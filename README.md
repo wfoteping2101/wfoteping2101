@@ -1,7 +1,7 @@
 
 # 👋 Hi, I'm William Foteping
 
-## 🚀 Senior DevOps Engineer | Network & Cloud Infrastructure Specialist | IT Consultant
+## 🚀 DevOps Engineer | Network & Cloud Infrastructure Specialist | IT Consultant
 
 With over 8 years of experience across IT infrastructure, cloud solutions, and cybersecurity, I help organizations architect resilient systems and streamline development using DevOps and automation practices.
 
@@ -19,6 +19,12 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 - **Version Control**: Git, GitHub, GitLab  
 - **Platform Engineering**: GitOps, Helm, Kustomize  
 - **Other Tools**: Azure DevOps, ClickShare, Unifi, Meraki, Teams Calling, Ubiquiti
+
+---
+
+### 📫 How to reach me
+
+https://wfoteping.net/
 
 ---
 
@@ -57,9 +63,12 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 
 ---
 
-### 🗺️ Roadmap Progress
+### 🗺️ DevOps Roadmap
 
-![roadmap.sh](https://api.roadmap.sh/v1-badge/tall/wfoteping2101?variant=dark)
+I'm currently following the official [DevOps Roadmap](https://roadmap.sh/devops) and tracking my journey publicly here:  
+👉 [roadmap.sh/u/wfoteping](https://roadmap.sh/u/wfoteping)
+
+![roadmap.sh](https://api.roadmap.sh/v1-badge/tall/wfoteping?variant=dark)
 
 ---
 
@@ -77,6 +86,11 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 - Network Security Administration  
 - GitHub Advanced DevOps Track
 
+**🎯 In Progress:**
+- [AWS Certified DevOps Engineer – Professional](https://aws.amazon.com/certification/certified-devops-engineer-professional/)  
+- [Certified Kubernetes Administrator (CKA)](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)  
+- [Red Hat Certified System Administrator (RHCSA)](https://www.redhat.com/en/services/certification/rhcsa)
+
 ---
 
 ### 🌍 Connect With Me
@@ -89,7 +103,10 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 
 ### 🎯 What I'm Working on Now
 
-- Finalizing the DevSecOps project series  
-- Launching my podcast for African small businesses  
-- Writing a guidebook on building eco-agritourism cabins  
-- Exploring platform engineering and observability tools
+- 🚀 **Deploying Zuri-ERP**: Preparing the full public launch of Zuri-ERP in the coming months, including assistant onboarding, marketing strategy, and French landing page enhancements (see screenshots).
+- 📚 **Learning SaaS Development**: Exploring SaaS design and development by building tools inspired by:
+  - [DocDraft.ai](https://www.docdraft.ai/)
+  - [Kraaft.co](https://www.kraaft.co/)
+- 🧠 **DevOps Skill Building**: Expanding practical DevOps skills through project-based learning, roadmap tracking, and certification prep.
+"""
+
