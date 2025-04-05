@@ -66,8 +66,7 @@ https://wfoteping.net/
 I'm currently following the official [DevOps Roadmap](https://roadmap.sh/devops) and tracking my journey publicly here:  
 👉 [roadmap.sh/u/wfoteping](https://roadmap.sh/u/wfoteping)
 
-[![@wfoteping's roadmap progress](https://api.roadmap.sh/v1-badge/wfoteping?variant=dark)](https://roadmap.sh/u/wfoteping)
-
+[![roadmap.sh](https://roadmap.sh/card/tall/67f1577d2fb824bbb5d83f05?variant=dark)](https://roadmap.sh)
 ---
 
 ### 🧠 LeetCode Progress
