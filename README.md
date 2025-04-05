@@ -18,7 +18,7 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 - **Programming/Scripting**: Bash, Python, Java, TypeScript, Gradle  
 - **Version Control**: Git, GitHub, GitLab  
 - **Platform Engineering**: GitOps, Helm, Kustomize  
-- **Other Tools**: Azure DevOps, ClickShare, Unifi, Meraki, Teams Calling, Ubiquiti
+  
 
 ---
 
@@ -33,14 +33,12 @@ https://wfoteping.net/
 - 🔹 **DevOps Projects**
   - Deployed Java/Gradle app to GitHub using CI/CD pipeline  
   - Dockerized applications and set up GitHub Actions for automation  
-  - Deployed Mastodon-based social platform "Village" using Replit  
+  - Deployed Mastodon-based social platform "Village"  
   - Monitored services using Prometheus and Grafana dashboards  
   - Implemented GitOps workflows for consistent deployments  
-  - Deployed ClickShare AV systems and network switches for churches
-
+    
 - 🔹 **Security Projects**
-  - Reviewed network security posture for HQ & regional offices  
-  - Managed Ubiquiti and Meraki door access & camera systems  
+  - Reviewed network security posture for HQ & regional offices   
   - Implemented POTS-to-VoIP migration plan for elevator/fire lines  
   - Applied DevSecOps best practices in CI/CD pipelines
 
