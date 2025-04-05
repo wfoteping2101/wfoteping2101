@@ -103,10 +103,10 @@ I'm currently following the official [DevOps Roadmap](https://roadmap.sh/devops)
 
 ### 🎯 What I'm Working on Now
 
-- 🚀 **Deploying Zuri-ERP**: Preparing the full public launch of Zuri-ERP in the coming months, including assistant onboarding, marketing strategy, and French landing page enhancements (see screenshots).
+- 🚀 **Deploying Zuri-ERP**: Preparing the full public launch of Zuri-ERP in the coming months, including assistant onboarding, marketing strategy, and French landing page enhancements.
 - 📚 **Learning SaaS Development**: Exploring SaaS design and development by building tools inspired by:
   - [DocDraft.ai](https://www.docdraft.ai/)
   - [Kraaft.co](https://www.kraaft.co/)
 - 🧠 **DevOps Skill Building**: Expanding practical DevOps skills through project-based learning, roadmap tracking, and certification prep.
-"""
+  
 
