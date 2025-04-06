@@ -25,6 +25,7 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 ### 📫 How to reach me
 
 wfoteping2101@outlook.com
+
 https://wfoteping2101.github.io/devops-resume/
 
 ---
