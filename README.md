@@ -24,7 +24,7 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 
 ### 📫 How to reach me
 
-https://www.novlr.org/writer/Laa
+wfoteping2101@outlook.com
 
 ---
 
