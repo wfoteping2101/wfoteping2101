@@ -14,7 +14,7 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 - **Infrastructure as Code**: Terraform, Ansible, Bicep  
 - **CI/CD Pipelines**: GitHub Actions, Jenkins, GitLab CI  
 - **Monitoring & Logging**: Prometheus, Grafana, Datadog, ELK Stack  
-- **Security**: DevSecOps, Vanta, Snyk, SSL, IAM, MFA, Firewalls  
+- **Security**: DevSecOps, Vanta, Snyk, SSL, IAM, SonarQube, Firewalls  
 - **Programming/Scripting**: Bash, Python, Java, TypeScript, Gradle  
 - **Version Control**: Git, GitHub, GitLab  
 - **Platform Engineering**: GitOps, Helm, Kustomize  
@@ -24,7 +24,7 @@ With over 8 years of experience across IT infrastructure, cloud solutions, and c
 
 ### 📫 How to reach me
 
-https://wfoteping.net/
+https://www.novlr.org/writer/Laa
 
 ---
 
