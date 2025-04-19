@@ -45,7 +45,7 @@ https://wfoteping2101.github.io/devops-resume/
   - Applied DevSecOps best practices in CI/CD pipelines
 
 - 🔹 **ERP & Web Projects**
-  - Built [Zuri-ERP](https://zuri-erp.com) for African small businesses  
+  - Built [Zuri-ERP]([https://zurilanding.com/]) for African small businesses  
   - Designed Flutter-based digital wallet prototype  
   - Customized video platform prototype inspired by Viddsee  
   - Built simple landing pages for SME clients and bloggers
@@ -95,7 +95,7 @@ I'm currently following the official [DevOps Roadmap](https://roadmap.sh/devops)
 ### 🌍 Connect With Me
 
 - 💼 [LinkedIn](https://linkedin.com/in/williamfoteping)  
-- 🌐 [Zuri-ERP Website](https://zuri-erp.com)  
+- 🌐 [Zuri-ERP Website](https://zurilanding.com/)  
 - 🐦 [Twitter](https://twitter.com/foteping)
 
 ---
