@@ -1,0 +1,7 @@
+{
+  "name": "william-foteping-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio of William Foteping: platforms, books, motion, journal, services.",
+  "engines": { "node": "20.x" }
+}

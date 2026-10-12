@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://william-foteping.vercel.app/sitemap.xml
