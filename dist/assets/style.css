@@ -224,3 +224,34 @@ footer .tag{font-family:var(--serif);font-size:22px;color:var(--fusain);margin-b
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.book,.btn{transition:none}}
 .skip{position:absolute;left:-999px;top:8px;background:var(--fusain);color:var(--craie);padding:8px 12px;border-radius:8px;z-index:50}
 .skip:focus{left:12px}
+
+/* walkthrough tour */
+.tour{border:1px solid var(--ligne);border-radius:var(--r);overflow:hidden;background:var(--fusain);color:var(--craie);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);isolation:isolate}
+@media (max-width:860px){.tour{grid-template-columns:1fr}}
+.tour-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+.tour-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transform-origin:50% 50%;will-change:transform;opacity:1}
+.tour-hl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tour-hl rect{fill:color-mix(in srgb,var(--bk-ink,#fff) 10%,transparent);stroke:var(--bk-ink,#fff);stroke-width:.6;vector-effect:non-scaling-stroke;stroke-width:2px}
+.tour-n{position:absolute;left:12px;top:10px;font-size:11px;letter-spacing:.16em;background:color-mix(in srgb,#000 45%,transparent);padding:4px 8px;border-radius:999px;color:#fff;backdrop-filter:blur(6px)}
+.tour-cap{padding:clamp(18px,3vw,30px);display:grid;gap:10px;align-content:center;background:var(--bk,var(--fusain));color:var(--bk-ink,var(--craie));opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.tour-cap.on{opacity:1;transform:none}
+.tour-cap .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.tour-cap .t{font-size:clamp(24px,2.6vw,34px);line-height:1.08}
+.tour-cap .c{margin:0;font-size:16px;line-height:1.55;opacity:.92}
+.tour-ctl{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid color-mix(in srgb,var(--craie) 15%,transparent);background:color-mix(in srgb,var(--bk,var(--fusain)) 85%,#000)}
+.tour-ctl button{border:1px solid color-mix(in srgb,var(--bk-ink,#fff) 35%,transparent);background:transparent;color:var(--bk-ink,#fff);border-radius:999px;padding:7px 12px;font:600 11px var(--mono);letter-spacing:.08em;cursor:pointer}
+.tour-ctl .dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.tour-ctl .dots button{width:10px;height:10px;padding:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--bk-ink,#fff) 50%,transparent);background:transparent}
+.tour-ctl .dots button[aria-selected="true"]{background:var(--bk-ink,#fff)}
+/* guide pages */
+.rooms{display:grid;gap:clamp(28px,4vw,52px)}
+.room{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:start;border-top:1px solid var(--ligne);padding-top:clamp(20px,3vw,34px)}
+@media (max-width:860px){.room{grid-template-columns:1fr}}
+ol.how{margin:0;padding-left:22px;display:grid;gap:6px;font-size:15px;color:var(--encre)}
+ol.how li::marker{color:var(--cobalt);font-family:var(--serif);font-style:italic}
+details.faq{border-top:1px solid var(--ligne);padding:10px 0}
+details.faq summary{cursor:pointer;font:500 16px var(--sans);list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.faq summary::after{content:"+";color:var(--cobalt);font-family:var(--serif);font-size:20px;line-height:1}
+details.faq[open] summary::after{content:"\2212"}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq p{margin:8px 0 0;color:var(--encre);font-size:15px;max-width:60ch}

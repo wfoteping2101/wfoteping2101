@@ -56,7 +56,7 @@
       $('.p-kind', present).textContent = b.dataset.kind + ' · ' + b.dataset.year;
       $('.p-line', present).textContent = b.dataset.line;
       const img = $('.p-img', present); img.src = b.dataset.shot; img.alt = b.dataset.title + ', screenshot';
-      const a = $('.p-open', present); a.href = b.dataset.href;
+      const a = $('.p-open', present); a.href = b.dataset.href; const gd = $('.p-guide', present); if (gd) gd.href = b.dataset.href.replace('/work/', '/guides/');
       const l = $('.p-link', present); if (b.dataset.url) { l.href = b.dataset.url; l.textContent = b.dataset.linkLabel; l.hidden = false; } else { l.hidden = true; }
       present.classList.add('on');
       b.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
@@ -100,6 +100,37 @@
     if (play) play.addEventListener('click', () => { running = !running; play.textContent = running ? 'PAUSE' : 'PLAY'; if (running) step(); else clearTimeout(timer); });
     if (running) step(); else { show(0); if (play) play.textContent = 'PLAY'; }
     stage.addEventListener('click', e => { if (e.target.closest('.ctl')) return; clearTimeout(timer); show((i + 1) % beats.length); if (running) timer = setTimeout(step, 3000); });
+  });
+
+  /* ---------- walkthrough tour: real screens, camera moves, highlights ---------- */
+  $$('.tour').forEach(tour => {
+    let scenes = [];
+    try { scenes = JSON.parse(tour.dataset.scenes || '[]'); } catch (e) {}
+    if (!scenes.length) return;
+    const img = $('.tour-img', tour), rect = $('.tour-hl rect', tour), k = $('.k', tour), tt = $('.t', tour), c = $('.c', tour), n = $('.tour-n', tour), dots = $('.dots', tour), play = $('.t-play', tour), cap = $('.tour-cap', tour);
+    let i = -1, timer = null, running = !reduce;
+    scenes.forEach((s, j) => { const d = document.createElement('button'); d.type = 'button'; d.setAttribute('role', 'tab'); d.setAttribute('aria-label', 'Scene ' + (j + 1)); d.addEventListener('click', () => { go(j); restart(); }); dots.appendChild(d); });
+    function go(j) {
+      i = j; const s = scenes[j]; const [x, y, w, h] = s.f;
+      const scale = Math.min(2.2, Math.max(1, Math.min(100 / w, 100 / h) * 0.92));
+      const lim = (scale - 1) * 50 / scale; const cx = x + w / 2, cy = y + h / 2; const tx = Math.max(-lim, Math.min(lim, 50 - cx)), ty = Math.max(-lim, Math.min(lim, 50 - cy));
+      if (img.getAttribute('src') !== s.img) { img.style.transition = 'none'; img.style.opacity = 0; img.src = s.img; requestAnimationFrame(() => { img.style.transition = reduce ? 'none' : 'opacity .5s, transform 5s cubic-bezier(.2,.7,.2,1)'; img.style.opacity = 1; img.style.transform = `scale(${scale}) translate(${tx}%, ${ty}%)`; }); }
+      else { img.style.transition = reduce ? 'none' : 'transform 5s cubic-bezier(.2,.7,.2,1)'; img.style.transform = `scale(${scale}) translate(${tx}%, ${ty}%)`; }
+      rect.setAttribute('x', x); rect.setAttribute('y', y); rect.setAttribute('width', w); rect.setAttribute('height', h);
+      rect.style.transition = 'none'; rect.style.strokeDasharray = '400'; rect.style.strokeDashoffset = '400'; rect.style.opacity = (w >= 95 && h >= 95) ? 0 : 1;
+      requestAnimationFrame(() => requestAnimationFrame(() => { rect.style.transition = reduce ? 'none' : 'stroke-dashoffset 1.6s ease'; rect.style.strokeDashoffset = '0'; }));
+      cap.classList.remove('on'); k.textContent = s.k; tt.textContent = s.t; c.textContent = s.c; requestAnimationFrame(() => requestAnimationFrame(() => cap.classList.add('on')));
+      n.textContent = String(j + 1).padStart(2, '0') + ' / ' + String(scenes.length).padStart(2, '0');
+      $$('button', dots).forEach((d, q) => d.setAttribute('aria-selected', q === j ? 'true' : 'false'));
+    }
+    function step() { go((i + 1) % scenes.length); if (running) timer = setTimeout(step, 5200); }
+    function restart() { clearTimeout(timer); if (running) timer = setTimeout(step, 5200); }
+    $('.t-prev', tour).addEventListener('click', () => { go((i - 1 + scenes.length) % scenes.length); restart(); });
+    $('.t-next', tour).addEventListener('click', () => { go((i + 1) % scenes.length); restart(); });
+    play.addEventListener('click', () => { running = !running; play.textContent = running ? 'PAUSE' : 'PLAY'; if (running) restart(); else clearTimeout(timer); });
+    tour.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { go((i + 1) % scenes.length); restart(); } if (e.key === 'ArrowLeft') { go((i - 1 + scenes.length) % scenes.length); restart(); } if (e.key === ' ') { e.preventDefault(); play.click(); } });
+    if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && i < 0) { step(); io.disconnect(); } })); io.observe(tour); } else step();
+    if (!running) { go(0); play.textContent = 'PLAY'; }
   });
 
   /* ---------- gallery players ---------- */

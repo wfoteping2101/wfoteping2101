@@ -2,6 +2,7 @@
 """Builds the static site into dist/. Run: python3 build.py"""
 import os, shutil, json, html, datetime
 import content as C
+from guides import GUIDES
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 E = html.escape
@@ -51,7 +52,7 @@ def shelf(projects, hint=True):
     books = "".join(book_btn(p) for p in projects)
     return f"""<div class="shelf"><div class="shelf-rail" tabindex="-1">{books}</div><div class="shelf-board" aria-hidden="true"></div>
 <div class="shelf-hint"><span>{t('Select a book to present it, select again to open it. Arrow keys move along the shelf, Escape puts it back.', 'Sélectionnez un livre pour le présenter, puis une seconde fois pour l’ouvrir. Les flèches parcourent l’étagère, Échap le range.')}</span><span class="shelf-arrows"><button type="button" data-dir="prev" aria-label="Previous">&larr;</button><button type="button" data-dir="next" aria-label="Next">&rarr;</button></span></div>
-<div class="present" aria-live="polite"><img class="p-img" alt="" src=""><div><span class="label"><b class="p-kind"></b></span><h3 class="p-title" style="margin:10px 0 8px"></h3><p class="p-line lede" style="font-size:17px"></p><p class="cta-row"><a class="btn p-open" href="#">{t('Read the book', 'Lire le livre')}</a><a class="btn ghost p-link" href="#" target="_blank" rel="noopener"></a></p></div></div></div>"""
+<div class="present" aria-live="polite"><img class="p-img" alt="" src=""><div><span class="label"><b class="p-kind"></b></span><h3 class="p-title" style="margin:10px 0 8px"></h3><p class="p-line lede" style="font-size:17px"></p><p class="cta-row"><a class="btn p-open" href="#">{t('Read the book', 'Lire le livre')}</a><a class="btn ghost p-guide" href="#">{t('How to use', 'Mode d’emploi')}</a><a class="btn ghost p-link" href="#" target="_blank" rel="noopener"></a></p></div></div></div>"""
 
 def hero_art():
     return """<div class="glass rv" aria-hidden="true"><svg viewBox="0 0 400 300" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#1C3FBF">
@@ -106,7 +107,7 @@ def post_row(p):
 
 # ---------------------------------------------------------------------------
 def page_work():
-    cards = "".join(f"""<a class="card rv" href="/work/{p['slug']}" style="gap:10px"><figure class="shot" style="margin:0 0 6px"><img src="/assets/shots/{p['shot']}.webp" alt="{E(p['title'], quote=True)}, screenshot" loading="lazy"></figure>{label(p['n'], p['kind'], p['year'])}<h3>{E(p['title'])}</h3><p style="margin:0;color:var(--encre)">{E(p['line'])}</p><span class="mono muted">{E(p['status'])}</span></a>""" for p in C.PROJECTS)
+    cards = "".join(f"""<a class="card rv" href="/work/{p['slug']}" style="gap:10px"><figure class="shot" style="margin:0 0 6px"><img src="/assets/shots/{p['shot']}.webp" alt="{E(p['title'], quote=True)}, screenshot" loading="lazy"></figure>{label(p['n'], p['kind'], p['year'])}<h3>{E(p['title'])}</h3><p style="margin:0;color:var(--encre)">{E(p['line'])}</p><span class="mono muted">{E(p['status'])}</span><span class="mono" style="color:var(--cobalt)">{t('Book', 'Livre')} &rarr; &nbsp; <a href="/guides/{p['slug']}" style="text-decoration:underline">{t('How to use', 'Mode d’emploi')}</a></span></a>""" for p in C.PROJECTS)
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>{t('Work', 'Travaux')}</b><span>{len(C.PROJECTS)} {t('books on the shelf', 'livres sur l’étagère')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('The library.', 'La bibliothèque.')}</h1><p class="lede rv">{t('Platforms, tools and sites I designed and built, presented as books: take one down, read the purpose, the problem, what I built and how it works, and watch a short motion that says why it exists.', 'Plateformes, outils et sites que j’ai conçus et construits, présentés comme des livres : prenez-en un, lisez le but, le problème, ce que j’ai construit et comment ça marche, et regardez une courte animation qui dit pourquoi il existe.')}</p></section>
 <section class="wrap">{shelf(C.PROJECTS)}</section>
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>{t('Index', 'Index')}</b><span>{t('All works', 'Toutes les œuvres')}</span></span></div><div class="grid g3">{cards}</div></section>"""
@@ -121,7 +122,7 @@ def page_project(p, prev, nxt):
     body = f"""<section class="block wrap"><div class="open">
 <aside><div class="cover" style="--bk:{p['color']};--bk-ink:{p['ink']}"><span class="bn">N° {E(p['n'])}</span><span class="bt">{E(p['title'])}</span><span class="bk">{E(p['kind'])}<br>{E(p['year'])}<br>{E(p['status'])}</span></div>
 <div class="facts">{facts}<div><span>Stack</span><span>{E(p['stack'])}</span></div></div></aside>
-<div><span class="label rv"><b>N° {E(p['n'])}</b><span>{E(p['kind'])}</span><span>{E(p['year'])}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(36px,5.5vw,72px)">{E(p['title'])}</h1><p class="lede rv">{E(p['line'])}</p><p class="cta-row rv" style="margin:18px 0 34px">{visit}<a class="btn ghost" href="#motion">{t('Watch the purpose', 'Voir le but en mouvement')}</a></p>
+<div><span class="label rv"><b>N° {E(p['n'])}</b><span>{E(p['kind'])}</span><span>{E(p['year'])}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(36px,5.5vw,72px)">{E(p['title'])}</h1><p class="lede rv">{E(p['line'])}</p><p class="cta-row rv" style="margin:18px 0 34px">{visit}<a class="btn cobalt" href="/guides/{p['slug']}">{t('How to use it', 'Mode d’emploi')}</a><a class="btn ghost" href="#motion">{t('Watch the purpose', 'Voir le but en mouvement')}</a></p>
 <figure class="shot rv"><img src="/assets/shots/{p['shot']}.webp" alt="{E(p['title'], quote=True)}, screenshot"><figcaption>{E(p['title'])}, {t('screenshot', 'capture d’écran')}</figcaption></figure>
 <div class="chapters" style="margin-top:40px">{chapters}
 <div class="chapter rv" id="motion"><span class="ch">{ROMAN[len(p['chapters'])]}</span><div><h3>{t('The purpose, in motion', 'Le but, en mouvement')}</h3><p style="margin-bottom:14px">{t('A short motion design made for this book: four beats, one drawn shape each, the reason the project exists. Tap it to step through.', 'Un court motion design fait pour ce livre : quatre temps, une forme dessinée à chaque fois, la raison d’être du projet. Touchez pour avancer.')}</p>{stage(p, p['title'])}</div></div>
@@ -142,7 +143,8 @@ def page_gallery():
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>{t('Gallery', 'Galerie')}</b><span>{t('Motion and edits', 'Motion et montages')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('Moving images.', 'Images qui bougent.')}</h1><p class="lede rv">{t('Motion designs and one minute edits made for my platforms, in both aspect ratios and both languages where they exist. Everything I make with Bobine and for the Bobine landing page lands here.', 'Motion designs et montages d’une minute faits pour mes plateformes, dans les deux formats et les deux langues quand elles existent. Tout ce que je fais avec Bobine et pour la page d’accueil de Bobine arrive ici.')}</p></section>
 <section class="block wrap" style="padding-top:10px"><div class="sec-head"><span class="label rv"><b>01</b><span>{t('Motion design', 'Motion design')}</span></span></div><div class="grid g2">{motion}</div></section>
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>02</b><span>{t('Showcase edits', 'Montages de démonstration')}</span><span>{len(C.EDITS)}</span></span><p class="muted" style="margin:0">{t('Real stock footage, edited by Bobine, labelled as examples and never as customer work.', 'Vraies images de banque, montées par Bobine, présentées comme des exemples et jamais comme du travail client.')}</p></div><div class="grid g3">{edits}</div></section>
-<section class="block wrap"><div class="sec-head"><span class="label rv"><b>03</b><span>{t('Purpose motions', 'Les buts en mouvement')}</span></span><p class="muted" style="margin:0">{t('One short motion per project book, drawn in the browser.', 'Un court motion par livre de projet, dessiné dans le navigateur.')}</p></div><div class="grid g3">{purposes}</div></section>"""
+<section class="block wrap"><div class="sec-head"><span class="label rv"><b>03</b><span>{t('Walkthroughs', 'Visites guidées')}</span></span><p class="muted" style="margin:0">{t('One motion design per platform, built from its real screens: what it is, how to use it, where to write.', 'Un motion design par plateforme, fait de ses vrais écrans : ce que c’est, comment s’en servir, où écrire.')}</p></div><div class="grid g3">{"".join(f'<a class="card" href="/guides/{p["slug"]}#tour" style="gap:8px"><figure class="shot" style="margin:0 0 4px"><img src="/assets/shots/{p["shot"]}.webp" alt="" loading="lazy"></figure>{label(p["n"], p["kind"], p["year"])}<h3 style="font-size:20px">{t("How to use", "Mode d’emploi")} {E(p["title"])}</h3></a>' for p in C.PROJECTS)}</div></section>
+<section class="block wrap"><div class="sec-head"><span class="label rv"><b>04</b><span>{t('Purpose motions', 'Les buts en mouvement')}</span></span><p class="muted" style="margin:0">{t('One short motion per project book, drawn in the browser.', 'Un court motion par livre de projet, dessiné dans le navigateur.')}</p></div><div class="grid g3">{purposes}</div></section>"""
     return head("Gallery", "Motion designs and video edits by William Foteping.", "/gallery") + header("gallery") + body + footer()
 
 def page_journal():
@@ -191,6 +193,39 @@ def page_services():
 </form></section>"""
     return head("Services", "Services and prices: platforms, networks, books, motion, content systems, localisation.", "/services") + header("services") + body + footer()
 
+
+def shot_path(name, p):
+    here = os.path.dirname(os.path.abspath(__file__))
+    if name and os.path.exists(os.path.join(here, "assets", "shots", name + ".webp")): return f"/assets/shots/{name}.webp"
+    return f"/assets/shots/{p['shot']}.webp"
+
+def tour(p, g):
+    scenes = [{"k": sc["k"], "t": sc["t"], "c": sc["c"], "img": shot_path(sc.get("shot"), p), "f": sc["f"]} for sc in g["scenes"]]
+    data = E(json.dumps(scenes, ensure_ascii=False), quote=True)
+    return f"""<div class="tour" id="tour" data-scenes="{data}" style="--bk:{p['color']};--bk-ink:{p['ink']}" tabindex="0" aria-label="{E(p['title'], quote=True)} walkthrough">
+<div class="tour-stage"><img class="tour-img" alt="" src="{scenes[0]['img']}"><svg class="tour-hl" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width="100" height="100" rx="1.2"/></svg><div class="tour-n mono"></div></div>
+<div class="tour-cap"><span class="k mono"></span><h3 class="t"></h3><p class="c"></p></div>
+<div class="tour-ctl"><button type="button" class="t-prev" aria-label="Previous">&larr;</button><div class="dots" role="tablist"></div><button type="button" class="t-play">PAUSE</button><button type="button" class="t-next" aria-label="Next">&rarr;</button></div></div>"""
+
+def page_guide(p):
+    g = GUIDES[p["slug"]]
+    start = "".join(f'<div class="step rv"><span class="n">{i + 1}</span><div><p style="font-size:17px">{E(x)}</p></div></div>' for i, x in enumerate(g["start"]))
+    rooms = ""
+    for i, r in enumerate(g["rooms"]):
+        how = "".join(f"<li>{E(h)}</li>" for h in r["how"])
+        rooms += f"""<article class="room rv"><figure class="shot"><img src="{shot_path(r.get('shot'), p)}" alt="{E(r['title'], quote=True)}, screenshot" loading="lazy"><figcaption>{E(p['title'])}, {E(r['title'])}</figcaption></figure><div><span class="label"><b>{str(i + 1).zfill(2)}</b><span>{E(r['title'])}</span></span><h3 style="margin:10px 0 8px">{E(r['title'])}</h3><p style="font-size:17px;line-height:1.65;color:var(--encre)">{E(r['text'])}</p><h4 class="mono muted" style="margin:14px 0 6px;letter-spacing:.14em">HOW TO USE IT</h4><ol class="how">{how}</ol></div></article>"""
+    tips = "".join(f"<li>{E(x)}</li>" for x in g["tips"])
+    faq = "".join(f'<details class="faq"><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in g["faq"])
+    contact = "".join(f'<a class="card" href="{E(h)}"{" target=\"_blank\" rel=\"noopener\"" if h.startswith("http") else ""}><span class="label"><b>Contact</b></span><h3 style="font-size:20px">{E(l)}</h3></a>' for l, h in g["contact"])
+    visit = f'<a class="btn" href="{E(p["url"])}" target="_blank" rel="noopener">{t("Open", "Ouvrir")} {E(p["title"])} &rarr;</a>' if p["url"] else ""
+    body = f"""<section class="block wrap" style="padding-bottom:24px"><span class="label rv"><b>N° {E(p['n'])}</b><span>{t('How to use', 'Mode d’emploi')}</span><span>{E(p['kind'])}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(34px,5.5vw,70px)">{t('How to use', 'Comment utiliser')} {E(p['title'])}</h1><p class="lede rv">{E(g['audience'])}</p><p class="cta-row rv" style="margin-top:16px">{visit}<a class="btn ghost" href="/work/{p['slug']}">{t('Read the book', 'Lire le livre')}</a><a class="btn ghost" href="#contact">Contact</a></p></section>
+<section class="wrap rv"><div class="sec-head" style="margin-bottom:14px"><span class="label"><b>{t('Walkthrough', 'Visite guidée')}</b><span>{t('Motion design, real screens', 'Motion design, vrais écrans')}</span></span></div>{tour(p, g)}<p class="muted" style="font-size:13px;margin-top:10px">{t('It plays by itself. Tap a dot or the arrows to move, Pause to stop.', 'Elle se joue toute seule. Touchez un point ou les flèches pour avancer, Pause pour arrêter.')}</p></section>
+<section class="block wrap"><div class="sec-head"><span class="label rv"><b>01</b><span>{t('Get started', 'Pour commencer')}</span></span><h2 class="rv">{t('Five steps, five minutes.', 'Cinq étapes, cinq minutes.')}</h2></div><div class="steps">{start}</div></section>
+<section class="block wrap" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>02</b><span>{t('Room by room', 'Pièce par pièce')}</span></span><h2 class="rv">{t('What is inside, and how to use it.', 'Ce qu’il y a dedans, et comment s’en servir.')}</h2></div><div class="rooms">{rooms}</div></section>
+<section class="block wrap" style="padding-top:0"><div class="grid g2"><div class="card rv"><span class="label"><b>03</b><span>{t('Tips', 'Conseils')}</span></span><ul class="ticks" style="font-size:16px">{tips}</ul></div><div class="card rv"><span class="label"><b>04</b><span>FAQ</span></span><div>{faq}</div></div></div></section>
+<section class="block wrap" id="contact" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>05</b><span>Contact</span></span><h2 class="rv">{t('Contact about', 'Contact à propos de')} {E(p['title'])}</h2></div><div class="grid g3 rv">{contact}<a class="card" href="/services#brief"><span class="label"><b>{t('Project', 'Projet')}</b></span><h3 style="font-size:20px">{t('Want something like this built for you?', 'Vous voulez la même chose pour vous ?')}</h3><span class="mono muted">{t('Send a brief', 'Envoyer un brief')} &rarr;</span></a></div></section>"""
+    return head("How to use " + p["title"], f"How to use {p['title']}: walkthrough, getting started, room by room, tips, FAQ and contact.", f"/guides/{p['slug']}") + header("work") + body + footer()
+
 def page_contact():
     body = f"""<section class="block wrap"><span class="label rv"><b>Contact</b><span>{E(C.SITE['location'])}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('Write to me.', 'Écrivez-moi.')}</h1><p class="lede rv">{t('For a project, start with the brief on the services page; it saves us a meeting. For everything else, an email is best. I answer within a day, in French or English.', 'Pour un projet, commencez par le brief sur la page services ; cela nous épargne une réunion. Pour tout le reste, un email est le mieux. Je réponds sous un jour, en français ou en anglais.')}</p>
 <div class="grid g2 rv" style="margin-top:28px"><div class="card"><span class="label"><b>Email</b></span><h3><a href="mailto:{E(C.SITE['email'])}">{E(C.SITE['email'])}</a></h3><p style="margin:0;color:var(--encre)">{t('Projects, books, talks, questions.', 'Projets, livres, conférences, questions.')}</p></div><div class="card"><span class="label"><b>{t('Meetings', 'Réunions')}</b></span><h3>Zoom, Microsoft Teams, Google Meet</h3><p style="margin:0;color:var(--encre)">{t('Booked through the brief, confirmed by email.', 'Réservées via le brief, confirmées par email.')}</p><p class="cta-row" style="margin-top:10px"><a class="btn small" href="/services#brief">{t('Open the brief', 'Ouvrir le brief')}</a></p></div></div>
@@ -225,6 +260,7 @@ def main():
     write("work/index.html", page_work())
     n = len(C.PROJECTS)
     for i, p in enumerate(C.PROJECTS): write(f"work/{p['slug']}.html", page_project(p, C.PROJECTS[i - 1], C.PROJECTS[(i + 1) % n]))
+    for p in C.PROJECTS: write(f"guides/{p['slug']}.html", page_guide(p))
     write("books.html", page_books())
     write("gallery.html", page_gallery())
     write("journal/index.html", page_journal())
@@ -234,7 +270,7 @@ def main():
     write("contact.html", page_contact())
     write("thanks.html", page_thanks())
     write("404.html", page_404())
-    pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + ["/books", "/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
+    pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books", "/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {C.SITE['url']}/sitemap.xml\n")
     print("built", len(pages), "pages into", OUT)
