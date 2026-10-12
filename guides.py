@@ -5,7 +5,7 @@
 GUIDES = {
 "uplink": {
     "audience": "Anyone moving from help desk toward network engineering: students preparing CompTIA A+, Network+, Security+, Linux+ or Cisco CCNA, technicians who want a safe place to practise tickets and labs, and career changers who need a plan.",
-    "contact": [("Contact form on the academy", "https://academy.lemonshops.app/contact"), ("Pricing and plans", "https://academy.lemonshops.app/pricing")],
+    "contact": [("Contact form on the academy", "https://academy.lemonshops.app/contact"), ("hello@lemonshops.app", "mailto:hello@lemonshops.app"), ("Pricing and plans", "https://academy.lemonshops.app/pricing")],
     "start": [
         "Open academy.lemonshops.app. Every room has free samples, so you can try before you sign in.",
         "Create an account with your email to keep your progress, your XP and your streak.",
@@ -28,7 +28,7 @@ GUIDES = {
          "how": ["Open Network Docs and start a brief", "Answer the questionnaire about the site", "Pay for the tier you need", "Receive the pack by email and review it"]},
     ],
     "tips": ["Study on your phone: every room is built for a small screen.", "Read the explanation of every question; the explanation is the lesson.", "Do one ticket a day; that habit is worth more than a hundred questions.", "Keep your streak; XP and ranks are there to keep you coming back."],
-    "faq": [("Do I need to pay to try it?", "No. Five questions per set, sample tickets and sample labs are free."), ("Which exams are covered?", "CompTIA A+ Core 1 and Core 2, Network+, Security+, Linux+, and Cisco CCNA. Others are listed as coming next."), ("Can I use it on a phone?", "Yes, it is mobile first."), ("How do I get help?", "Use the contact form on the academy; messages land in the support inbox.")],
+    "faq": [("Do I need to pay to try it?", "No. Five questions per set, sample tickets and sample labs are free."), ("Which exams are covered?", "CompTIA A+ Core 1 and Core 2, Network+, Security+, Linux+, and Cisco CCNA. Others are listed as coming next."), ("Can I use it on a phone?", "Yes, it is mobile first."), ("How do I get help?", "Use the contact form on the academy, or write to hello@lemonshops.app.")],
     "scenes": [
         {"k": "Uplink IT Academy", "t": "Learn IT the way the job works", "c": "Exam practice written as tickets, a help desk you can work, hands-on labs and a coach.", "shot": "uplink", "f": [3, 20, 50, 60]},
         {"k": "Step 1", "t": "Pick your exam", "c": "Five vendors' exams, two hundred original questions per set, five free in each.", "shot": "uplink-exams", "f": [0, 25, 100, 70]},

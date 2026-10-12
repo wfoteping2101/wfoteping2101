@@ -3,6 +3,8 @@
 import os, shutil, json, html, datetime
 import content as C
 from guides import GUIDES
+import fr as FR
+import salon as SALON
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 E = html.escape
@@ -10,6 +12,36 @@ E = html.escape
 def t(en, fr):
     """Bilingual inline text: English shown, French swapped in by the toggle."""
     return f'<span data-fr="{E(fr, quote=True)}">{E(en)}</span>'
+
+def frp(slug): return FR.PROJECTS.get(slug, {})
+def frb(slug): return FR.BOOKS.get(slug, {})
+def frs(slug): return FR.SERVICES.get(slug, {})
+def frj(slug): return FR.JOURNAL.get(slug, {})
+def frg(slug): return FR.GUIDES.get(slug, {})
+def tf(en, d, key, i=None, j=None):
+    """t() with a French value looked up in dict d[key] (optionally indexed)."""
+    v = d.get(key)
+    try:
+        if v is not None and i is not None: v = v[i]
+        if v is not None and j is not None: v = v[j]
+    except (IndexError, KeyError, TypeError): v = None
+    return t(en, v) if v else E(en)
+
+THREE = '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script><script src="/assets/scenes.js" defer></script>'
+
+def cover_art(seed, color, ink):
+    """An original generative motif per cover: concentric arcs, a rose of lines, or a field of dots, seeded by the slug."""
+    import random
+    rnd = random.Random(seed); kind = rnd.choice(["rose", "arcs", "field", "weave"]); out = []
+    if kind == "rose":
+        n = rnd.choice([8, 12, 16]); out.append(f'<g transform="translate(100 150)" fill="none" stroke="{ink}" stroke-opacity=".55" stroke-width="1.2">' + "".join(f'<ellipse rx="22" ry="{rnd.randint(55,80)}" transform="rotate({360*i/n})"/>' for i in range(n)) + f'<circle r="{rnd.randint(8,14)}" fill="{ink}" fill-opacity=".9" stroke="none"/></g>')
+    elif kind == "arcs":
+        out.append(f'<g fill="none" stroke="{ink}" stroke-opacity=".5" stroke-width="1.3">' + "".join(f'<path d="M -20 {300 - i*22} Q 100 {120 - i*18} 220 {300 - i*22}"/>' for i in range(9)) + '</g>')
+    elif kind == "field":
+        out.append(f'<g fill="{ink}" fill-opacity=".55">' + "".join(f'<circle cx="{18 + (i%9)*20.5}" cy="{70 + (i//9)*20}" r="{1.2 + rnd.random()*2.6}"/>' for i in range(81)) + '</g>')
+    else:
+        out.append(f'<g fill="none" stroke="{ink}" stroke-opacity=".45" stroke-width="1">' + "".join(f'<path d="M 0 {40 + i*26} C 60 {20 + i*26}, 140 {60 + i*26}, 200 {40 + i*26}"/>' for i in range(10)) + "".join(f'<path d="M {20 + i*26} 0 C {0 + i*26} 100, {40 + i*26} 200, {20 + i*26} 300"/>' for i in range(8)) + '</g>')
+    return f'<svg class="cover-art" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="300" fill="{color}"/>{"".join(out)}</svg>'
 
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">'
 
@@ -55,7 +87,7 @@ def shelf(projects, hint=True):
 <div class="present" aria-live="polite"><img class="p-img" alt="" src=""><div><span class="label"><b class="p-kind"></b></span><h3 class="p-title" style="margin:10px 0 8px"></h3><p class="p-line lede" style="font-size:17px"></p><p class="cta-row"><a class="btn p-open" href="#">{t('Read the book', 'Lire le livre')}</a><a class="btn ghost p-guide" href="#">{t('How to use', 'Mode d’emploi')}</a><a class="btn ghost p-link" href="#" target="_blank" rel="noopener"></a></p></div></div></div>"""
 
 def hero_art():
-    return """<div class="glass rv" aria-hidden="true"><svg viewBox="0 0 400 300" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#1C3FBF">
+    return """<div class="glass rv" aria-hidden="true"><canvas id="hero-canvas"></canvas><svg class="glass-fallback" viewBox="0 0 400 300" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#1C3FBF">
 <g opacity=".55"><path d="M40 260 L200 40 L360 260 Z"/><path d="M200 40 V260"/><path d="M120 150 H280"/><path d="M80 205 H320"/></g>
 <g opacity=".8" stroke="#B8933F"><circle cx="200" cy="150" r="70"/><circle cx="200" cy="150" r="46"/><path d="M130 150 H270 M200 80 V220"/></g>
 <g opacity=".5"><path d="M20 290 H380" /><path d="M60 120 Q200 -20 340 120" /></g></svg></div>"""
@@ -70,7 +102,7 @@ def page_home():
 <h1 class="name rv" style="margin:18px 0 20px">William<br><em>Foteping</em></h1>
 <p class="lede rv">{t(C.SITE['tagline_en'], C.SITE['tagline_fr'])}</p>
 <p class="cta-row rv"><a class="btn" href="/work">{t('Open the library', 'Ouvrir la bibliothèque')}</a><a class="btn ghost" href="/services">{t('Work with me', 'Travailler avec moi')}</a></p></div>
-<div>{hero_art()}<div class="hero-aside rv"><div class="kv"><span>{t('Trade', 'Métier')}</span><span>{t('Senior network administrator, cloud and infrastructure', 'Administrateur réseau senior, cloud et infrastructure')}</span></div><div class="kv"><span>{t('Ventures', 'Projets')}</span><span>Uplink IT Academy, Bobine, Lemon Network Solutions, Droit Facile</span></div><div class="kv"><span>{t('Writing', 'Écriture')}</span><span>{t('Essays, chronicles, technical books, in French and English', 'Essais, chroniques, livres techniques, en français et en anglais')}</span></div><div class="kv"><span>{t('Certified', 'Certifié')}</span><span>CCNA, Azure Administrator</span></div></div></div></div></section>
+<div>{hero_art()}<div class="hero-aside rv"><div class="kv"><span>{t('Trade', 'Métier')}</span><span>{t('Senior network administrator, cloud and infrastructure', 'Administrateur réseau senior, cloud et infrastructure')}</span></div><div class="kv"><span>{t('Temperament', 'Tempérament')}</span><span>{t('Serial entrepreneur, hobby entrepreneur, and I love it', 'Entrepreneur en série, entrepreneur par passion, et j’aime ça')}</span></div><div class="kv"><span>{t('Ventures', 'Projets')}</span><span>Uplink IT Academy, Bobine, Lemon Network Solutions, Droit Facile</span></div><div class="kv"><span>{t('Writing', 'Écriture')}</span><span>{t('Essays, chronicles, technical books, in French and English', 'Essais, chroniques, livres techniques, en français et en anglais')}</span></div><div class="kv"><span>{t('Certified', 'Certifié')}</span><span>CCNA, Azure Administrator</span></div></div></div></div></section>
 <div class="wrap"><div class="stats rv">{"".join(f'<div class="stat"><b>{n}</b><span>{t(en, fr)}</span></div>' for n, en, fr in stats)}</div></div>
 
 <section class="block wrap" id="library"><div class="sec-head"><span class="label rv"><b>01</b><span>{t('The library', 'La bibliothèque')}</span></span><div class="row rv"><h2>{t('Every project is a book.', 'Chaque projet est un livre.')}</h2><a class="btn ghost small" href="/work">{t('All the shelves', 'Toutes les étagères')} &rarr;</a></div><p class="lede rv">{t('Take one down. Each book has the purpose, the problem, what I built, how it works, and a short motion that says why it exists.', 'Prenez-en un. Chaque livre raconte le but, le problème, ce que j’ai construit, comment ça marche, et une courte animation qui dit pourquoi il existe.')}</p></div>{shelf(C.PROJECTS)}</section>
@@ -87,13 +119,17 @@ def page_home():
 <div class="posts rv">{"".join(post_row(p) for p in posts)}</div></section>
 
 <section class="block wrap"><div class="card rv" style="padding:clamp(24px,4vw,44px);gap:16px"><span class="label"><b>06</b><span>Services</span></span><h2>{t('I can do this for you.', 'Je peux faire ça pour vous.')}</h2><p class="lede">{t('Platforms, networks, books, motion and content systems, in French and English. A clear brief, a booked meeting on Zoom, Teams or Google Meet, a price in writing.', 'Plateformes, réseaux, livres, motion et systèmes de contenu, en français et en anglais. Un brief clair, un rendez-vous sur Zoom, Teams ou Google Meet, un prix par écrit.')}</p><p class="cta-row"><a class="btn cobalt" href="/services">{t('See services and prices', 'Voir les services et les prix')}</a><a class="btn ghost" href="/services#brief">{t('Send a brief', 'Envoyer un brief')}</a></p></div></section>"""
-    return head("", C.SITE["description"], "/") + header("home") + body + footer()
+    return head("", C.SITE["description"], "/", THREE) + header("home") + body + footer()
 
-def tome(b):
-    where = "".join(f'<a class="btn ghost small" href="{E(u)}" target="_blank" rel="noopener">{E(l)} &rarr;</a>' for l, u in b["where"])
-    pages = f'<div><span class="k">Format</span> {E(b["pages"])}</div>' if b["pages"] else ""
-    return f"""<article class="tome"><div class="cover" style="--bk:{b['color']};--bk-ink:{b['ink']}"><span class="bn">{E(b['lang'].upper())}</span><span class="bt">{E(b['title'])}</span><span class="bk">{E(b['kind'])}<br>{E(b['year'])}</span></div>
-<div class="meta"><h3 style="font-size:22px">{E(b['title'])}</h3><p style="margin:4px 0 6px;font-size:15px;color:var(--encre)">{E(b['line'])}</p>{pages}{('<div class="cta-row" style="margin-top:6px">' + where + '</div>') if where else ''}</div></article>"""
+def tome(b, is_album=False):
+    f = FR.ALBUM if is_album else frb(b["slug"])
+    where_en = b["where"]; where_fr = f.get("where", where_en)
+    where = "".join(f'<a class="btn {"cobalt" if u.startswith("/lire/") else "ghost"} small" href="{E(u)}"{"" if u.startswith("/") else " target=\"_blank\" rel=\"noopener\""}>{t(l, (where_fr[i][0] if i < len(where_fr) else l))} &rarr;</a>' for i, (l, u) in enumerate(where_en))
+    pages = f'<div><span class="k">Format</span> {tf(b["pages"], f, "pages")}</div>' if b.get("pages") else ""
+    by = E(b["artist"]) if is_album else E(C.SITE["name"])
+    top = E(b["lang"].upper()) if not is_album else "WFOSS"
+    return f"""<article class="tome"><div class="cover art" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['slug'], b['color'], b['ink'])}<span class="bn">{top}</span><span class="bt">{E(b['title'])}</span><span class="by">{by}</span><span class="bk">{tf(b['kind'], f, 'kind')}<br>{E(b['year'])}</span></div>
+<div class="meta"><h3 style="font-size:22px">{E(b['title'])}</h3><p style="margin:4px 0 6px;font-size:15px;color:var(--encre)">{tf(b['line'], f, 'line')}</p>{pages}{('<div class="cta-row" style="margin-top:6px">' + where + '</div>') if where else ''}</div></article>"""
 
 def vcard(v):
     first = v["variants"][0]
@@ -103,7 +139,7 @@ def vcard(v):
 
 def post_row(p):
     d = datetime.date.fromisoformat(p["date"]).strftime("%d %b %Y")
-    return f"""<article class="post"><a class="th" href="/journal/{p['slug']}"><img src="{E(p['thumb']) if p['thumb'].startswith('http') else '/' + E(p['thumb'])}" alt="" loading="lazy"></a><div><span class="cat"><i style="color:{p['color']}"></i>{E(p['cat'])}</span> <span class="date">{d}</span><h3><a href="/journal/{p['slug']}">{E(p['title'])}</a></h3><p class="lede" style="font-size:17px">{E(p['lede'])}</p><a class="btn ghost small" href="/journal/{p['slug']}">{t('Read', 'Lire')} &rarr;</a></div></article>"""
+    return f"""<article class="post"><a class="th" href="/journal/{p['slug']}"><img src="{E(p['thumb']) if p['thumb'].startswith('http') else '/' + E(p['thumb'])}" alt="" loading="lazy"></a><div><span class="cat"><i style="color:{p['color']}"></i>{tf(p['cat'], frj(p['slug']), 'cat')}</span> <span class="date">{d}</span><h3><a href="/journal/{p['slug']}">{tf(p['title'], frj(p['slug']), 'title')}</a></h3><p class="lede" style="font-size:17px">{tf(p['lede'], frj(p['slug']), 'lede')}</p><a class="btn ghost small" href="/journal/{p['slug']}">{t('Read', 'Lire')} &rarr;</a></div></article>"""
 
 # ---------------------------------------------------------------------------
 def page_work():
@@ -115,14 +151,15 @@ def page_work():
 
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
 def page_project(p, prev, nxt):
-    chapters = "".join(f'<div class="chapter rv"><span class="ch">{ROMAN[i]}</span><div><h3>{E(h)}</h3><p>{E(txt)}</p></div></div>' for i, (h, txt) in enumerate(p["chapters"]))
+    f = frp(p["slug"])
+    chapters = "".join(f'<div class="chapter rv"><span class="ch">{ROMAN[i]}</span><div><h3>{tf(h, f, "chapters", i, 0)}</h3><p>{tf(txt, f, "chapters", i, 1)}</p></div></div>' for i, (h, txt) in enumerate(p["chapters"]))
     facts = "".join(f'<div><span>{E(k)}</span><span>{E(v)}</span></div>' for k, v in p["facts"])
-    hl = "".join(f"<li>{E(h)}</li>" for h in p["highlights"])
+    hl = "".join(f"<li>{tf(h, f, 'highlights', i)}</li>" for i, h in enumerate(p["highlights"]))
     visit = f'<a class="btn" href="{E(p["url"])}" target="_blank" rel="noopener">{t("Visit", "Visiter")} {E(p["link_label"])} &rarr;</a>' if p["url"] else f'<span class="notice">{t("This one is a private build for now. Ask me for a walkthrough.", "Celui-ci est une version privée pour le moment. Demandez-moi une visite.")}</span>'
     body = f"""<section class="block wrap"><div class="open">
-<aside><div class="cover" style="--bk:{p['color']};--bk-ink:{p['ink']}"><span class="bn">N° {E(p['n'])}</span><span class="bt">{E(p['title'])}</span><span class="bk">{E(p['kind'])}<br>{E(p['year'])}<br>{E(p['status'])}</span></div>
+<aside><div class="cover" style="--bk:{p['color']};--bk-ink:{p['ink']}"><span class="bn">N° {E(p['n'])}</span><span class="bt">{E(p['title'])}</span><span class="bk">{tf(p['kind'], f, 'kind')}<br>{E(p['year'])}<br>{tf(p['status'], f, 'status')}</span></div>
 <div class="facts">{facts}<div><span>Stack</span><span>{E(p['stack'])}</span></div></div></aside>
-<div><span class="label rv"><b>N° {E(p['n'])}</b><span>{E(p['kind'])}</span><span>{E(p['year'])}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(36px,5.5vw,72px)">{E(p['title'])}</h1><p class="lede rv">{E(p['line'])}</p><p class="cta-row rv" style="margin:18px 0 34px">{visit}<a class="btn cobalt" href="/guides/{p['slug']}">{t('How to use it', 'Mode d’emploi')}</a><a class="btn ghost" href="#motion">{t('Watch the purpose', 'Voir le but en mouvement')}</a></p>
+<div><span class="label rv"><b>N° {E(p['n'])}</b><span>{E(p['kind'])}</span><span>{E(p['year'])}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(36px,5.5vw,72px)">{E(p['title'])}</h1><p class="lede rv">{tf(p['line'], f, 'line')}</p><p class="cta-row rv" style="margin:18px 0 34px">{visit}<a class="btn cobalt" href="/guides/{p['slug']}">{t('How to use it', 'Mode d’emploi')}</a><a class="btn ghost" href="#motion">{t('Watch the purpose', 'Voir le but en mouvement')}</a></p>
 <figure class="shot rv"><img src="/assets/shots/{p['shot']}.webp" alt="{E(p['title'], quote=True)}, screenshot"><figcaption>{E(p['title'])}, {t('screenshot', 'capture d’écran')}</figcaption></figure>
 <div class="chapters" style="margin-top:40px">{chapters}
 <div class="chapter rv" id="motion"><span class="ch">{ROMAN[len(p['chapters'])]}</span><div><h3>{t('The purpose, in motion', 'Le but, en mouvement')}</h3><p style="margin-bottom:14px">{t('A short motion design made for this book: four beats, one drawn shape each, the reason the project exists. Tap it to step through.', 'Un court motion design fait pour ce livre : quatre temps, une forme dessinée à chaque fois, la raison d’être du projet. Touchez pour avancer.')}</p>{stage(p, p['title'])}</div></div>
@@ -130,9 +167,20 @@ def page_project(p, prev, nxt):
 <nav class="cta-row" style="margin-top:48px;justify-content:space-between" aria-label="Books"><a class="btn ghost small" href="/work/{prev['slug']}">&larr; {E(prev['title'])}</a><a class="btn ghost small" href="/work/{nxt['slug']}">{E(nxt['title'])} &rarr;</a></nav></div></div></section>"""
     return head(p["title"], p["line"], f"/work/{p['slug']}") + header("work") + body + footer()
 
+def salon_card(b):
+    f = frb(b["slug"])
+    if b["free"]:
+        cta = f'<a class="btn cobalt small" href="/lire/{b["free"]}">{t("Read now", "Lire maintenant")} &rarr;</a>'
+    else:
+        cta = f'<span class="notice">{t("In writing. Free here when the first chapters land.", "En cours d’écriture. Gratuit ici dès les premiers chapitres.")}</span>'
+    return f"""<article class="card salon-card" style="--bk:{b['color']};--bk-ink:{b['ink']}"><div class="cover art mini" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['slug'], b['color'], b['ink'])}<span class="bt">{E(b['title'])}</span><span class="by">{E(C.SITE['name'])}</span></div><div><span class="label"><b>{t('Free', 'Gratuit')}</b><span>{tf(b['kind'], f, 'kind')}</span></span><h3 style="font-size:22px;margin:8px 0">{E(b['title'])}</h3><p style="margin:0 0 12px;font-size:15px;color:var(--encre)">{tf(b['line'], f, 'line')}</p>{cta}</div></article>"""
+
 def page_books():
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>{t('Books', 'Livres')}</b><span>{len(C.BOOKS)} {t('titles', 'titres')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('The bookcase.', 'La bibliothèque.')}</h1><p class="lede rv">{t('Books I wrote, and books I produce for others: essays and chronicles in French, technical books in English, and the project book format. New titles join this shelf as they are finished.', 'Les livres que j’ai écrits, et ceux que je produis pour d’autres : essais et chroniques en français, livres techniques en anglais, et le format du livre de projet. Les nouveaux titres rejoignent cette étagère quand ils sont terminés.')}</p></section>
-<section class="block wrap" style="padding-top:10px"><div class="bookcase">{"".join(tome(b) for b in C.BOOKS)}</div></section>
+<section class="block wrap" style="padding-top:10px" id="salon"><div class="sec-head"><span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span>{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span><div class="row rv"><h2>{t('Read them here, for free.', 'Lisez-les ici, gratuitement.')}</h2></div><p class="lede rv">{t('Three books open to everyone: the full text, chapter by chapter, with a calm piece of music generated in your browser if you want company. Nothing to buy, nothing to sign up for.', 'Trois livres ouverts à tous : le texte intégral, chapitre par chapitre, avec une musique calme générée dans votre navigateur si vous voulez de la compagnie. Rien à acheter, rien à créer.')}</p></div>
+<div class="grid g3 rv">{"".join(salon_card(b) for b in C.BOOKS if "free" in b)}</div></section>
+<section class="block wrap" style="padding-top:10px"><div class="sec-head"><span class="label rv"><b>{t('All titles', 'Tous les titres')}</b></span></div><div class="bookcase">{"".join(tome(b) for b in C.BOOKS)}</div></section>
+<section class="block wrap" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>{t('Music', 'Musique')}</b><span>{t('For images', 'Pour les images')}</span></span><h2 class="rv">{t('An album for the screen.', 'Un album pour l’écran.')}</h2></div><div class="bookcase">{tome(C.ALBUM, True)}</div></section>
 <section class="block wrap"><div class="card rv" style="padding:clamp(24px,4vw,40px)"><h2 style="font-size:clamp(26px,3vw,38px)">{t('Your book, produced.', 'Votre livre, produit.')}</h2><p class="lede">{t('From a manuscript or a pile of notes to a print ready PDF and an ebook, with figures, running heads and a cover.', 'D’un manuscrit ou d’une pile de notes à un PDF prêt à imprimer et un ebook, avec figures, titres courants et couverture.')}</p><p class="cta-row"><a class="btn" href="/services#books">{t('Book production service', 'Service de production de livres')} &rarr;</a></p></div></section>"""
     return head("Books", "Books written and produced by William Foteping.", "/books") + header("books") + body + footer()
 
@@ -153,20 +201,22 @@ def page_journal():
     return head("Journal", "Journal of William Foteping: process, life and galleries.", "/journal") + header("journal") + body + footer()
 
 def page_post(p, prev, nxt):
+    f = frj(p["slug"])
     d = datetime.date.fromisoformat(p["date"]).strftime("%d %B %Y")
-    paras = "".join(f"<p>{E(x)}</p>" for x in p["body"])
+    paras = "".join(f"<p>{tf(x, f, 'body', i)}</p>" for i, x in enumerate(p["body"]))
     gal = ""
     if p["images"]:
-        gal = '<div class="gallery">' + "".join(f'<figure><img src="{E(s) if s.startswith('http') else '/' + E(s)}" alt="{E(c, quote=True)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for s, c in p["images"]) + "</div>"
-    body = f"""<article class="block wrap"><span class="cat rv"><i style="color:{p['color']}"></i>{E(p['cat'])}</span> <span class="date">{d}</span><h1 class="rv" style="margin:14px 0 16px;font-size:clamp(34px,5vw,64px);max-width:20ch">{E(p['title'])}</h1><p class="lede rv">{E(p['lede'])}</p>
-<figure class="shot rv" style="margin:28px 0"><img src="{E(p['thumb']) if p['thumb'].startswith('http') else '/' + E(p['thumb'])}" alt=""></figure>
-<div class="prose rv">{paras}</div>{gal}
+        gal = '<div class="gallery centered">' + "".join(f'<figure><img src="{E(sr) if sr.startswith("http") else "/" + E(sr)}" alt="{E(c, quote=True)}" loading="lazy"><figcaption>{tf(c, f, "captions", i)}</figcaption></figure>' for i, (sr, c) in enumerate(p["images"])) + "</div>"
+    sound = f'<button class="btn ghost small sound" type="button" data-sound="{E(p["sound"])}" aria-pressed="false" data-on="{E(p["sound_label"], quote=True)}" data-off="{t("Sound off", "Couper le son")}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg><span>{tf(p["sound_label"], f, "sound_label")}</span></button>'
+    body = f"""<article class="block wrap"><div class="post-head"><span class="cat rv"><i style="color:{p['color']}"></i>{tf(p['cat'], f, 'cat')}</span> <span class="date">{d}</span><h1 class="rv" style="margin:14px 0 16px;font-size:clamp(34px,5vw,64px);max-width:22ch">{tf(p['title'], f, 'title')}</h1><p class="lede rv">{tf(p['lede'], f, 'lede')}</p><p class="cta-row rv" style="margin-top:10px">{sound}</p></div>
+<div class="scene rv" style="--bk:{p['color']}"><canvas data-scene="{E(p['scene'])}" aria-label="{E(p['title'], quote=True)}, animated scene"></canvas></div>
+<div class="prose rv centered">{paras}</div>{gal}
 <nav class="cta-row" style="margin-top:48px;justify-content:space-between" aria-label="Posts"><a class="btn ghost small" href="/journal/{prev['slug']}">&larr; {E(prev['title'][:36])}</a><a class="btn ghost small" href="/journal/{nxt['slug']}">{E(nxt['title'][:36])} &rarr;</a></nav></article>"""
-    return head(p["title"], p["lede"], f"/journal/{p['slug']}") + header("journal") + body + footer()
+    return head(p["title"], p["lede"], f"/journal/{p['slug']}", THREE) + header("journal") + body + footer()
 
 def page_services():
-    cards = "".join(f"""<article class="card rv" id="{s['slug']}"><span class="label"><b>{str(i + 1).zfill(2)}</b><span>Service</span></span><h3>{E(s['name'])}</h3><p style="margin:0;color:var(--encre)">{E(s['line'])}</p><p class="mono muted" style="margin:0"><b style="color:var(--fusain)">{t('Example', 'Exemple')}:</b> {E(s['example'])}</p><ul class="ticks">{"".join(f"<li>{E(d)}</li>" for d in s['deliverables'])}</ul><div class="foot"><div class="price">{t('from', 'à partir de')} ${s['from']:,}<small>{E(s['unit'])}</small></div><button class="btn small" type="button" data-pay="{s['slug']}">{t('Pay the deposit', 'Payer l’acompte')} ${s['deposit']:,}</button></div></article>""" for i, s in enumerate(C.SERVICES))
-    steps = "".join(f'<div class="step rv"><span class="n">{i + 1}</span><div><h3>{E(h)}</h3><p>{E(d)}</p></div></div>' for i, (h, d) in enumerate(C.STEPS))
+    cards = "".join(f"""<article class="card rv" id="{s['slug']}"><span class="label"><b>{str(i + 1).zfill(2)}</b><span>Service</span></span><h3>{tf(s['name'], frs(s['slug']), 'name')}</h3><p style="margin:0;color:var(--encre)">{tf(s['line'], frs(s['slug']), 'line')}</p><p class="mono muted" style="margin:0"><b style="color:var(--fusain)">{t('Example', 'Exemple')}:</b> {tf(s['example'], frs(s['slug']), 'example')}</p><ul class="ticks">{"".join(f"<li>{tf(d, frs(s['slug']), 'deliverables', k)}</li>" for k, d in enumerate(s['deliverables']))}</ul><div class="foot"><div class="price">{t('from', 'à partir de')} ${s['from']:,}<small>{tf(s['unit'], frs(s['slug']), 'unit')}</small></div><button class="btn small" type="button" data-pay="{s['slug']}">{t('Pay the deposit', 'Payer l’acompte')} ${s['deposit']:,}</button></div></article>""" for i, s in enumerate(C.SERVICES))
+    steps = "".join(f'<div class="step rv"><span class="n">{i + 1}</span><div><h3>{t(h, FR.STEPS[i][0])}</h3><p>{t(d, FR.STEPS[i][1])}</p></div></div>' for i, (h, d) in enumerate(C.STEPS))
     opts = "".join(f'<option>{E(s["name"])}</option>' for s in C.SERVICES) + "<option>Something else</option>"
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>Services</b><span>{t('Prices in US dollars', 'Prix en dollars américains')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('What I can do for you.', 'Ce que je peux faire pour vous.')}</h1><p class="lede rv">{t('Nine things I do well, with a real example of each, a starting price and the deposit that starts the work. Every engagement begins the same way: a brief, a booked meeting, a price in writing.', 'Neuf choses que je fais bien, avec un vrai exemple de chacune, un prix de départ et l’acompte qui lance le travail. Chaque mission commence de la même façon : un brief, un rendez-vous, un prix par écrit.')}</p></section>
 <section class="block wrap" style="padding-top:10px"><div class="grid g3">{cards}</div><p id="pay-notice" class="notice" hidden style="margin-top:16px"></p></section>
@@ -199,8 +249,14 @@ def shot_path(name, p):
     if name and os.path.exists(os.path.join(here, "assets", "shots", name + ".webp")): return f"/assets/shots/{name}.webp"
     return f"/assets/shots/{p['shot']}.webp"
 
-def tour(p, g):
-    scenes = [{"k": sc["k"], "t": sc["t"], "c": sc["c"], "img": shot_path(sc.get("shot"), p), "f": sc["f"]} for sc in g["scenes"]]
+def tour(p, g, f=None):
+    f = f or {}
+    scenes = []
+    for i, sc in enumerate(g["scenes"]):
+        fs = f.get("scenes", [])
+        d = {"k": sc["k"], "t": sc["t"], "c": sc["c"], "img": shot_path(sc.get("shot"), p), "f": sc["f"]}
+        if i < len(fs): d["fr"] = {"k": fs[i][0], "t": fs[i][1], "c": fs[i][2]}
+        scenes.append(d)
     data = E(json.dumps(scenes, ensure_ascii=False), quote=True)
     return f"""<div class="tour" id="tour" data-scenes="{data}" style="--bk:{p['color']};--bk-ink:{p['ink']}" tabindex="0" aria-label="{E(p['title'], quote=True)} walkthrough">
 <div class="tour-stage"><img class="tour-img" alt="" src="{scenes[0]['img']}"><svg class="tour-hl" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width="100" height="100" rx="1.2"/></svg><div class="tour-n mono"></div></div>
@@ -208,18 +264,20 @@ def tour(p, g):
 <div class="tour-ctl"><button type="button" class="t-prev" aria-label="Previous">&larr;</button><div class="dots" role="tablist"></div><button type="button" class="t-play">PAUSE</button><button type="button" class="t-next" aria-label="Next">&rarr;</button></div></div>"""
 
 def page_guide(p):
-    g = GUIDES[p["slug"]]
-    start = "".join(f'<div class="step rv"><span class="n">{i + 1}</span><div><p style="font-size:17px">{E(x)}</p></div></div>' for i, x in enumerate(g["start"]))
+    g = GUIDES[p["slug"]]; f = frg(p["slug"]); fp = frp(p["slug"])
+    start = "".join(f'<div class="step rv"><span class="n">{i + 1}</span><div><p style="font-size:17px">{tf(x, f, "start", i)}</p></div></div>' for i, x in enumerate(g["start"]))
     rooms = ""
     for i, r in enumerate(g["rooms"]):
-        how = "".join(f"<li>{E(h)}</li>" for h in r["how"])
-        rooms += f"""<article class="room rv"><figure class="shot"><img src="{shot_path(r.get('shot'), p)}" alt="{E(r['title'], quote=True)}, screenshot" loading="lazy"><figcaption>{E(p['title'])}, {E(r['title'])}</figcaption></figure><div><span class="label"><b>{str(i + 1).zfill(2)}</b><span>{E(r['title'])}</span></span><h3 style="margin:10px 0 8px">{E(r['title'])}</h3><p style="font-size:17px;line-height:1.65;color:var(--encre)">{E(r['text'])}</p><h4 class="mono muted" style="margin:14px 0 6px;letter-spacing:.14em">HOW TO USE IT</h4><ol class="how">{how}</ol></div></article>"""
-    tips = "".join(f"<li>{E(x)}</li>" for x in g["tips"])
-    faq = "".join(f'<details class="faq"><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in g["faq"])
-    contact = "".join(f'<a class="card" href="{E(h)}"{" target=\"_blank\" rel=\"noopener\"" if h.startswith("http") else ""}><span class="label"><b>Contact</b></span><h3 style="font-size:20px">{E(l)}</h3></a>' for l, h in g["contact"])
+        fh = f["rooms"][i][2] if i < len(f.get("rooms", [])) else []
+        how = "".join(f"<li>{t(h, fh[k] if k < len(fh) else None)}</li>" for k, h in enumerate(r["how"]))
+        rt = f["rooms"][i][0] if i < len(f.get("rooms", [])) else None; rx = f["rooms"][i][1] if i < len(f.get("rooms", [])) else None
+        rooms += f"""<article class="room rv"><figure class="shot"><img src="{shot_path(r.get('shot'), p)}" alt="{E(r['title'], quote=True)}, screenshot" loading="lazy"><figcaption>{E(p['title'])}, {t(r['title'], rt)}</figcaption></figure><div><span class="label"><b>{str(i + 1).zfill(2)}</b><span>{t(r['title'], rt)}</span></span><h3 style="margin:10px 0 8px">{t(r['title'], rt)}</h3><p style="font-size:17px;line-height:1.65;color:var(--encre)">{t(r['text'], rx)}</p><h4 class="mono muted" style="margin:14px 0 6px;letter-spacing:.14em">{t('HOW TO USE IT', 'MODE D’EMPLOI')}</h4><ol class="how">{how}</ol></div></article>"""
+    tips = "".join(f"<li>{tf(x, f, 'tips', i)}</li>" for i, x in enumerate(g["tips"]))
+    faq = "".join(f'<details class="faq"><summary>{tf(q, f, "faq", i, 0)}</summary><p>{tf(a, f, "faq", i, 1)}</p></details>' for i, (q, a) in enumerate(g["faq"]))
+    contact = "".join(f'<a class="card" href="{E(h)}"{" target=\"_blank\" rel=\"noopener\"" if h.startswith("http") else ""}><span class="label"><b>Contact</b></span><h3 style="font-size:20px">{tf(l, f, "contact", i)}</h3></a>' for i, (l, h) in enumerate(g["contact"]))
     visit = f'<a class="btn" href="{E(p["url"])}" target="_blank" rel="noopener">{t("Open", "Ouvrir")} {E(p["title"])} &rarr;</a>' if p["url"] else ""
-    body = f"""<section class="block wrap" style="padding-bottom:24px"><span class="label rv"><b>N° {E(p['n'])}</b><span>{t('How to use', 'Mode d’emploi')}</span><span>{E(p['kind'])}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(34px,5.5vw,70px)">{t('How to use', 'Comment utiliser')} {E(p['title'])}</h1><p class="lede rv">{E(g['audience'])}</p><p class="cta-row rv" style="margin-top:16px">{visit}<a class="btn ghost" href="/work/{p['slug']}">{t('Read the book', 'Lire le livre')}</a><a class="btn ghost" href="#contact">Contact</a></p></section>
-<section class="wrap rv"><div class="sec-head" style="margin-bottom:14px"><span class="label"><b>{t('Walkthrough', 'Visite guidée')}</b><span>{t('Motion design, real screens', 'Motion design, vrais écrans')}</span></span></div>{tour(p, g)}<p class="muted" style="font-size:13px;margin-top:10px">{t('It plays by itself. Tap a dot or the arrows to move, Pause to stop.', 'Elle se joue toute seule. Touchez un point ou les flèches pour avancer, Pause pour arrêter.')}</p></section>
+    body = f"""<section class="block wrap" style="padding-bottom:24px"><span class="label rv"><b>N° {E(p['n'])}</b><span>{t('How to use', 'Mode d’emploi')}</span><span>{tf(p['kind'], fp, 'kind')}</span></span><h1 class="rv" style="margin:14px 0 12px;font-size:clamp(34px,5.5vw,70px)">{t('How to use', 'Comment utiliser')} {E(p['title'])}</h1><p class="lede rv">{tf(g['audience'], f, 'audience')}</p><p class="cta-row rv" style="margin-top:16px">{visit}<a class="btn ghost" href="/work/{p['slug']}">{t('Read the book', 'Lire le livre')}</a><a class="btn ghost" href="#contact">Contact</a></p></section>
+<section class="wrap rv"><div class="sec-head" style="margin-bottom:14px"><span class="label"><b>{t('Walkthrough', 'Visite guidée')}</b><span>{t('Motion design, real screens', 'Motion design, vrais écrans')}</span></span></div>{tour(p, g, f)}<p class="muted" style="font-size:13px;margin-top:10px">{t('It plays by itself. Tap a dot or the arrows to move, Pause to stop.', 'Elle se joue toute seule. Touchez un point ou les flèches pour avancer, Pause pour arrêter.')}</p></section>
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>01</b><span>{t('Get started', 'Pour commencer')}</span></span><h2 class="rv">{t('Five steps, five minutes.', 'Cinq étapes, cinq minutes.')}</h2></div><div class="steps">{start}</div></section>
 <section class="block wrap" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>02</b><span>{t('Room by room', 'Pièce par pièce')}</span></span><h2 class="rv">{t('What is inside, and how to use it.', 'Ce qu’il y a dedans, et comment s’en servir.')}</h2></div><div class="rooms">{rooms}</div></section>
 <section class="block wrap" style="padding-top:0"><div class="grid g2"><div class="card rv"><span class="label"><b>03</b><span>{t('Tips', 'Conseils')}</span></span><ul class="ticks" style="font-size:16px">{tips}</ul></div><div class="card rv"><span class="label"><b>04</b><span>FAQ</span></span><div>{faq}</div></div></div></section>
@@ -242,9 +300,9 @@ def page_404():
 
 FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#F6F2EA"/><circle cx="32" cy="32" r="13" fill="#1C3FBF"/><path d="M12 52 L32 10 L52 52" fill="none" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/></svg>"""
 
-def write(path, s):
+def write(path, s, strict=True):
     for bad, name in (("—", "em dash"), ("–", "en dash")):
-        assert bad not in s, f"{name} found in {path}"
+        assert not strict or bad not in s, f"{name} found in {path}"
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
@@ -262,6 +320,7 @@ def main():
     for i, p in enumerate(C.PROJECTS): write(f"work/{p['slug']}.html", page_project(p, C.PROJECTS[i - 1], C.PROJECTS[(i + 1) % n]))
     for p in C.PROJECTS: write(f"guides/{p['slug']}.html", page_guide(p))
     write("books.html", page_books())
+    for b in SALON.load_books(): write(f"lire/{b['slug']}.html", SALON.page(b, t, head, header, footer, cover_art), strict=False)
     write("gallery.html", page_gallery())
     write("journal/index.html", page_journal())
     m = len(C.JOURNAL)
@@ -270,7 +329,7 @@ def main():
     write("contact.html", page_contact())
     write("thanks.html", page_thanks())
     write("404.html", page_404())
-    pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books", "/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
+    pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books", "/lire/le-contrat-du-peuple", "/lire/laa", "/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {C.SITE['url']}/sitemap.xml\n")
     print("built", len(pages), "pages into", OUT)

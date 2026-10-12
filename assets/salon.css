@@ -1,0 +1,67 @@
+/* The reading room. Chalk paper, a long measure, one chapter at a time. */
+.salon{--measure:66ch;--size:19px;position:relative;z-index:1}
+.opening{padding-top:clamp(28px,5vw,64px);padding-bottom:clamp(20px,4vw,48px)}
+.opening-grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.opening .cover.big{position:relative;top:auto;max-width:300px;width:100%;aspect-ratio:2/3;box-shadow:inset 8px 0 0 color-mix(in srgb,var(--bk) 70%,#000),inset 11px 0 0 color-mix(in srgb,var(--bk) 40%,#fff),0 40px 70px color-mix(in srgb,var(--fusain) 32%,transparent);transform:rotate(-2deg)}
+.opening .cover.big .bt{font-size:clamp(30px,3.4vw,44px)}
+.opening .cover.big .bk{text-transform:none;letter-spacing:.02em;font:italic 400 13px/1.4 var(--serif);opacity:.9}
+.opening .sub{font:italic 400 clamp(20px,2.4vw,28px)/1.3 var(--serif);color:var(--encre);margin:0 0 14px;max-width:30ch}
+.btn.music svg{margin-right:8px;vertical-align:-2px}
+.btn.music[aria-pressed="true"]{background:var(--cobalt);color:#fff;border-color:var(--cobalt)}
+
+.reader-bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--craie) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne)}
+.reader-bar .rb{display:flex;align-items:center;gap:12px;padding-top:8px;padding-bottom:8px;min-height:48px}
+.reader-bar .now{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--gris);font-size:12px}
+.rb-tools{display:flex;gap:6px;align-items:center}
+.reader-bar .pill{font:500 11px var(--mono);letter-spacing:.08em;padding:7px 11px;border:1px solid var(--ligne);border-radius:999px;background:var(--blanc);color:var(--fusain);cursor:pointer}
+.reader-bar .pill:hover{border-color:var(--fusain)}
+.reader-bar .pill.music[aria-pressed="true"]{background:var(--cobalt);color:#fff;border-color:var(--cobalt)}
+.reader-bar .pill.music svg{display:block}
+.progress{height:2px;background:transparent}
+.progress i{display:block;height:100%;width:0;background:var(--or);transition:width .3s var(--ease)}
+
+.reader-grid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:start;padding-top:clamp(24px,4vw,56px);padding-bottom:clamp(40px,8vw,120px)}
+.toc{position:sticky;top:64px;max-height:calc(100vh - 80px);overflow:auto;scrollbar-width:thin}
+.toc nav{display:grid;gap:2px;margin-top:12px}
+.toc nav a{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:baseline;padding:7px 8px;border-radius:8px;font:400 14px/1.35 var(--sans);color:var(--encre)}
+.toc nav a .n{font:500 11px var(--mono);letter-spacing:.08em;color:var(--gris)}
+.toc nav a:hover{background:var(--craie-2)}
+.toc nav a[aria-current="true"]{background:var(--cobalt-soft);color:var(--fusain)}
+.toc nav a[aria-current="true"] .n{color:var(--cobalt)}
+
+.book-body{max-width:var(--measure);margin:0 auto;width:100%;min-width:0}
+.chap{scroll-margin-top:72px}
+html.js .chap{display:none}
+html.js .chap.on{display:block;animation:page .5s var(--ease) both}
+@keyframes page{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.chap-head{margin:0 0 clamp(28px,4vw,44px);padding-bottom:22px;border-bottom:1px solid var(--ligne);text-align:center}
+.chap-head .kicker{display:block;color:var(--or);margin-bottom:14px;letter-spacing:.24em;font-size:11px}
+.chap-head h2{font-size:clamp(30px,4.4vw,48px);line-height:1.1;font-variation-settings:"opsz" 144}
+.text{font:300 var(--size)/1.78 var(--serif);color:var(--fusain);font-variation-settings:"opsz" 20;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+.text p{margin:0 0 1.15em}
+.text p:first-of-type:not(.scene)::first-letter{font-size:3.3em;float:left;line-height:.82;padding:6px 10px 0 0;color:var(--cobalt);font-weight:400;font-variation-settings:"opsz" 144}
+.text h3.sec{font:400 clamp(21px,2.3vw,26px)/1.25 var(--serif);margin:2.1em 0 .8em;display:flex;gap:14px;align-items:baseline;font-variation-settings:"opsz" 144}
+.text h3.sec .sn{font:500 12px var(--mono);letter-spacing:.14em;color:var(--or);min-width:22px}
+.text ul{padding-left:1.2em;margin:0 0 1.2em}
+.text li{margin:0 0 .4em}
+.text em{font-variation-settings:"opsz" 20}
+.text strong{font-weight:600}
+.text u{text-decoration:none;font-style:italic}
+.text p.scene{margin:2.2em 0 1.6em;text-align:center}
+.text p.scene span{font:500 11px var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--gris);padding:6px 14px;border:1px solid var(--ligne);border-radius:999px}
+.text p.scene + p::first-letter{font-size:1em;float:none;padding:0;color:inherit}
+.chap-nav{display:flex;justify-content:space-between;gap:12px;margin-top:clamp(36px,5vw,64px);padding-top:22px;border-top:1px solid var(--ligne);flex-wrap:wrap}
+.chap-nav a[hidden]{display:none}
+html.js .colophon{display:none}
+.colophon{padding-top:40px}
+html.js .colophon.on{display:block}
+
+@media (max-width:900px){
+  .opening-grid{grid-template-columns:1fr;gap:28px}
+  .opening .cover.big{max-width:220px;transform:none}
+  .reader-grid{grid-template-columns:1fr;gap:0}
+  .toc{position:fixed;inset:48px 0 0 0;top:var(--rb-h,60px);z-index:29;background:var(--craie);max-height:none;padding:16px var(--gutter) 40px;transform:translateY(-8px);opacity:0;pointer-events:none;transition:.25s var(--ease)}
+  .toc.open{transform:none;opacity:1;pointer-events:auto}
+  .salon{--size:18px}
+}
+@media (prefers-reduced-motion:reduce){.chap.on{animation:none}}

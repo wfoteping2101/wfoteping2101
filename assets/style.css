@@ -77,7 +77,8 @@ hr.rule{border:0;border-top:1px solid var(--ligne);margin:0}
  radial-gradient(60% 50% at 30% 30%,color-mix(in srgb,var(--cobalt) 55%,transparent),transparent 70%),
  radial-gradient(50% 60% at 75% 70%,color-mix(in srgb,var(--or) 45%,transparent),transparent 70%),
  linear-gradient(160deg,var(--pierre),var(--craie-2))}
-.glass svg{position:absolute;inset:0;width:100%;height:100%}
+.glass canvas,.glass svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.glass canvas:not([hidden]) + svg{display:none}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px;border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);padding:22px 0}
@@ -255,3 +256,33 @@ details.faq summary::after{content:"+";color:var(--cobalt);font-family:var(--ser
 details.faq[open] summary::after{content:"\2212"}
 details.faq summary::-webkit-details-marker{display:none}
 details.faq p{margin:8px 0 0;color:var(--encre);font-size:15px;max-width:60ch}
+
+/* artistic covers */
+.cover.art{position:relative;overflow:hidden;isolation:isolate}
+.cover.art .cover-art{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.cover.art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,color-mix(in srgb,var(--bk) 65%,#000) 100%);z-index:-1;opacity:.55}
+.cover .by{font:italic 400 13px var(--serif);letter-spacing:.02em;opacity:.9;margin-top:auto;padding-top:14px}
+.cover .bt{text-shadow:0 1px 0 color-mix(in srgb,var(--bk) 60%,#000)}
+/* centred, clean figures */
+figure.shot{background:var(--craie-2);padding:12px;display:grid;place-items:center}
+figure.shot img{width:100%;height:auto;border-radius:8px;box-shadow:0 10px 30px color-mix(in srgb,var(--fusain) 14%,transparent)}
+figure.shot figcaption{padding:10px 4px 0;text-align:center;width:100%}
+.tour-stage{aspect-ratio:4/3;background:color-mix(in srgb,var(--bk,#000) 70%,#000)}
+.tour-img{object-fit:contain;object-position:center}
+/* journal scenes and sound */
+.post-head{max-width:760px;margin:0 auto;text-align:left}
+.scene{position:relative;aspect-ratio:16/9;max-width:980px;margin:28px auto;border-radius:var(--r);overflow:hidden;border:1px solid var(--ligne);background:radial-gradient(70% 80% at 50% 40%,color-mix(in srgb,var(--bk) 22%,var(--craie)),var(--craie-2))}
+.scene canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.prose.centered{margin:0 auto}
+.gallery.centered{max-width:980px;margin:28px auto;justify-items:center}
+.gallery.centered figure{width:100%;background:var(--craie-2);display:grid;place-items:center}
+.gallery.centered figure img{aspect-ratio:auto;object-fit:contain;max-height:360px;width:100%;padding:10px;border-radius:14px}
+.btn.sound[aria-pressed="true"]{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.post .th img{object-fit:cover;object-position:top}
+
+/* reading room cards on the books page */
+.salon-card{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:start}
+.cover.mini{position:relative;top:auto;aspect-ratio:2/3;padding:14px 10px 12px 16px;border-radius:4px 8px 8px 4px;box-shadow:inset 5px 0 0 color-mix(in srgb,var(--bk) 70%,#000),inset 7px 0 0 color-mix(in srgb,var(--bk) 40%,#fff),0 16px 28px color-mix(in srgb,var(--fusain) 22%,transparent)}
+.cover.mini .bt{font-size:15px;line-height:1.05}
+.cover.mini .by{font-size:10px;padding-top:8px}
+@media (max-width:480px){.salon-card{grid-template-columns:90px 1fr}}

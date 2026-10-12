@@ -16,6 +16,7 @@
     $$('[data-fr-ph]').forEach(el => { if (!el.dataset.enPh) el.dataset.enPh = el.placeholder; el.placeholder = l === 'fr' ? el.dataset.frPh : el.dataset.enPh; });
     $$('.lang').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l ? 'true' : 'false'));
     store.set(LANG_KEY, l);
+    dispatchEvent(new CustomEvent('wf-lang', { detail: l }));
   }
   $$('.lang').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
   applyLang(store.get(LANG_KEY) || 'en');
@@ -111,7 +112,7 @@
     let i = -1, timer = null, running = !reduce;
     scenes.forEach((s, j) => { const d = document.createElement('button'); d.type = 'button'; d.setAttribute('role', 'tab'); d.setAttribute('aria-label', 'Scene ' + (j + 1)); d.addEventListener('click', () => { go(j); restart(); }); dots.appendChild(d); });
     function go(j) {
-      i = j; const s = scenes[j]; const [x, y, w, h] = s.f;
+      i = j; const s0 = scenes[j]; const s = (document.documentElement.lang === 'fr' && s0.fr) ? Object.assign({}, s0, s0.fr) : s0; const [x, y, w, h] = s.f;
       const scale = Math.min(2.2, Math.max(1, Math.min(100 / w, 100 / h) * 0.92));
       const lim = (scale - 1) * 50 / scale; const cx = x + w / 2, cy = y + h / 2; const tx = Math.max(-lim, Math.min(lim, 50 - cx)), ty = Math.max(-lim, Math.min(lim, 50 - cy));
       if (img.getAttribute('src') !== s.img) { img.style.transition = 'none'; img.style.opacity = 0; img.src = s.img; requestAnimationFrame(() => { img.style.transition = reduce ? 'none' : 'opacity .5s, transform 5s cubic-bezier(.2,.7,.2,1)'; img.style.opacity = 1; img.style.transform = `scale(${scale}) translate(${tx}%, ${ty}%)`; }); }
@@ -131,6 +132,7 @@
     tour.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { go((i + 1) % scenes.length); restart(); } if (e.key === 'ArrowLeft') { go((i - 1 + scenes.length) % scenes.length); restart(); } if (e.key === ' ') { e.preventDefault(); play.click(); } });
     if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && i < 0) { step(); io.disconnect(); } })); io.observe(tour); } else step();
     if (!running) { go(0); play.textContent = 'PLAY'; }
+    addEventListener('wf-lang', () => { if (i >= 0) { const keep = i; i = -1; go(keep); } });
   });
 
   /* ---------- gallery players ---------- */
