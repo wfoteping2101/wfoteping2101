@@ -300,9 +300,20 @@ def page_404():
 
 FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#F6F2EA"/><circle cx="32" cy="32" r="13" fill="#1C3FBF"/><path d="M12 52 L32 10 L52 52" fill="none" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/></svg>"""
 
+import hashlib
+def asset_version():
+    here = os.path.dirname(os.path.abspath(__file__)); h = hashlib.sha1()
+    for n in ("style.css", "app.js", "scenes.js", "salon.css", "salon.js"):
+        p = os.path.join(here, "assets", n)
+        if os.path.exists(p): h.update(open(p, "rb").read())
+    return h.hexdigest()[:8]
+V = asset_version()
+
 def write(path, s, strict=True):
     for bad, name in (("—", "em dash"), ("–", "en dash")):
         assert not strict or bad not in s, f"{name} found in {path}"
+    import re as _re
+    s = _re.sub(r'(/assets/(?:style|salon)\.css|/assets/(?:app|scenes|salon)\.js)(?=["\'])', lambda m: m.group(1) + "?v=" + V, s)
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
