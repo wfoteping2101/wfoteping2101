@@ -1,0 +1,203 @@
+{
+"slug": "le-contrat-du-peuple",
+"sections": [
+{
+"idx": 0,
+"cid": "preface",
+"label": "Préface",
+"title": "Pourquoi ce livre doit exister",
+"kind": "preface",
+"part": "",
+"words": 1200
+},
+{
+"idx": 1,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Le pays n’est pas une propriété privée",
+"kind": "chapter",
+"part": "",
+"words": 1361
+},
+{
+"idx": 2,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Le contrat social commence avec le citoyen",
+"kind": "chapter",
+"part": "",
+"words": 1630
+},
+{
+"idx": 3,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "La force ne crée pas le droit",
+"kind": "chapter",
+"part": "",
+"words": 1468
+},
+{
+"idx": 4,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "La soumission n’est pas un contrat",
+"kind": "chapter",
+"part": "",
+"words": 1650
+},
+{
+"idx": 5,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "La première convention : devenir un peuple avant de choisir un chef",
+"kind": "chapter",
+"part": "",
+"words": 1776
+},
+{
+"idx": 6,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "Le pacte social : unir nos forces sans perdre notre liberté",
+"kind": "chapter",
+"part": "",
+"words": 1706
+},
+{
+"idx": 7,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "Le souverain : le peuple organisé",
+"kind": "chapter",
+"part": "",
+"words": 1857
+},
+{
+"idx": 8,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "La vie civique : passer de l'instinct à la justice",
+"kind": "chapter",
+"part": "",
+"words": 1455
+},
+{
+"idx": 9,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "La terre, les ressources et le bien commun",
+"kind": "chapter",
+"part": "",
+"words": 1350
+},
+{
+"idx": 10,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "La souveraineté ne se vend pas et ne se découpe pas",
+"kind": "chapter",
+"part": "",
+"words": 1322
+},
+{
+"idx": 11,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "Quand le peuple peut se tromper",
+"kind": "chapter",
+"part": "",
+"words": 1355
+},
+{
+"idx": 12,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "Les limites de tout pouvoir : la dignité humaine comme frontière",
+"kind": "chapter",
+"part": "",
+"words": 1246
+},
+{
+"idx": 13,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "La loi juste : une règle pour tous, connue de tous",
+"kind": "chapter",
+"part": "",
+"words": 1302
+},
+{
+"idx": 14,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "La constitution vivante : qui écrit les règles du jeu ?",
+"kind": "chapter",
+"part": "",
+"words": 1325
+},
+{
+"idx": 15,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "Le gouvernement est un serviteur, non un maître",
+"kind": "chapter",
+"part": "",
+"words": 1314
+},
+{
+"idx": 16,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Quand le pouvoir dégénère",
+"kind": "chapter",
+"part": "",
+"words": 1415
+},
+{
+"idx": 17,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "Les représentants doivent rendre des comptes",
+"kind": "chapter",
+"part": "",
+"words": 1217
+},
+{
+"idx": 18,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "Voter en conscience",
+"kind": "chapter",
+"part": "",
+"words": 1375
+},
+{
+"idx": 19,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "La foi civique : croire ensemble sans se diviser",
+"kind": "chapter",
+"part": "",
+"words": 1423
+},
+{
+"idx": 20,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "La volonté du peuple ne meurt pas",
+"kind": "chapter",
+"part": "",
+"words": 1400
+},
+{
+"idx": 21,
+"cid": "epilogue",
+"label": "Épilogue",
+"title": "Le serment du citoyen",
+"kind": "epilogue",
+"part": "",
+"words": 325
+}
+]
+}

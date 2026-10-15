@@ -6,15 +6,24 @@ from guides import GUIDES
 import fr as FR
 import salon as SALON
 
-if SALON.has_richesse():  # the manuscript has landed: open it in the reading room
-    for _b in C.BOOKS:
-        if _b["slug"] == "richesse-silencieuse":
-            _b.update({"free": "la-richesse-silencieuse", "year": "2026", "pages": "Free, complete, online", "kind": "Investing guide for the diaspora",
-                       "line": "A calm, practical investing guide for salaried people of the African diaspora: simple principles, real numbers, and room for family without sacrificing the future. Free to read here, in full.",
-                       "where": [("Read it free, online", "/lire/la-richesse-silencieuse")]})
-            FR.BOOKS["richesse-silencieuse"] = {"pages": "Gratuit, complet, en ligne", "kind": "Guide d'investissement pour la diaspora",
-                       "line": "Un guide d'investissement calme et pratique pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et une place pour la famille sans sacrifier l'avenir. À lire ici gratuitement, en entier.",
-                       "where": [("Lire gratuitement en ligne", "/lire/la-richesse-silencieuse")]}
+READING = SALON.available()  # books whose table of contents is present; their text lives in the protected backend
+_RICH = {"pages": "Free, complete, online", "kind": "Investing guide for the diaspora", "year": "2026",
+         "line": "A calm, practical investing guide for salaried people of the African diaspora: simple principles, real numbers, and room for family without sacrificing the future. Free to read here, in full.",
+         "where": [("Read it free, online", "/lire/la-richesse-silencieuse")]}
+for _b in C.BOOKS:
+    if _b["slug"] == "richesse-silencieuse" and "la-richesse-silencieuse" in READING:
+        _b.update(_RICH, free="la-richesse-silencieuse")
+        FR.BOOKS["richesse-silencieuse"] = {"pages": "Gratuit, complet, en ligne", "kind": "Guide d'investissement pour la diaspora",
+            "line": "Un guide d'investissement calme et pratique pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et une place pour la famille sans sacrifier l'avenir. À lire ici gratuitement, en entier.",
+            "where": [("Lire gratuitement en ligne",)]}
+if "le-capital-entrave" in READING and not any(b["slug"] == "capital-entrave" for b in C.BOOKS):
+    C.BOOKS.insert(2, {"slug": "capital-entrave", "title": "Le capital entravé", "lang": "Français", "kind": "Essay, economy", "year": "2026", "pages": "Free, complete, online",
+        "color": "#3B2414", "ink": "#F2E6C9", "free": "le-capital-entrave",
+        "line": "An essay on capital that cannot move freely, and what it costs the people who live beside it. Free to read here, in full.",
+        "where": [("Read it free, online", "/lire/le-capital-entrave")]})
+    FR.BOOKS["capital-entrave"] = {"pages": "Gratuit, complet, en ligne", "kind": "Essai, économie",
+        "line": "Un essai sur le capital qui ne circule pas librement, et sur ce que cela coûte à ceux qui vivent à côté. À lire ici gratuitement, en entier.",
+        "where": [("Lire gratuitement en ligne",)]}
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 E = html.escape
@@ -63,7 +72,8 @@ def head(title, desc, path, extra=""):
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{E(full)}</title><meta name="description" content="{E(desc, quote=True)}"><link rel="canonical" href="{url}">
 <meta property="og:title" content="{E(full, quote=True)}"><meta property="og:description" content="{E(desc, quote=True)}"><meta property="og:type" content="website"><meta property="og:url" content="{url}"><meta property="og:image" content="{C.SITE['url']}/assets/og.png"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#F6F2EA">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#F6F2EA"><meta name="robots" content="noai, noimageai">
+<script src="/assets/guard.js" defer></script><script src="/assets/track.js" defer></script>
 {FONTS}<link rel="stylesheet" href="/assets/style.css">{extra}</head><body data-email="{E(C.SITE['email'], quote=True)}"><a class="skip" href="#main">Skip to content</a>"""
 
 def header(active):
@@ -77,7 +87,7 @@ def footer():
     work = "".join(f'<a href="{p["url"] or "/work/" + p["slug"]}"{" target=\"_blank\" rel=\"noopener\"" if p["url"] else ""}>{E(p["title"])}</a>' for p in C.PROJECTS[:6])
     return f"""</main><footer><div class="wrap"><div><div class="tag">{t('Build things that teach, and things that work.', 'Construire ce qui enseigne, et ce qui fonctionne.')}</div><p>{E(C.SITE['location'])}. {t('French and English.', 'Français et anglais.')}</p><p><a href="mailto:{E(C.SITE['email'])}">{E(C.SITE['email'])}</a></p></div>
 <div><h4>{t('Work', 'Travaux')}</h4>{work}</div>
-<div><h4>{t('Here', 'Ici')}</h4><a href="/books">{t('Books', 'Livres')}</a><a href="/gallery">{t('Gallery', 'Galerie')}</a><a href="/journal">Journal</a><a href="/services">Services</a><a href="/contact">Contact</a><p style="margin-top:14px">&copy; {y} {E(C.SITE['name'])}</p></div></div></footer>
+<div><h4>{t('Here', 'Ici')}</h4><a href="/books">{t('Books', 'Livres')}</a><a href="/gallery">{t('Gallery', 'Galerie')}</a><a href="/journal">Journal</a><a href="/services">Services</a><a href="/contact">Contact</a><p style="margin-top:14px">&copy; {y} {E(C.SITE['name'])}</p><p class="privacy-note">{t('Anonymous visit statistics. No cookies, no ads.', 'Statistiques de visite anonymes. Pas de cookies, pas de publicité.')}</p></div></div></footer>
 <script src="/assets/app.js" defer></script></body></html>"""
 
 def label(n, kind, year):
@@ -106,7 +116,7 @@ def hero_art():
 def page_home():
     featured = C.PROJECTS[0]
     posts = C.JOURNAL[:3]
-    stats = [("9", "Platforms", "Plateformes"), ("6", "Books", "Livres"), ("14", "Motion and edits", "Motion et montages"), ("2", "Languages", "Langues")]
+    stats = [(str(len(C.PROJECTS)), "Platforms", "Plateformes"), (str(len(C.BOOKS)), "Books", "Livres"), (str(len(C.MOTION) + len(C.EDITS)), "Motion and edits", "Motion et montages"), (str(len(READING)), "Free books", "Livres gratuits")]
     body = f"""<section class="hero wrap"><div class="hero-grid"><div>
 <span class="label rv"><b>{t('Portfolio', 'Portfolio')}</b><span>{E(C.SITE['location'])}</span></span>
 <h1 class="name rv" style="margin:18px 0 20px">William<br><em>Foteping</em></h1>
@@ -183,27 +193,29 @@ def salon_card(b):
         cta = f'<a class="btn cobalt small" href="/lire/{b["free"]}">{t("Read now", "Lire maintenant")} &rarr;</a>'
     else:
         cta = f'<span class="notice">{t("In writing. Free here when the first chapters land.", "En cours d’écriture. Gratuit ici dès les premiers chapitres.")}</span>'
-    return f"""<article class="card salon-card" style="--bk:{b['color']};--bk-ink:{b['ink']}"><div class="cover art mini" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['slug'], b['color'], b['ink'])}<span class="bt">{E(b['title'])}</span><span class="by">{E(C.SITE['name'])}</span></div><div><span class="label"><b>{t('Free', 'Gratuit')}</b><span>{tf(b['kind'], f, 'kind')}</span></span><h3 style="font-size:22px;margin:8px 0">{E(b['title'])}</h3><p style="margin:0 0 12px;font-size:15px;color:var(--encre)">{tf(b['line'], f, 'line')}</p>{cta}</div></article>"""
+    return f"""<article class="card salon-card" style="--bk:{b['color']};--bk-ink:{b['ink']}"><div class="cover art mini" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['slug'], b['color'], b['ink'])}<span class="bt">{E(b['title'])}</span><span class="by">{E(C.SITE['name'])}</span></div><div><span class="label"><b data-free-slug="{E(b['free'])}">{t('Free', 'Gratuit')}</b><span>{tf(b['kind'], f, 'kind')}</span></span><h3 style="font-size:22px;margin:8px 0">{E(b['title'])}</h3><p style="margin:0 0 12px;font-size:15px;color:var(--encre)">{tf(b['line'], f, 'line')}</p>{cta}</div></article>"""
 
 def page_books():
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>{t('Books', 'Livres')}</b><span>{len(C.BOOKS)} {t('titles', 'titres')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('The bookcase.', 'La bibliothèque.')}</h1><p class="lede rv">{t('Books I wrote, and books I produce for others: essays and chronicles in French, technical books in English, and the project book format. New titles join this shelf as they are finished.', 'Les livres que j’ai écrits, et ceux que je produis pour d’autres : essais et chroniques en français, livres techniques en anglais, et le format du livre de projet. Les nouveaux titres rejoignent cette étagère quand ils sont terminés.')}</p></section>
-<section class="block wrap" style="padding-top:10px" id="salon"><div class="sec-head"><span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span>{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span><div class="row rv"><h2>{t('Read them here, for free.', 'Lisez-les ici, gratuitement.')}</h2></div><p class="lede rv">{t('Three books open to everyone: the full text, chapter by chapter, with a calm piece of music generated in your browser if you want company. Nothing to buy, nothing to sign up for.', 'Trois livres ouverts à tous : le texte intégral, chapitre par chapitre, avec une musique calme générée dans votre navigateur si vous voulez de la compagnie. Rien à acheter, rien à créer.')}</p></div>
-<div class="grid g3 rv">{"".join(salon_card(b) for b in C.BOOKS if "free" in b)}</div></section>
+<section class="block wrap" style="padding-top:10px" id="salon"><div class="sec-head"><span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span>{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span><div class="row rv"><h2>{t('Read them here, for free.', 'Lisez-les ici, gratuitement.')}</h2></div><p class="lede rv">{t('Every book here opens to everyone for a month at a time: the full text, chapter by chapter, with a calm piece of music generated in your browser if you want company. Nothing to buy, nothing to sign up for. Reading happens here only: no download, no print.', 'Chaque livre ici s’ouvre à tous, un mois à la fois : le texte intégral, chapitre par chapitre, avec une musique calme générée dans votre navigateur si vous voulez de la compagnie. Rien à acheter, rien à créer. La lecture se fait ici uniquement : pas de téléchargement, pas d’impression.')}</p></div>
+<div class="grid g3 rv">{"".join(salon_card(b) for b in C.BOOKS if b.get("free"))}</div></section>
 <section class="block wrap" style="padding-top:10px"><div class="sec-head"><span class="label rv"><b>{t('All titles', 'Tous les titres')}</b></span></div><div class="bookcase">{"".join(tome(b) for b in C.BOOKS)}</div></section>
 <section class="block wrap" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>{t('Music', 'Musique')}</b><span>{t('For images', 'Pour les images')}</span></span><h2 class="rv">{t('An album for the screen.', 'Un album pour l’écran.')}</h2></div><div class="bookcase">{tome(C.ALBUM, True)}</div></section>
 <section class="block wrap"><div class="card rv" style="padding:clamp(24px,4vw,40px)"><h2 style="font-size:clamp(26px,3vw,38px)">{t('Your book, produced.', 'Votre livre, produit.')}</h2><p class="lede">{t('From a manuscript or a pile of notes to a print ready PDF and an ebook, with figures, running heads and a cover.', 'D’un manuscrit ou d’une pile de notes à un PDF prêt à imprimer et un ebook, avec figures, titres courants et couverture.')}</p><p class="cta-row"><a class="btn" href="/services#books">{t('Book production service', 'Service de production de livres')} &rarr;</a></p></div></section>"""
-    return head("Books", "Books written and produced by William Foteping.", "/books") + header("books") + body + footer()
+    return head("Books", "Books written and produced by William Foteping.", "/books", '<script src="/assets/live.js" defer></script>') + header("books") + body + footer()
 
 def page_gallery():
     motion = "".join(vcard(v) for v in C.MOTION)
     edits = "".join(vcard(v) for v in C.EDITS)
+    films = '<div class="grid g2" style="margin-top:18px">' + "".join(f'<a class="card film-card" href="{E(u)}" target="_blank" rel="noopener"><figure class="shot" style="margin:0 0 8px"><img src="/assets/shots/{sh}.webp" alt="" loading="lazy"></figure><span class="label"><b>{t(k, kf)}</b><span>2026</span></span><h3 style="font-size:22px">{t(ti, tif)}</h3><p style="margin:0;font-size:14px;color:var(--encre)">{t(li, lif)}</p><span class="mono" style="color:var(--cobalt)">{t("Watch on the page", "Regarder sur la page")} &rarr;</span></a>' for u, sh, k, kf, ti, tif, li, lif in FILMS) + '</div>'
     purposes = "".join(f'<a class="card" href="/work/{p["slug"]}#motion" style="gap:8px">{label(p["n"], p["kind"], p["year"])}<h3 style="font-size:20px">{E(p["title"])}</h3><p style="margin:0;font-size:14px;color:var(--encre)">{E(p["beats"][0]["t"])} {E(p["beats"][-1]["t"])}</p></a>' for p in C.PROJECTS)
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>{t('Gallery', 'Galerie')}</b><span>{t('Motion and edits', 'Motion et montages')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('Moving images.', 'Images qui bougent.')}</h1><p class="lede rv">{t('Motion designs and one minute edits made for my platforms, in both aspect ratios and both languages where they exist. Everything I make with Bobine and for the Bobine landing page lands here.', 'Motion designs et montages d’une minute faits pour mes plateformes, dans les deux formats et les deux langues quand elles existent. Tout ce que je fais avec Bobine et pour la page d’accueil de Bobine arrive ici.')}</p></section>
-<section class="block wrap" style="padding-top:10px"><div class="sec-head"><span class="label rv"><b>01</b><span>{t('Motion design', 'Motion design')}</span></span></div><div class="grid g2">{motion}</div></section>
+<section class="block wrap regards" style="padding-top:10px" hidden><div class="sec-head"><span class="label rv"><b>{t('Regards', 'Regards')}</b><span>{t('Photos and footage, each with its story', 'Photos et images, chacune avec son histoire')}</span></span><h2 class="rv">{t('What I see, and why it matters.', 'Ce que je vois, et pourquoi cela compte.')}</h2></div><div class="moments" data-regards></div></section>
+<section class="block wrap" style="padding-top:10px"><div class="sec-head"><span class="label rv"><b>01</b><span>{t('Motion design', 'Motion design')}</span></span></div><div class="grid g2">{motion}</div>{films}</section>
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>02</b><span>{t('Showcase edits', 'Montages de démonstration')}</span><span>{len(C.EDITS)}</span></span><p class="muted" style="margin:0">{t('Real stock footage, edited by Bobine, labelled as examples and never as customer work.', 'Vraies images de banque, montées par Bobine, présentées comme des exemples et jamais comme du travail client.')}</p></div><div class="grid g3">{edits}</div></section>
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>03</b><span>{t('Walkthroughs', 'Visites guidées')}</span></span><p class="muted" style="margin:0">{t('One motion design per platform, built from its real screens: what it is, how to use it, where to write.', 'Un motion design par plateforme, fait de ses vrais écrans : ce que c’est, comment s’en servir, où écrire.')}</p></div><div class="grid g3">{"".join(f'<a class="card" href="/guides/{p["slug"]}#tour" style="gap:8px"><figure class="shot" style="margin:0 0 4px"><img src="/assets/shots/{p["shot"]}.webp" alt="" loading="lazy"></figure>{label(p["n"], p["kind"], p["year"])}<h3 style="font-size:20px">{t("How to use", "Mode d’emploi")} {E(p["title"])}</h3></a>' for p in C.PROJECTS)}</div></section>
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>04</b><span>{t('Purpose motions', 'Les buts en mouvement')}</span></span><p class="muted" style="margin:0">{t('One short motion per project book, drawn in the browser.', 'Un court motion par livre de projet, dessiné dans le navigateur.')}</p></div><div class="grid g3">{purposes}</div></section>"""
-    return head("Gallery", "Motion designs and video edits by William Foteping.", "/gallery") + header("gallery") + body + footer()
+    return head("Gallery", "Motion designs, edits, photos and stories by William Foteping.", "/gallery", '<script src="/assets/live.js" defer></script>') + header("gallery") + body + footer()
 
 def page_journal():
     body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>Journal</b><span>{t('Life, process, regards', 'Vie, processus, regards')}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('A journal of making.', 'Un journal de fabrication.')}</h1><p class="lede rv">{t('How things get built, what the days look like, and galleries of the small things and landscapes around me that make me want to make more.', 'Comment les choses se construisent, à quoi ressemblent les journées, et des galeries des petites choses et des paysages autour de moi qui me donnent envie de faire plus.')}</p></section>
@@ -304,6 +316,50 @@ def page_thanks():
     body = f"""<section class="block wrap"><span class="label rv"><b>{t('Reserved', 'Réservé')}</b></span><h1 class="rv" style="margin:16px 0 14px">{t('Thank you.', 'Merci.')}</h1><p class="lede rv">{t('Your payment went through. I will confirm your slot by email within a day and send a calendar invitation for Zoom, Microsoft Teams or Google Meet, as you chose.', 'Votre paiement est passé. Je confirme votre créneau par email sous un jour et j’envoie une invitation pour Zoom, Microsoft Teams ou Google Meet, selon votre choix.')}</p><p class="mono muted" hidden>{t('Reference', 'Référence')}: <span id="session"></span></p><p class="cta-row"><a class="btn" href="/">{t('Back to the start', 'Retour au début')}</a></p></section>"""
     return head("Thank you", "Reservation confirmed.", "/thanks") + header("services") + body + footer()
 
+FILMS = [
+    ("https://claude.ai/artifact/V1u1HfuXv56xoGZ5MQczYh", "zeste-film", "Paper animation", "Animation en papier", "Zeste, explained", "Zeste, expliqué",
+     "A minute and a half of torn paper and kalimba: you speak, Claude prepares, you approve. Plays on the Zeste page, in French and English.",
+     "Une minute et demie de papier déchiré et de kalimba : vous parlez, Claude prépare, vous approuvez. Sur la page Zeste, en français et en anglais."),
+    ("https://claude.ai/artifact/VJodoes5amcSFqaWrmcpGo", "peel", "Interactive", "Interactif", "Peel, the exposure check", "Peel, le test d'exposition",
+     "Five questions, a live score and the likely risks, computed in the browser. The first thing a founder sees.",
+     "Cinq questions, un score en direct et les risques probables, calculés dans le navigateur. La première chose qu'un fondateur voit."),
+]
+
+def page_admin():
+    body = f"""<section class="admin wrap">
+<div class="a-login"><span class="label"><b>Privé</b><span>Propriétaire</span></span><h1 style="font-size:34px;margin:4px 0">La salle des machines</h1><p class="muted" style="margin:0">Entrez votre clé privée. Elle reste sur cet appareil.</p>
+<form><input type="password" autocomplete="current-password" placeholder="Clé privée" aria-label="Clé privée" required><button class="a-btn" type="submit">Entrer</button><p class="err"></p></form></div>
+<div class="a-app" hidden>
+<div class="a-top"><div><span class="label"><b>Privé</b><span>william-foteping.vercel.app</span></span><h1>Qui lit, qui visite.</h1></div><button class="a-btn ghost" id="logout" type="button">Se déconnecter</button></div>
+<div class="a-tabs" role="tablist"><button type="button" data-tab="stats">Visites et lecteurs</button><button type="button" data-tab="books">Livres gratuits</button><button type="button" data-tab="gallery">Galerie</button><button type="button" data-tab="settings">Réglages</button></div>
+
+<div class="a-pane a-stats" data-pane="stats">
+<div class="a-top" style="align-items:center"><label style="max-width:240px">Période<select id="range"><option value="1">Aujourd’hui</option><option value="7">7 jours</option><option value="30" selected>30 jours</option><option value="90">90 jours</option><option value="365">12 mois</option></select></label><div class="a-actions"><span class="muted a-updated" style="font-size:13px"></span><button class="a-btn ghost" id="refresh" type="button">Actualiser</button></div></div>
+<div class="a-tiles"></div>
+<div class="a-card" style="margin-bottom:14px"><h3>Jour après jour</h3><div class="a-daily"></div></div>
+<div class="a-card" style="margin-bottom:14px"><h3>Livres lus</h3><div class="a-table a-books-read"></div><h4>Jusqu’où ils lisent</h4><div class="a-funnel"></div></div>
+<div class="a-grid" style="margin-bottom:14px"><div class="a-card"><h3>Pays</h3><div class="a-countries"></div></div><div class="a-card"><h3>Villes</h3><div class="a-cities"></div></div>
+<div class="a-card"><h3>Pages</h3><div class="a-pages"></div></div><div class="a-card"><h3>D’où ils viennent</h3><div class="a-refs"></div><h4>Appareils</h4><div class="a-devices"></div></div></div>
+<div class="a-card"><h3>Activité récente</h3><p class="muted" style="margin:-6px 0 10px;font-size:13px">Chaque visiteur est un identifiant anonyme : mêmes lettres, même personne. Aucun nom, aucune adresse IP n’est gardé.</p><div class="a-table a-recent"><table><thead><tr><th>Quand</th><th>Visiteur</th><th>Action</th><th>Quoi</th><th>Où</th><th>Appareil</th><th>Venu de</th></tr></thead><tbody></tbody></table></div></div>
+</div>
+
+<div class="a-pane" data-pane="books" hidden>
+<div class="a-card" style="margin-bottom:14px"><h3>Tous les livres d’un coup</h3><p class="muted" style="margin-top:-4px">Quand la lecture libre est fermée, les visiteurs lisent seulement les premières sections, puis voient vos liens d’achat et le bouton café.</p><div class="a-actions"><button class="a-btn" id="all-month" type="button">Tout gratuit 30 jours</button><button class="a-btn ghost" id="all-open" type="button">Tout gratuit sans date de fin</button><button class="a-btn ghost danger" id="all-close" type="button">Tout fermer maintenant</button></div></div>
+<div class="a-booklist"></div></div>
+
+<div class="a-pane" data-pane="gallery" hidden>
+<div class="a-upload"><h3 style="font:400 24px var(--serif);margin:0">Ajouter des photos ou des vidéos</h3><p class="muted" style="margin:0">Photos JPG, PNG ou WebP, vidéos MP4 ou MOV jusqu’à 50 Mo. Les grandes photos sont réduites avant l’envoi. Après l’envoi, écrivez l’histoire de chaque moment, puis Enregistrer.</p><input type="file" id="files" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm" multiple><p class="st"></p></div>
+<div class="a-glist"></div></div>
+
+<div class="a-pane" data-pane="settings" hidden><div class="a-grid">
+<div class="a-card"><h3>Lien de don</h3><p class="muted" style="margin-top:-4px">Le bouton « Offrez-moi un café » ouvre ce lien. Dans Stripe : Liens de paiement, Nouveau, « Les clients choisissent le montant », puis copiez le lien ici.</p><label>Lien Stripe<input id="donation" type="url" placeholder="https://buy.stripe.com/..."></label><div class="a-actions"><button class="a-btn" id="save-donation" type="button">Enregistrer</button></div></div>
+<div class="a-card"><h3>Mes propres visites</h3><label class="sw"><input type="checkbox" id="me-toggle"><span>Ne pas compter mes visites sur cet appareil</span></label></div>
+<div class="a-card"><h3>Changer la clé privée</h3><label>Nouvelle clé (au moins 12 caractères)<input id="new-key" type="password" autocomplete="new-password"></label><label>La même, encore une fois<input id="new-key2" type="password" autocomplete="new-password"></label><div class="a-actions"><button class="a-btn" id="change-key" type="button">Changer la clé</button></div></div>
+</div></div>
+</div><div class="a-toast" role="status"></div></section>"""
+    extra = '<meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/assets/admin.css"><script src="/assets/admin.js" defer></script>'
+    return head("Private", "Private.", "/admin", extra) + header("") + body + footer()
+
 def page_404():
     body = f"""<section class="block wrap"><span class="label rv"><b>404</b></span><h1 class="rv" style="margin:16px 0 14px">{t('That shelf is empty.', 'Cette étagère est vide.')}</h1><p class="cta-row"><a class="btn" href="/">{t('Back to the library', 'Retour à la bibliothèque')}</a></p></section>"""
     return head("Not found", "Page not found.", "/404") + header("") + body + footer()
@@ -313,7 +369,7 @@ FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect w
 import hashlib
 def asset_version():
     here = os.path.dirname(os.path.abspath(__file__)); h = hashlib.sha1()
-    for n in ("style.css", "app.js", "scenes.js", "salon.css", "salon.js"):
+    for n in ("style.css", "app.js", "scenes.js", "salon.css", "salon.js", "guard.js", "track.js", "live.js", "admin.js", "admin.css"):
         p = os.path.join(here, "assets", n)
         if os.path.exists(p): h.update(open(p, "rb").read())
     return h.hexdigest()[:8]
@@ -323,7 +379,7 @@ def write(path, s, strict=True):
     for bad, name in (("—", "em dash"), ("–", "en dash")):
         assert not strict or bad not in s, f"{name} found in {path}"
     import re as _re
-    s = _re.sub(r'(/assets/(?:style|salon)\.css|/assets/(?:app|scenes|salon)\.js)(?=["\'])', lambda m: m.group(1) + "?v=" + V, s)
+    s = _re.sub(r'(/assets/(?:style|salon|admin)\.css|/assets/(?:app|scenes|salon|guard|track|live|admin)\.js)(?=["\'])', lambda m: m.group(1) + "?v=" + V, s)
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
@@ -350,9 +406,11 @@ def main():
     write("contact.html", page_contact())
     write("thanks.html", page_thanks())
     write("404.html", page_404())
+    write("admin.html", page_admin())
     pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
-    write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {C.SITE['url']}/sitemap.xml\n")
+    ai = ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "CCBot", "anthropic-ai", "ClaudeBot", "Claude-Web", "Google-Extended", "PerplexityBot", "Bytespider", "Amazonbot", "Applebot-Extended", "meta-externalagent", "FacebookBot", "Diffbot", "ImagesiftBot", "Omgilibot", "cohere-ai", "YouBot", "Timpibot"]
+    write("robots.txt", "".join(f"User-agent: {b}\nDisallow: /\n\n" for b in ai) + f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: {C.SITE['url']}/sitemap.xml\n")
     print("built", len(pages), "pages into", OUT)
 
 if __name__ == "__main__":

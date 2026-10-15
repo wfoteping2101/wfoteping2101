@@ -112,17 +112,17 @@ PROJECTS = [
 
     {"slug": "post-kit", "n": "07", "title": "Uplink Post Kit", "kind": "Content operations tool", "year": "2026",
      "line": "Where every post is drafted, reviewed, scheduled and marked posted.",
-     "color": "#0F2A1E", "ink": "#F2C200", "url": "https://uplink-posts.floot.app", "link_label": "uplink-posts.floot.app, public view",
-     "status": "Live, view only link", "shot": "post-kit", "stack": "React, Postgres, phone share sheet",
+     "color": "#0F2A1E", "ink": "#F2C200", "url": "", "link_label": "Private tool",
+     "status": "Private, my own publishing floor", "shot": "post-kit", "stack": "React, Postgres, phone share sheet",
      "facts": [("Views", "Posts, Yap, Live, Saves, Playbook"), ("Rhythm", "Carousels and videos scheduled every day"), ("Rule", "One idea per post, always original")],
      "chapters": [
         ("Purpose", "A factory floor for daily publishing: every carousel and video arrives as a draft, I review it on my phone, approve it or ask for a change, then post it in two taps."),
         ("The problem", "Content made in a chat gets lost in the chat, and scheduling in three apps means three different truths."),
         ("What I built", "A queue with scheduled times, previews and a status per post. Buttons that copy the right caption per platform and open the phone share sheet. A view for daily talking to camera scripts, a view for live shows with a full run of show, a view that turns saved videos into lessons, and a playbook distilled from them."),
-        ("How it works", "Drafts are inserted straight into the database, media lives on a CDN, and the page remembers the last view. The private link carries a key once per browser; without it the kit is read only, which is the public link."),
+        ("How it works", "Drafts are inserted straight into the database, media lives on a CDN, and the page remembers the last view. It is private: it stays my own publishing floor, and the same system can be built for a client."),
         ("Craft", "Forest green and lemon, a serif for dates like a diary, cards that read at arm's length."),
      ],
-     "highlights": ["Drafts to review, approve, post", "Run of show for live sessions", "Saved videos turned into a playbook", "View only public link"],
+     "highlights": ["Drafts to review, approve, post", "Run of show for live sessions", "Saved videos turned into a playbook", "Private, built the same way for clients"],
      "beats": [{"t": "One idea per post.", "s": "frame"}, {"t": "Drafted, reviewed, scheduled.", "s": "stack"}, {"t": "Posted in two taps.", "s": "dots"}, {"t": "Every day.", "s": "ring"}]},
 
     {"slug": "serviceops", "n": "08", "title": "Uplink ServiceOps Console", "kind": "IT service management", "year": "2026",
@@ -175,9 +175,9 @@ BOOKS = [
      "line": "The book in progress: how money is quietly built, kept and passed on, written for the diaspora and for home. It will be free to read here as soon as the first chapters are delivered.",
      "where": []},
     {"slug": "bobine-la-methode", "title": "Bobine, la méthode", "lang": "Français", "kind": "Method, video", "year": "2026", "pages": "265 pages, 6 by 9 inches",
-     "color": "#121210", "ink": "#F6F2EA",
-     "line": "How to film so the edit becomes easy, and how to edit so the film stays yours. Read on the site or download the PDF after purchase.",
-     "where": [("Read or buy on Bobine", "https://bobine-tau.vercel.app/livre")]},
+     "color": "#16130F", "ink": "#E9B44C", "free": "bobine-la-methode",
+     "line": "How to film so the edit becomes easy, and how to edit so the film stays yours. Free to read here, in full; the PDF is sold on Bobine.",
+     "where": [("Read it free, online", "/lire/bobine-la-methode"), ("Buy the PDF on Bobine", "https://bobine-tau.vercel.app/livre")]},
     {"slug": "unifi-ground-up", "title": "UniFi from the Ground Up", "lang": "English", "kind": "Technical, networking", "year": "2026", "pages": "241 pages, 59 figures",
      "color": "#15181D", "ink": "#F2C200",
      "line": "Plan, build and run a modern business network: gateways, switching, WiFi design, cameras, door access, racks and operations. The first chapters are a free sample.",
@@ -193,6 +193,10 @@ BOOKS = [
 ]
 
 MOTION = [
+    {"slug": "uplink-promo", "title": "Uplink in forty four seconds", "kind": "Motion design", "year": "2026",
+     "line": "The academy in one vertical film: the platform, exam practice written as tickets, a service desk you can actually work, the lab, the price. Made for TikTok and Reels.",
+     "poster": "/assets/motion/uplink-promo.webp",
+     "variants": [("9:16", "/assets/motion/uplink-promo-9x16.mp4", "9:16")]},
     {"slug": "bobine-50", "title": "Bobine in fifty seconds", "kind": "Motion design", "year": "2026",
      "line": "What Bobine is, in forty nine seconds: you film, Bobine edits. Six features, three steps, four audiences, one promise about privacy. Original synthesised music.",
      "poster": "https://bobine-tau.vercel.app/showcase/v2/showcase-clean.webp",
@@ -311,3 +315,7 @@ STEPS = [
     ("We meet online", "We go through the brief, I ask the questions that matter, and you leave with a scope, a price and a timeline in writing."),
     ("Deposit, build, deliver", "A deposit starts the work. You review at each milestone. Delivery includes two rounds of revisions and documentation."),
 ]
+
+# Platforms added later (Peel, Zeste): kept in their own file so they are easy to find.
+from projects_extra import PROJ as _EXTRA_PROJECTS
+PROJECTS.extend(_EXTRA_PROJECTS)

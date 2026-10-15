@@ -72,38 +72,47 @@ def clean_html(h):
     h = re.sub(r"<p>(\s*<br\s*/?>\s*)+</p>", "", h)
     return h
 
+BOOK_META = {
+    "bobine-la-methode": {"title": "Bobine, la méthode", "subtitle": "Planifier, filmer, monter et vendre avec l'IA", "year": "2026", "color": "#16130F", "ink": "#E9B44C", "seed": "bobine-la-methode",
+        "desc_en": "The complete creator's method: an idea bank, one shooting day for a month of content, editing with an AI editor, publishing and selling. Written in French for people who sell what they make.",
+        "desc_fr": "La méthode complète du créateur : une banque d'idées, une journée de tournage pour un mois de contenu, le montage avec un monteur IA, la publication et la vente. Écrit pour celles et ceux qui vendent ce qu'ils font.",
+        "music": "clair", "buy": [("Buy the PDF on Bobine", "Acheter le PDF sur Bobine", "https://bobine-tau.vercel.app/livre")]},
+    "la-richesse-silencieuse": {"title": "La Richesse Silencieuse", "subtitle": "Le guide d'investissement de la diaspora africaine", "year": "2026", "color": "#0E3B2E", "ink": "#F2E6C9", "seed": "richesse-silencieuse",
+        "desc_en": "A calm, practical investing guide for salaried people of the African diaspora: simple principles, real numbers, and room for family without sacrificing the future.",
+        "desc_fr": "Un guide d'investissement calme et pratique pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et une place pour la famille sans sacrifier l'avenir.",
+        "music": "clair", "buy": []},
+    "le-capital-entrave": {"title": "Le capital entravé", "subtitle": "", "year": "2026", "color": "#3B2414", "ink": "#F2E6C9", "seed": "capital-entrave",
+        "desc_en": "An essay on capital that cannot move freely, and what it costs the people who live beside it.",
+        "desc_fr": "Un essai sur le capital qui ne circule pas librement, et sur ce que cela coûte à ceux qui vivent à côté.",
+        "music": "clair", "buy": []},
+    "le-contrat-du-peuple": {"title": "Le Contrat du Peuple", "subtitle": "Droit social, justice et responsabilité citoyenne pour bâtir une nation libre", "year": "2026", "color": "#1C3FBF", "ink": "#F6F2EA", "seed": "contrat-du-peuple",
+        "desc_en": "A civic essay in twenty chapters and an epilogue, written for Cameroonian readers and readable anywhere.",
+        "desc_fr": "Un essai civique en vingt chapitres et un épilogue, écrit pour les lecteurs camerounais et lisible partout.",
+        "music": "clair", "buy": []},
+    "laa": {"title": "La'a", "subtitle": "Chroniques des Clans et des Confréries", "year": "2024", "color": "#5A1F1F", "ink": "#F6F2EA", "seed": "laa",
+        "desc_en": "The first book of a twenty book saga: Fote, a village, a brotherhood, a war, and the loyalties that shape a life.",
+        "desc_fr": "Le premier volet d'une saga de vingt livres : Fote, un village, une confrérie, une guerre, et les loyautés qui façonnent une vie.",
+        "music": "braise", "buy": [("Kindle on Amazon", "Kindle sur Amazon", "https://www.amazon.com/dp/B0CZ8NCM9Z"), ("Paperback on Amazon", "Broché sur Amazon", "https://www.amazon.com/dp/B0D3F4TB9Y")]},
+}
+ORDER = ["bobine-la-methode", "la-richesse-silencieuse", "le-capital-entrave", "le-contrat-du-peuple", "laa"]
+
+# The public site only knows each book's table of contents (books/toc/<slug>.json). The text itself lives in the
+# protected backend and is fetched one chapter at a time while reading.
+SUPABASE = "https://qytpqmgzphiuhlwkybiy.supabase.co"
+PUBLISHABLE = "sb_publishable_QgRtb2_rjK2-hMG0s4i2Bw_Y11M05_X"
+
 def load_books():
     books = []
-    c = json.load(open(os.path.join(HERE, "books", "contrat.json"), encoding="utf-8"))
-    secs = []
-    for s in c["sections"]:
-        num = s["num"]; kind = s["kind"].lower()
-        label = num if kind != "chapter" else num
-        secs.append({"id": re.sub(r"[^a-z0-9]+", "-", num.lower().replace("é", "e").replace("è", "e")).strip("-"), "label": label, "title": s["title"].split(" : ", 1)[-1] if kind != "chapter" else s["title"], "html": md_block(s["body"]), "kind": kind})
-    books.append({"slug": "le-contrat-du-peuple", "title": "Le Contrat du Peuple", "subtitle": "Droit social, justice et responsabilité citoyenne pour bâtir une nation libre", "author": "William Foteping", "year": "2026", "color": "#1C3FBF", "ink": "#F6F2EA", "seed": "contrat-du-peuple",
-        "desc_en": "A civic essay in twenty chapters and an epilogue, written for Cameroonian readers and readable anywhere.", "desc_fr": "Un essai civique en vingt chapitres et un épilogue, écrit pour les lecteurs camerounais et lisible partout.",
-        "music": "clair", "sections": secs})
-    l = json.load(open(os.path.join(HERE, "books", "laa-raw.json"), encoding="utf-8"))
-    secs = []
-    for d in l:
-        t = d["title"].strip(); m = re.match(r"^(\d+)\.\s*(.*)$", t)
-        if m: secs.append({"id": f"chapitre-{m.group(1)}", "label": f"Chapitre {m.group(1)}", "title": m.group(2).strip(), "html": clean_html(d["html"]), "kind": "chapter"})
-        else: secs.append({"id": re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-"), "label": t, "title": t, "html": clean_html(d["html"]), "kind": "front"})
-    books.append({"slug": "laa", "title": "La'a", "subtitle": "Chroniques des Clans et des Confréries", "author": "William Foteping", "year": "2024", "color": "#5A1F1F", "ink": "#F6F2EA", "seed": "laa",
-        "desc_en": "The first book of a twenty book saga: Fote, a village, a brotherhood, a war, and the loyalties that shape a life.", "desc_fr": "Le premier volet d'une saga de vingt livres : Fote, un village, une confrérie, une guerre, et les loyautés qui façonnent une vie.",
-        "music": "braise", "sections": secs})
-    rp = os.path.join(HERE, "books", "richesse.json")
-    if os.path.exists(rp):
-        r = json.load(open(rp, encoding="utf-8"))
-        secs = [{"id": x["id"], "label": x["label"], "title": x["title"], "html": md_block(x["body"]), "kind": x["kind"], "part": x.get("part", "")} for x in r["sections"]]
-        books.append({"slug": "la-richesse-silencieuse", "title": "La Richesse Silencieuse", "subtitle": r.get("subtitle", "Le guide d'investissement de la diaspora africaine"), "author": "William Foteping", "year": "2026", "color": "#0E3B2E", "ink": "#F2E6C9", "seed": "richesse-silencieuse",
-            "desc_en": "A calm, practical investing guide for salaried people of the African diaspora: simple principles, real numbers, and room for family without sacrificing the future.", "desc_fr": "Un guide d'investissement calme et pratique pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et une place pour la famille sans sacrifier l'avenir.",
-            "music": "clair", "sections": secs})
+    for slug in ORDER:
+        p = os.path.join(HERE, "books", "toc", slug + ".json")
+        if not os.path.exists(p): continue
+        t = json.load(open(p, encoding="utf-8"))
+        secs = [{"id": s["cid"], "label": s["label"], "title": s["title"], "kind": s["kind"], "part": s.get("part", ""), "words": s.get("words", 0)} for s in t["sections"]]
+        books.append(dict(BOOK_META[slug], slug=slug, author="William Foteping", sections=secs))
     return books
 
-def has_richesse():
-    return os.path.exists(os.path.join(HERE, "books", "richesse.json"))
-
+def available():
+    return [b["slug"] for b in load_books()]
 
 AMB = [("calme", "Calm", "Calme"), ("pluie", "Soft rain", "Pluie douce"), ("foret", "Morning forest", "Forêt au matin"), ("mer", "Distant sea", "Mer au loin"), ("nuit", "Night", "Nuit")]
 ALBUM_EMBED = "https://open.spotify.com/embed/album/5Ddoawb4wW8x2xMxW64RZN?utm_source=generator&theme=0"
@@ -111,40 +120,65 @@ ALBUM_URL = "https://open.spotify.com/album/5Ddoawb4wW8x2xMxW64RZN"
 
 ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI","XXII"]
 
+COFFEE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 2.5c-.6.8-.6 1.7 0 2.5M12 2.5c-.6.8-.6 1.7 0 2.5"/></svg>'
+
+def coffee_button(t, cls="btn coffee", label=None):
+    lab = label or t("Buy me a coffee", "Offrez-moi un café")
+    return f'<button class="{cls}" type="button" data-coffee>{COFFEE_SVG}<span>{lab}</span></button>'
+
+def coffee_modal(t):
+    return f"""<div class="coffee-modal" hidden role="dialog" aria-modal="true" aria-label="Coffee"><div class="cm-card"><button class="cm-x" type="button" aria-label="Close">&times;</button><span class="label"><b>{t('A coffee for the author', 'Un café pour l’auteur')}</b></span><h3>{t('Thank you for reading.', 'Merci de lire.')}</h3><p>{t('Every book here is free to read. A coffee, a few dollars or more, pays for the time it takes to write the next one. You choose the amount on a secure Stripe page.', 'Chaque livre ici se lit gratuitement. Un café, quelques dollars ou plus, finance le temps d’écrire le suivant. Vous choisissez le montant sur une page Stripe sécurisée.')}</p><p class="cta-row cm-ready"><a class="btn cobalt cm-go" href="#" target="_blank" rel="noopener">{t('Give on Stripe', 'Donner sur Stripe')} &rarr;</a></p><p class="cm-wait muted" hidden>{t('The donation page opens in a few days. Meanwhile, sharing the book is the best gift.', 'La page de don ouvre dans quelques jours. En attendant, partager le livre est le plus beau cadeau.')}</p></div></div>"""
+
 def page(b, t, head, header, footer, cover_art):
     def ambience(rv=True):
         chips = "".join('<button type="button" class="amb" data-amb="%s" aria-pressed="%s">%s</button>' % (k, "true" if k == "calme" else "false", t(en, fr)) for k, en, fr in AMB)
         return '<div class="ambience%s" role="group" aria-label="Ambience">%s</div>' % (" rv" if rv else "", chips)
     def album_panel():
-        lead = t("This book has its own music: Chant et poésie de La'a, the author's synth album. Open the player and read with it.", "Ce livre a sa propre musique : Chant et poésie de La'a, l'album de l'auteur. Ouvrez le lecteur et lisez avec lui.") if b["slug"] == "laa" else t("Or read with the author's album, Chant et poésie de La'a, slow synths written for images.", "Ou lisez avec l'album de l'auteur, Chant et poésie de La'a, des synthés lents écrits pour l'image.")
+        if b["slug"] == "laa":
+            lead = t("This book has its own music: Chant et poésie de La'a, the author's synth album. Open the player and read with it.", "Ce livre a sa propre musique : Chant et poésie de La'a, l'album de l'auteur. Ouvrez le lecteur et lisez avec lui.")
+        else:
+            lead = t("Or read with the author's album, Chant et poésie de La'a, slow synths written for images.", "Ou lisez avec l'album de l'auteur, Chant et poésie de La'a, des synthés lents écrits pour l'image.")
         return f'<div class="album rv"><p>{lead}</p><div class="cta-row"><button class="btn ghost small album-open" type="button" data-src="{E(ALBUM_EMBED)}">{t("Open the album player", "Ouvrir le lecteur de l’album")}</button><a class="btn ghost small" href="{ALBUM_URL}" target="_blank" rel="noopener">Spotify &rarr;</a></div><div class="album-frame" hidden></div></div>'
-
-    def short(s): return s["label"].replace("Chapitre ", "") if s["kind"] == "chapter" else s["label"][:1]
+    def short(s):
+        if s["kind"] == "chapter": return re.sub(r"^\D+", "", s["label"]) or s["label"][:2]
+        if s["kind"] == "annex": return re.sub(r"^Annexe\s*", "", s["label"])[:2]
+        return s["label"][:1]
     toc = "".join(f'<a href="#{s["id"]}" data-i="{i}"><span class="n">{E(short(s))}</span><span>{E(s["title"])}</span></a>' for i, s in enumerate(b["sections"]))
     chapters = ""
     for i, s in enumerate(b["sections"]):
         kicker = (E(s["part"]) + " &middot; " if s.get("part") else "") + E(s["label"])
-        chapters += f'''<section class="chap" id="{s["id"]}" data-i="{i}"><header class="chap-head"><span class="kicker mono">{kicker}</span><h2>{E(s["title"])}</h2></header><div class="text">{s["html"]}</div>
-<nav class="chap-nav" aria-label="Chapitres"><a class="btn ghost small prev" href="#">&larr; <span></span></a><a class="btn small next" href="#"><span></span> &rarr;</a></nav></section>'''
-    words = sum(len(re.sub(r"<[^>]+>", " ", s["html"]).split()) for s in b["sections"])
+        chapters += (f'<section class="chap" id="{s["id"]}" data-i="{i}"><header class="chap-head"><span class="kicker mono">{kicker}</span><h2>{E(s["title"])}</h2></header>'
+                     f'<div class="text" data-pending><p class="loading"><span></span><span></span><span></span></p></div>'
+                     f'<nav class="chap-nav" aria-label="Chapitres"><a class="btn ghost small prev" href="#">&larr; <span></span></a><a class="btn small next" href="#"><span></span> &rarr;</a></nav></section>\n')
+    words = sum(s.get("words", 0) for s in b["sections"])
     mins = max(1, round(words / 220))
     n = len(b["sections"])
-    body = f"""<div class="salon" data-book="{E(b['slug'])}" data-music="{E(b['music'])}" style="--bk:{b['color']};--bk-ink:{b['ink']}">
+    buy = "".join(f'<a class="btn ghost small" href="{E(u)}" target="_blank" rel="noopener">{t(en, fr)} &rarr;</a>' for en, fr, u in b.get("buy", []))
+    lock = (f'<div class="lock" hidden><span class="label"><b>{t("Free reading is paused", "La lecture libre est en pause")}</b></span>'
+            f'<h3>{t("This chapter opens again soon.", "Ce chapitre rouvrira bientôt.")}</h3>'
+            f'<p>{t("The author opens his books for free for a period of time. This one is closed for now: the first pages stay open, and you can follow the book where it is sold.", "L’auteur ouvre ses livres gratuitement pendant une période. Celui-ci est fermé pour le moment : les premières pages restent ouvertes, et vous pouvez suivre le livre là où il est vendu.")}</p>'
+            f'<p class="cta-row">{buy}{coffee_button(t, "btn small coffee")}</p></div>')
+    music_svg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>'
+    body = f"""<div class="salon guarded" data-book="{E(b['slug'])}" data-music="{E(b['music'])}" data-sb="{SUPABASE}" data-pk="{PUBLISHABLE}" style="--bk:{b['color']};--bk-ink:{b['ink']}">
+<div class="coffee-bar"><div class="wrap cb"><span class="cb-text">{t('These pages are free. If they help you, a coffee keeps them coming.', 'Ces pages sont gratuites. Si elles vous aident, un café les fait vivre.')}</span>{coffee_button(t, "btn small cobalt coffee")}</div></div>
 <section class="opening wrap"><div class="opening-grid">
-<div class="cover art big rv" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['seed'], b['color'], b['ink'])}<span class="bn">{t('FREE TO READ', 'LECTURE LIBRE')}</span><span class="bt">{E(b['title'])}</span><span class="by">{E(b['author'])}</span><span class="bk">{E(b['subtitle'])}</span></div>
-<div class="opening-text"><span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span>{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span>
+<div class="cover art big rv" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['seed'], b['color'], b['ink'])}<span class="bn free-flag">{t('FREE TO READ', 'LECTURE LIBRE')}</span><span class="bt">{E(b['title'])}</span><span class="by">{E(b['author'])}</span><span class="bk">{E(b['subtitle'])}</span></div>
+<div class="opening-text"><span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span class="free-state">{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span>
 <h1 class="rv" style="margin:14px 0 6px;font-size:clamp(40px,6vw,84px)">{E(b['title'])}</h1><p class="rv sub">{E(b['subtitle'])}</p>
 <p class="lede rv">{t(b['desc_en'], b['desc_fr'])}</p>
 <p class="rv mono muted" style="margin:0 0 20px">{E(b['author'])} &middot; {n} {t('sections', 'sections')} &middot; {words:,} {t('words', 'mots')} &middot; {t('about', 'environ')} {mins} {t('minutes', 'minutes')}</p>
-<p class="cta-row rv"><a class="btn" href="#{b['sections'][0]['id']}" data-start>{t('Start reading', 'Commencer la lecture')}</a><button class="btn ghost music" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><span class="on">{t('Calm music', 'Musique calme')}</span><span class="off" hidden>{t('Stop the music', 'Couper la musique')}</span></button><a class="btn ghost" href="/books">{t('All the books', 'Tous les livres')}</a></p>
+<p class="cta-row rv"><a class="btn" href="#{b['sections'][0]['id']}" data-start>{t('Start reading', 'Commencer la lecture')}</a>{coffee_button(t, "btn cobalt coffee")}<button class="btn ghost music" type="button" aria-pressed="false">{music_svg}<span class="on">{t('Calm music', 'Musique calme')}</span><span class="off" hidden>{t('Stop the music', 'Couper la musique')}</span></button></p>
+{('<p class="cta-row rv buy-row">' + buy + '</p>') if buy else ''}
 {ambience()}
 <p class="rv muted" style="font-size:14px;max-width:56ch;margin-top:14px">{t('A slow piece, composed live in your browser while you read, never twice the same. Choose its weather. It starts only when you ask.', 'Un morceau lent, composé en direct dans votre navigateur pendant que vous lisez, jamais deux fois le même. Choisissez son climat. Il ne démarre que si vous le demandez.')}</p>
 {album_panel()}</div></div></section>
 
-<div class="reader-bar" role="toolbar" aria-label="Reading tools"><div class="wrap rb"><button class="pill toc-btn" type="button" aria-expanded="false" aria-controls="toc">{t('Contents', 'Sommaire')}</button><span class="now mono"></span><span class="rb-tools"><button class="pill size" data-size="-" type="button" aria-label="Smaller text">A&minus;</button><button class="pill size" data-size="+" type="button" aria-label="Larger text">A+</button><button class="pill paper" type="button" aria-label="Page tone">{t('Paper', 'Papier')}</button><span class="mwrap"><button class="pill mbtn" type="button" aria-expanded="false" aria-label="Music"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><i class="eq" aria-hidden="true"><b></b><b></b><b></b></i></button>
+<div class="reader-bar" role="toolbar" aria-label="Reading tools"><div class="wrap rb"><button class="pill toc-btn" type="button" aria-expanded="false" aria-controls="toc">{t('Contents', 'Sommaire')}</button><span class="now mono"></span><span class="rb-tools">{coffee_button(t, "pill coffee", t('Coffee', 'Café'))}<button class="pill size" data-size="-" type="button" aria-label="Smaller text">A&minus;</button><button class="pill size" data-size="+" type="button" aria-label="Larger text">A+</button><button class="pill paper" type="button" aria-label="Page tone">Paper</button><span class="mwrap"><button class="pill mbtn" type="button" aria-expanded="false" aria-label="Music"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><i class="eq" aria-hidden="true"><b></b><b></b><b></b></i></button>
 <div class="mpanel" hidden><span class="label"><b>{t('Music for reading', 'Musique pour lire')}</b></span><button class="btn small music" type="button" aria-pressed="false"><span class="on">{t('Play', 'Lancer')}</span><span class="off" hidden>{t('Stop', 'Arrêter')}</span></button>{ambience(False)}<label class="vol"><span class="mono">{t('Volume', 'Volume')}</span><input type="range" min="0" max="100" value="70" aria-label="Volume"></label></div></span></span></div><div class="progress"><i></i></div></div>
 
 <div class="wrap reader-grid"><aside class="toc" id="toc"><div class="toc-in"><span class="label"><b>{t('Contents', 'Sommaire')}</b></span><nav aria-label="Contents">{toc}</nav></div></aside>
-<div class="book-body">{chapters}
-<section class="colophon"><span class="label"><b>{t('The end', 'Fin')}</b></span><h2 style="margin:12px 0 10px">{t('Thank you for reading.', 'Merci de votre lecture.')}</h2><p class="lede">{t('This book is free to read here, in full. If it was worth something to you, share the link, or write to me.', 'Ce livre se lit ici gratuitement, en entier. S’il a compté pour vous, partagez le lien, ou écrivez-moi.')}</p>{album_panel()}<p class="cta-row"><a class="btn" href="/books">{t('Other books', 'Autres livres')}</a><a class="btn ghost" href="/contact">{t('Write to me', 'Écrire')}</a></p></section></div></div></div>"""
+<div class="book-body">{lock}{chapters}
+<section class="colophon"><span class="label"><b>{t('The end', 'Fin')}</b></span><h2 style="margin:12px 0 10px">{t('Thank you for reading.', 'Merci de votre lecture.')}</h2><p class="lede">{t('This book is free to read here. If it gave you something, offer a coffee: it pays for the next book. Or share the link.', 'Ce livre se lit ici gratuitement. S’il vous a apporté quelque chose, offrez un café : il finance le prochain livre. Ou partagez le lien.')}</p><p class="cta-row">{coffee_button(t, "btn cobalt coffee")}</p>{album_panel()}<p class="cta-row"><a class="btn" href="/books">{t('Other books', 'Autres livres')}</a><a class="btn ghost" href="/contact">{t('Write to me', 'Écrire')}</a></p></section></div></div></div>
+{coffee_modal(t)}
+<div class="print-block">{t('This book is read online only. Printing and copying are turned off.', 'Ce livre se lit en ligne uniquement. L’impression et la copie sont désactivées.')}</div>"""
     return head(b["title"], b["desc_en"], f"/lire/{b['slug']}", '<link rel="stylesheet" href="/assets/salon.css"><script>document.documentElement.classList.add("js")</script><script src="/assets/salon.js" defer></script>') + header("books") + body + footer()

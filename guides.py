@@ -199,10 +199,10 @@ GUIDES = {
     ],
 },
 "post-kit": {
-    "audience": "Me, first: it is the publishing floor for Uplink. Public visitors can see the schedule and the posts; the editing functions need the private key.",
-    "contact": [("Write from the portfolio", "mailto:support@lemonshops.app?subject=Post%20Kit"), ("Open the public view", "https://uplink-posts.floot.app")],
+    "audience": "Me, first: it is the private publishing floor for Uplink. This page shows how it works; the same system can be set up for your brand.",
+    "contact": [("Write from the portfolio", "mailto:support@lemonshops.app?subject=Post%20Kit")],
     "start": [
-        "Open uplink-posts.floot.app; the public link is view only.",
+        "Every morning, open the floor on the phone.",
         "Use the five views in the header: Posts, Yap, Live, Saves, Playbook.",
         "In Posts, filter To post, To review, Posted or All, and open a card to see the slides or the video.",
         "In Live, read a run of show to see how a faceless live session is prepared.",
@@ -219,7 +219,7 @@ GUIDES = {
          "how": ["Browse the saves", "Read the lesson and the idea", "Open the playbook section", "Try one move this week"]},
     ],
     "tips": ["One idea per post; a mixed list teaches nothing.", "Review on the phone where you will post.", "The posted tick is the only bookkeeping you need.", "The playbook is the method; the posts are the output."],
-    "faq": [("Can I use it for my brand?", "Yes, as a service: the same system can be set up for you; see the services page."), ("Why is it view only?", "The editing key stays private; the public link shows the schedule and the posts."), ("Where do posts go?", "TikTok, YouTube Shorts and Facebook, through the phone's share sheet."), ("How many posts a day?", "Up to twenty carousels and five videos, scheduled.")],
+    "faq": [("Can I use it for my brand?", "Yes, as a service: the same system can be set up for you; see the services page."), ("Why is there no link?", "It is my personal tool and stays private. The screens and the walkthrough show everything."), ("Where do posts go?", "TikTok, YouTube Shorts and Facebook, through the phone's share sheet."), ("How many posts a day?", "Up to twenty carousels and five videos, scheduled.")],
     "scenes": [
         {"k": "Uplink Post Kit", "t": "Every post, drafted, reviewed, scheduled", "c": "The publishing floor for an academy that posts every day.", "shot": "post-kit", "f": [20, 0, 60, 60]},
         {"k": "Step 1", "t": "The queue", "c": "Scheduled time, series, slides, status.", "shot": "postkit-posts", "f": [20, 25, 60, 75]},
@@ -288,3 +288,6 @@ GUIDES = {
     ],
 },
 }
+
+from projects_extra import GUIDE as _G
+GUIDES.update(_G)

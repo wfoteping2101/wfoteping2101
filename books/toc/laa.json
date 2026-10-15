@@ -1,0 +1,140 @@
+{
+"slug": "laa",
+"sections": [
+{
+"idx": 0,
+"cid": "presentation",
+"label": "Presentation",
+"title": "Presentation",
+"kind": "front",
+"part": "",
+"words": 599
+},
+{
+"idx": 1,
+"cid": "glossaire",
+"label": "Glossaire",
+"title": "Glossaire",
+"kind": "front",
+"part": "",
+"words": 5291
+},
+{
+"idx": 2,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Entre Tradition et Destinées Croisées",
+"kind": "chapter",
+"part": "",
+"words": 3636
+},
+{
+"idx": 3,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Les Liens du Sang et de la Terre",
+"kind": "chapter",
+"part": "",
+"words": 3467
+},
+{
+"idx": 4,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Marche ou crève",
+"kind": "chapter",
+"part": "",
+"words": 2350
+},
+{
+"idx": 5,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "La Purge Corporelle",
+"kind": "chapter",
+"part": "",
+"words": 3074
+},
+{
+"idx": 6,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "Épreuves et Ascension au Seuil de la Confrérie",
+"kind": "chapter",
+"part": "",
+"words": 10118
+},
+{
+"idx": 7,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "Épreuves et Révélations",
+"kind": "chapter",
+"part": "",
+"words": 5619
+},
+{
+"idx": 8,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "Les arcanes de la connaissance",
+"kind": "chapter",
+"part": "",
+"words": 6410
+},
+{
+"idx": 9,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "L'initiation de Fote aux arcanes des disciplines de Lutte",
+"kind": "chapter",
+"part": "",
+"words": 4256
+},
+{
+"idx": 10,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "La Danse du Guerrier Solitaire",
+"kind": "chapter",
+"part": "",
+"words": 3453
+},
+{
+"idx": 11,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "La quête de l'hydromel",
+"kind": "chapter",
+"part": "",
+"words": 4671
+},
+{
+"idx": 12,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "Le périple solitaire",
+"kind": "chapter",
+"part": "",
+"words": 4211
+},
+{
+"idx": 13,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "Le pèlerin du Ikakalaka",
+"kind": "chapter",
+"part": "",
+"words": 2356
+},
+{
+"idx": 14,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "La valse des lames et des larmes",
+"kind": "chapter",
+"part": "",
+"words": 5425
+}
+]
+}

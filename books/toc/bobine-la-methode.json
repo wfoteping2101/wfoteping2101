@@ -1,0 +1,266 @@
+{
+"slug": "bobine-la-methode",
+"sections": [
+{
+"idx": 0,
+"cid": "preface",
+"label": "Préface",
+"title": "Préface",
+"kind": "front",
+"part": "",
+"words": 559
+},
+{
+"idx": 1,
+"cid": "introduction",
+"label": "Introduction",
+"title": "Votre téléphone est un studio",
+"kind": "introduction",
+"part": "",
+"words": 1289
+},
+{
+"idx": 2,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Créer du contenu aujourd’hui : une vraie opportunité",
+"kind": "chapter",
+"part": "Partie I : Les fondations",
+"words": 2539
+},
+{
+"idx": 3,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Votre audience avant tout",
+"kind": "chapter",
+"part": "",
+"words": 2557
+},
+{
+"idx": 4,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Trouver sa promesse et sa voix",
+"kind": "chapter",
+"part": "",
+"words": 2600
+},
+{
+"idx": 5,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "Les cinq piliers de contenu",
+"kind": "chapter",
+"part": "",
+"words": 2515
+},
+{
+"idx": 6,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "La banque d’idées",
+"kind": "chapter",
+"part": "Partie II : Planifier",
+"words": 2660
+},
+{
+"idx": 7,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "La séance mensuelle de 90 minutes",
+"kind": "chapter",
+"part": "",
+"words": 2537
+},
+{
+"idx": 8,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "Un calendrier éditorial réaliste",
+"kind": "chapter",
+"part": "",
+"words": 2415
+},
+{
+"idx": 9,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Les accroches : la règle des 3 secondes",
+"kind": "chapter",
+"part": "",
+"words": 2646
+},
+{
+"idx": 10,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "Raconter en vidéo courte",
+"kind": "chapter",
+"part": "Partie III : Produire",
+"words": 2677
+},
+{
+"idx": 11,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Filmer comme un pro avec un téléphone",
+"kind": "chapter",
+"part": "",
+"words": 2666
+},
+{
+"idx": 12,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "La photo qui arrête le défilement",
+"kind": "chapter",
+"part": "",
+"words": 2468
+},
+{
+"idx": 13,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "La journée de tournage : un mois de contenu en un jour",
+"kind": "chapter",
+"part": "",
+"words": 2495
+},
+{
+"idx": 14,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Les principes du montage",
+"kind": "chapter",
+"part": "Partie IV : Monter avec Bobine",
+"words": 2631
+},
+{
+"idx": 15,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "Bobine, votre monteur IA",
+"kind": "chapter",
+"part": "",
+"words": 2562
+},
+{
+"idx": 16,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "Diriger l’IA : l’art de la consigne de montage",
+"kind": "chapter",
+"part": "",
+"words": 2516
+},
+{
+"idx": 17,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "La finition qui fait pro",
+"kind": "chapter",
+"part": "",
+"words": 2440
+},
+{
+"idx": 18,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "Publier sur chaque plateforme",
+"kind": "chapter",
+"part": "Partie V : Publier, grandir et vendre",
+"words": 2764
+},
+{
+"idx": 19,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "Lire ses chiffres sans s’affoler",
+"kind": "chapter",
+"part": "",
+"words": 2469
+},
+{
+"idx": 20,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "Le contenu qui vend",
+"kind": "chapter",
+"part": "",
+"words": 2466
+},
+{
+"idx": 21,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Vivre de son contenu",
+"kind": "chapter",
+"part": "",
+"words": 2547
+},
+{
+"idx": 22,
+"cid": "conclusion",
+"label": "Conclusion",
+"title": "Votre première bobine",
+"kind": "conclusion",
+"part": "",
+"words": 800
+},
+{
+"idx": 23,
+"cid": "annexe-a",
+"label": "Annexe A",
+"title": "Plan de démarrage en 30 jours",
+"kind": "annex",
+"part": "",
+"words": 1926
+},
+{
+"idx": 24,
+"cid": "annexe-b",
+"label": "Annexe B",
+"title": "100 accroches prêtes à adapter",
+"kind": "annex",
+"part": "",
+"words": 1826
+},
+{
+"idx": 25,
+"cid": "annexe-c",
+"label": "Annexe C",
+"title": "50 consignes pour le Réalisateur IA de Bobine",
+"kind": "annex",
+"part": "",
+"words": 2499
+},
+{
+"idx": 26,
+"cid": "annexe-d",
+"label": "Annexe D",
+"title": "Check-lists",
+"kind": "annex",
+"part": "",
+"words": 944
+},
+{
+"idx": 27,
+"cid": "annexe-e",
+"label": "Annexe E",
+"title": "Glossaire français-anglais du créateur",
+"kind": "annex",
+"part": "",
+"words": 1175
+},
+{
+"idx": 28,
+"cid": "annexe-f",
+"label": "Annexe F",
+"title": "Modèles à remplir",
+"kind": "annex",
+"part": "",
+"words": 766
+}
+]
+}

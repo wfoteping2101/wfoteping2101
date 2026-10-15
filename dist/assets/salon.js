@@ -9,6 +9,72 @@
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   let cur = -1;
 
+  /* ---------- the text lives in the protected backend; one chapter is fetched at a time ---------- */
+  const SB = root.dataset.sb + '/rest/v1/rpc/', PK = root.dataset.pk;
+  const vid = (window.pfVisitor && window.pfVisitor()) || '', sid = (window.pfSession && window.pfSession()) || '';
+  const lockBox = root.querySelector('.lock');
+  const isFrUI = () => document.documentElement.getAttribute('lang') === 'fr';
+  async function rpc(fn, body) {
+    const r = await fetch(SB + fn, { method: 'POST', headers: { apikey: PK, 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+    if (!r.ok) throw new Error('rpc ' + r.status);
+    return r.json();
+  }
+  const loaded = new Map();
+  function msg(c, fr, en) { c.querySelector('.text').innerHTML = '<p class="note">' + (isFrUI() ? fr : en) + '</p>'; }
+  async function load(i) {
+    const c = chaps[i]; if (!c || loaded.get(i) === 'ok' || loaded.get(i) === 'busy') return;
+    loaded.set(i, 'busy');
+    try {
+      const d = await rpc('pf_chapter', { p_book: book, p_idx: i, p_visitor: vid, p_session: sid });
+      if (d && d.html) {
+        const t = c.querySelector('.text'); t.removeAttribute('data-pending'); t.innerHTML = d.html;
+        t.querySelectorAll('a[href^="http"]').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+        loaded.set(i, 'ok'); lockBox.hidden = true; c.classList.remove('locked');
+      } else if (d && d.locked) {
+        loaded.set(i, 'locked'); c.classList.add('locked'); c.querySelector('.text').innerHTML = ''; lockBox.hidden = false;
+        c.querySelector('.text').appendChild(lockBox);
+      } else if (d && d.slow) {
+        loaded.delete(i); msg(c, 'Vous tournez les pages très vite. Patientez une minute, puis rechargez ce chapitre.', 'You are turning pages very fast. Wait a minute, then reload this chapter.');
+      } else { loaded.delete(i); msg(c, 'Ce chapitre ne s’est pas chargé. Vérifiez la connexion et réessayez.', 'This chapter did not load. Check the connection and try again.'); }
+    } catch (e) {
+      loaded.delete(i); msg(c, 'Ce chapitre ne s’est pas chargé. Vérifiez la connexion et réessayez.', 'This chapter did not load. Check the connection and try again.');
+    }
+    progress();
+  }
+
+  /* free or paused, and the donation link, set from the private admin page */
+  let donation = '';
+  rpc('pf_public', {}).then(p => {
+    donation = p.donation_url || '';
+    const me = (p.books || []).find(x => x.slug === book); if (!me) return;
+    const st = root.querySelector('.free-state'), flag = root.querySelector('.free-flag');
+    const until = me.free_until ? new Date(me.free_until) : null;
+    const fmt = d => d.toLocaleDateString(isFrUI() ? 'fr-FR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+    if (me.free) {
+      st.textContent = until ? (isFrUI() ? 'Gratuit jusqu’au ' + fmt(until) : 'Free until ' + fmt(until)) : (isFrUI() ? 'Gratuit, complet, en ligne' : 'Free, complete, online');
+    } else {
+      st.textContent = isFrUI() ? 'Extrait gratuit, lecture complète en pause' : 'Free excerpt, full reading paused';
+      if (flag) flag.textContent = isFrUI() ? 'EXTRAIT' : 'EXCERPT';
+    }
+  }).catch(() => {});
+
+  /* reading time, sent once a minute while the page is visible and a chapter is open */
+  let readSec = 0;
+  setInterval(() => { if (document.visibilityState === 'visible' && cur >= 0 && loaded.get(cur) === 'ok') readSec += 10;
+    if (readSec >= 60 && window.pfTrack) { window.pfTrack('read', { book, chapter: cur, seconds: readSec }); readSec = 0; } }, 10000);
+  addEventListener('pagehide', () => { if (readSec > 0 && window.pfTrack) window.pfTrack('read', { book, chapter: cur, seconds: readSec }, true); });
+
+  /* coffee */
+  const modal = document.querySelector('.coffee-modal');
+  document.querySelectorAll('[data-coffee]').forEach(b => b.addEventListener('click', () => {
+    if (window.pfTrack) window.pfTrack('donate', { book });
+    const go = modal.querySelector('.cm-go'), wait = modal.querySelector('.cm-wait'), ready = modal.querySelector('.cm-ready');
+    if (donation) { go.href = donation; ready.hidden = false; wait.hidden = true; } else { ready.hidden = true; wait.hidden = false; }
+    modal.hidden = false; modal.querySelector('.cm-x').focus();
+  }));
+  if (modal) { modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.cm-x')) modal.hidden = true; });
+    modal.querySelector('.cm-go').addEventListener('click', () => { if (window.pfTrack) window.pfTrack('donate_go', { book }); }); }
+
   /* ---------- layout: the reader bar sits under the site header ---------- */
   function measure() {
     const h = header ? header.getBoundingClientRect().height : 0;
@@ -23,7 +89,7 @@
     i = Math.max(0, Math.min(chaps.length - 1, i)); if (i === cur && !scroll) return;
     chaps.forEach((c, k) => c.classList.toggle('on', k === i));
     tocLinks.forEach((a, k) => a.setAttribute('aria-current', k === i ? 'true' : 'false'));
-    const c = chaps[i]; cur = i;
+    const c = chaps[i]; cur = i; load(i);
     const title = c.querySelector('h2').textContent.trim(), kick = c.querySelector('.kicker').textContent.trim();
     now.textContent = kick && kick !== title ? kick + ' · ' + title : title;
     const prev = c.querySelector('.prev'), next = c.querySelector('.next');
@@ -56,7 +122,7 @@
   if (paperBtn) paperBtn.addEventListener('click', () => { const i = TONES.findIndex(x => x[0] === root.dataset.tone); tone(TONES[(i + 1) % TONES.length][0]); });
   new MutationObserver(() => tone(root.dataset.tone)).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
-  addEventListener('keydown', e => { if (e.target.closest('input,textarea,select')) return; if (e.key === 'ArrowRight') show(cur + 1, true); if (e.key === 'ArrowLeft') show(cur - 1, true); if (e.key === 'Escape') closePanel(); });
+  addEventListener('keydown', e => { if (e.target.closest('input,textarea,select')) return; if (e.key === 'ArrowRight') show(cur + 1, true); if (e.key === 'ArrowLeft') show(cur - 1, true); if (e.key === 'Escape') { closePanel(); if (modal) modal.hidden = true; } });
 
   let start = fromHash();
   if (start < 0) { const s = store.get(KEY); if (s !== null) start = parseInt(s, 10); }

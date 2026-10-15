@@ -141,9 +141,10 @@
     let src = card.dataset.src, ratio = card.dataset.ratio || '16:9', video = null;
     function setRatio(r) { media.classList.toggle('tall', r === '9:16'); }
     function start() {
-      if (!video) { video = document.createElement('video'); video.controls = true; video.playsInline = true; video.preload = 'metadata'; video.poster = card.dataset.poster || ''; media.innerHTML = ''; media.appendChild(video); }
+      if (!video) { video = document.createElement('video'); video.controls = true; video.playsInline = true; video.setAttribute('controlslist', 'nodownload'); video.disablePictureInPicture = true; video.oncontextmenu = e => e.preventDefault(); video.preload = 'metadata'; video.poster = card.dataset.poster || ''; media.innerHTML = ''; media.appendChild(video); }
       video.src = src; setRatio(ratio); video.play().catch(() => {});
     }
+    setRatio(ratio);
     if (playBtn) playBtn.addEventListener('click', start);
     vars.forEach(b => b.addEventListener('click', () => { vars.forEach(x => x.setAttribute('aria-pressed', 'false')); b.setAttribute('aria-pressed', 'true'); src = b.dataset.src; ratio = b.dataset.ratio; if (video) start(); else setRatio(ratio); }));
   });
