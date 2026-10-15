@@ -92,7 +92,7 @@
       path.setAttribute('d', SHAPES[b.s] || SHAPES.ring);
       len = path.getTotalLength();
       path.style.transition = 'none'; path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-      line.classList.remove('on'); line.textContent = b.t;
+      line.classList.remove('on'); line.textContent = (document.documentElement.lang === 'fr' && b.fr) ? b.fr : b.t;
       requestAnimationFrame(() => requestAnimationFrame(() => { path.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1)'; path.style.strokeDashoffset = 0; line.classList.add('on'); }));
       bar.style.width = ((k + 1) / beats.length * 100) + '%';
       const m = $('.meta', stage); if (m) m.textContent = m.dataset.base + ' · ' + String(k + 1).padStart(2, '0') + ' / ' + String(beats.length).padStart(2, '0');
@@ -101,6 +101,7 @@
     if (play) play.addEventListener('click', () => { running = !running; play.textContent = running ? 'PAUSE' : 'PLAY'; if (running) step(); else clearTimeout(timer); });
     if (running) step(); else { show(0); if (play) play.textContent = 'PLAY'; }
     stage.addEventListener('click', e => { if (e.target.closest('.ctl')) return; clearTimeout(timer); show((i + 1) % beats.length); if (running) timer = setTimeout(step, 3000); });
+    addEventListener('wf-lang', () => { if (i >= 0) { const b = beats[i]; line.textContent = (document.documentElement.lang === 'fr' && b.fr) ? b.fr : b.t; } });
   });
 
   /* ---------- walkthrough tour: real screens, camera moves, highlights ---------- */

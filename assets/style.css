@@ -71,7 +71,7 @@ hr.rule{border:0;border-top:1px solid var(--ligne);margin:0}
 @media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
 .hero-aside{display:grid;gap:14px;border-top:1px solid var(--ligne);padding-top:18px}
 .hero-aside .kv{display:grid;grid-template-columns:110px 1fr;gap:10px;font-size:14px}
-.hero-aside .kv span:first-child{color:var(--gris);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}
+.hero-aside .kv > span:first-child{color:var(--gris);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}
 .cta-row{display:flex;gap:10px;flex-wrap:wrap}
 .glass{position:relative;aspect-ratio:4/3;max-width:100%;border-radius:var(--r);overflow:hidden;background:
  radial-gradient(60% 50% at 30% 30%,color-mix(in srgb,var(--cobalt) 55%,transparent),transparent 70%),
@@ -129,7 +129,7 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.6em;width:8px;heigh
 .cover .bk{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 .facts{display:grid;gap:10px;margin-top:18px;font-size:14px}
 .facts div{display:grid;grid-template-columns:96px 1fr;gap:10px;border-top:1px solid var(--ligne);padding-top:8px}
-.facts span:first-child{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gris);padding-top:3px}
+.facts > div > span:first-child{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gris);padding-top:3px}
 .chapters{display:grid;gap:clamp(26px,4vw,44px)}
 .chapter{display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:start}
 @media (max-width:560px){.chapter{grid-template-columns:1fr}}
@@ -310,3 +310,13 @@ input,textarea,select,[contenteditable],.selectable,.selectable *{-webkit-user-s
 .film-card{text-decoration:none;color:inherit;transition:transform .25s var(--ease),border-color .25s}
 .film-card:hover{transform:translateY(-3px);border-color:var(--cobalt)}
 [data-free-slug].paused{color:var(--or)}
+
+/* Portfolio cards */
+.pcard{gap:10px;align-content:start}
+.pcard .pc-shot{display:block;border-radius:12px;overflow:hidden}
+.pcard h3{margin:0}
+.pcard h3 a{color:inherit;text-decoration:none}
+.pcard h3 a:hover{color:var(--cobalt)}
+.pc-links{display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 0;font:500 13px var(--mono)}
+.pc-links a{color:var(--cobalt);text-decoration:none}
+.pc-links a:hover{text-decoration:underline}
