@@ -384,6 +384,7 @@ def write(path, s, strict=True):
         assert not strict or bad not in s, f"{name} found in {path}"
     import re as _re
     s = _re.sub(r'(/assets/(?:style|salon|admin)\.css|/assets/(?:app|scenes|salon|guard|track|live|admin)\.js)(?=["\'])', lambda m: m.group(1) + "?v=" + V, s)
+    s = _re.sub(r'(/assets/(?:shots|motion)/[\w.-]+\.(?:webp|png|jpg|mp4))(?=["\'&])', lambda m: m.group(1) + "?v=" + V, s)
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
