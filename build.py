@@ -6,6 +6,16 @@ from guides import GUIDES
 import fr as FR
 import salon as SALON
 
+if SALON.has_richesse():  # the manuscript has landed: open it in the reading room
+    for _b in C.BOOKS:
+        if _b["slug"] == "richesse-silencieuse":
+            _b.update({"free": "la-richesse-silencieuse", "year": "2026", "pages": "Free, complete, online", "kind": "Investing guide for the diaspora",
+                       "line": "A calm, practical investing guide for salaried people of the African diaspora: simple principles, real numbers, and room for family without sacrificing the future. Free to read here, in full.",
+                       "where": [("Read it free, online", "/lire/la-richesse-silencieuse")]})
+            FR.BOOKS["richesse-silencieuse"] = {"pages": "Gratuit, complet, en ligne", "kind": "Guide d'investissement pour la diaspora",
+                       "line": "Un guide d'investissement calme et pratique pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et une place pour la famille sans sacrifier l'avenir. À lire ici gratuitement, en entier.",
+                       "where": [("Lire gratuitement en ligne", "/lire/la-richesse-silencieuse")]}
+
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 E = html.escape
 
@@ -340,7 +350,7 @@ def main():
     write("contact.html", page_contact())
     write("thanks.html", page_thanks())
     write("404.html", page_404())
-    pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books", "/lire/le-contrat-du-peuple", "/lire/laa", "/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
+    pages = ["/", "/work"] + [f"/work/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {C.SITE['url']}/sitemap.xml\n")
     print("built", len(pages), "pages into", OUT)
