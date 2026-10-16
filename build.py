@@ -414,6 +414,7 @@ def main():
     write("books.html", page_books())
     for b in SALON.load_books(): write(f"lire/{b['slug']}.html", SALON.page(b, t, head, header, footer, cover_art), strict=False)
     write("gallery.html", page_gallery())
+    write("demo/e-xaf.html", open(os.path.join(here, "demo", "e-xaf.html"), encoding="utf-8").read(), strict=False)
     write("journal/index.html", page_journal())
     m = len(C.JOURNAL)
     for i, p in enumerate(C.JOURNAL): write(f"journal/{p['slug']}.html", page_post(p, C.JOURNAL[i - 1], C.JOURNAL[(i + 1) % m]))
@@ -422,7 +423,7 @@ def main():
     write("thanks.html", page_thanks())
     write("404.html", page_404())
     write("admin.html", page_admin())
-    pages = ["/", "/portfolio"] + [f"/portfolio/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
+    pages = ["/", "/portfolio"] + [f"/portfolio/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/demo/e-xaf", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
     ai = ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "CCBot", "anthropic-ai", "ClaudeBot", "Claude-Web", "Google-Extended", "PerplexityBot", "Bytespider", "Amazonbot", "Applebot-Extended", "meta-externalagent", "FacebookBot", "Diffbot", "ImagesiftBot", "Omgilibot", "cohere-ai", "YouBot", "Timpibot"]
     write("robots.txt", "".join(f"User-agent: {b}\nDisallow: /\n\n" for b in ai) + f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: {C.SITE['url']}/sitemap.xml\n")

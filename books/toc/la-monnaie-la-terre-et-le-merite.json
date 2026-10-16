@@ -1,0 +1,410 @@
+{
+"slug": "la-monnaie-la-terre-et-le-merite",
+"sections": [
+{
+"idx": 0,
+"cid": "introduction",
+"label": "Introduction",
+"title": "Pourquoi ce livre s’adresse aux décideurs",
+"kind": "front",
+"part": "",
+"words": 1514
+},
+{
+"idx": 1,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Le cash coûte plus cher qu’on ne le croit",
+"kind": "chapter",
+"part": "Livre I : Le Cameroun sans espèces",
+"words": 3476
+},
+{
+"idx": 2,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Ce que la Chine a vraiment fait",
+"kind": "chapter",
+"part": "",
+"words": 3393
+},
+{
+"idx": 3,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Ce n’est pas la monnaie qu’il faut changer, c’est son support",
+"kind": "chapter",
+"part": "",
+"words": 3439
+},
+{
+"idx": 4,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "Le Cameroun a déjà commencé sans le savoir",
+"kind": "chapter",
+"part": "",
+"words": 3313
+},
+{
+"idx": 5,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "Le QR code universel et le paiement sans terminal",
+"kind": "chapter",
+"part": "",
+"words": 3068
+},
+{
+"idx": 6,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "L’État paie d’abord",
+"kind": "chapter",
+"part": "",
+"words": 3391
+},
+{
+"idx": 7,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "L’État encaisse ensuite",
+"kind": "chapter",
+"part": "",
+"words": 3231
+},
+{
+"idx": 8,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Le commerce informel et l’inclusion",
+"kind": "chapter",
+"part": "",
+"words": 3245
+},
+{
+"idx": 9,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "La vie privée, la surveillance et la peur",
+"kind": "chapter",
+"part": "",
+"words": 3449
+},
+{
+"idx": 10,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Fraude, corruption et argent sale : ce que le numérique change",
+"kind": "chapter",
+"part": "",
+"words": 3491
+},
+{
+"idx": 11,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "Les banques, la BEAC et la COBAC dans un monde sans espèces",
+"kind": "chapter",
+"part": "",
+"words": 3311
+},
+{
+"idx": 12,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "Les opérateurs télécoms ne sont pas l’État",
+"kind": "chapter",
+"part": "",
+"words": 3277
+},
+{
+"idx": 13,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Électricité, réseau et hors-ligne",
+"kind": "chapter",
+"part": "",
+"words": 3188
+},
+{
+"idx": 14,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "La feuille de route : cinq ans, par paliers",
+"kind": "chapter",
+"part": "",
+"words": 3308
+},
+{
+"idx": 15,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "La loi et les institutions à créer",
+"kind": "chapter",
+"part": "",
+"words": 3290
+},
+{
+"idx": 16,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Ce que le Cameroun y gagne en dix ans",
+"kind": "chapter",
+"part": "",
+"words": 3381
+},
+{
+"idx": 17,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "La leçon de l’Asie en trois temps",
+"kind": "chapter",
+"part": "Livre II : Ce qui fait fonctionner l'Asie, et comment le Cameroun peut le faire",
+"words": 3182
+},
+{
+"idx": 18,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "La terre d’abord : l’agriculture familiale intensive",
+"kind": "chapter",
+"part": "",
+"words": 3159
+},
+{
+"idx": 19,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "La terre au Cameroun",
+"kind": "chapter",
+"part": "",
+"words": 3096
+},
+{
+"idx": 20,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Cacao, café, coton, vivrier : des filières à reconstruire",
+"kind": "chapter",
+"part": "",
+"words": 3163
+},
+{
+"idx": 21,
+"cid": "chapitre-21",
+"label": "Chapitre 21",
+"title": "L’industrie ensuite : fabriquer, pas seulement extraire",
+"kind": "chapter",
+"part": "",
+"words": 3095
+},
+{
+"idx": 22,
+"cid": "chapitre-22",
+"label": "Chapitre 22",
+"title": "La discipline d’exportation : le seul juge incorruptible",
+"kind": "chapter",
+"part": "",
+"words": 3445
+},
+{
+"idx": 23,
+"cid": "chapitre-23",
+"label": "Chapitre 23",
+"title": "Choisir des champions, puis les mettre en concurrence",
+"kind": "chapter",
+"part": "",
+"words": 3319
+},
+{
+"idx": 24,
+"cid": "chapitre-24",
+"label": "Chapitre 24",
+"title": "Ce que le Cameroun peut fabriquer",
+"kind": "chapter",
+"part": "",
+"words": 3237
+},
+{
+"idx": 25,
+"cid": "chapitre-25",
+"label": "Chapitre 25",
+"title": "La finance au service du plan",
+"kind": "chapter",
+"part": "",
+"words": 3430
+},
+{
+"idx": 26,
+"cid": "chapitre-26",
+"label": "Chapitre 26",
+"title": "Pourquoi l’Asie du Sud-Est a échoué",
+"kind": "chapter",
+"part": "",
+"words": 3486
+},
+{
+"idx": 27,
+"cid": "chapitre-27",
+"label": "Chapitre 27",
+"title": "L’État développeur n’est pas l’État prédateur",
+"kind": "chapter",
+"part": "",
+"words": 3408
+},
+{
+"idx": 28,
+"cid": "chapitre-28",
+"label": "Chapitre 28",
+"title": "Infrastructures : routes, énergie, ports, numérique",
+"kind": "chapter",
+"part": "",
+"words": 3361
+},
+{
+"idx": 29,
+"cid": "chapitre-29",
+"label": "Chapitre 29",
+"title": "Le piège de la rente pétrolière et forestière",
+"kind": "chapter",
+"part": "",
+"words": 3433
+},
+{
+"idx": 30,
+"cid": "chapitre-30",
+"label": "Chapitre 30",
+"title": "Un plan camerounais en dix ans",
+"kind": "chapter",
+"part": "",
+"words": 3415
+},
+{
+"idx": 31,
+"cid": "chapitre-31",
+"label": "Chapitre 31",
+"title": "La valeur est subjective",
+"kind": "chapter",
+"part": "Livre III : Un pays n'appartient à personne, les principes de l'économie",
+"words": 3498
+},
+{
+"idx": 32,
+"cid": "chapitre-32",
+"label": "Chapitre 32",
+"title": "Les biens d’ordre supérieur : pourquoi la production prend du temps",
+"kind": "chapter",
+"part": "",
+"words": 3475
+},
+{
+"idx": 33,
+"cid": "chapitre-33",
+"label": "Chapitre 33",
+"title": "La monnaie naît de l’échange, pas du décret",
+"kind": "chapter",
+"part": "",
+"words": 3266
+},
+{
+"idx": 34,
+"cid": "chapitre-34",
+"label": "Chapitre 34",
+"title": "L’échange crée de la valeur pour les deux parties",
+"kind": "chapter",
+"part": "",
+"words": 3250
+},
+{
+"idx": 35,
+"cid": "chapitre-35",
+"label": "Chapitre 35",
+"title": "Le prix est une information, pas une injustice",
+"kind": "chapter",
+"part": "",
+"words": 3199
+},
+{
+"idx": 36,
+"cid": "chapitre-36",
+"label": "Chapitre 36",
+"title": "Le tribalisme est une mauvaise théorie économique",
+"kind": "chapter",
+"part": "",
+"words": 3420
+},
+{
+"idx": 37,
+"cid": "chapitre-37",
+"label": "Chapitre 37",
+"title": "Le népotisme est un impôt",
+"kind": "chapter",
+"part": "",
+"words": 3536
+},
+{
+"idx": 38,
+"cid": "chapitre-38",
+"label": "Chapitre 38",
+"title": "L’État n’est pas un propriétaire",
+"kind": "chapter",
+"part": "",
+"words": 3468
+},
+{
+"idx": 39,
+"cid": "chapitre-39",
+"label": "Chapitre 39",
+"title": "La propriété et le contrat : les fondations invisibles",
+"kind": "chapter",
+"part": "",
+"words": 3329
+},
+{
+"idx": 40,
+"cid": "chapitre-40",
+"label": "Chapitre 40",
+"title": "Le capital humain : le seul bien d’ordre supérieur qui pense",
+"kind": "chapter",
+"part": "",
+"words": 3497
+},
+{
+"idx": 41,
+"cid": "chapitre-41",
+"label": "Chapitre 41",
+"title": "Les conceptions à abandonner",
+"kind": "chapter",
+"part": "",
+"words": 3609
+},
+{
+"idx": 42,
+"cid": "chapitre-42",
+"label": "Chapitre 42",
+"title": "Les principes en dix lois pour le décideur",
+"kind": "chapter",
+"part": "",
+"words": 3533
+},
+{
+"idx": 43,
+"cid": "conclusion",
+"label": "Conclusion",
+"title": "Lettre aux décideurs",
+"kind": "back",
+"part": "",
+"words": 3039
+},
+{
+"idx": 44,
+"cid": "annexes",
+"label": "Annexes",
+"title": "Annexes",
+"kind": "back",
+"part": "",
+"words": 7065
+}
+]
+}

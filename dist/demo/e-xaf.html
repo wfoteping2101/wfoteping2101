@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Démonstrateur interactif du franc CFA numérique : neuf scénarios et un film animé, pour accompagner le livre La Monnaie, la Terre et le Mérite.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://william-foteping.vercel.app/demo/e-xaf">
+<title>Démonstrateur e-XAF</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+<style>
+/* Layout: a presenter's console — left rail of scenarios, centre stage with a phone and a counterpart panel, right ledger that fills as transactions happen. */
+:root{
+  --bg:#f6f4ee; --panel:#ffffff; --fg:#1b1f24; --muted:#5d6670; --line:#dcd7cb;
+  --accent:#0f6e56; --accent-ink:#ffffff; --gold:#b8862b; --warn:#b4452a; --ok:#1f8a4c;
+  --phone:#111418; --phone-fg:#f4f5f7; --ledger:#1d2a24; --ledger-fg:#e8efe9;
+  --display:"Fraunces",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15181b; --panel:#1e2327; --fg:#edeae2; --muted:#9aa3ab; --line:#30373d;
+  --accent:#3fb28f; --accent-ink:#0d1a15; --gold:#d9a84a; --warn:#e07a5f; --ok:#4cc27a;
+  --phone:#0a0c0e; --phone-fg:#f4f5f7; --ledger:#0f1714; --ledger-fg:#dfe9e2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15181b; --panel:#1e2327; --fg:#edeae2; --muted:#9aa3ab; --line:#30373d;
+  --accent:#3fb28f; --accent-ink:#0d1a15; --gold:#d9a84a; --warn:#e07a5f; --ok:#4cc27a;
+  --phone:#0a0c0e; --phone-fg:#f4f5f7; --ledger:#0f1714; --ledger-fg:#dfe9e2; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;margin:0;
+  padding-block:0 24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding-block:20px 12px;border-bottom:1px solid var(--line)}
+header h1{font-family:var(--display);font-size:clamp(24px,3vw,34px);margin:0;letter-spacing:-.01em;text-wrap:balance}
+header .sub{color:var(--muted);font-size:14px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-block:16px}
+.kpi{border:1px solid var(--line);background:var(--panel);padding:10px 14px;min-width:0}
+.kpi b{display:block;font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums;font-weight:500}
+.kpi span{font-size:12px;color:var(--muted)}
+main{display:grid;grid-template-columns:230px minmax(0,1fr) 300px;gap:16px;align-items:start}
+@media (max-width:1000px){main{grid-template-columns:1fr}}
+nav{display:flex;flex-direction:column;gap:6px}
+nav button{text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:10px 12px;cursor:pointer;font:inherit;border-radius:4px}
+nav button[aria-current="true"]{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+nav button small{display:block;color:var(--muted);font-size:12px}
+nav button:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.stage{display:grid;grid-template-columns:260px minmax(0,1fr);gap:16px;min-width:0}
+@media (max-width:640px){.stage{grid-template-columns:1fr}}
+.phone{background:var(--phone);color:var(--phone-fg);border-radius:26px;padding:14px 12px 18px;min-height:480px;display:flex;flex-direction:column;gap:10px;border:6px solid #2b2f35;position:relative}
+.phone .bar{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:#9aa3ab}
+.phone .bal{font-family:var(--mono);font-size:26px;font-variant-numeric:tabular-nums}
+.phone .who{font-size:12px;color:#9aa3ab}
+.phone .screen{flex:1;display:flex;flex-direction:column;gap:8px;font-size:13px}
+.phone .screen h4{margin:4px 0 0;font-size:14px;font-weight:600}
+.phone .row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #2b2f35;padding:5px 0;font-variant-numeric:tabular-nums}
+.phone .row.in b{color:#6fd49f}.phone .row.out b{color:#f3b09a}
+.phone .notice{background:#1f2a25;border:1px solid #2f4a3c;border-radius:8px;padding:8px;font-size:12px}
+.phone .notice.warn{background:#2a1f1b;border-color:#5a3a2e}
+.qr{width:120px;height:120px;background:#fff;padding:6px;border-radius:6px;margin:4px auto;image-rendering:pixelated}
+.counter{background:var(--panel);border:1px solid var(--line);padding:16px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.counter h3{font-family:var(--display);font-size:20px;margin:0}
+.counter p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.controls label{font-size:13px;color:var(--muted)}
+input,select{font:inherit;padding:7px 9px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:4px;max-width:100%}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer;border-radius:4px}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.steps{display:grid;gap:6px;font-size:13px}
+.steps div{display:flex;gap:10px;align-items:flex-start;color:var(--muted)}
+.steps div.done{color:var(--fg)}.steps div.done i{background:var(--ok)}
+.steps i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--line);display:inline-grid;place-items:center;font-style:normal;font-size:11px;color:#fff;margin-top:2px}
+.ledger{background:var(--ledger);color:var(--ledger-fg);padding:14px;min-width:0;border-radius:4px}
+.ledger h3{margin:0 0 8px;font-family:var(--display);font-size:18px}
+.ledger .tag{color:#9fb3a8}
+.ledger table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11.5px}
+.ledger td{padding:5px 2px;border-bottom:1px solid #2c3b34;vertical-align:top;font-variant-numeric:tabular-nums}
+.ledger td:last-child{text-align:right;white-space:nowrap}
+.ledger .hash{color:#7f9a8c;font-size:10px}
+.ledger .wrap{max-height:420px;overflow:auto}
+.chart{background:var(--panel);border:1px solid var(--line);padding:14px;margin-top:16px}
+.chart h3{font-family:var(--display);margin:0 0 4px;font-size:18px}
+.chart p{margin:0 0 8px;color:var(--muted);font-size:13px}
+svg text{fill:var(--muted);font-family:var(--mono);font-size:11px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px}
+.cmp div{border:1px solid var(--line);padding:10px 12px;font-size:13px}
+.cmp b{font-family:var(--mono);font-size:18px;display:block;font-variant-numeric:tabular-nums}
+.foot{color:var(--muted);font-size:12px;margin-top:18px;max-width:80ch}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.on{border-color:var(--ok);color:var(--ok)}.pill.off{border-color:var(--warn);color:var(--warn)}
+.table{overflow-x:auto}
+.table table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.table th,.table td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+.table th{font-size:12px;color:var(--muted);font-weight:500}
+@media (prefers-reduced-motion:no-preference){.flash{animation:fl .6s}}
+@keyframes fl{from{background:var(--accent);color:var(--accent-ink)}to{}}
+
+.film-btn{border-color:var(--gold)!important}
+#film{position:fixed;inset:0;background:#06241a;color:#f6f1e3;z-index:50;display:none;flex-direction:column;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+#film[data-on="1"]{display:flex}
+#film .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#film .top b{font-family:var(--display);font-size:18px}
+#film .close{background:transparent;border:1px solid #f1cf7a;color:#f6f1e3;padding:6px 12px;border-radius:4px;cursor:pointer;font:inherit}
+#film .stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+#film svg text{fill:#f6f1e3;font-family:var(--display)}
+#film svg{width:min(100%,900px);height:auto;max-height:62vh;aspect-ratio:900/420;flex:none}
+#film .cap{text-align:center;font-family:var(--display);font-size:clamp(18px,2.6vw,28px);min-height:3.2em;text-wrap:balance;max-width:60ch;margin:0 auto}
+#film .ref{text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#cfe3d8;margin-top:6px}
+#film .prog{height:4px;background:#1f3a2f;border-radius:2px;overflow:hidden;margin-top:10px}
+#film .prog i{display:block;height:100%;width:0;background:#f1cf7a;transition:width .4s linear}
+#film .ctl{display:flex;gap:8px;justify-content:center;margin-top:10px}
+#film .ctl button{background:transparent;border:1px solid #f1cf7a;color:#f6f1e3;padding:6px 14px;border-radius:4px;cursor:pointer;font:inherit}
+@media (prefers-reduced-motion:no-preference){
+  .f-in{animation:fin .7s ease-out both}
+  @keyframes fin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .pulse{animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+  .flow{stroke-dasharray:10 8;animation:dash 1.2s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-36}}
+  .grow{transform-origin:bottom;animation:grow 1.4s ease-out both}
+  @keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+}
+.cat{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:12px}
+.cat .bar{height:8px;background:#2b3a33;border-radius:4px;overflow:hidden;grid-column:1/-1}
+.cat .bar i{display:block;height:100%;background:#6fd49f}
+[hidden]{display:none!important}
+html{color-scheme:light dark}
+</style>
+
+</head>
+<body>
+<header>
+  <h1>Démonstrateur e-XAF</h1>
+  <div class="sub">Franc CFA numérique — la même monnaie, un autre support. Démonstrateur du livre <em>La Monnaie, la Terre et le Mérite</em>.</div>
+  <span class="tag">illustration · données fictives</span>
+</header>
+
+<section class="kpis" aria-label="Indicateurs du démonstrateur">
+  <div class="kpi"><b id="k-tx">0</b><span>transactions enregistrées</span></div>
+  <div class="kpi"><b id="k-vol">0</b><span>XAF réglés sans espèces</span></div>
+  <div class="kpi"><b id="k-tax">0</b><span>XAF de recettes publiques tracées</span></div>
+  <div class="kpi"><b id="k-cash">0</b><span>XAF de coût d'espèces évité (illustration, 1,5 %)</span></div>
+</section>
+
+<main>
+  <nav aria-label="Scénarios">
+    <span class="tag" style="padding:4px 0">Scénarios</span>
+    <button data-s="citizen" aria-current="true">1. Le portefeuille citoyen<small>Identité, solde, historique, limites</small></button>
+    <button data-s="merchant">2. Payer le marchand par QR<small>Marché Mokolo, sans terminal, sans compte bancaire</small></button>
+    <button data-s="salary">3. L'État paie les salaires<small>Trésor → agents, en une opération tracée</small></button>
+    <button data-s="tax">4. Payer l'impôt et la douane<small>DGI, mairie, port : plus de guichet « sans monnaie »</small></button>
+    <button data-s="offline">5. Payer hors connexion<small>Village sans réseau, règlement différé</small></button>
+    <button data-s="treasury">6. Tableau de bord du Trésor<small>Ce que l'État voit en temps réel</small></button>
+    <button data-s="spend">7. Dépenser et suivre son budget<small>Chaque dépense classée, sans effort</small></button>
+    <button data-s="send">8. Envoyer de l'argent<small>Au village, à la diaspora, aux frais réels</small></button>
+    <button data-s="cashout">9. Retirer des espèces<small>L'agent, le plafond, le coût de la transition</small></button>
+    <span class="tag" style="padding:10px 0 4px">Présentation</span>
+    <button data-s="film" class="film-btn">▶ Film animé · 3 minutes<small>Le démonstrateur et les trois livres</small></button>
+  </nav>
+
+  <div>
+    <div class="stage">
+      <div class="phone" aria-live="polite">
+        <div class="bar"><span id="p-net">● réseau</span><span id="p-time">09:41</span></div>
+        <div class="who" id="p-who">Marthe N., vendeuse de légumes · Yaoundé</div>
+        <div class="bal"><span id="p-bal">42 500</span> <span style="font-size:13px">XAF</span></div>
+        <div class="screen" id="p-screen"></div>
+      </div>
+      <div class="counter" id="counter"></div>
+    </div>
+
+    <div class="chart" id="chartbox">
+      <h3>Dix ans sans espèces : scénario illustratif</h3>
+      <p>Part des paiements numériques et recettes publiques supplémentaires tracées, selon la feuille de route du Livre I. Hypothèses modifiables ; aucune promesse.</p>
+      <div class="controls">
+        <label for="c-start">Part numérique au départ</label><input id="c-start" type="range" min="5" max="40" value="20"><span id="c-start-v" class="pill">20 %</span>
+        <label for="c-speed">Rythme</label><select id="c-speed"><option value="slow">lent</option><option value="base" selected>feuille de route</option><option value="fast">volontariste</option></select>
+      </div>
+      <div style="overflow-x:auto"><svg id="chart" viewBox="0 0 640 220" width="100%" height="220" role="img" aria-label="Courbe de la part des paiements numériques sur dix ans"></svg></div>
+      <div class="cmp" id="cmp"></div>
+    </div>
+  </div>
+
+  <aside class="ledger">
+    <h3>Registre national des paiements</h3>
+    <span class="tag">chaque opération : horodatée, signée, auditable</span>
+    <div class="wrap"><table id="ledger"><tbody></tbody></table></div>
+  </aside>
+</main>
+
+<p class="foot">Ce démonstrateur accompagne l'ouvrage <em>Le Cameroun sans espèces</em>. Il illustre le principe : la monnaie reste le franc CFA ; seul le support change. Les noms, montants et institutions mises en scène sont fictifs ou simplifiés. Les petits montants (ici sous 25 000 XAF) sont enregistrés sans identité du payeur, pour montrer qu'un système traçable peut rester respectueux de la vie privée.</p>
+
+<div id="film" data-on="0" role="dialog" aria-label="Film animé">
+  <div class="top"><b>La Monnaie, la Terre et le Mérite — en trois minutes</b><button class="close" id="f-close">Fermer</button></div>
+  <div class="stage"><svg id="f-svg" viewBox="0 0 900 420" role="img" aria-label="Animation"></svg></div>
+  <p class="cap" id="f-cap"></p><div class="ref" id="f-ref"></div>
+  <div class="prog"><i id="f-prog"></i></div>
+  <div class="ctl"><button id="f-prev">◀ Précédent</button><button id="f-pause">Pause</button><button id="f-next">Suivant ▶</button></div>
+</div>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const fmt=n=>Math.round(n).toLocaleString('fr-FR');
+const state={tx:0,vol:0,tax:0,wallet:42500,merchant:18200,treasury:412000000,ledger:[],offlineQueue:[]};
+const ANON=25000;
+
+function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16).padStart(8,'0')}
+function stamp(){const d=new Date();return d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+function ledger(kind,from,to,amount,note,anon){
+  const id=hash(kind+from+to+amount+Date.now()+state.ledger.length);
+  state.ledger.unshift({id,kind,from:anon?'— (anonyme < 25 000)':from,to,amount,note,t:stamp()});
+  state.tx++;state.vol+=amount;
+  if(kind==='impôt'||kind==='douane'||kind==='taxe')state.tax+=amount;
+  render();
+}
+function render(){
+  $('#k-tx').textContent=fmt(state.tx);$('#k-vol').textContent=fmt(state.vol);
+  $('#k-tax').textContent=fmt(state.tax);$('#k-cash').textContent=fmt(state.vol*0.015);
+  const tb=$('#ledger tbody');tb.innerHTML='';
+  state.ledger.slice(0,40).forEach(r=>{const tr=document.createElement('tr');
+    tr.innerHTML=`<td><div>${r.t} · ${r.kind}</div><div>${r.from} → ${r.to}</div><div class="hash">${r.note||''} #${r.id}</div></td><td>${fmt(r.amount)}</td>`;
+    tb.appendChild(tr)});
+  if(tb.firstChild)tb.firstChild.classList.add('flash');
+  $('#p-bal').textContent=fmt(state.wallet);
+}
+
+/* QR drawing: deterministic pseudo-pattern from payload */
+function qr(canvas,payload){const n=25,c=canvas.getContext('2d'),s=canvas.width/n;c.fillStyle='#fff';c.fillRect(0,0,canvas.width,canvas.height);c.fillStyle='#111';
+  let h=parseInt(hash(payload),16);const rnd=()=>{h^=h<<13;h^=h>>>17;h^=h<<5;h>>>=0;return h/4294967296};
+  const finder=(x,y)=>{c.fillRect(x*s,y*s,7*s,7*s);c.fillStyle='#fff';c.fillRect((x+1)*s,(y+1)*s,5*s,5*s);c.fillStyle='#111';c.fillRect((x+2)*s,(y+2)*s,3*s,3*s)};
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){if((x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9))continue;if(rnd()>.55)c.fillRect(x*s,y*s,s,s)}
+  finder(0,0);finder(n-7,0);finder(0,n-7)}
+
+const scen={};
+function screen(html){$('#p-screen').innerHTML=html}
+function counter(html){$('#counter').innerHTML=html}
+function who(t){$('#p-who').textContent=t}
+function net(on){$('#p-net').textContent=on?'● réseau':'○ hors ligne';$('#p-net').style.color=on?'#6fd49f':'#f3b09a'}
+
+scen.citizen=()=>{who('Marthe N., vendeuse de légumes · Yaoundé');net(true);
+  screen(`<h4>Mon portefeuille e-XAF</h4>
+  <div class="row"><span>Identité</span><b>vérifiée (CNI)</b></div>
+  <div class="row"><span>Plafond quotidien</span><b>500 000 XAF</b></div>
+  <div class="row"><span>Petits paiements</span><b>anonymes &lt; 25 000</b></div>
+  <div class="row in"><span>Vente · hier</span><b>+ 6 500</b></div>
+  <div class="row out"><span>Taxe de marché · hier</span><b>− 500</b></div>
+  <div class="row in"><span>Tontine · versement reçu</span><b>+ 15 000</b></div>
+  <div class="notice">Pas de smartphone ? Le même portefeuille fonctionne par USSD : <span style="font-family:var(--mono)">*123#</span>. Pas de compte bancaire nécessaire.</div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Le portefeuille est un compte en francs CFA tenu dans le système national, accessible par application, par USSD ou par carte. Il remplace la liasse, pas la monnaie.</p>
+  <div class="steps"><div class="done"><i>1</i>Une identité numérique vérifiée une fois, chez un agent agréé ou en ligne.</div>
+  <div class="done"><i>2</i>Des limites par niveau d'identité : petits montants anonymes, gros montants tracés.</div>
+  <div class="done"><i>3</i>Un historique que la titulaire peut présenter à une banque pour obtenir un crédit : ses ventes deviennent une preuve de revenu.</div></div>
+  <div class="controls"><button class="btn" id="b-tontine">Recevoir un versement de tontine (15 000)</button><button class="btn alt" id="b-stmt">Générer un relevé pour la banque</button></div>
+  <div id="c-out"></div>`);
+  $('#b-tontine').onclick=()=>{state.wallet+=15000;ledger('transfert','Tontine « Mères de Mvog-Ada »','Marthe N.',15000,'cycle 7/12',true);$('#c-out').innerHTML='<p>Versement reçu. La tontine garde son fonctionnement ; seuls les billets disparaissent.</p>'};
+  $('#b-stmt').onclick=()=>{$('#c-out').innerHTML=`<div class="table"><table><tr><th>Mois</th><th>Encaissements</th><th>Jours actifs</th></tr><tr><td>Juillet</td><td>184 500</td><td>26</td></tr><tr><td>Août</td><td>201 000</td><td>27</td></tr><tr><td>Septembre</td><td>193 500</td><td>25</td></tr></table></div><p>Trois mois d'historique vérifiable : la base d'un micro-crédit de fonds de roulement, impossible à établir avec des espèces.</p>`};
+};
+
+scen.merchant=()=>{who('Client au marché Mokolo · Yaoundé');net(true);
+  screen(`<h4>Scanner pour payer</h4><canvas class="qr" id="qrc" width="250" height="250"></canvas>
+  <div style="text-align:center;font-size:12px">Étal n° 214 · Marthe N.<br><span style="color:#9aa3ab">QR statique, imprimé, gratuit</span></div>
+  <div id="m-res"></div>`);
+  qr($('#qrc'),'XAF-QR|214|MARTHE-N');
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Le marchand n'a ni terminal, ni abonnement, ni compte bancaire classique. Un papier plastifié avec un QR code suffit. Le client scanne, saisit le montant, confirme. Le marchand entend une notification vocale.</p>
+  <div class="controls"><label for="m-amt">Montant</label><input id="m-amt" type="number" value="3500" min="100" step="100" style="width:110px"><label for="m-rail">Rail</label><select id="m-rail"><option>Portefeuille e-XAF</option><option>Mobile Money (interopérable)</option><option>Compte bancaire</option></select><button class="btn" id="b-pay">Payer</button></div>
+  <div class="steps" id="m-steps"><div><i>1</i>Scan du QR XAF-QR (norme nationale ouverte)</div><div><i>2</i>Saisie du montant, confirmation par code</div><div><i>3</i>Règlement instantané, frais marchand : 0 XAF</div><div><i>4</i>Notification vocale au marchand, écriture au registre</div></div>`);
+  $('#b-pay').onclick=()=>{const a=+$('#m-amt').value||0;if(a<=0)return;const st=$('#m-steps').children;let i=0;
+    const tick=()=>{if(i<st.length){st[i].classList.add('done');i++;setTimeout(tick,220)}else{state.merchant+=a;ledger('achat','Client','Étal 214 · Marthe N.',a,$('#m-rail').value,a<ANON);
+      $('#m-res').innerHTML=`<div class="notice">Payé ${fmt(a)} XAF à l'étal 214. Reçu numérique conservé.</div>`}};tick()};
+};
+
+scen.salary=()=>{who('Trésor public · Direction de la solde');net(true);
+  screen(`<h4>Ordre de paiement · solde d'octobre</h4>
+  <div class="row"><span>Agents à payer (illustration)</span><b id="s-n">1 240</b></div>
+  <div class="row"><span>Masse salariale</span><b id="s-m">—</b></div>
+  <div class="row"><span>Doublons détectés</span><b id="s-d">—</b></div>
+  <div class="row"><span>Comptes inactifs &gt; 6 mois</span><b id="s-i">—</b></div>
+  <div id="s-out"></div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>L'État est le premier payeur du pays. Quand il paie en numérique, chaque agent reçoit son salaire sur son portefeuille le même jour, et chaque anomalie apparaît avant le paiement, pas après.</p>
+  <div class="controls"><label for="s-unit">Unité</label><select id="s-unit"><option>Délégation régionale de l'Éducation · Ouest</option><option>Hôpital régional · Garoua</option><option>Commune d'arrondissement · Douala 3e</option></select><button class="btn" id="b-check">Contrôler le fichier</button><button class="btn" id="b-run" disabled>Exécuter le paiement</button></div>
+  <div id="s-tab"></div>`);
+  let data=null;
+  $('#b-check').onclick=()=>{data={n:1240,avg:185000,dup:7,inact:19};$('#s-m').textContent=fmt(data.n*data.avg);$('#s-d').textContent=data.dup;$('#s-i').textContent=data.inact;
+    $('#s-tab').innerHTML=`<div class="table"><table><tr><th>Contrôle</th><th>Résultat</th><th>Action</th></tr><tr><td>Même identité, deux matricules</td><td>7</td><td>suspendus, 1 295 000 XAF retenus</td></tr><tr><td>Portefeuille inactif depuis 6 mois</td><td>19</td><td>vérification de présence</td></tr><tr><td>Bénéficiaire décédé (registre civil)</td><td>2</td><td>radiés</td></tr></table></div><p>En espèces ou par chèque, ces 28 cas auraient été payés et découverts, au mieux, lors d'un audit plusieurs années plus tard.</p>`;$('#b-run').disabled=false};
+  $('#b-run').onclick=()=>{const paid=data.n-data.dup-2;const total=paid*data.avg;state.treasury-=total;ledger('salaire','Trésor public',`${paid} agents · ${$('#s-unit').value.split('·')[0].trim()}`,total,'solde octobre, J+0',false);
+    $('#s-out').innerHTML=`<div class="notice">${fmt(paid)} agents payés en 4 secondes. ${fmt(total)} XAF. Aucun intermédiaire, aucun guichet, aucun « frais de dossier ».</div>`;$('#b-run').disabled=true};
+};
+
+scen.tax=()=>{who('Entreprise « Tchop & Co » · Douala');net(true);
+  screen(`<h4>Payer une obligation publique</h4><div id="t-list">
+  <div class="row"><span>TVA · septembre</span><b>146 000</b></div>
+  <div class="row"><span>Patente communale</span><b>35 000</b></div>
+  <div class="row"><span>Droits de douane · conteneur DLA-4471</span><b>812 000</b></div></div>
+  <div id="t-out"></div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Quand l'État encaisse en numérique, le reçu est émis par le système, pas par l'agent. Le montant exigé est celui du barème, visible par tous. Le guichet qui « n'a pas la monnaie » et le reçu manuscrit disparaissent.</p>
+  <div class="controls"><label for="t-which">Obligation</label><select id="t-which"><option value="146000|impôt|DGI · TVA septembre">TVA (146 000)</option><option value="35000|taxe|Commune Douala 1er · patente">Patente (35 000)</option><option value="812000|douane|Douane · PAD · DLA-4471">Douane (812 000)</option></select><button class="btn" id="b-tax">Payer et obtenir la quittance</button></div>
+  <div class="steps" id="t-steps"><div><i>1</i>Montant calculé par le barème officiel, affiché au contribuable</div><div><i>2</i>Paiement depuis le portefeuille de l'entreprise</div><div><i>3</i>Quittance signée électroniquement, opposable</div><div><i>4</i>Recette affectée au bon compte du Trésor le jour même</div></div>`);
+  $('#b-tax').onclick=()=>{const [a,k,to]=$('#t-which').value.split('|');const st=$('#t-steps').children;let i=0;
+    const tick=()=>{if(i<st.length){st[i].classList.add('done');i++;setTimeout(tick,200)}else{state.treasury+= +a;ledger(k,'Tchop & Co',to,+a,'quittance Q-'+hash(to+Date.now()).slice(0,6).toUpperCase(),false);
+      $('#t-out').innerHTML=`<div class="notice">Quittance émise. Montant : ${fmt(+a)} XAF. Conteneur libéré / obligation soldée. Aucune main n'a touché l'argent.</div>`}};tick()};
+};
+
+scen.offline=()=>{who('Moto-taxi · piste de Bafia, sans réseau');net(false);
+  screen(`<h4>Paiement hors connexion</h4>
+  <div class="notice warn">Aucun réseau. Les deux téléphones se parlent par NFC / Bluetooth. Le règlement est signé maintenant, enregistré au prochain passage sous réseau.</div>
+  <div class="row"><span>Réserve hors ligne</span><b id="o-res">12 000</b></div>
+  <div class="row"><span>Plafond hors ligne</span><b>20 000 / jour</b></div>
+  <div id="o-q"></div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Un pays sans espèces doit fonctionner là où il n'y a ni réseau ni électricité. La réserve hors ligne est une petite somme chargée à l'avance sur le téléphone ou la carte, signée cryptographiquement, dépensable sans connexion dans des limites strictes.</p>
+  <div class="controls"><label for="o-amt">Course</label><input id="o-amt" type="number" value="500" min="100" step="100" style="width:100px"><button class="btn" id="b-off">Payer hors ligne</button><button class="btn alt" id="b-sync">Retrouver le réseau et synchroniser</button></div>
+  <div id="o-out"></div>`);
+  let res=12000;
+  $('#b-off').onclick=()=>{const a=+$('#o-amt').value||0;if(a>res){$('#o-out').innerHTML='<p>Réserve insuffisante : le plafond hors ligne protège le système contre la double dépense.</p>';return}
+    res-=a;$('#o-res').textContent=fmt(res);state.offlineQueue.push(a);$('#o-q').innerHTML=`<div class="row out"><span>${state.offlineQueue.length} paiement(s) en attente</span><b>− ${fmt(state.offlineQueue.reduce((x,y)=>x+y,0))}</b></div>`;
+    $('#o-out').innerHTML=`<p>Payé ${fmt(a)} XAF au conducteur. Le jeton signé est dans son téléphone ; il sera réglé à la prochaine connexion.</p>`};
+  $('#b-sync').onclick=()=>{if(!state.offlineQueue.length){$('#o-out').innerHTML='<p>Rien à synchroniser.</p>';return}net(true);
+    state.offlineQueue.forEach(a=>ledger('course','Passager','Moto-taxi · Bafia',a,'hors ligne, réglé à la synchro',true));state.offlineQueue=[];$('#o-q').innerHTML='';
+    $('#o-out').innerHTML='<p>Réseau retrouvé. Les jetons sont réglés et inscrits au registre. Aucun billet n\'a circulé, aucun paiement n\'a été perdu.</p>'};
+};
+
+scen.treasury=()=>{who('Ministère des Finances · salle de pilotage');net(true);
+  const today=state.ledger.filter(r=>['impôt','douane','taxe'].includes(r.kind)).reduce((s,r)=>s+r.amount,0);
+  screen(`<h4>Vue Trésor · aujourd'hui</h4>
+  <div class="row"><span>Recettes encaissées (démo)</span><b>${fmt(today)}</b></div>
+  <div class="row"><span>Salaires exécutés (démo)</span><b>${fmt(state.ledger.filter(r=>r.kind==='salaire').reduce((s,r)=>s+r.amount,0))}</b></div>
+  <div class="row"><span>Opérations tracées</span><b>${fmt(state.tx)}</b></div>
+  <div class="row"><span>Délai moyen recette → Trésor</span><b>0 jour</b></div>
+  <div class="notice">Avant : la recette d'un guichet de province mettait des jours, parfois des semaines, à être connue à Yaoundé. Après : le jour même, par poste, par région, par agent.</div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Le tableau de bord n'est pas un gadget : c'est la différence entre gouverner sur des rapports et gouverner sur des faits. Il montre aussi ce que le système ne montre pas : les petits paiements anonymes n'y apparaissent qu'en agrégat.</p>
+  <div class="table"><table><tr><th>Indicateur</th><th>Économie d'espèces</th><th>Économie numérique</th></tr>
+  <tr><td>Connaissance des recettes</td><td>J+15 à J+60, par rapport papier</td><td>J+0, par poste</td></tr>
+  <tr><td>Paiement d'un salaire en province</td><td>Guichet, file, parfois intermédiaire</td><td>Portefeuille, le même jour</td></tr>
+  <tr><td>Coût de manipulation des espèces (illustration)</td><td>≈ 1 à 2 % des montants</td><td>≈ 0,1 %</td></tr>
+  <tr><td>Preuve en cas de litige</td><td>Reçu manuscrit</td><td>Écriture signée, horodatée</td></tr>
+  <tr><td>Fichier de la solde</td><td>Doublons découverts à l'audit</td><td>Doublons bloqués avant paiement</td></tr>
+  <tr><td>Vie privée du citoyen</td><td>Totale, mais sans recours</td><td>Petits montants anonymes, gros montants tracés, loi sur les données</td></tr></table></div>`);
+};
+
+
+/* ---- 7. Dépenser et suivre ---- */
+scen.spend=()=>{who('Jean-Paul E., enseignant · Bafoussam');net(true);
+  const cats=[['Alimentation',68000],['Transport',21500],['Scolarité',45000],['Santé',12000],['Téléphone & data',9000],['Tontine',15000],['Famille au village',20000]];
+  const tot=cats.reduce((s,c)=>s+c[1],0);
+  screen(`<h4>Mes dépenses · octobre</h4><div class="cat">${cats.map(c=>`<span>${c[0]}</span><b>${fmt(c[1])}</b><div class="bar"><i style="width:${Math.round(c[1]/tot*100)}%"></i></div>`).join('')}</div>
+  <div class="row"><span>Total</span><b>${fmt(tot)} XAF</b></div><div id="sp-out"></div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Avec des espèces, personne ne sait où est passé le salaire au 20 du mois. Avec un portefeuille, chaque dépense est classée automatiquement : le ménage voit son budget, la banque voit une capacité de remboursement, l'État voit la consommation réelle, en agrégat.</p>
+  <div class="controls"><label for="sp-cat">Nouvelle dépense</label><select id="sp-cat"><option>Alimentation</option><option>Transport</option><option>Santé</option><option>Scolarité</option></select><input id="sp-amt" type="number" value="2500" min="100" step="100" style="width:100px"><button class="btn" id="b-spend">Payer</button><button class="btn alt" id="b-alert">Activer une alerte budget</button></div>
+  <div id="sp-c"></div>`);
+  $('#b-spend').onclick=()=>{const a=+$('#sp-amt').value||0;if(a<=0||a>state.wallet){$('#sp-c').innerHTML='<p>Solde insuffisant ou montant invalide.</p>';return}state.wallet-=a;ledger('achat','Jean-Paul E.',$('#sp-cat').value,a,'dépense classée',a<ANON);$('#sp-out').innerHTML=`<div class="notice">${fmt(a)} XAF · ${$('#sp-cat').value}. Classé automatiquement, reçu conservé.</div>`};
+  $('#b-alert').onclick=()=>{$('#sp-c').innerHTML='<div class="table"><table><tr><th>Règle</th><th>Effet</th></tr><tr><td>Transport &gt; 25 000 / mois</td><td>notification au titulaire</td></tr><tr><td>Famille au village &gt; 10 % du revenu</td><td>rappel du plafond que le ménage s\'est fixé</td></tr><tr><td>Solde &lt; 15 000 avant le 25</td><td>proposition d\'épargne automatique le jour de paie</td></tr></table></div><p>Ces règles appartiennent au citoyen, pas à l\'État. Le système les exécute ; il ne les impose pas.</p>'};
+};
+
+/* ---- 8. Envoyer de l'argent ---- */
+scen.send=()=>{who('Aïcha M., coiffeuse · Douala');net(true);
+  screen(`<h4>Envoyer</h4>
+  <div class="row"><span>Mère · Maroua</span><b>portefeuille e-XAF</b></div>
+  <div class="row"><span>Frère · Paris</span><b>compte en euros</b></div>
+  <div class="row"><span>Fournisseur · Lagos</span><b>compte en nairas</b></div>
+  <div id="sd-out"></div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Envoyer de l'argent au village coûte aujourd'hui du temps, des frais et parfois un intermédiaire. En numérique, le transfert intérieur est instantané et presque gratuit ; le transfert international reste réglementé, mais son coût devient visible et comparable.</p>
+  <div class="controls"><label for="sd-to">Destinataire</label><select id="sd-to"><option value="in|Mère · Maroua|0|XAF">Mère à Maroua (intérieur)</option><option value="dia|Frère · Paris → Aïcha|0|EUR">Recevoir de la diaspora (Paris)</option><option value="out|Fournisseur · Lagos|1.5|NGN">Fournisseur à Lagos (CEMAC → Nigeria)</option></select><input id="sd-amt" type="number" value="30000" min="500" step="500" style="width:110px"><button class="btn" id="b-send">Envoyer</button></div>
+  <div class="table" id="sd-cmp"><table><tr><th>Canal</th><th>Frais (illustration)</th><th>Délai</th><th>Trace</th></tr>
+  <tr><td>Espèces par un voyageur</td><td>≈ 5 à 10 % + risque de perte</td><td>1 à 3 jours</td><td>aucune</td></tr>
+  <tr><td>Mobile Money actuel</td><td>≈ 1 à 3 %</td><td>minutes</td><td>opérateur</td></tr>
+  <tr><td>e-XAF intérieur</td><td>0 à 0,2 %</td><td>secondes</td><td>registre national</td></tr>
+  <tr><td>e-XAF ⇄ diaspora (agréé)</td><td>≈ 1 à 2 % contre 6 à 8 % aujourd'hui</td><td>minutes</td><td>registre + déclaration de change</td></tr></table></div>`);
+  $('#b-send').onclick=()=>{const [k,to,fee,cur]=$('#sd-to').value.split('|');const a=+$('#sd-amt').value||0;if(a<=0)return;
+    if(k==='dia'){state.wallet+=a;ledger('réception','Diaspora · Paris','Aïcha M.',a,'change EUR→XAF déclaré, frais 1,5 %',false);$('#sd-out').innerHTML=`<div class="notice">Reçu ${fmt(a)} XAF de Paris. Frais payés à l'envoi : ≈ ${fmt(a*0.015)} XAF au lieu de ≈ ${fmt(a*0.07)} par les canaux actuels.</div>`;return}
+    if(a>state.wallet){$('#sd-out').innerHTML='<div class="notice warn">Solde insuffisant.</div>';return}
+    const f=a*fee/100;state.wallet-=a+f;ledger(k==='in'?'transfert':'transfert international','Aïcha M.',to,a,k==='in'?'intérieur, frais 0':'déclaration de change automatique, frais 1,5 %',k==='in'&&a<ANON);
+    $('#sd-out').innerHTML=`<div class="notice">Envoyé ${fmt(a)} XAF à ${to}. Frais : ${fmt(f)} XAF. ${k==='in'?'Arrivé en 2 secondes ; la mère reçoit une notification vocale en fulfulde.':'Converti en '+cur+' au taux affiché, déclaré automatiquement à la BEAC.'}</div>`};
+};
+
+/* ---- 9. Retirer des espèces ---- */
+scen.cashout=()=>{who('Samuel T., retraité · Ebolowa');net(true);
+  screen(`<h4>Retirer des espèces</h4>
+  <div class="row"><span>Agent le plus proche</span><b>Boutique Mama Rose · 300 m</b></div>
+  <div class="row"><span>Retraits ce mois</span><b id="co-n">1 / 4 gratuits</b></div>
+  <div class="row"><span>Plafond mensuel en espèces</span><b>200 000 XAF</b></div>
+  <div class="notice">Pendant la transition, les espèces restent disponibles. Elles deviennent simplement l'exception, pas la règle.</div><div id="co-out"></div>`);
+  counter(`<h3>Ce que montre ce scénario</h3>
+  <p>Un pays ne supprime pas les billets du jour au lendemain. Il les rend moins nécessaires. Les retraits restent possibles chez des agents de proximité, gratuits jusqu'à un certain nombre, puis légèrement payants, pendant que tout ce qui peut se payer en numérique le devient.</p>
+  <div class="controls"><label for="co-amt">Montant</label><input id="co-amt" type="number" value="20000" min="1000" step="1000" style="width:110px"><button class="btn" id="b-co">Retirer chez l'agent</button><button class="btn alt" id="b-why">Pourquoi un plafond ?</button></div>
+  <div class="table"><table><tr><th>Année de la feuille de route</th><th>Retraits gratuits / mois</th><th>Plafond espèces / mois</th><th>Part des paiements publics en numérique</th></tr>
+  <tr><td>1</td><td>illimités</td><td>aucun</td><td>salaires, pensions</td></tr><tr><td>2</td><td>8</td><td>1 000 000</td><td>+ impôts, douane</td></tr><tr><td>3</td><td>4</td><td>500 000</td><td>+ marchés publics, hôpitaux</td></tr><tr><td>5</td><td>2</td><td>200 000</td><td>tout, sauf exceptions motivées</td></tr></table><p class="foot" style="margin:6px 0 0">Illustration : les seuils réels se décident par la loi, après concertation.</p></div>
+  <div id="co-c"></div>`);
+  let n=1;
+  $('#b-co').onclick=()=>{const a=+$('#co-amt').value||0;if(a>state.wallet){$('#co-out').innerHTML='<div class="notice warn">Solde insuffisant.</div>';return}n++;const fee=n>4?200:0;state.wallet-=a+fee;$('#co-n').textContent=`${n} / 4 gratuits`;ledger('retrait','Samuel T.','Agent · Mama Rose',a,fee?'frais 200 XAF au-delà de 4 retraits':'gratuit',a<ANON);
+    $('#co-out').innerHTML=`<div class="notice">${fmt(a)} XAF remis en billets par l'agent, qui a reçu ${fmt(a)} e-XAF + une commission payée par le système. ${fee?'Frais : 200 XAF.':'Gratuit.'}</div>`};
+  $('#b-why').onclick=()=>{$('#co-c').innerHTML='<p>Parce que chaque billet retiré redevient invisible : il ne nourrit ni crédit, ni recette, ni preuve. Le plafond n\'empêche personne de vivre ; il rappelle que l\'espèce est désormais un service rendu, avec un coût, et non le mode normal de paiement.</p>'};
+};
+
+/* ---- Film animé ---- */
+const F=[
+ {cap:"Un pays qui compte en billets compte lentement, cher et dans le noir.",ref:"Livre I · Chapitre 1 — Le cash coûte plus cher qu'on ne le croit",draw:s=>s(`<g class="f-in"><text x="450" y="80" text-anchor="middle" font-size="26" fill="#f6f1e3">Aujourd'hui</text>${[0,1,2,3,4,5].map(i=>`<rect x="${120+i*110}" y="${160+(i%2)*30}" width="90" height="50" rx="6" fill="#f1cf7a" opacity="${.35+i*.1}"/>`).join('')}<text x="450" y="300" text-anchor="middle" font-size="18" fill="#cfe3d8">impression · transport · coffres · vols · files · pertes · aucune trace</text></g>`)},
+ {cap:"Ce n'est pas la monnaie qu'il faut changer. C'est son support.",ref:"Livre I · Chapitre 3",draw:s=>s(`<g class="f-in"><circle cx="300" cy="210" r="90" fill="none" stroke="#f1cf7a" stroke-width="8"/><text x="300" y="232" text-anchor="middle" font-size="64" font-weight="bold" fill="#f1cf7a">F</text><line x1="420" y1="210" x2="560" y2="210" stroke="#f1cf7a" stroke-width="6" class="flow"/><rect x="590" y="130" width="160" height="160" rx="12" fill="#f1cf7a" opacity=".9"/>${[[0,0],[1,0],[2,0],[0,1],[2,1],[0,2],[1,2],[2,2],[3,3],[4,1],[1,4],[3,1],[4,4]].map(([a,b])=>`<rect x="${605+a*27}" y="${145+b*27}" width="22" height="22" fill="#06241a"/>`).join('')}<text x="300" y="340" text-anchor="middle" font-size="18" fill="#cfe3d8">le même franc CFA</text><text x="670" y="340" text-anchor="middle" font-size="18" fill="#cfe3d8">un support numérique</text></g>`)},
+ {cap:"Le démonstrateur e-XAF montre ce que cela change pour une vendeuse, un enseignant, un retraité, un ministre.",ref:"Démonstrateur · scénarios 1 à 9",draw:s=>s(`<g class="f-in">${['Portefeuille','QR marchand','Salaires','Impôts','Hors ligne','Trésor','Dépenses','Envois','Retraits'].map((l,i)=>`<g class="f-in" style="animation-delay:${i*.12}s"><rect x="${70+(i%5)*160}" y="${i<5?110:230}" width="140" height="80" rx="8" fill="#0f6e56" stroke="#f1cf7a"/><text x="${140+(i%5)*160}" y="${i<5?158:278}" text-anchor="middle" font-size="16" fill="#f6f1e3">${l}</text></g>`).join('')}</g>`)},
+ {cap:"L'État paie d'abord, puis encaisse. Chaque franc public devient traçable le jour même.",ref:"Livre I · Chapitres 6 et 7",draw:s=>s(`<g class="f-in"><rect x="80" y="150" width="180" height="110" rx="8" fill="#f1cf7a"/><text x="170" y="212" text-anchor="middle" font-size="20" font-weight="bold" fill="#06241a">TRÉSOR</text>${[0,1,2,3].map(i=>`<line x1="260" y1="205" x2="520" y2="${110+i*65}" stroke="#6fd49f" stroke-width="4" class="flow"/><circle cx="540" cy="${110+i*65}" r="18" fill="#6fd49f"/><text x="580" y="${116+i*65}" font-size="16" fill="#f6f1e3">${['agent payé J+0','pension versée','impôt encaissé','douane soldée'][i]}</text>`).join('')}</g>`)},
+ {cap:"La trace rend la fraude visible, mais la loi protège le citoyen : petits montants anonymes, autorité indépendante, droit de regard.",ref:"Livre I · Chapitres 9 et 10",draw:s=>s(`<g class="f-in"><rect x="250" y="120" width="400" height="180" rx="10" fill="none" stroke="#f1cf7a" stroke-width="6"/><text x="450" y="185" text-anchor="middle" font-size="22" fill="#f6f1e3">&lt; 25 000 XAF : anonyme</text><text x="450" y="235" text-anchor="middle" font-size="22" fill="#f6f1e3">&gt; 25 000 XAF : tracé, protégé</text><circle cx="450" cy="60" r="22" fill="#f1cf7a" class="pulse"/><text x="450" y="360" text-anchor="middle" font-size="18" fill="#cfe3d8">autorité des données · séparation des pouvoirs numériques</text></g>`)},
+ {cap:"La terre aux familles qui la cultivent. L'industrie sous discipline d'exportation. La finance au service des deux.",ref:"Livre II · Ce qui fait fonctionner l'Asie",draw:s=>s(`<g class="f-in">${[['Terre',180,'#6fd49f'],['Industrie',260,'#f1cf7a'],['Finance',140,'#cfe3d8']].map(([l,h,c],i)=>`<rect class="grow" style="animation-delay:${i*.3}s" x="${200+i*200}" y="${330-h}" width="120" height="${h}" fill="${c}"/><text x="${260+i*200}" y="365" text-anchor="middle" font-size="20" fill="#f6f1e3">${l}</text>`).join('')}<path d="M200,120 L740,80" stroke="#f1cf7a" stroke-width="4" class="flow" fill="none"/><text x="470" y="70" text-anchor="middle" font-size="16" fill="#cfe3d8">exporter : le seul juge incorruptible</text></g>`)},
+ {cap:"La valeur n'est pas dans la chose ; elle est dans celui qui en a besoin. Une rente se partage ; une économie se construit.",ref:"Livre III · Les principes de l'économie",draw:s=>s(`<g class="f-in"><circle cx="300" cy="210" r="110" fill="none" stroke="#f1cf7a" stroke-width="6" stroke-dasharray="8 6"/><text x="300" y="200" text-anchor="middle" font-size="18" fill="#f6f1e3">le gâteau</text><text x="300" y="228" text-anchor="middle" font-size="16" fill="#cfe3d8">que des clans se partagent</text><text x="450" y="218" text-anchor="middle" font-size="40" fill="#f1cf7a">→</text>${[0,1,2,3,4,5].map(i=>`<circle cx="${560+(i%3)*70}" cy="${160+Math.floor(i/3)*80}" r="22" fill="#6fd49f" class="pulse" style="animation-delay:${i*.2}s"/>`).join('')}<text x="630" y="300" text-anchor="middle" font-size="16" fill="#cfe3d8">des individus qui échangent</text></g>`)},
+ {cap:"Un pays n'appartient à personne. Il se gère au nom de tous. Le mérite, pas l'affinité.",ref:"Livre III · Chapitres 36 à 38",draw:s=>s(`<g class="f-in"><line x1="450" y1="70" x2="450" y2="230" stroke="#f1cf7a" stroke-width="8"/><line x1="300" y1="110" x2="600" y2="110" stroke="#f1cf7a" stroke-width="8"/><path d="M250,180 L350,180 L300,110 Z" fill="none" stroke="#f1cf7a" stroke-width="6"/><path d="M550,180 L650,180 L600,110 Z" fill="none" stroke="#f1cf7a" stroke-width="6"/>${[0,1,2,3,4,5,6].map(i=>`<g class="f-in" style="animation-delay:${i*.1}s"><circle cx="${240+i*70}" cy="290" r="12" fill="#f1cf7a"/><rect x="${228+i*70}" y="306" width="24" height="40" rx="5" fill="#f1cf7a"/></g>`).join('')}</g>`)},
+ {cap:"Trois réformes dures. Une décennie. Et un démonstrateur prêt à être présenté demain matin.",ref:"La Monnaie, la Terre et le Mérite — Lettre aux décideurs",draw:s=>s(`<g class="f-in"><text x="450" y="150" text-anchor="middle" font-size="44" font-weight="bold" fill="#f6f1e3">La Monnaie, la Terre</text><text x="450" y="210" text-anchor="middle" font-size="44" font-weight="bold" fill="#f6f1e3">et le Mérite</text><rect x="370" y="235" width="160" height="4" fill="#f1cf7a"/><text x="450" y="290" text-anchor="middle" font-size="20" fill="#cfe3d8">Le cash ne cause pas la pauvreté ; il la rend invisible, lente et coûteuse.</text></g>`)}
+];
+let fi=0,ft=null,fpaused=false;const DUR=18000;
+function fshow(i){fi=(i+F.length)%F.length;const fr=F[fi];$('#f-svg').innerHTML='';fr.draw(h=>$('#f-svg').innerHTML=h);$('#f-cap').textContent=fr.cap;$('#f-ref').textContent=fr.ref;
+  const bar=$('#f-prog');bar.style.transition='none';bar.style.width='0';requestAnimationFrame(()=>{bar.style.transition=`width ${DUR}ms linear`;bar.style.width='100%'});
+  clearTimeout(ft);if(!fpaused)ft=setTimeout(()=>fshow(fi+1),DUR)}
+function fopen(){$('#film').dataset.on='1';fpaused=false;$('#f-pause').textContent='Pause';fshow(0)}
+function fclose(){$('#film').dataset.on='0';clearTimeout(ft)}
+$('#f-close').onclick=fclose;$('#f-next').onclick=()=>fshow(fi+1);$('#f-prev').onclick=()=>fshow(fi-1);
+$('#f-pause').onclick=()=>{fpaused=!fpaused;$('#f-pause').textContent=fpaused?'Reprendre':'Pause';if(fpaused){clearTimeout(ft);$('#f-prog').style.transition='none'}else fshow(fi)};
+document.addEventListener('keydown',e=>{if($('#film').dataset.on!=='1')return;if(e.key==='Escape')fclose();if(e.key==='ArrowRight')fshow(fi+1);if(e.key==='ArrowLeft')fshow(fi-1)});
+scen.film=()=>{fopen()};
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','true');scen[b.dataset.s]();});
+scen.citizen();render();
+if(location.hash==='#film'){document.querySelector('button[data-s=film]').setAttribute('aria-current','true');fopen()}
+
+/* ten-year chart */
+function chart(){const start=+$('#c-start').value;$('#c-start-v').textContent=start+' %';const sp=$('#c-speed').value;
+  const k={slow:.22,base:.38,fast:.55}[sp];const pts=[];for(let y=0;y<=10;y++){const v=start+(92-start)*(1-Math.exp(-k*y));pts.push(Math.min(92,v))}
+  const W=640,H=220,L=48,R=16,T=16,B=32;const x=i=>L+i*(W-L-R)/10,yy=v=>T+(100-v)*(H-T-B)/100;
+  let s=`<line x1="${L}" y1="${yy(0)}" x2="${W-R}" y2="${yy(0)}" stroke="var(--line)"/>`;
+  [0,25,50,75,100].forEach(g=>{s+=`<line x1="${L}" y1="${yy(g)}" x2="${W-R}" y2="${yy(g)}" stroke="var(--line)" stroke-dasharray="2 4"/><text x="${L-8}" y="${yy(g)+4}" text-anchor="end">${g} %</text>`});
+  for(let i=0;i<=10;i++)s+=`<text x="${x(i)}" y="${H-10}" text-anchor="middle">an ${i}</text>`;
+  const d=pts.map((v,i)=>`${i?'L':'M'}${x(i)},${yy(v)}`).join(' ');
+  s+=`<path d="${d} L${x(10)},${yy(0)} L${x(0)},${yy(0)} Z" fill="var(--accent)" opacity=".12"/><path d="${d}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`;
+  pts.forEach((v,i)=>{if(i%5===0||i===10)s+=`<circle cx="${x(i)}" cy="${yy(v)}" r="4" fill="var(--accent)"/><text x="${x(i)}" y="${yy(v)-10}" text-anchor="middle" style="fill:var(--fg)">${Math.round(v)} %</text>`});
+  $('#chart').innerHTML=s;
+  // illustrative impacts: assume cash handling cost 1.5% of cash volume on a base of 10 000 Mds XAF/yr informal+formal payments; traced revenue gain 0.4% of GDP per 10 points digital
+  const gain=pts[10]-start;const cashSaved=gain/100*10000*0.015;const revenue=gain/10*0.4;
+  $('#cmp').innerHTML=`<div>Part numérique à l'an 10<b>${Math.round(pts[10])} %</b></div><div>Coût d'espèces évité par an (illustration, base 10 000 Mds XAF de paiements, 1,5 %)<b>≈ ${fmt(cashSaved)} Mds XAF</b></div><div>Recettes supplémentaires tracées (illustration, +0,4 pt de PIB par 10 pts)<b>≈ +${revenue.toFixed(1)} pt de PIB</b></div>`;
+}
+$('#c-start').oninput=chart;$('#c-speed').onchange=chart;chart();
+})();
+</script>
+
+<p class="foot"><a href="/lire/la-monnaie-la-terre-et-le-merite" style="color:var(--accent)">Lire le livre en ligne, gratuitement</a> · <a href="/books" style="color:var(--accent)">Tous les livres</a></p>
+<script src="/assets/track.js?v=5c2fd3e6" defer></script>
+</body>
+</html>

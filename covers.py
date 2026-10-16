@@ -190,7 +190,55 @@ def camera():
     o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
     return "".join(o)
 
-COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera}
+
+# ---------------------------------------------------------------------------
+# La Monnaie, la Terre et le Mérite: three gold emblems on deep green, one per book.
+def monnaie():
+    u = _uid()
+    BG, BG2, G, GL, PA, MUTE = "#06241A", "#0B3D2E", "#B8862B", "#F1CF7A", "#F6F1E3", "#CFE3D8"
+    o = []
+    o.append(f'<defs>{_grain("g" + u)}<linearGradient id="b{u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient>'
+             f'<linearGradient id="au{u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{GL}"/><stop offset="1" stop-color="{G}"/></linearGradient>'
+             f'<pattern id="q{u}" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="4.5" height="4.5" fill="{GL}" fill-opacity=".9"/><rect x="6" y="1.5" width="3" height="3" fill="{GL}" fill-opacity=".5"/><rect x="1.5" y="6.5" width="3" height="3" fill="{GL}" fill-opacity=".6"/><rect x="6.5" y="6.5" width="3.5" height="3.5" fill="{GL}" fill-opacity=".35"/></pattern>'
+             f'<clipPath id="c1{u}"><circle cx="120" cy="486" r="60"/></clipPath><clipPath id="c2{u}"><circle cx="300" cy="486" r="60"/></clipPath><clipPath id="c3{u}"><circle cx="480" cy="486" r="60"/></clipPath></defs>')
+    o.append(f'<rect width="600" height="900" fill="url(#b{u})"/>')
+    o.append(f'<rect x="26" y="26" width="548" height="848" fill="none" stroke="{GL}" stroke-opacity=".35" stroke-width="1.2"/>')
+    o.append(f'<text x="300" y="88" text-anchor="middle" font-family="{SANS}" font-size="9.5" letter-spacing="3.6" fill="{MUTE}">UN MANIFESTE POUR LES DÉCIDEURS CAMEROUNAIS</text>')
+    o.append(f'<text x="300" y="175" text-anchor="middle" font-family="{SERIF}" font-size="50" font-weight="600" letter-spacing="-.5" fill="{PA}">La Monnaie,</text>')
+    o.append(f'<text x="300" y="232" text-anchor="middle" font-family="{SERIF}" font-size="50" font-weight="600" letter-spacing="-.5" fill="{PA}">la Terre</text>')
+    o.append(f'<text x="300" y="289" text-anchor="middle" font-family="{SERIF}" font-size="50" font-weight="600" letter-spacing="-.5" fill="{PA}">et le Mérite</text>')
+    o.append(f'<rect x="240" y="310" width="120" height="2.5" fill="url(#au{u})"/>')
+    o.append(f'<text x="300" y="344" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="16.5" fill="#E7D9AD">Trois réformes dures pour un Cameroun qui se construit</text>')
+    # 1. money: a coin whose right half becomes a QR code
+    o.append(f'<circle cx="120" cy="486" r="64" fill="none" stroke="{GL}" stroke-width="3.5"/>')
+    o.append(f'<g clip-path="url(#c1{u})"><rect x="60" y="426" width="60" height="120" fill="{GL}" fill-opacity=".12"/><text x="90" y="502" text-anchor="middle" font-family="{SERIF}" font-size="46" font-weight="700" fill="{GL}">F</text><rect x="120" y="426" width="60" height="120" fill="url(#q{u})"/></g>')
+    o.append(f'<line x1="120" y1="422" x2="120" y2="550" stroke="{BG}" stroke-width="3.5"/>')
+    # 2. land: furrows under a small factory and an export arrow
+    o.append(f'<circle cx="300" cy="486" r="64" fill="none" stroke="{GL}" stroke-width="3.5"/>')
+    o.append(f'<g clip-path="url(#c2{u})"><rect x="240" y="494" width="120" height="52" fill="{GL}" fill-opacity=".12"/>'
+             f'<path d="M240,508 Q270,497 300,508 T360,508" fill="none" stroke="{GL}" stroke-width="3"/><path d="M240,523 Q270,512 300,523 T360,523" fill="none" stroke="{GL}" stroke-width="3"/><path d="M240,538 Q270,527 300,538 T360,538" fill="none" stroke="{GL}" stroke-width="3"/>'
+             f'<rect x="259" y="460" width="22" height="34" fill="{GL}"/><rect x="285" y="445" width="22" height="49" fill="{GL}"/><rect x="311" y="471" width="22" height="23" fill="{GL}"/><path d="M263,460 L274,445 L285,460" fill="{GL}"/>'
+             f'<path d="M337,478 L359,456 M359,456 L345,456 M359,456 L359,470" fill="none" stroke="{GL}" stroke-width="3.5" stroke-linecap="round"/></g>')
+    # 3. merit: a balanced scale over equal figures
+    o.append(f'<circle cx="480" cy="486" r="64" fill="none" stroke="{GL}" stroke-width="3.5"/>')
+    o.append(f'<g clip-path="url(#c3{u})"><line x1="480" y1="440" x2="480" y2="498" stroke="{GL}" stroke-width="3.5"/><line x1="440" y1="454" x2="520" y2="454" stroke="{GL}" stroke-width="3.5"/>'
+             f'<path d="M428,480 L452,480 L440,454 Z" fill="none" stroke="{GL}" stroke-width="3"/><path d="M508,480 L532,480 L520,454 Z" fill="none" stroke="{GL}" stroke-width="3"/><line x1="458" y1="498" x2="502" y2="498" stroke="{GL}" stroke-width="3.5"/>')
+    for i in range(5):
+        x = 440 + i * 20
+        o.append(f'<circle cx="{x}" cy="514" r="5" fill="{GL}"/><rect x="{x - 5}" y="521" width="10" height="18" rx="2.5" fill="{GL}"/>')
+    o.append('</g>')
+    for x, a, b in ((120, "LA MONNAIE", "le même franc, un autre support"), (300, "LA TERRE", "cultiver, fabriquer, exporter"), (480, "LE MÉRITE", "un pays n'appartient à personne")):
+        o.append(f'<text x="{x}" y="582" text-anchor="middle" font-family="{SERIF}" font-size="15.5" fill="{PA}">{a}</text><text x="{x}" y="601" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="10" fill="{MUTE}">{b}</text>')
+    o.append(f'<text x="300" y="668" text-anchor="middle" font-family="{SERIF}" font-size="12.5" fill="#E7D9AD">LIVRE I · Le Cameroun sans espèces</text>')
+    o.append(f'<text x="300" y="690" text-anchor="middle" font-family="{SERIF}" font-size="12.5" fill="#E7D9AD">LIVRE II · Ce qui fait fonctionner l’Asie</text>')
+    o.append(f'<text x="300" y="712" text-anchor="middle" font-family="{SERIF}" font-size="12.5" fill="#E7D9AD">LIVRE III · Un pays n’appartient à personne</text>')
+    o.append(f'<path d="M 110 752 H 490" stroke="{GL}" stroke-opacity=".5" stroke-width="1"/>')
+    o.append(f'<text font-family="{SERIF}" font-style="italic" font-size="14.5" fill="{PA}" text-anchor="middle"><tspan x="300" y="784">« Le cash ne cause pas la pauvreté ;</tspan><tspan x="300" y="806">il la rend invisible, lente et coûteuse. »</tspan></text>')
+    o.append(f'<text x="300" y="856" text-anchor="middle" font-family="{SANS}" font-size="8.5" letter-spacing="3" fill="{MUTE}">AVEC LE DÉMONSTRATEUR INTERACTIF e-XAF</text>')
+    o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
+    return "".join(o)
+
+COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie}
 
 def cover_svg(seed):
     fn = COVERS.get(seed)

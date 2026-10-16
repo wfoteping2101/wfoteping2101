@@ -89,6 +89,10 @@ BOOK_META = {
         "desc_en": "Why Cameroon's economy stalls: work and savings cannot become capital when land titles, rules and institutions fail. A few people title and stockpile land to speculate; most families own something they cannot use as collateral. An essay on what must change, and on what the diaspora can do.",
         "desc_fr": "Pourquoi l'économie camerounaise piétine : le travail et l'épargne ne deviennent pas du capital quand les titres fonciers, les règles et les institutions font défaut. Quelques-uns titrent et accumulent les terrains pour spéculer ; la plupart des familles possèdent un bien qu'elles ne peuvent pas mettre en garantie. Un essai sur ce qui doit changer, et sur ce que la diaspora peut faire.",
         "music": "clair", "buy": []},
+    "la-monnaie-la-terre-et-le-merite": {"title": "La Monnaie, la Terre et le Mérite", "subtitle": "Trois réformes dures pour un Cameroun qui se construit", "year": "2026", "color": "#06241A", "ink": "#F1CF7A", "seed": "monnaie-terre-merite",
+        "desc_en": "A manifesto for Cameroonian decision makers in three books: the money (move the franc CFA from cash to digital, without changing the currency), the land (agriculture, industry under export discipline, finance in their service, as East Asia did) and merit (the value is subjective, a country belongs to no one, tribalism and nepotism are bad economics). Forty-two chapters, a letter to decision makers and the e-XAF interactive demonstrator.",
+        "desc_fr": "Un manifeste pour les décideurs camerounais en trois livres : la monnaie (faire passer le franc CFA des espèces au numérique, sans changer de monnaie), la terre (agriculture, industrie sous discipline d'exportation, finance à leur service, comme l'Asie de l'Est) et le mérite (la valeur est subjective, un pays n'appartient à personne, le tribalisme et le népotisme sont de mauvaises théories économiques). Quarante-deux chapitres, une lettre aux décideurs et le démonstrateur interactif e-XAF.",
+        "music": "clair", "buy": [("e-XAF demonstrator", "Démonstrateur e-XAF", "/demo/e-xaf")]},
     "le-contrat-du-peuple": {"title": "Le Contrat du Peuple", "subtitle": "Droit social, justice et responsabilité citoyenne pour bâtir une nation libre", "year": "2026", "color": "#1C3FBF", "ink": "#F6F2EA", "seed": "contrat-du-peuple",
         "desc_en": "Essay on the social contract in Cameroon: rights, justice and the responsibilities of citizens. Preface, 20 chapters and an epilogue.",
         "desc_fr": "Essai sur le contrat social au Cameroun : droits, justice et responsabilités du citoyen. Préface, 20 chapitres et un épilogue.",
@@ -98,7 +102,7 @@ BOOK_META = {
         "desc_fr": "Premier tome d'une saga prévue en 20 volumes. Fote grandit au village de La'a, entre dans une confrérie et traverse une guerre.",
         "music": "braise", "buy": [("Kindle on Amazon", "Kindle sur Amazon", "https://www.amazon.com/dp/B0CZ8NCM9Z"), ("Paperback on Amazon", "Broché sur Amazon", "https://www.amazon.com/dp/B0D3F4TB9Y")]},
 }
-ORDER = ["camera-au-poing", "la-richesse-silencieuse", "le-capital-entrave", "bobine-la-methode", "le-contrat-du-peuple", "laa"]
+ORDER = ["camera-au-poing", "la-richesse-silencieuse", "le-capital-entrave", "la-monnaie-la-terre-et-le-merite", "bobine-la-methode", "le-contrat-du-peuple", "laa"]
 
 # The public site only knows each book's table of contents (books/toc/<slug>.json). The text itself lives in the
 # protected backend and is fetched one chapter at a time while reading.
