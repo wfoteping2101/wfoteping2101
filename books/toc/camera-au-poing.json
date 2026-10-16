@@ -1,0 +1,275 @@
+{
+"slug": "camera-au-poing",
+"sections": [
+{
+"idx": 0,
+"cid": "preface",
+"label": "Préface",
+"title": "Préface",
+"kind": "front",
+"part": "",
+"words": 524
+},
+{
+"idx": 1,
+"cid": "introduction",
+"label": "Introduction",
+"title": "Le cinéma tient dans votre poche",
+"kind": "introduction",
+"part": "",
+"words": 761
+},
+{
+"idx": 2,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Pourquoi vloguer maintenant",
+"kind": "chapter",
+"part": "Partie I : Vloguer",
+"words": 1539
+},
+{
+"idx": 3,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Trouver votre angle",
+"kind": "chapter",
+"part": "",
+"words": 1458
+},
+{
+"idx": 4,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Le rendez-vous",
+"kind": "chapter",
+"part": "",
+"words": 1346
+},
+{
+"idx": 5,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "Parler à la caméra",
+"kind": "chapter",
+"part": "",
+"words": 1560
+},
+{
+"idx": 6,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "Raconter une journée",
+"kind": "chapter",
+"part": "",
+"words": 1625
+},
+{
+"idx": 7,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "Construire une communauté",
+"kind": "chapter",
+"part": "",
+"words": 1373
+},
+{
+"idx": 8,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "Vivre de ses vidéos",
+"kind": "chapter",
+"part": "",
+"words": 1472
+},
+{
+"idx": 9,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Voir comme un réalisateur",
+"kind": "chapter",
+"part": "Partie II : L’école de cinéma de poche",
+"words": 1617
+},
+{
+"idx": 10,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "La lumière",
+"kind": "chapter",
+"part": "",
+"words": 1559
+},
+{
+"idx": 11,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Le son",
+"kind": "chapter",
+"part": "",
+"words": 1541
+},
+{
+"idx": 12,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "La caméra qui bouge",
+"kind": "chapter",
+"part": "",
+"words": 1636
+},
+{
+"idx": 13,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "Filmer une scène",
+"kind": "chapter",
+"part": "",
+"words": 1996
+},
+{
+"idx": 14,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Écrire et préparer",
+"kind": "chapter",
+"part": "",
+"words": 1579
+},
+{
+"idx": 15,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "Produire : l’équipe et le plateau",
+"kind": "chapter",
+"part": "",
+"words": 1560
+},
+{
+"idx": 16,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "Diriger des personnes",
+"kind": "chapter",
+"part": "",
+"words": 1460
+},
+{
+"idx": 17,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Le documentaire",
+"kind": "chapter",
+"part": "",
+"words": 1822
+},
+{
+"idx": 18,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "Faire rire : le sketch",
+"kind": "chapter",
+"part": "",
+"words": 1488
+},
+{
+"idx": 19,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "Le clip musical",
+"kind": "chapter",
+"part": "",
+"words": 1484
+},
+{
+"idx": 20,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "La grammaire du montage",
+"kind": "chapter",
+"part": "Partie III : Monter avec Bobine",
+"words": 1605
+},
+{
+"idx": 21,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Monter avec Bobine, pas à pas",
+"kind": "chapter",
+"part": "",
+"words": 1738
+},
+{
+"idx": 22,
+"cid": "chapitre-21",
+"label": "Chapitre 21",
+"title": "Apprendre des meilleurs : les styles",
+"kind": "chapter",
+"part": "",
+"words": 1426
+},
+{
+"idx": 23,
+"cid": "chapitre-22",
+"label": "Chapitre 22",
+"title": "Récits, shorts et vidéos sans visage",
+"kind": "chapter",
+"part": "",
+"words": 1475
+},
+{
+"idx": 24,
+"cid": "chapitre-23",
+"label": "Chapitre 23",
+"title": "Publier et apprendre",
+"kind": "chapter",
+"part": "",
+"words": 1081
+},
+{
+"idx": 25,
+"cid": "conclusion",
+"label": "Conclusion",
+"title": "Caméra au poing",
+"kind": "conclusion",
+"part": "",
+"words": 341
+},
+{
+"idx": 26,
+"cid": "annexe-a",
+"label": "Annexe A",
+"title": "Listes de contrôle",
+"kind": "annex",
+"part": "",
+"words": 335
+},
+{
+"idx": 27,
+"cid": "annexe-b",
+"label": "Annexe B",
+"title": "Petit lexique du cinéma et du vlog",
+"kind": "annex",
+"part": "",
+"words": 441
+},
+{
+"idx": 28,
+"cid": "annexe-c",
+"label": "Annexe C",
+"title": "Trente jours pour commencer",
+"kind": "annex",
+"part": "",
+"words": 318
+},
+{
+"idx": 29,
+"cid": "annexe-d",
+"label": "Annexe D",
+"title": "Pour aller plus loin",
+"kind": "annex",
+"part": "",
+"words": 194
+}
+]
+}

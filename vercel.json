@@ -81,6 +81,46 @@
       "source": "/work/:slug",
       "destination": "/portfolio/:slug",
       "permanent": true
+    },
+    {
+      "source": "/journal/crac-contre-le-regime-du-prestige",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/fait-par-des-moyens-mecaniques",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/voir-plus-grand",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/the-night-the-first-ticket-came-in",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/fifteen-formats",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/a-book-instead-of-a-quote",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/two-languages-one-desk",
+      "destination": "/journal",
+      "permanent": false
+    },
+    {
+      "source": "/journal/chalk-and-glass",
+      "destination": "/journal",
+      "permanent": false
     }
   ]
 }

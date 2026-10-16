@@ -73,6 +73,10 @@ def clean_html(h):
     return h
 
 BOOK_META = {
+    "camera-au-poing": {"title": "Caméra au poing", "subtitle": "Vloguer et filmer comme un pro, avec un téléphone et Bobine", "year": "2026", "color": "#0B0B0D", "ink": "#D4AD6A", "seed": "camera-au-poing",
+        "desc_en": "A practical school of vlogging and filmmaking for creators who shoot on a phone: voice and rhythm, telling a day, light, sound, camera movement, scenes, production, documentary, sketch and music video, then editing with Bobine and learning from every post.",
+        "desc_fr": "Une école pratique du vlog et du cinéma pour les créateurs qui filment au téléphone : la voix et le rythme, raconter une journée, la lumière, le son, le mouvement, la scène, la production, le documentaire, le sketch et le clip, puis le montage avec Bobine et l'apprentissage de chaque publication.",
+        "music": "clair", "buy": [("On Bobine", "Sur Bobine", "https://bobine-tau.vercel.app/livre#camera")]},
     "bobine-la-methode": {"title": "Bobine, la méthode", "subtitle": "Planifier, filmer, monter et vendre avec l'IA", "year": "2026", "color": "#16130F", "ink": "#E9B44C", "seed": "bobine-la-methode",
         "desc_en": "A complete method for creators: an idea bank, one shooting day for a month of content, editing with an AI editor, publishing and selling.",
         "desc_fr": "Une méthode complète pour les créateurs : une banque d'idées, une journée de tournage pour un mois de contenu, le montage avec un monteur IA, la publication et la vente.",
@@ -94,7 +98,7 @@ BOOK_META = {
         "desc_fr": "Premier tome d'une saga prévue en 20 volumes. Fote grandit au village de La'a, entre dans une confrérie et traverse une guerre.",
         "music": "braise", "buy": [("Kindle on Amazon", "Kindle sur Amazon", "https://www.amazon.com/dp/B0CZ8NCM9Z"), ("Paperback on Amazon", "Broché sur Amazon", "https://www.amazon.com/dp/B0D3F4TB9Y")]},
 }
-ORDER = ["la-richesse-silencieuse", "le-capital-entrave", "bobine-la-methode", "le-contrat-du-peuple", "laa"]
+ORDER = ["camera-au-poing", "la-richesse-silencieuse", "le-capital-entrave", "bobine-la-methode", "le-contrat-du-peuple", "laa"]
 
 # The public site only knows each book's table of contents (books/toc/<slug>.json). The text itself lives in the
 # protected backend and is fetched one chapter at a time while reading.

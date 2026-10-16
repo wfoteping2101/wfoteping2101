@@ -18,13 +18,17 @@ SITE = {
 
 CDN = "https://d2ol7oe51mr4n9.cloudfront.net/user_38X5q6AW6UAWxSufMc8KKw4LN7Q/"
 
-from platforms import PROJECTS  # the 11 platforms, written in platforms.py
+from platforms import PROJECTS  # the 12 platforms, written in platforms.py
 
 ALBUM = {"slug": "wfoss", "title": "Chant et poésie de La'a", "artist": "Wfoss", "kind": "Album", "year": "2026", "color": "#0E1B4D", "ink": "#F2E6C9",
     "line": "Synth album composed for film and video, released under the name Wfoss.",
     "where": [("Listen on Spotify", "https://open.spotify.com/search/Wfoss%20Chant%20et%20po%C3%A9sie%20de%20La%27a")]}
 
 BOOKS = [
+    {"slug": "camera-au-poing", "title": "Caméra au poing", "lang": "Français", "kind": "Vlog, film, editing", "year": "2026", "pages": "Preface, introduction, 23 chapters, 4 appendices",
+     "color": "#0B0B0D", "ink": "#D4AD6A", "free": "camera-au-poing",
+     "line": "Vlogging and filmmaking with a phone: finding a voice, telling a day, light, sound, scenes, documentary, sketch and music video, then editing with Bobine and learning from every post.",
+     "where": [("Read online, free", "/lire/camera-au-poing"), ("On Bobine", "https://bobine-tau.vercel.app/livre#camera")]},
     {"slug": "richesse-silencieuse", "title": "La Richesse Silencieuse", "lang": "Français", "kind": "Investing guide", "year": "2026", "pages": "Introduction, 28 chapters, conclusion, appendices",
      "color": "#0C2A20", "ink": "#E6CB8E", "free": "la-richesse-silencieuse",
      "line": "Investing guide for salaried members of the African diaspora. It names the pressure to build back home, shows why many of those emotional investments never pay back, and gives a simple method: save, buy index funds, protect the family, and help relatives within a set limit.",

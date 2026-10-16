@@ -1,4 +1,4 @@
-# Hand-drawn vector covers for two books. Pure SVG, drawn in code: no generated images.
+# Hand-drawn vector covers for three books. Pure SVG, drawn in code: no generated images.
 # cover_svg(seed) returns an <svg class="cover-art cover-custom"> for the seeds below, or None.
 import random
 
@@ -149,7 +149,48 @@ def capital():
     o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
     return "".join(o)
 
-COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital}
+# ---------------------------------------------------------------------------
+# Caméra au poing: a phone viewfinder, mid-recording, with the focus box on a third.
+def camera():
+    u = _uid()
+    PA, AM, RED = "#ECE5D8", "#D4AD6A", "#E5484D"
+    X0, Y0, X1, Y1 = 42, 42, 558, 858
+    o = []
+    o.append(f'<defs>{_grain("g" + u, ".09")}'
+             f'<linearGradient id="b{u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#121215"/><stop offset=".6" stop-color="#0B0B0D"/><stop offset="1" stop-color="#08080A"/></linearGradient>'
+             f'<radialGradient id="a{u}" cx="444" cy="198" r="360" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="{AM}" stop-opacity=".34"/><stop offset=".7" stop-color="{AM}" stop-opacity="0"/></radialGradient>'
+             f'<radialGradient id="r{u}" cx="72" cy="828" r="400" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8B3A2A" stop-opacity=".42"/><stop offset=".72" stop-color="#8B3A2A" stop-opacity="0"/></radialGradient>'
+             f'<filter id="f{u}" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="5"/></filter></defs>')
+    o.append(f'<rect width="600" height="900" fill="url(#b{u})"/><rect width="600" height="900" fill="url(#a{u})"/><rect width="600" height="900" fill="url(#r{u})"/>')
+    # rule of thirds inside the frame
+    w, h = X1 - X0, Y1 - Y0
+    for k in (1, 2):
+        x, y = X0 + w * k / 3, Y0 + h * k / 3
+        o.append(f'<path d="M {x:.1f} {Y0} V {Y1} M {X0} {y:.1f} H {X1}" stroke="{PA}" stroke-opacity=".11" stroke-width="1"/>')
+    # frame corners
+    L, sw = 54, 2.6
+    for cx, cy, dx, dy in ((X0, Y0, 1, 1), (X1, Y0, -1, 1), (X0, Y1, 1, -1), (X1, Y1, -1, -1)):
+        o.append(f'<path d="M {cx} {cy + dy * L} V {cy} H {cx + dx * L}" fill="none" stroke="{PA}" stroke-opacity=".88" stroke-width="{sw}"/>')
+    # HUD: REC, resolution, timecode
+    hud = f'font-family="{SANS}" font-size="13.5" letter-spacing="2.4" fill="{PA}" fill-opacity=".82"'
+    o.append(f'<circle cx="75" cy="80" r="11" fill="{RED}" fill-opacity=".55" filter="url(#f{u})"/><circle cx="75" cy="80" r="6.6" fill="{RED}"/>')
+    o.append(f'<text x="91" y="85" {hud}>REC</text><text x="532" y="85" text-anchor="end" {hud}>4K</text>')
+    o.append(f'<text x="532" y="826" text-anchor="end" {hud} style="font-variant-numeric:tabular-nums">00:00:01:12</text>')
+    # focus box on the upper-right third
+    fx, fy, s, t = X0 + w * 2 / 3, Y0 + h / 3, 39, 19
+    for cx, cy, dx, dy in ((fx - s, fy - s, 1, 1), (fx + s, fy - s, -1, 1), (fx - s, fy + s, 1, -1), (fx + s, fy + s, -1, -1)):
+        o.append(f'<path d="M {cx:.1f} {cy + dy * t:.1f} V {cy:.1f} H {cx + dx * t:.1f}" fill="none" stroke="{AM}" stroke-width="2"/>')
+    o.append(f'<circle cx="{fx:.1f}" cy="{fy:.1f}" r="3.3" fill="{AM}"/>')
+    # type
+    o.append(f'<text x="75" y="436" font-family="{SANS}" font-size="13" letter-spacing="4.4" fill="{AM}">VLOG · CINÉMA · MONTAGE</text>')
+    o.append(f'<text x="72" y="540" font-family="{SERIF}" font-size="104" font-weight="500" letter-spacing="-1" fill="{PA}">Caméra</text>')
+    o.append(f'<text x="104" y="638" font-family="{SERIF}" font-style="italic" font-size="104" font-weight="400" letter-spacing="-1" fill="{AM}">au poing</text>')
+    o.append(f'<text font-family="{SERIF}" font-style="italic" font-size="23" fill="{PA}" fill-opacity=".82"><tspan x="75" y="700">Vloguer et filmer comme un pro,</tspan><tspan x="75" y="731">avec un téléphone et Bobine</tspan></text>')
+    o.append(f'<text x="75" y="826" font-family="{SANS}" font-size="12.5" letter-spacing="5.2" fill="{PA}" fill-opacity=".72">ÉDITIONS BOBINE</text>')
+    o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
+    return "".join(o)
+
+COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera}
 
 def cover_svg(seed):
     fn = COVERS.get(seed)

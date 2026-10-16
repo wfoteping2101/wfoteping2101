@@ -4,6 +4,9 @@
 from platforms import PROJECTS_FR as PROJECTS, GUIDES_FR as GUIDES
 
 BOOKS = {
+"camera-au-poing": {"pages": "Préface, introduction, 23 chapitres, 4 annexes", "kind": "Vlog, cinéma, montage",
+    "line": "Vloguer et filmer avec un téléphone : trouver sa voix, raconter une journée, la lumière, le son, la scène, le documentaire, le sketch et le clip, puis monter avec Bobine et apprendre de chaque publication.",
+    "where": [("Lire en ligne, gratuitement",), ("Sur Bobine",)]},
 "contrat-du-peuple": {"pages": "Préface, 20 chapitres, épilogue", "kind": "Essai civique",
     "line": "Essai sur le contrat social au Cameroun : droits, justice et responsabilités du citoyen.",
     "where": [("Lire en ligne, gratuitement",)]},
