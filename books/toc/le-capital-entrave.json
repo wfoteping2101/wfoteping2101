@@ -1,0 +1,509 @@
+{
+"slug": "le-capital-entrave",
+"sections": [
+{
+"idx": 0,
+"cid": "note-au-lecteur",
+"label": "Note au lecteur",
+"title": "Note au lecteur",
+"kind": "front",
+"part": "",
+"words": 77
+},
+{
+"idx": 1,
+"cid": "prologue",
+"label": "Prologue",
+"title": "Le portail et la rue",
+"kind": "front",
+"part": "",
+"words": 766
+},
+{
+"idx": 2,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Votre avenir sous autorisation",
+"kind": "chapter",
+"part": "Partie 1 : La promesse du capital",
+"words": 1077
+},
+{
+"idx": 3,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Une société capable de tenir ses promesses",
+"kind": "chapter",
+"part": "",
+"words": 846
+},
+{
+"idx": 4,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Le jour où l'argent entre ne dit pas ce qu'il reste",
+"kind": "chapter",
+"part": "",
+"words": 820
+},
+{
+"idx": 5,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "Posséder ne suffit pas à faire fructifier",
+"kind": "chapter",
+"part": "",
+"words": 897
+},
+{
+"idx": 6,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "Le papier qui permet de travailler avec un inconnu",
+"kind": "chapter",
+"part": "",
+"words": 966
+},
+{
+"idx": 7,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "Faire confiance sans fermer les yeux",
+"kind": "chapter",
+"part": "",
+"words": 699
+},
+{
+"idx": 8,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "L'histoire ne donne pas de raccourci",
+"kind": "chapter",
+"part": "",
+"words": 753
+},
+{
+"idx": 9,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Le terrain que vous pensez avoir acheté",
+"kind": "chapter",
+"part": "Partie 2 : Rendre les droits utilisables",
+"words": 916
+},
+{
+"idx": 10,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "Les personnes que le plan ne montre pas",
+"kind": "chapter",
+"part": "",
+"words": 805
+},
+{
+"idx": 11,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Être reconnu sans devoir connaître quelqu'un",
+"kind": "chapter",
+"part": "",
+"words": 684
+},
+{
+"idx": 12,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "Une réforme qui fonctionne dans la vie réelle",
+"kind": "chapter",
+"part": "",
+"words": 679
+},
+{
+"idx": 13,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "Ce qui appartient à plusieurs doit pouvoir être gouverné",
+"kind": "chapter",
+"part": "",
+"words": 668
+},
+{
+"idx": 14,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Un droit que l'on ne peut pas défendre reste fragile",
+"kind": "chapter",
+"part": "",
+"words": 680
+},
+{
+"idx": 15,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "La banque ne prête pas à un tampon",
+"kind": "chapter",
+"part": "",
+"words": 672
+},
+{
+"idx": 16,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "Quand l'obstacle devient une source de revenu",
+"kind": "chapter",
+"part": "Partie 3 : Sortir de la dépendance",
+"words": 720
+},
+{
+"idx": 17,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Ce que votre argent renforce malgré vous",
+"kind": "chapter",
+"part": "",
+"words": 701
+},
+{
+"idx": 18,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "Savoir attendre sans apprendre à subir",
+"kind": "chapter",
+"part": "",
+"words": 686
+},
+{
+"idx": 19,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "Apprendre là où l'on vit, préparer ce que l'on veut bâtir",
+"kind": "chapter",
+"part": "",
+"words": 699
+},
+{
+"idx": 20,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "Des règles assez fortes pour résister aux personnes séduisantes",
+"kind": "chapter",
+"part": "",
+"words": 645
+},
+{
+"idx": 21,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Retirer au pouvoir le droit de tout rendre personnel",
+"kind": "chapter",
+"part": "",
+"words": 725
+},
+{
+"idx": 22,
+"cid": "chapitre-21",
+"label": "Chapitre 21",
+"title": "La rue décide aussi de votre richesse",
+"kind": "chapter",
+"part": "Partie 4 : Construire une ville qui fonctionne",
+"words": 816
+},
+{
+"idx": 23,
+"cid": "chapitre-22",
+"label": "Chapitre 22",
+"title": "La distance se mesure aussi en occasions perdues",
+"kind": "chapter",
+"part": "",
+"words": 686
+},
+{
+"idx": 24,
+"cid": "chapitre-23",
+"label": "Chapitre 23",
+"title": "L'eau ne s'arrête pas à la limite de votre terrain",
+"kind": "chapter",
+"part": "",
+"words": 651
+},
+{
+"idx": 25,
+"cid": "chapitre-24",
+"label": "Chapitre 24",
+"title": "Une poubelle pleine est une question de pouvoir",
+"kind": "chapter",
+"part": "",
+"words": 680
+},
+{
+"idx": 26,
+"cid": "chapitre-25",
+"label": "Chapitre 25",
+"title": "Le capital qui attend le courant",
+"kind": "chapter",
+"part": "",
+"words": 639
+},
+{
+"idx": 27,
+"cid": "chapitre-26",
+"label": "Chapitre 26",
+"title": "La facture des services absents",
+"kind": "chapter",
+"part": "",
+"words": 798
+},
+{
+"idx": 28,
+"cid": "chapitre-27",
+"label": "Chapitre 27",
+"title": "Votre locataire doit gagner sa vie",
+"kind": "chapter",
+"part": "",
+"words": 787
+},
+{
+"idx": 29,
+"cid": "chapitre-28",
+"label": "Chapitre 28",
+"title": "Une ville doit aussi gagner sa vie",
+"kind": "chapter",
+"part": "",
+"words": 656
+},
+{
+"idx": 30,
+"cid": "chapitre-29",
+"label": "Chapitre 29",
+"title": "Le jardin, le marché et la liberté de rester dehors",
+"kind": "chapter",
+"part": "",
+"words": 689
+},
+{
+"idx": 31,
+"cid": "chapitre-30",
+"label": "Chapitre 30",
+"title": "La diaspora doit reprendre le contrôle de son argent",
+"kind": "chapter",
+"part": "Partie 5 : Devenir capables ensemble",
+"words": 1003
+},
+{
+"idx": 32,
+"cid": "chapitre-31",
+"label": "Chapitre 31",
+"title": "Se réunir ne suffit pas à devenir une force",
+"kind": "chapter",
+"part": "",
+"words": 713
+},
+{
+"idx": 33,
+"cid": "chapitre-32",
+"label": "Chapitre 32",
+"title": "Les chiffres qui empêchent le chef de devenir propriétaire de la vérité",
+"kind": "chapter",
+"part": "",
+"words": 640
+},
+{
+"idx": 34,
+"cid": "chapitre-33",
+"label": "Chapitre 33",
+"title": "Acheter un résultat plutôt qu'une promesse",
+"kind": "chapter",
+"part": "",
+"words": 607
+},
+{
+"idx": 35,
+"cid": "chapitre-34",
+"label": "Chapitre 34",
+"title": "Donner au projet un argent qui sait attendre",
+"kind": "chapter",
+"part": "",
+"words": 669
+},
+{
+"idx": 36,
+"cid": "chapitre-35",
+"label": "Chapitre 35",
+"title": "Le rendement que les photos ne montrent pas",
+"kind": "chapter",
+"part": "",
+"words": 682
+},
+{
+"idx": 37,
+"cid": "chapitre-36",
+"label": "Chapitre 36",
+"title": "Un écran ne rend pas une institution honnête",
+"kind": "chapter",
+"part": "",
+"words": 629
+},
+{
+"idx": 38,
+"cid": "chapitre-37",
+"label": "Chapitre 37",
+"title": "La force de prévoir ce qui peut mal tourner",
+"kind": "chapter",
+"part": "",
+"words": 646
+},
+{
+"idx": 39,
+"cid": "chapitre-38",
+"label": "Chapitre 38",
+"title": "Ce que vos enfants recevront vraiment",
+"kind": "chapter",
+"part": "Partie 6 : Transmettre davantage que des murs",
+"words": 705
+},
+{
+"idx": 40,
+"cid": "chapitre-39",
+"label": "Chapitre 39",
+"title": "Transmettre une organisation, pas une énigme",
+"kind": "chapter",
+"part": "",
+"words": 702
+},
+{
+"idx": 41,
+"cid": "chapitre-40",
+"label": "Chapitre 40",
+"title": "Vos enfants n'hériteront pas de vos raisons",
+"kind": "chapter",
+"part": "",
+"words": 647
+},
+{
+"idx": 42,
+"cid": "chapitre-41",
+"label": "Chapitre 41",
+"title": "Le capital ne travaille jamais tout seul",
+"kind": "chapter",
+"part": "",
+"words": 669
+},
+{
+"idx": 43,
+"cid": "chapitre-42",
+"label": "Chapitre 42",
+"title": "La vie que les comptes oublient",
+"kind": "chapter",
+"part": "",
+"words": 619
+},
+{
+"idx": 44,
+"cid": "chapitre-43",
+"label": "Chapitre 43",
+"title": "Ne pas transmettre la facture à ceux qui arrivent",
+"kind": "chapter",
+"part": "",
+"words": 651
+},
+{
+"idx": 45,
+"cid": "chapitre-44",
+"label": "Chapitre 44",
+"title": "Une ville pensée par ceux qui y vivent",
+"kind": "chapter",
+"part": "Partie 7 : Le pouvoir de faire durer",
+"words": 982
+},
+{
+"idx": 46,
+"cid": "chapitre-45",
+"label": "Chapitre 45",
+"title": "Faire entrer les habitants dans la décision",
+"kind": "chapter",
+"part": "",
+"words": 712
+},
+{
+"idx": 47,
+"cid": "chapitre-46",
+"label": "Chapitre 46",
+"title": "Le budget révèle ce que les discours cachent",
+"kind": "chapter",
+"part": "",
+"words": 679
+},
+{
+"idx": 48,
+"cid": "chapitre-47",
+"label": "Chapitre 47",
+"title": "Exiger sans se rendre dépendant d'un sauveur",
+"kind": "chapter",
+"part": "",
+"words": 703
+},
+{
+"idx": 49,
+"cid": "chapitre-48",
+"label": "Chapitre 48",
+"title": "Un programme de transformation sur cinq ans",
+"kind": "chapter",
+"part": "",
+"words": 1158
+},
+{
+"idx": 50,
+"cid": "chapitre-49",
+"label": "Chapitre 49",
+"title": "Une année pour devenir plus capables ensemble",
+"kind": "chapter",
+"part": "",
+"words": 736
+},
+{
+"idx": 51,
+"cid": "chapitre-50",
+"label": "Chapitre 50",
+"title": "Le jour où le portail pourra rester ouvert",
+"kind": "chapter",
+"part": "",
+"words": 877
+},
+{
+"idx": 52,
+"cid": "carnet-de-decision",
+"label": "Carnet de décision",
+"title": "Carnet de décision",
+"kind": "back",
+"part": "",
+"words": 961
+},
+{
+"idx": 53,
+"cid": "les-mots-pour-decider-sans-se-laisser-impressionner",
+"label": "Les mots pour décider sans se laisser impressionner",
+"title": "Les mots pour décider sans se laisser impressionner",
+"kind": "back",
+"part": "",
+"words": 754
+},
+{
+"idx": 54,
+"cid": "les-objections-que-le-livre-doit-affronter",
+"label": "Les objections que le livre doit affronter",
+"title": "Les objections que le livre doit affronter",
+"kind": "back",
+"part": "",
+"words": 1333
+},
+{
+"idx": 55,
+"cid": "sources-et-methode",
+"label": "Sources et méthode",
+"title": "Sources et méthode",
+"kind": "back",
+"part": "",
+"words": 1391
+}
+]
+}

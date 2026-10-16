@@ -25,6 +25,14 @@ ALBUM = {"slug": "wfoss", "title": "Chant et poésie de La'a", "artist": "Wfoss"
     "where": [("Listen on Spotify", "https://open.spotify.com/search/Wfoss%20Chant%20et%20po%C3%A9sie%20de%20La%27a")]}
 
 BOOKS = [
+    {"slug": "richesse-silencieuse", "title": "La Richesse Silencieuse", "lang": "Français", "kind": "Investing guide", "year": "2026", "pages": "Introduction, 28 chapters, conclusion, appendices",
+     "color": "#0C2A20", "ink": "#E6CB8E", "free": "la-richesse-silencieuse",
+     "line": "Investing guide for salaried members of the African diaspora. It names the pressure to build back home, shows why many of those emotional investments never pay back, and gives a simple method: save, buy index funds, protect the family, and help relatives within a set limit.",
+     "where": [("Read online, free", "/lire/la-richesse-silencieuse")]},
+    {"slug": "capital-entrave", "title": "Le capital entravé", "lang": "Français", "kind": "Essay, economy", "year": "2026", "pages": "Prologue, 50 chapters in 7 parts, decision notebook, sources",
+     "color": "#EDE3CF", "ink": "#A8432A", "free": "le-capital-entrave",
+     "line": "Why Cameroon's economy stalls: work and savings cannot become capital when land titles, rules and institutions fail. A few people title and stockpile land to speculate; most families own something they cannot use as collateral.",
+     "where": [("Read online, free", "/lire/le-capital-entrave")]},
     {"slug": "contrat-du-peuple", "title": "Le Contrat du Peuple", "lang": "Français", "kind": "Civic essay", "year": "2026", "pages": "Preface, 20 chapters, epilogue",
      "color": "#1C3FBF", "ink": "#F6F2EA", "free": "le-contrat-du-peuple",
      "line": "Essay on the social contract in Cameroon: rights, justice and the responsibilities of citizens.",
@@ -33,10 +41,6 @@ BOOKS = [
      "color": "#5A1F1F", "ink": "#F6F2EA", "free": "laa",
      "line": "Book one of a planned 20-volume saga. Fote grows up in the village of La'a, joins a brotherhood and lives through a war.",
      "where": [("Read online, free", "/lire/laa"), ("Kindle", "https://www.amazon.com/dp/B0CZ8NCM9Z"), ("Paperback", "https://www.amazon.com/dp/B0D3F4TB9Y")]},
-    {"slug": "richesse-silencieuse", "title": "La Richesse Silencieuse", "lang": "Français", "kind": "Investing guide", "year": "In progress", "pages": "",
-     "color": "#0E3B2E", "ink": "#F2E6C9", "free": "",
-     "line": "Investing guide for salaried members of the African diaspora. It will be free to read here when published.",
-     "where": []},
     {"slug": "bobine-la-methode", "title": "Bobine, la méthode", "lang": "Français", "kind": "Video production method", "year": "2026", "pages": "265 pages",
      "color": "#16130F", "ink": "#E9B44C", "free": "bobine-la-methode",
      "line": "How to plan, film, edit with AI and sell video content, with one shooting day for a month of posts. The PDF is sold on Bobine.",

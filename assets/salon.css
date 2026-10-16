@@ -153,3 +153,13 @@ html.js .colophon.on{display:block}
   body .print-block{display:block!important;font:18px/1.6 Georgia,serif;padding:60px}
 }
 @media (max-width:900px){.reader-bar .pill.coffee span{display:none}.reader-bar .pill.coffee svg{margin:0}}
+
+/* support card, every third chapter */
+.support-card{margin:2.6em 0 .6em;padding:1.3em 1.4em;border:1px solid color-mix(in srgb,var(--cobalt) 35%,transparent);border-left:4px solid var(--cobalt);border-radius:12px;background:color-mix(in srgb,var(--cobalt) 6%,transparent);font-family:var(--sans,Inter,system-ui,sans-serif)}
+.support-card p{margin:0 0 .7em;font-size:.86em;line-height:1.55}
+.support-card .sc-k{font:600 .68em var(--mono,monospace);letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin-bottom:.5em}
+.support-card .sc-row{display:flex;gap:10px;flex-wrap:wrap;margin:.9em 0 0}
+.support-card .sc-btn{font:600 14px var(--sans,Inter,sans-serif);padding:10px 18px;border-radius:999px;border:0;background:var(--cobalt);color:var(--craie);cursor:pointer}
+.support-card .sc-share{font:500 13px var(--sans,Inter,sans-serif);padding:10px 14px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;opacity:.8;cursor:pointer}
+.text sup.fn{font-size:.62em;vertical-align:super;line-height:0;opacity:.7;margin-left:1px}
+.cover:has(> .cover-custom) > span{display:none}

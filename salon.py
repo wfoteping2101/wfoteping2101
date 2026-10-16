@@ -77,13 +77,13 @@ BOOK_META = {
         "desc_en": "A complete method for creators: an idea bank, one shooting day for a month of content, editing with an AI editor, publishing and selling.",
         "desc_fr": "Une méthode complète pour les créateurs : une banque d'idées, une journée de tournage pour un mois de contenu, le montage avec un monteur IA, la publication et la vente.",
         "music": "clair", "buy": [("Buy the PDF on Bobine", "Acheter le PDF sur Bobine", "https://bobine-tau.vercel.app/livre")]},
-    "la-richesse-silencieuse": {"title": "La Richesse Silencieuse", "subtitle": "Le guide d'investissement de la diaspora africaine", "year": "2026", "color": "#0E3B2E", "ink": "#F2E6C9", "seed": "richesse-silencieuse",
-        "desc_en": "Investing guide for salaried members of the African diaspora: simple principles, real figures, and room to support family without sacrificing the future.",
-        "desc_fr": "Guide d'investissement pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et la possibilité d'aider la famille sans sacrifier l'avenir.",
+    "la-richesse-silencieuse": {"title": "La Richesse Silencieuse", "subtitle": "Le guide d'investissement de la diaspora africaine", "year": "2026", "color": "#0C2A20", "ink": "#E6CB8E", "seed": "richesse-silencieuse",
+        "desc_en": "An investing guide for salaried members of the African diaspora. It names the pressure to build back home, shows why many of those emotional investments never pay back, and gives a simple method: save, buy index funds, protect the family, and help relatives within a set limit.",
+        "desc_fr": "Un guide d'investissement pour les salariés de la diaspora africaine. Il nomme la pression de construire au pays, montre pourquoi tant de ces investissements affectifs ne rapportent jamais, et propose une méthode simple : épargner, acheter des fonds indiciels, protéger la famille, et aider les proches dans une limite fixée.",
         "music": "clair", "buy": []},
-    "le-capital-entrave": {"title": "Le capital entravé", "subtitle": "", "year": "2026", "color": "#3B2414", "ink": "#F2E6C9", "seed": "capital-entrave",
-        "desc_en": "Essay by William Foteping.",
-        "desc_fr": "Essai de William Foteping.",
+    "le-capital-entrave": {"title": "Le capital entravé", "subtitle": "Institutions, investissement et prospérité au Cameroun", "year": "2026", "color": "#3B2414", "ink": "#EDE3CF", "seed": "capital-entrave",
+        "desc_en": "Why Cameroon's economy stalls: work and savings cannot become capital when land titles, rules and institutions fail. A few people title and stockpile land to speculate; most families own something they cannot use as collateral. An essay on what must change, and on what the diaspora can do.",
+        "desc_fr": "Pourquoi l'économie camerounaise piétine : le travail et l'épargne ne deviennent pas du capital quand les titres fonciers, les règles et les institutions font défaut. Quelques-uns titrent et accumulent les terrains pour spéculer ; la plupart des familles possèdent un bien qu'elles ne peuvent pas mettre en garantie. Un essai sur ce qui doit changer, et sur ce que la diaspora peut faire.",
         "music": "clair", "buy": []},
     "le-contrat-du-peuple": {"title": "Le Contrat du Peuple", "subtitle": "Droit social, justice et responsabilité citoyenne pour bâtir une nation libre", "year": "2026", "color": "#1C3FBF", "ink": "#F6F2EA", "seed": "contrat-du-peuple",
         "desc_en": "Essay on the social contract in Cameroon: rights, justice and the responsibilities of citizens. Preface, 20 chapters and an epilogue.",
@@ -94,7 +94,7 @@ BOOK_META = {
         "desc_fr": "Premier tome d'une saga prévue en 20 volumes. Fote grandit au village de La'a, entre dans une confrérie et traverse une guerre.",
         "music": "braise", "buy": [("Kindle on Amazon", "Kindle sur Amazon", "https://www.amazon.com/dp/B0CZ8NCM9Z"), ("Paperback on Amazon", "Broché sur Amazon", "https://www.amazon.com/dp/B0D3F4TB9Y")]},
 }
-ORDER = ["bobine-la-methode", "la-richesse-silencieuse", "le-capital-entrave", "le-contrat-du-peuple", "laa"]
+ORDER = ["la-richesse-silencieuse", "le-capital-entrave", "bobine-la-methode", "le-contrat-du-peuple", "laa"]
 
 # The public site only knows each book's table of contents (books/toc/<slug>.json). The text itself lives in the
 # protected backend and is fetched one chapter at a time while reading.
@@ -127,7 +127,7 @@ def coffee_button(t, cls="btn coffee", label=None):
     return f'<button class="{cls}" type="button" data-coffee>{COFFEE_SVG}<span>{lab}</span></button>'
 
 def coffee_modal(t):
-    return f"""<div class="coffee-modal" hidden role="dialog" aria-modal="true" aria-label="Coffee"><div class="cm-card"><button class="cm-x" type="button" aria-label="Close">&times;</button><span class="label"><b>{t('A coffee for the author', 'Un café pour l’auteur')}</b></span><h3>{t('Thank you for reading.', 'Merci de lire.')}</h3><p>{t('All the books on this site are free to read. A contribution of any amount funds the next one. You choose the amount; payment is handled by Stripe.', 'Tous les livres de ce site se lisent gratuitement. Une contribution, quel que soit le montant, finance le suivant. Vous choisissez le montant ; le paiement passe par Stripe.')}</p><p class="cta-row cm-ready"><a class="btn cobalt cm-go" href="#" target="_blank" rel="noopener">{t('Give on Stripe', 'Donner sur Stripe')} &rarr;</a></p><p class="cm-wait muted" hidden>{t('The donation page is not open yet. In the meantime, sharing the book helps.', 'La page de don n’est pas encore ouverte. En attendant, partager le livre aide.')}</p></div></div>"""
+    return f"""<div class="coffee-modal" hidden role="dialog" aria-modal="true" aria-label="Coffee"><div class="cm-card"><button class="cm-x" type="button" aria-label="Close">&times;</button><span class="label"><b>{t('A coffee for the author', 'Un café pour l’auteur')}</b></span><h3>{t('Thank you for reading.', 'Merci de lire.')}</h3><p>{t('All the books on this site are free to read. A contribution of any amount funds the next one. You choose the amount and the payment method.', 'Tous les livres de ce site se lisent gratuitement. Une contribution, quel que soit le montant, finance le suivant. Vous choisissez le montant et le moyen de paiement.')}</p><div class="cta-row cm-ready cm-links"></div><p class="cm-wait muted" hidden>{t('The donation page is not open yet. In the meantime, sharing the book helps.', 'La page de don n’est pas encore ouverte. En attendant, partager le livre aide.')}</p></div></div>"""
 
 def page(b, t, head, header, footer, cover_art):
     def ambience(rv=True):

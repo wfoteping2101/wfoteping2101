@@ -30,6 +30,7 @@
         const t = c.querySelector('.text'); t.removeAttribute('data-pending'); t.innerHTML = d.html;
         t.querySelectorAll('a[href^="http"]').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
         loaded.set(i, 'ok'); lockBox.hidden = true; c.classList.remove('locked');
+        if ((i + 1) % 3 === 0 || i === chaps.length - 1) t.appendChild(supportCard());
       } else if (d && d.locked) {
         loaded.set(i, 'locked'); c.classList.add('locked'); c.querySelector('.text').innerHTML = ''; lockBox.hidden = false;
         c.querySelector('.text').appendChild(lockBox);
@@ -42,13 +43,40 @@
     progress();
   }
 
+  /* a support card every third chapter: the book is free, the author asks for a donation */
+  let freeUntil = null;
+  function bi(en, fr) { const s = document.createElement('span'); s.dataset.en = en; s.dataset.fr = fr; s.textContent = isFrUI() ? fr : en; return s; }
+  function supportCard() {
+    const a = document.createElement('aside'); a.className = 'support-card';
+    const d = freeUntil ? freeUntil : null;
+    const dEn = d ? d.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : '', dFr = d ? d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    const k = document.createElement('p'); k.className = 'sc-k'; k.appendChild(bi('Support the author', 'Soutenir l’auteur'));
+    const p = document.createElement('p'); p.appendChild(bi(
+      (d ? 'This book is free to read until ' + dEn + '. ' : 'This book is free to read. ') + 'Writing it took months of work. If this chapter was useful to you, a donation of any amount pays for the next book.',
+      (d ? 'Ce livre se lit gratuitement jusqu’au ' + dFr + '. ' : 'Ce livre se lit gratuitement. ') + 'L’écrire a demandé des mois de travail. Si ce chapitre vous a été utile, un don, quel que soit le montant, finance le prochain livre.'));
+    const row = document.createElement('p'); row.className = 'sc-row';
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'sc-btn'; b.setAttribute('data-coffee', 'chapter'); b.appendChild(bi('Make a donation', 'Faire un don'));
+    const sh = document.createElement('button'); sh.type = 'button'; sh.className = 'sc-share'; sh.appendChild(bi('Copy the link to share', 'Copier le lien pour partager'));
+    sh.addEventListener('click', () => { const u = location.origin + location.pathname; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => { sh.textContent = isFrUI() ? 'Lien copié' : 'Link copied'; }).catch(() => { sh.textContent = u; }); });
+    row.append(b, sh); a.append(k, p, row);
+    return a;
+  }
+
   /* free or paused, and the donation link, set from the private admin page */
-  let donation = '';
+  let donations = [];
+  function donLabel(d) {
+    if (d.label) return d.label;
+    const h = (d.url.match(/^https:\/\/([^/]+)/) || [])[1] || '';
+    if (/stripe/.test(h)) return isFrUI() ? 'Carte bancaire' : 'Card';
+    if (/flutterwave|cinetpay/.test(h)) return 'Mobile Money';
+    if (/ko-fi/.test(h)) return 'Ko-fi'; if (/paypal/.test(h)) return 'PayPal'; if (/buymeacoffee/.test(h)) return 'Buy Me a Coffee'; if (/patreon/.test(h)) return 'Patreon';
+    return isFrUI() ? 'Faire un don' : 'Donate';
+  }
   rpc('pf_public', {}).then(p => {
-    donation = p.donation_url || '';
+    donations = (p.donations && p.donations.length) ? p.donations : (p.donation_url ? [{ label: '', url: p.donation_url }] : []);
     const me = (p.books || []).find(x => x.slug === book); if (!me) return;
     const st = root.querySelector('.free-state'), flag = root.querySelector('.free-flag');
-    const until = me.free_until ? new Date(me.free_until) : null;
+    const until = me.free_until ? new Date(me.free_until) : null; freeUntil = me.free ? until : null;
     const fmt = d => d.toLocaleDateString(isFrUI() ? 'fr-FR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
     if (me.free) {
       st.textContent = until ? (isFrUI() ? 'Gratuit jusqu’au ' + fmt(until) : 'Free until ' + fmt(until)) : (isFrUI() ? 'Gratuit, complet, en ligne' : 'Free, complete, online');
@@ -66,14 +94,16 @@
 
   /* coffee */
   const modal = document.querySelector('.coffee-modal');
-  document.querySelectorAll('[data-coffee]').forEach(b => b.addEventListener('click', () => {
-    if (window.pfTrack) window.pfTrack('donate', { book });
-    const go = modal.querySelector('.cm-go'), wait = modal.querySelector('.cm-wait'), ready = modal.querySelector('.cm-ready');
-    if (donation) { go.href = donation; ready.hidden = false; wait.hidden = true; } else { ready.hidden = true; wait.hidden = false; }
+  document.addEventListener('click', e => { const b = e.target.closest('[data-coffee]'); if (!b || !modal) return;
+    if (window.pfTrack) window.pfTrack('donate', { book, from: b.getAttribute('data-coffee') || '' });
+    const wait = modal.querySelector('.cm-wait'), ready = modal.querySelector('.cm-ready');
+    ready.innerHTML = '';
+    donations.forEach((d, k) => { const a = document.createElement('a'); a.className = 'btn ' + (k === 0 ? 'cobalt' : 'ghost') + ' cm-go'; a.href = d.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = donLabel(d) + ' \u2192'; ready.appendChild(a); });
+    if (donations.length) { ready.hidden = false; wait.hidden = true; } else { ready.hidden = true; wait.hidden = false; }
     modal.hidden = false; modal.querySelector('.cm-x').focus();
-  }));
+  });
   if (modal) { modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.cm-x')) modal.hidden = true; });
-    modal.querySelector('.cm-go').addEventListener('click', () => { if (window.pfTrack) window.pfTrack('donate_go', { book }); }); }
+    modal.addEventListener('click', e => { const a = e.target.closest('.cm-go'); if (a && window.pfTrack) window.pfTrack('donate_go', { book, to: (a.href.match(/^https:\/\/([^/]+)/) || [])[1] || '' }); }); }
 
   /* ---------- layout: the reader bar sits under the site header ---------- */
   function measure() {

@@ -215,9 +215,9 @@
 
   /* ---------- settings ---------- */
   async function loadSettings() {
-    try { const r = await fetch(SB + '/rest/v1/rpc/pf_public', { method: 'POST', headers: { apikey: PK, 'Content-Type': 'application/json' }, body: '{}' }); const d = await r.json(); $('#donation').value = d.donation_url || ''; } catch (e) {}
+    try { const r = await fetch(SB + '/rest/v1/rpc/pf_public', { method: 'POST', headers: { apikey: PK, 'Content-Type': 'application/json' }, body: '{}' }); const d = await r.json(); const links = (d.donations && d.donations.length) ? d.donations : (d.donation_url ? [{ label: '', url: d.donation_url }] : []); document.querySelectorAll('.a-don').forEach((row, i) => { const l = links[i] || {}; row.querySelector('.dl').value = l.label || ''; row.querySelector('.du').value = l.url || ''; }); } catch (e) {}
   }
-  $('#save-donation').addEventListener('click', async () => { try { await admin('set_donation', { url: $('#donation').value.trim() }); toast('Lien de don enregistré'); } catch (e) { toast(e.message === 'not a Stripe link' ? 'Collez un lien Stripe (buy.stripe.com ou donate.stripe.com)' : e.message, true); } });
+  $('#save-donation').addEventListener('click', async () => { const links = [...document.querySelectorAll('.a-don')].map(r => ({ label: r.querySelector('.dl').value.trim(), url: r.querySelector('.du').value.trim() })).filter(x => x.url); try { await admin('set_donations', { links }); toast(links.length ? 'Liens de don enregistrés' : 'Liens de don retirés'); } catch (e) { toast(e.message === 'link not allowed' ? 'Lien refusé. Utilisez un lien https de Stripe, Ko-fi, PayPal, Flutterwave, CinetPay, Buy Me a Coffee ou Patreon.' : e.message, true); } });
   $('#me-toggle').addEventListener('change', e => { store.set('pf-me', e.target.checked ? '1' : '0'); toast(e.target.checked ? 'Vos visites ne sont plus comptées sur cet appareil' : 'Vos visites sont comptées'); });
   $('#change-key').addEventListener('click', async () => {
     const a = $('#new-key').value.trim(), b = $('#new-key2').value.trim();

@@ -281,7 +281,9 @@ figure.shot figcaption{padding:10px 4px 0;text-align:center;width:100%}
 .post .th img{object-fit:cover;object-position:top}
 
 /* reading room cards on the books page */
-.salon-card{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:start}
+.salon-card{display:grid;grid-template-columns:110px minmax(0,1fr);gap:18px;align-items:start}
+.salon-card > div{min-width:0}
+.salon-card .label{flex-wrap:wrap}
 .cover.mini{position:relative;top:auto;aspect-ratio:2/3;padding:14px 10px 12px 16px;border-radius:4px 8px 8px 4px;box-shadow:inset 5px 0 0 color-mix(in srgb,var(--bk) 70%,#000),inset 7px 0 0 color-mix(in srgb,var(--bk) 40%,#fff),0 16px 28px color-mix(in srgb,var(--fusain) 22%,transparent)}
 .cover.mini .bt{font-size:15px;line-height:1.05}
 .cover.mini .by{font-size:10px;padding-top:8px}
@@ -320,3 +322,7 @@ input,textarea,select,[contenteditable],.selectable,.selectable *{-webkit-user-s
 .pc-links{display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 0;font:500 13px var(--mono)}
 .pc-links a{color:var(--cobalt);text-decoration:none}
 .pc-links a:hover{text-decoration:underline}
+
+/* hand-drawn covers carry their own type */
+.cover:has(> .cover-custom) > span{display:none}
+.cover-custom{position:absolute;inset:0;width:100%;height:100%}

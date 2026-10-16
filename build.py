@@ -7,22 +7,7 @@ import fr as FR
 import salon as SALON
 
 READING = SALON.available()  # books whose table of contents is present; their text lives in the protected backend
-if "la-richesse-silencieuse" in READING:
-    for _b in C.BOOKS:
-        if _b["slug"] == "richesse-silencieuse":
-            _b.update(year="2026", free="la-richesse-silencieuse",
-                      line="Investing guide for salaried members of the African diaspora: simple principles, real figures, and room to support family without sacrificing the future.",
-                      where=[("Read online, free", "/lire/la-richesse-silencieuse")])
-    FR.BOOKS["richesse-silencieuse"] = {"kind": "Guide d'investissement",
-        "line": "Guide d'investissement pour les salariés de la diaspora africaine : des principes simples, de vrais chiffres, et la possibilité d'aider la famille sans sacrifier l'avenir.",
-        "where": [("Lire en ligne, gratuitement",)]}
-if "le-capital-entrave" in READING and not any(b["slug"] == "capital-entrave" for b in C.BOOKS):
-    C.BOOKS.insert(2, {"slug": "capital-entrave", "title": "Le capital entravé", "lang": "Français", "kind": "Essay", "year": "2026", "pages": "",
-        "color": "#3B2414", "ink": "#F2E6C9", "free": "le-capital-entrave",
-        "line": "Essay by William Foteping. Full text, free to read online.",
-        "where": [("Read online, free", "/lire/le-capital-entrave")]})
-    FR.BOOKS["capital-entrave"] = {"kind": "Essai", "line": "Essai de William Foteping. Texte intégral, à lire gratuitement en ligne.",
-        "where": [("Lire en ligne, gratuitement",)]}
+from covers import cover_svg
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 E = html.escape
@@ -49,6 +34,8 @@ THREE = '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three
 
 def cover_art(seed, color, ink):
     """An original generative motif per cover: concentric arcs, a rose of lines, or a field of dots, seeded by the slug."""
+    custom = cover_svg(seed)
+    if custom: return custom
     import random
     rnd = random.Random(seed); kind = rnd.choice(["rose", "arcs", "field", "weave"]); out = []
     if kind == "rose":
@@ -356,7 +343,7 @@ def page_admin():
 <div class="a-glist"></div></div>
 
 <div class="a-pane" data-pane="settings" hidden><div class="a-grid">
-<div class="a-card"><h3>Lien de don</h3><p class="muted" style="margin-top:-4px">Le bouton « Offrez-moi un café » ouvre ce lien. Dans Stripe : Liens de paiement, Nouveau, « Les clients choisissent le montant », puis copiez le lien ici.</p><label>Lien Stripe<input id="donation" type="url" placeholder="https://buy.stripe.com/..."></label><div class="a-actions"><button class="a-btn" id="save-donation" type="button">Enregistrer</button></div></div>
+<div class="a-card"><h3>Liens de don</h3><p class="muted" style="margin-top:-4px">Jusqu’à trois liens, proposés dans cet ordre quand un lecteur touche « Faire un don ». Sites acceptés : Stripe, Ko-fi, PayPal, Flutterwave, CinetPay, Buy Me a Coffee, Patreon. Laissez une ligne vide pour ne pas l’afficher.</p><div class="a-row a-don"><label>Libellé<input class="dl" type="text" maxlength="40" placeholder="Carte bancaire"></label><label>Lien<input class="du" type="url" placeholder="https://buy.stripe.com/..."></label></div><div class="a-row a-don"><label>Libellé<input class="dl" type="text" maxlength="40" placeholder="PayPal"></label><label>Lien<input class="du" type="url" placeholder="https://ko-fi.com/... ou https://www.paypal.com/donate/..."></label></div><div class="a-row a-don"><label>Libellé<input class="dl" type="text" maxlength="40" placeholder="Mobile Money"></label><label>Lien<input class="du" type="url" placeholder="https://flutterwave.com/pay/..."></label></div><div class="a-actions"><button class="a-btn" id="save-donation" type="button">Enregistrer</button></div></div>
 <div class="a-card"><h3>Mes propres visites</h3><label class="sw"><input type="checkbox" id="me-toggle"><span>Ne pas compter mes visites sur cet appareil</span></label></div>
 <div class="a-card"><h3>Changer la clé privée</h3><label>Nouvelle clé (au moins 12 caractères)<input id="new-key" type="password" autocomplete="new-password"></label><label>La même, encore une fois<input id="new-key2" type="password" autocomplete="new-password"></label><div class="a-actions"><button class="a-btn" id="change-key" type="button">Changer la clé</button></div></div>
 </div></div>

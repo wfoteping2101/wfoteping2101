@@ -1,0 +1,284 @@
+{
+"slug": "la-richesse-silencieuse",
+"sections": [
+{
+"idx": 0,
+"cid": "introduction",
+"label": "Introduction",
+"title": "Un guide pour ceux qu’on ne félicite jamais",
+"kind": "front",
+"part": "",
+"words": 1515
+},
+{
+"idx": 1,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Le salarié est un investisseur",
+"kind": "chapter",
+"part": "Partie I — Choisir un mode de vie financier sain",
+"words": 2609
+},
+{
+"idx": 2,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Dépenser moins que l’on gagne, même avec une famille élargie",
+"kind": "chapter",
+"part": "",
+"words": 2859
+},
+{
+"idx": 3,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Commencer tôt : le temps est l’actif principal",
+"kind": "chapter",
+"part": "",
+"words": 2854
+},
+{
+"idx": 4,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "Le budget à trois enveloppes : soi, la famille, l’avenir",
+"kind": "chapter",
+"part": "",
+"words": 2719
+},
+{
+"idx": 5,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "Les fondations : dettes, fonds d’urgence, protection de base",
+"kind": "chapter",
+"part": "",
+"words": 2890
+},
+{
+"idx": 6,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "Les actions : posséder des entreprises",
+"kind": "chapter",
+"part": "Partie II — Comprendre ce que l’on achète",
+"words": 2887
+},
+{
+"idx": 7,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "Les obligations et les liquidités : le rôle de la stabilité",
+"kind": "chapter",
+"part": "",
+"words": 2899
+},
+{
+"idx": 8,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Fonds communs, ETF et fonds indiciels",
+"kind": "chapter",
+"part": "",
+"words": 2880
+},
+{
+"idx": 9,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "Pourquoi l’indexation gagne",
+"kind": "chapter",
+"part": "",
+"words": 2903
+},
+{
+"idx": 10,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Les contenants fiscaux : 401(k), 403(b), IRA, PER, PEA, REER, CELI et les autres",
+"kind": "chapter",
+"part": "",
+"words": 2913
+},
+{
+"idx": 11,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "L’allocation d’actifs : la décision qui compte vraiment",
+"kind": "chapter",
+"part": "Partie III — Construire son portefeuille",
+"words": 2927
+},
+{
+"idx": 12,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "La diversification mondiale, et la place de l’Afrique",
+"kind": "chapter",
+"part": "",
+"words": 2899
+},
+{
+"idx": 13,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Les frais : le voleur silencieux",
+"kind": "chapter",
+"part": "",
+"words": 2865
+},
+{
+"idx": 14,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "Les impôts : le deuxième voleur",
+"kind": "chapter",
+"part": "",
+"words": 3331
+},
+{
+"idx": 15,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "Rééquilibrer, simplifier, automatiser",
+"kind": "chapter",
+"part": "",
+"words": 2898
+},
+{
+"idx": 16,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Les pièges de l’esprit : peur, cupidité, comparaison",
+"kind": "chapter",
+"part": "Partie IV — L’investisseur et son comportement",
+"words": 2886
+},
+{
+"idx": 17,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "Le bruit : médias, réseaux sociaux et groupes de discussion",
+"kind": "chapter",
+"part": "",
+"words": 2830
+},
+{
+"idx": 18,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "La richesse visible et la richesse productive",
+"kind": "chapter",
+"part": "",
+"words": 2745
+},
+{
+"idx": 19,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "Solidarité familiale et capital : aider sans se ruiner",
+"kind": "chapter",
+"part": "",
+"words": 2916
+},
+{
+"idx": 20,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Faut-il investir au pays ? Une grille, pas un slogan",
+"kind": "chapter",
+"part": "",
+"words": 3003
+},
+{
+"idx": 21,
+"cid": "chapitre-21",
+"label": "Chapitre 21",
+"title": "La résidence principale : un logement avant d’être un actif",
+"kind": "chapter",
+"part": "Partie V — L’immobilier, ici et là-bas",
+"words": 2794
+},
+{
+"idx": 22,
+"cid": "chapitre-22",
+"label": "Chapitre 22",
+"title": "L’immobilier locatif : calculer avant de construire",
+"kind": "chapter",
+"part": "",
+"words": 2815
+},
+{
+"idx": 23,
+"cid": "chapitre-23",
+"label": "Chapitre 23",
+"title": "Analyser un projet en Afrique : la checklist complète",
+"kind": "chapter",
+"part": "",
+"words": 3001
+},
+{
+"idx": 24,
+"cid": "chapitre-24",
+"label": "Chapitre 24",
+"title": "Assurances : protéger avant de faire fructifier",
+"kind": "chapter",
+"part": "Partie VI — Protéger, préparer, transmettre",
+"words": 2913
+},
+{
+"idx": 25,
+"cid": "chapitre-25",
+"label": "Chapitre 25",
+"title": "Préparer les études des enfants",
+"kind": "chapter",
+"part": "",
+"words": 2888
+},
+{
+"idx": 26,
+"cid": "chapitre-26",
+"label": "Chapitre 26",
+"title": "La retraite : de l’accumulation au revenu",
+"kind": "chapter",
+"part": "",
+"words": 3024
+},
+{
+"idx": 27,
+"cid": "chapitre-27",
+"label": "Chapitre 27",
+"title": "Les retraits, la Social Security et leurs équivalents",
+"kind": "chapter",
+"part": "",
+"words": 2932
+},
+{
+"idx": 28,
+"cid": "chapitre-28",
+"label": "Chapitre 28",
+"title": "Transmettre : testament, bénéficiaires, héritage",
+"kind": "chapter",
+"part": "",
+"words": 3232
+},
+{
+"idx": 29,
+"cid": "conclusion",
+"label": "Conclusion",
+"title": "Garder le cap",
+"kind": "back",
+"part": "",
+"words": 1819
+},
+{
+"idx": 30,
+"cid": "annexes",
+"label": "Annexes",
+"title": "Annexes",
+"kind": "back",
+"part": "",
+"words": 5573
+}
+]
+}
