@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Builds the static site into dist/. Run: python3 build.py"""
-import os, shutil, json, html, datetime
+import os, re, shutil, json, html, datetime, hashlib
 import content as C
 from guides import GUIDES
 import fr as FR
@@ -150,9 +150,36 @@ def date_t(iso, long=False):
     fr = f"{d.day} {MONTHS_FR[d.month - 1]} {d.year}"
     return t(en, fr)
 
+def asset_v(rel):
+    f = os.path.join(os.path.dirname(os.path.abspath(__file__)), rel)
+    return hashlib.sha1(open(f, "rb").read()).hexdigest()[:8] if os.path.exists(f) else "0"
+
+def art_src(p): return "/" + p["thumb"] + "?v=" + asset_v(p["thumb"])
+
 def post_row(p):
-    f = frj(p['slug'])
-    return f"""<article class="post"><a class="th" href="/journal/{p['slug']}"><img src="{E(p['thumb']) if p['thumb'].startswith('http') else '/' + E(p['thumb'])}" alt="" loading="lazy"></a><div><span class="cat"><i style="color:{p['color']}"></i>{tf(p['cat'], f, 'cat')}</span> <span class="date">{date_t(p['date'])}</span><h3><a href="/journal/{p['slug']}">{tf(p['title'], f, 'title')}</a></h3><p class="lede" style="font-size:17px">{tf(p['lede'], f, 'lede')}</p><a class="btn ghost small" href="/journal/{p['slug']}">{t('Read', 'Lire')} &rarr;</a></div></article>"""
+    return f"""<article class="post" lang="fr"><a class="th" href="/journal/{p['slug']}" tabindex="-1" aria-hidden="true"><img src="{art_src(p)}" alt="" loading="lazy" width="900" height="675"></a><div><span class="cat"><i style="background:{p['color']}"></i>{FE(p['cat'])}</span> <span class="date">{date_t(p['date'])}</span><h3><a href="/journal/{p['slug']}">{FE(p['title'])}</a></h3><p class="lede">{FE(p['lede'])}</p><a class="btn ghost small" href="/journal/{p['slug']}">Lire &rarr;</a></div></article>"""
+
+def typo(x):
+    """French typography: curly apostrophes, thin no-break spaces before high punctuation and inside guillemets."""
+    x = x.replace("'", "\u2019")
+    for a, b in ((" :", "\u00a0:"), (" ;", "\u202f;"), (" ?", "\u202f?"), (" !", "\u202f!"), ("« ", "«\u202f"), (" »", "\u202f»")): x = x.replace(a, b)
+    return x
+
+def FE(x): return E(typo(x))
+
+def inline(x):
+    x = FE(x)
+    x = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", x)
+    return re.sub(r"(?<![*\w])\*(?!\s)(.+?)(?<!\s)\*(?![*\w])", r"<em>\1</em>", x)
+
+def prose(blocks):
+    out = []
+    for b in blocks:
+        if b.startswith("## "): out.append(f"<h2>{inline(b[3:])}</h2>")
+        elif b.startswith("> "): out.append(f"<blockquote><p>{inline(b[2:])}</p></blockquote>")
+        elif b.startswith("- "): out.append("<ul>" + "".join(f"<li>{inline(l[2:])}</li>" for l in b.split("\n")) + "</ul>")
+        else: out.append(f"<p>{inline(b)}</p>")
+    return "".join(out)
 
 # ---------------------------------------------------------------------------
 def page_portfolio():
@@ -210,21 +237,17 @@ def page_gallery():
     return head("Gallery", "Motion design, video edits and photos by William Foteping.", "/gallery", '<script src="/assets/live.js" defer></script>') + header("gallery") + body + footer()
 
 def page_journal():
-    body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>Journal</b><span>{len(C.JOURNAL)} {t('posts', 'articles')}</span></span><h1 class="rv" style="margin:16px 0 14px">Journal.</h1><p class="lede rv">{t('How the projects are built, and photos from daily life.', 'Comment les projets sont construits, et des photos du quotidien.')}</p></section>
+    body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>Journal</b><span>{len(C.JOURNAL)} {t('posts', 'articles')}</span></span><h1 class="rv" style="margin:16px 0 14px">Journal.</h1><p class="lede rv">{t('Essays on building, ambition and the work behind each platform. Written in French; each one comes with its own animated piece.', 'Des essais sur la fabrication, l’ambition et le travail derrière chaque plateforme. Écrits en français ; chacun a sa propre œuvre animée.')}</p></section>
 <section class="block wrap" style="padding-top:10px"><div class="posts">{"".join(post_row(p) for p in C.JOURNAL)}</div></section>"""
     return head("Journal", "Journal of William Foteping: how the projects are built.", "/journal") + header("journal") + body + footer()
 
 def page_post(p, prev, nxt):
-    f = frj(p["slug"])
-    paras = "".join(f"<p>{tf(x, f, 'body', i)}</p>" for i, x in enumerate(p["body"]))
-    gal = ""
-    if p["images"]:
-        gal = '<div class="gallery centered">' + "".join(f'<figure><img src="{E(sr) if sr.startswith("http") else "/" + E(sr)}" alt="{E(c, quote=True)}" loading="lazy"><figcaption>{tf(c, f, "captions", i)}</figcaption></figure>' for i, (sr, c) in enumerate(p["images"])) + "</div>"
-    sound = f'<button class="btn ghost small sound" type="button" data-sound="{E(p["sound"])}" aria-pressed="false" data-on="{E(p["sound_label"], quote=True)}" data-off="{t("Sound off", "Couper le son")}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg><span>{tf(p["sound_label"], f, "sound_label")}</span></button>'
-    body = f"""<article class="block wrap"><div class="post-head"><span class="cat rv"><i style="color:{p['color']}"></i>{tf(p['cat'], f, 'cat')}</span> <span class="date">{date_t(p['date'], True)}</span><h1 class="rv" style="margin:14px 0 16px;font-size:clamp(34px,5vw,64px);max-width:22ch">{tf(p['title'], f, 'title')}</h1><p class="lede rv">{tf(p['lede'], f, 'lede')}</p><p class="cta-row rv" style="margin-top:10px">{sound}</p></div>
-<div class="scene rv" style="--bk:{p['color']}"><canvas data-scene="{E(p['scene'])}" aria-label="{E(p['title'], quote=True)}, animated scene"></canvas></div>
-<div class="prose rv centered">{paras}</div>{gal}
-<nav class="cta-row" style="margin-top:48px;justify-content:space-between" aria-label="Posts"><a class="btn ghost small" href="/journal/{prev['slug']}">&larr; {tf(prev['title'], frj(prev['slug']), 'title')}</a><a class="btn ghost small" href="/journal/{nxt['slug']}">{tf(nxt['title'], frj(nxt['slug']), 'title')} &rarr;</a></nav></article>"""
+    sound = f'<button class="btn ghost small sound" type="button" data-sound="{E(p["sound"])}" aria-pressed="false" data-on="{E(p["sound_label"], quote=True)}" data-off="Couper le son"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg><span>{E(p["sound_label"])}</span></button>'
+    words = sum(len(b.split()) for b in p["body"]); mins = max(1, round(words / 220))
+    body = f"""<article class="block wrap post-page" lang="fr"><div class="post-head"><span class="cat rv"><i style="background:{p['color']}"></i>{FE(p['cat'])}</span> <span class="date">{date_t(p['date'], True)} &middot; {mins} min</span><h1 class="rv">{FE(p['title'])}</h1><p class="lede rv">{FE(p['lede'])}</p><p class="cta-row rv" style="margin-top:10px">{sound}<span class="infr" lang="en">{t('Written in French', 'Écrit en français')}</span></p></div>
+<div class="scene rv" style="background-image:url({art_src(p)})"><canvas data-scene="{E(p['scene'])}" aria-label="{E(p['title'], quote=True)}, œuvre animée"></canvas></div>
+<div class="prose rv centered">{prose(p['body'])}</div>
+<nav class="post-nav" aria-label="Articles"><a href="/journal/{prev['slug']}"><span>&larr; Précédent</span><b>{FE(prev['title'])}</b></a><a href="/journal/{nxt['slug']}"><span>Suivant &rarr;</span><b>{FE(nxt['title'])}</b></a></nav></article>"""
     return head(p["title"], p["lede"], f"/journal/{p['slug']}", THREE) + header("journal") + body + footer()
 
 def page_services():

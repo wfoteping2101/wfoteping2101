@@ -80,46 +80,4 @@ STEPS = [
     ("Acompte, réalisation, livraison", "L'acompte lance le travail. Vous validez chaque étape. La livraison comprend deux séries de corrections et la documentation."),
 ]
 
-JOURNAL = {
-"the-night-the-first-ticket-came-in": {"title": "Écrire le premier ticket d'Uplink", "cat": "Méthode", "sound_label": "Pluie",
-    "lede": "Comment le simulateur de tickets d'Uplink a été conçu, et pourquoi chaque lab doit se corriger lui-même avant d'être publié.",
-    "body": [
-        "Le simulateur de tickets repose sur une société fictive, Harborline Logistics : un entrepôt, une équipe commerciale, une liste d'employés et un seul informaticien. L'apprenant joue cet informaticien.",
-        "Le premier ticket que j'ai écrit signale qu'un lecteur réseau ne répond plus et que les fichiers d'une campagne sont attendus pour 14 h. Quiconque a travaillé au support a traité ce ticket. Pour le résoudre, l'apprenant utilise les mêmes outils qu'un technicien : annuaire, salle serveurs, bureau à distance et console de messagerie.",
-        "C'est l'écart que vise Uplink. Un examen de certification vérifie ce dont on se souvient. Un premier emploi vérifie si l'on sait trouver une panne sous pression. S'entraîner sur des tickets réalistes, là où l'erreur ne coûte rien, comble une partie de cet écart.",
-        "Les labs suivent une règle : un lab n'est publié que s'il sait se corriger. Chaque lab rejoue sa solution de référence dans le même moteur que celui de l'apprenant. Une tâche planifiée ajoute un lab par filière chaque matin et ne publie que ceux qui passent.",
-        "Des échantillons gratuits sont disponibles dans chaque module sur academy.lemonshops.app."],
-    "captions": ["La file de tickets d'Harborline", "Les filières du lab réseau", "Le coach de dépannage"]},
-"fifteen-formats": {"title": "Pourquoi Bobine monte sur le téléphone", "cat": "Produit", "sound_label": "Vagues",
-    "lede": "Bobine est né comme un outil pour des amis qui filment toute la journée et montent le soir. Deux décisions l'ont façonné : les images ne quittent jamais l'appareil, et chaque format vidéo a son propre agent.",
-    "body": [
-        "Les créateurs que je connais passent leurs soirées à monter sur téléphone. Un monteur en ligne leur demanderait d'envoyer des gigaoctets en données mobiles. Bobine monte donc dans le navigateur avec WebCodecs, et seules de courtes descriptions textuelles partent vers l'IA.",
-        "Un vlog, un lancement produit et un extrait de podcast ne se coupent pas de la même façon : chacun des 15 formats a donc son agent et ses consignes. L'agent planifie la coupe, monte, revoit le résultat et corrige ses erreurs. Quand vous ajoutez une musique, les coupes tombent sur son rythme. Vous demandez les changements avec vos mots.",
-        "Pour montrer honnêtement le résultat, j'ai réalisé 13 montages d'une minute à partir d'images sous licence, chacun en 9:16 et en 16:9, publiés à côté des rushes. La méthode est détaillée dans le livre Bobine, la méthode, et un guide de 50 pages couvre chaque écran.",
-        "Bobine est d'abord en français parce que ses premiers utilisateurs travaillent en français. L'anglais est à un clic."],
-    "captions": ["Le studio", "L'éditeur", "La transcription, silences retirés"]},
-"a-book-instead-of-a-quote": {"title": "Le devis réseau de 10 pages", "cat": "Méthode", "sound_label": "Vent",
-    "lede": "La plupart des devis réseau sont un tableau de références. Chez Lemon Network Solutions, le devis est un document de 10 pages que le client peut signer et dont l'installateur peut se servir.",
-    "body": [
-        "Un devis réseau classique aligne des références et des quantités. Le client ne voit pas ce qu'il achète, et l'installateur ne peut pas travailler à partir de ce document.",
-        "Le dossier de projet Lemon compte dix pages : le plan avec chaque point d'accès placé, les cartes de couverture WiFi, les caméras et les portes, la baie avec l'alimentation et le câblage, chaque produit avec sa photo et son prix catalogue, le calendrier semaine par semaine, et une page de signature.",
-        "Le planificateur en ligne recueille les données du site en cinq minutes environ et produit une estimation avec de vrais produits. La consultation est déduite du projet. La conception est ensuite dessinée sur les plans du client et exportée en PDF au format US Letter. Un exemple complet pour une société fictive, Juniper Yard, est sur la page du planificateur.",
-        "Les déploiements de site commencent à 5 000 $, dossier de projet compris."],
-    "captions": ["Trois pages du dossier d'exemple", "Le planificateur", "Études de cas"]},
-"two-languages-one-desk": {"title": "Travailler en français et en anglais", "cat": "Vie", "sound_label": "Oiseaux",
-    "lede": "L'ingénierie réseau le jour ; construire et écrire le soir, en deux langues.",
-    "body": [
-        "Le jour, je travaille sur l'infrastructure cloud et réseau. Le soir, je construis les projets de ce portfolio. Uplink et Lemon sont en anglais parce que leurs utilisateurs le sont. Bobine, Droit Facile et mes livres sont d'abord en français parce que leurs lecteurs le sont, et parce que c'est en français que j'écris le mieux.",
-        "La palabre camerounaise, où une décision se débat en public jusqu'à ce que chacun puisse l'accepter, influence ce que je construis. Droit Facile explique la loi avec des mots simples parce que chacun doit pouvoir lire les règles qui s'appliquent à lui. Les essais sont écrits pour être lus à voix haute, en classe ou en réunion de quartier.",
-        "Les deux métiers se nourrissent. L'ingénierie donne une structure à l'écriture ; l'écriture rend le travail technique compréhensible pour ceux qui le paient.",
-        "Si vous construisez pour un public bilingue, ajoutez la seconde langue dès le premier écran. Le sélecteur de langue de ce site a pris une heure."],
-    "captions": ["Droit Facile", "Les cours d'Uplink", "Bobine, la méthode"]},
-"chalk-and-glass": {"title": "Le design de ce site : Reims et Paris", "cat": "Design", "sound_label": "Vent",
-    "lede": "Les couleurs et la mise en page de ce site viennent de deux endroits : les crayères et les vitraux de Reims, et la manière dont les galeries parisiennes accrochent les œuvres.",
-    "body": [
-        "À Reims, le champagne vieillit dans des galeries de craie, et les vitraux de la cathédrale sont d'un bleu profond. Le site reprend cette palette : blanc craie pour la page, bleu cobalt pour l'action principale, et un filet d'or.",
-        "Les galeries parisiennes accrochent chaque œuvre avec un petit cartel, un numéro et beaucoup d'espace autour. Chaque plateforme du portfolio a un numéro, une courte étiquette et de l'espace autour.",
-        "Le symbole animé de l'accueil est une rosace : des pétales de verre cobalt autour d'un cœur de craie, dans un anneau d'or, rendus avec Three.js.",
-        "Des photos et des vidéos prises autour de moi, dans le Maryland, rejoindront la galerie."],
-    "captions": ["Des pages numérotées, avec de l'espace", "La craie et une seule couleur d'accent", "Noir et ivoire"]},
-}
+JOURNAL = {}  # the journal is written in French (journal.py)

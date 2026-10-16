@@ -94,51 +94,9 @@ EDITS = [{"slug": k, "title": t[0], "kind": "Demo edit, one minute", "year": "20
           "variants": [(lab, CDN + mid + ".mp4", lab.split()[0]) for lab, mid in v]} for k, t, l, v in _S]
 
 # Journal. Images: list of (src, caption).
-JOURNAL = [
-    {"slug": "the-night-the-first-ticket-came-in", "title": "Writing the first ticket for Uplink", "date": "2026-10-12", "cat": "Process", "color": "#1F4D3A", "scene": "network", "sound": "rain", "sound_label": "Rain", "thumb": "assets/shots/uplink-tickets.webp",
-     "lede": "How the Uplink ticket simulator was designed, and why every lab has to grade itself before it goes live.",
-     "body": [
-        "The ticket simulator is built around a fictional company, Harborline Logistics: a warehouse, a sales team, a list of employees and one IT person. The learner plays that IT person.",
-        "The first ticket I wrote says a mapped drive has stopped responding and the campaign files are due at 2 p.m. Anyone who has worked a help desk has handled that ticket. To solve it, the learner uses the same kinds of tools a technician uses: a directory, a server room, remote desktop and a mail console.",
-        "That is the gap Uplink is built for. A certification exam checks what you remember. A first job checks whether you can find a fault under time pressure. Practising on realistic tickets, where mistakes cost nothing, closes part of that gap.",
-        "The labs follow one rule: a lab is published only if it can grade itself. Each lab replays its reference solution through the same engine the learner uses. A scheduled job adds one lab per track every morning and publishes only the labs that pass.",
-        "Free samples are available in every module at academy.lemonshops.app."],
-     "images": [("assets/shots/uplink-tickets.webp", "The Harborline ticket queue"), ("assets/shots/uplink-lab.webp", "The Network Lab tracks"), ("assets/shots/uplink-troubleshoot.webp", "The troubleshooting coach")]},
-    {"slug": "fifteen-formats", "title": "Why Bobine edits on the phone", "date": "2026-10-11", "cat": "Product", "color": "#121210", "scene": "frames", "sound": "ocean", "sound_label": "Waves", "thumb": "assets/shots/bobine-studio.webp",
-     "lede": "Bobine started as a tool for friends who film all day and edit at night. Two decisions shaped it: footage never leaves the device, and each video format has its own agent.",
-     "body": [
-        "The creators I know spend their evenings editing on a phone. Cloud editors would ask them to upload gigabytes over mobile data. Bobine edits in the browser with WebCodecs instead, and only short text descriptions are sent to the AI.",
-        "A vlog, a product launch and a podcast clip are cut differently, so each of the 15 formats has its own agent and instructions. The agent plans the cut, edits, reviews the result and fixes its errors. When you add music, the cuts land on its beats. You request changes in plain words.",
-        "To show the output honestly, I made 13 one-minute edits from licensed stock footage, each in 9:16 and 16:9, and published them next to the raw clips. The method is written up in the book Bobine, la méthode, and a 50-page guide covers every screen.",
-        "Bobine is in French first because its first users work in French. English is one click away."],
-     "images": [("assets/shots/bobine-studio.webp", "The studio"), ("assets/shots/bobine-editor.webp", "The editor"), ("assets/shots/bobine-transcript.webp", "The transcript view, with silences removed")]},
-    {"slug": "a-book-instead-of-a-quote", "title": "The 10-page network quote", "date": "2026-10-11", "cat": "Process", "color": "#F2C200", "scene": "blueprint", "sound": "wind", "sound_label": "Wind", "thumb": "assets/shots/lemon-book.webp",
-     "lede": "Most network quotes are a table of part numbers. At Lemon Network Solutions, the quote is a 10-page document the owner can sign and the installer can work from.",
-     "body": [
-        "A typical network quote lists part numbers and quantities. The owner cannot see what they are buying, and the installer cannot install from it.",
-        "The Lemon project book has ten pages: the floor plan with each access point placed, WiFi coverage maps, cameras and doors, the rack with power and cabling, every product with its photo and list price, the week-by-week schedule, and a signature page.",
-        "The online planner collects the site details in about five minutes and produces an estimate from real products. The consultation fee is credited to the project. The design is then drawn on the client's floor plans and exported to a US Letter PDF. A complete sample for a fictional company, Juniper Yard, is on the planner page.",
-        "Site deployments start at $5,000, project book included."],
-     "images": [("assets/shots/lemon-book.webp", "Three pages of the sample project book"), ("assets/shots/lemon-plan.webp", "The planner"), ("assets/shots/lemon-cases.webp", "Case studies")]},
-    {"slug": "two-languages-one-desk", "title": "Working in French and English", "date": "2026-10-10", "cat": "Life", "color": "#8A3A1F", "scene": "path", "sound": "forest", "sound_label": "Birds", "thumb": "assets/shots/droit-facile.webp",
-     "lede": "Network engineering by day; building and writing at night, in two languages.",
-     "body": [
-        "During the day I work in cloud and network infrastructure. In the evening I build the projects in this portfolio. Uplink and Lemon are in English because their users are. Bobine, Droit Facile and my books are in French first because their readers are, and because I write best in French.",
-        "The Cameroonian palaver, where a decision is debated in public until everyone can accept it, shapes what I build. Droit Facile explains the law in plain words because people should be able to read the rules that apply to them. The essays are written to be read aloud in a classroom or a community meeting.",
-        "The two kinds of work feed each other. Engineering gives structure to the writing; writing makes the technical work understandable to the people who pay for it.",
-        "If you build for a bilingual audience, add the second language from the first screen. The language switch on this site took an hour to build."],
-     "images": [("assets/shots/droit-facile.webp", "Droit Facile"), ("assets/shots/uplink-courses.webp", "Uplink courses"), ("assets/shots/bobine-livre.webp", "Bobine, la méthode")]},
-    {"slug": "chalk-and-glass", "title": "The design of this site: Reims and Paris", "date": "2026-10-12", "cat": "Design", "color": "#1C3FBF", "scene": "glass", "sound": "wind", "sound_label": "Wind", "thumb": "assets/shots/lemon-book.webp",
-     "lede": "The colors and layout of this site come from two places: the chalk cellars and cathedral glass of Reims, and the way Paris galleries hang their work.",
-     "body": [
-        "In Reims, champagne ages in chalk tunnels, and the cathedral's stained glass is a deep blue. The site uses the same palette: chalk white for the page, cobalt blue for the main action, and a thin gold accent.",
-        "Paris galleries hang each work with a small label, a number and plenty of space around it. Each platform in the portfolio gets a number, a short label and room around it.",
-        "The animated symbol on the home page is a rose window: cobalt glass petals around a chalk center, inside a gold ring, rendered with Three.js.",
-        "Photos and footage from around me in Maryland will be added to the gallery."],
-     "images": [("assets/shots/lemon-book.webp", "Numbered pages with space around them"), ("assets/shots/uplink.webp", "Chalk with a single accent color"), ("assets/shots/bobine.webp", "Black and ivory")]},
-]
+# The journal is written in French, in journal.py.
+from journal import JOURNAL
 
-# Services: slug, name, from (USD), unit, deposit (USD), one line, example, deliverables.
 SERVICES = [
     {"slug": "platforms", "name": "Web platforms and apps", "from": 4500, "unit": "per platform; landing pages from $1,500", "deposit": 900,
      "line": "Learning platforms, client portals, marketplaces and landing pages, with database, accounts, payments and an optional second language.",
