@@ -183,7 +183,7 @@ def _executer(code):
 
   function outputBox() {
     const box = el('div', 'pyout'); box.hidden = true;
-    const out = el('pre', 'pyout-text'); const plots = el('div', 'pyout-plots'); const hint = el('p', 'pyout-hint'); hint.hidden = true;
+    const out = el('pre', 'pyout-text selectable'); const plots = el('div', 'pyout-plots'); const hint = el('p', 'pyout-hint'); hint.hidden = true;
     box.append(el('span', 'pyout-label', 'Sortie'), out, plots, hint);
     return { box, out, plots, hint };
   }

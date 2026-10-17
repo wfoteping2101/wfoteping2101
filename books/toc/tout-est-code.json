@@ -1,0 +1,284 @@
+{
+"slug": "tout-est-code",
+"sections": [
+{
+"idx": 0,
+"cid": "introduction",
+"label": "Introduction",
+"title": "Tout est code",
+"kind": "front",
+"part": "",
+"words": 1707
+},
+{
+"idx": 1,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Le code est partout",
+"kind": "chapter",
+"part": "Première partie : Pourquoi coder",
+"words": 3710
+},
+{
+"idx": 2,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Penser comme un programmeur",
+"kind": "chapter",
+"part": "",
+"words": 3723
+},
+{
+"idx": 3,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Coder à l’âge de l’intelligence artificielle",
+"kind": "chapter",
+"part": "",
+"words": 3706
+},
+{
+"idx": 4,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "L’atelier : où et comment écrire du Python",
+"kind": "chapter",
+"part": "Deuxième partie : Les fondations de Python",
+"words": 3388
+},
+{
+"idx": 5,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "Les variables : donner un nom aux choses",
+"kind": "chapter",
+"part": "",
+"words": 3528
+},
+{
+"idx": 6,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "Les opérateurs : compter comme une machine",
+"kind": "chapter",
+"part": "",
+"words": 3455
+},
+{
+"idx": 7,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "Les nombres et le texte",
+"kind": "chapter",
+"part": "",
+"words": 3309
+},
+{
+"idx": 8,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Mettre en forme : f-strings et conversions",
+"kind": "chapter",
+"part": "",
+"words": 3240
+},
+{
+"idx": 9,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "Les listes : ranger plusieurs choses",
+"kind": "chapter",
+"part": "",
+"words": 3560
+},
+{
+"idx": 10,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Tuples et dictionnaires : figer et étiqueter",
+"kind": "chapter",
+"part": "",
+"words": 3278
+},
+{
+"idx": 11,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "Dialoguer avec l’utilisateur",
+"kind": "chapter",
+"part": "",
+"words": 3286
+},
+{
+"idx": 12,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "Décider : si, sinon",
+"kind": "chapter",
+"part": "",
+"words": 3222
+},
+{
+"idx": 13,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Répéter avec for",
+"kind": "chapter",
+"part": "",
+"words": 3703
+},
+{
+"idx": 14,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "Répéter tant que : while, break, continue",
+"kind": "chapter",
+"part": "",
+"words": 3407
+},
+{
+"idx": 15,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "Quand ça casse : erreurs et exceptions",
+"kind": "chapter",
+"part": "",
+"words": 3520
+},
+{
+"idx": 16,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Les fonctions : écrire une fois, servir mille fois",
+"kind": "chapter",
+"part": "",
+"words": 3158
+},
+{
+"idx": 17,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "Les modules : les outils des autres",
+"kind": "chapter",
+"part": "",
+"words": 3560
+},
+{
+"idx": 18,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "Les fichiers : garder la mémoire",
+"kind": "chapter",
+"part": "",
+"words": 3266
+},
+{
+"idx": 19,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "Les objets, première partie : classes et instances",
+"kind": "chapter",
+"part": "",
+"words": 3244
+},
+{
+"idx": 20,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Les objets, deuxième partie : héritage et polymorphisme",
+"kind": "chapter",
+"part": "",
+"words": 3258
+},
+{
+"idx": 21,
+"cid": "chapitre-21",
+"label": "Chapitre 21",
+"title": "Lire les données : du tableau au savoir",
+"kind": "chapter",
+"part": "Troisième partie : Penser, critiquer, visualiser",
+"words": 3630
+},
+{
+"idx": 22,
+"cid": "chapitre-22",
+"label": "Chapitre 22",
+"title": "Visualiser : dessiner les chiffres",
+"kind": "chapter",
+"part": "",
+"words": 3448
+},
+{
+"idx": 23,
+"cid": "chapitre-23",
+"label": "Chapitre 23",
+"title": "Vérifier et critiquer : quand les chiffres trompent",
+"kind": "chapter",
+"part": "",
+"words": 3550
+},
+{
+"idx": 24,
+"cid": "chapitre-24",
+"label": "Chapitre 24",
+"title": "Simuler : essayer le futur sans risque",
+"kind": "chapter",
+"part": "",
+"words": 3593
+},
+{
+"idx": 25,
+"cid": "chapitre-25",
+"label": "Chapitre 25",
+"title": "Comprendre l’IA en la construisant en petit",
+"kind": "chapter",
+"part": "",
+"words": 3605
+},
+{
+"idx": 26,
+"cid": "chapitre-26",
+"label": "Chapitre 26",
+"title": "Projet : le jeu des priorités opératoires",
+"kind": "chapter",
+"part": "Quatrième partie : Projets",
+"words": 3345
+},
+{
+"idx": 27,
+"cid": "chapitre-27",
+"label": "Chapitre 27",
+"title": "Projet : la tontine numérique",
+"kind": "chapter",
+"part": "",
+"words": 3189
+},
+{
+"idx": 28,
+"cid": "chapitre-28",
+"label": "Chapitre 28",
+"title": "Projet : bulletin scolaire et tableau de bord du marché",
+"kind": "chapter",
+"part": "",
+"words": 3212
+},
+{
+"idx": 29,
+"cid": "conclusion",
+"label": "Conclusion",
+"title": "La première ligne, et toutes les suivantes",
+"kind": "back",
+"part": "",
+"words": 2167
+},
+{
+"idx": 30,
+"cid": "annexes",
+"label": "Annexes",
+"title": "Annexes",
+"kind": "back",
+"part": "",
+"words": 4029
+}
+]
+}
