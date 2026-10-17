@@ -1,0 +1,266 @@
+{
+"slug": "les-yeux-ouverts",
+"sections": [
+{
+"idx": 0,
+"cid": "introduction",
+"label": "Introduction",
+"title": "Fermer les yeux ne protège de rien",
+"kind": "front",
+"part": "",
+"words": 3084
+},
+{
+"idx": 1,
+"cid": "chapitre-1",
+"label": "Chapitre 1",
+"title": "Ce que l’on appelle « intelligence artificielle »",
+"kind": "chapter",
+"part": "Première partie : Ouvrir la machine",
+"words": 3652
+},
+{
+"idx": 2,
+"cid": "chapitre-2",
+"label": "Chapitre 2",
+"title": "Deviner le mot suivant : le secret le plus simple du monde",
+"kind": "chapter",
+"part": "",
+"words": 3512
+},
+{
+"idx": 3,
+"cid": "chapitre-3",
+"label": "Chapitre 3",
+"title": "Découper la langue : les jetons",
+"kind": "chapter",
+"part": "",
+"words": 3507
+},
+{
+"idx": 4,
+"cid": "chapitre-4",
+"label": "Chapitre 4",
+"title": "Des mots aux nombres : la carte du sens",
+"kind": "chapter",
+"part": "",
+"words": 3496
+},
+{
+"idx": 5,
+"cid": "chapitre-5",
+"label": "Chapitre 5",
+"title": "L’attention : comment la machine sait de quoi l’on parle",
+"kind": "chapter",
+"part": "",
+"words": 3516
+},
+{
+"idx": 6,
+"cid": "chapitre-6",
+"label": "Chapitre 6",
+"title": "L’édifice : comment s’empilent les étages du modèle",
+"kind": "chapter",
+"part": "",
+"words": 3679
+},
+{
+"idx": 7,
+"cid": "chapitre-7",
+"label": "Chapitre 7",
+"title": "L’apprentissage : comment on forme la machine",
+"kind": "chapter",
+"part": "",
+"words": 3614
+},
+{
+"idx": 8,
+"cid": "chapitre-8",
+"label": "Chapitre 8",
+"title": "Le hasard apprivoisé : comment la machine choisit ses mots, et pourquoi elle invente",
+"kind": "chapter",
+"part": "",
+"words": 3579
+},
+{
+"idx": 9,
+"cid": "chapitre-9",
+"label": "Chapitre 9",
+"title": "De l’élève savant à l’assistant poli : l’ajustement",
+"kind": "chapter",
+"part": "",
+"words": 3488
+},
+{
+"idx": 10,
+"cid": "chapitre-10",
+"label": "Chapitre 10",
+"title": "Ce que la machine sait faire, et ce qu’elle ne sait pas",
+"kind": "chapter",
+"part": "",
+"words": 3543
+},
+{
+"idx": 11,
+"cid": "chapitre-11",
+"label": "Chapitre 11",
+"title": "Ce que coûte une intelligence : calcul, énergie, données, talents",
+"kind": "chapter",
+"part": "",
+"words": 3629
+},
+{
+"idx": 12,
+"cid": "chapitre-12",
+"label": "Chapitre 12",
+"title": "De la machine qui répond à la machine qui agit",
+"kind": "chapter",
+"part": "Deuxième partie : Les machines qui agissent",
+"words": 3634
+},
+{
+"idx": 13,
+"cid": "chapitre-13",
+"label": "Chapitre 13",
+"title": "Les degrés d’autonomie",
+"kind": "chapter",
+"part": "",
+"words": 3498
+},
+{
+"idx": 14,
+"cid": "chapitre-14",
+"label": "Chapitre 14",
+"title": "Dans les entrailles d’un agent : pourquoi il réussit, pourquoi il échoue",
+"kind": "chapter",
+"part": "",
+"words": 3506
+},
+{
+"idx": 15,
+"cid": "chapitre-15",
+"label": "Chapitre 15",
+"title": "L’entreprise réinventée",
+"kind": "chapter",
+"part": "",
+"words": 3634
+},
+{
+"idx": 16,
+"cid": "chapitre-16",
+"label": "Chapitre 16",
+"title": "Le travail réinventé",
+"kind": "chapter",
+"part": "",
+"words": 3388
+},
+{
+"idx": 17,
+"cid": "chapitre-17",
+"label": "Chapitre 17",
+"title": "La vie réinventée",
+"kind": "chapter",
+"part": "",
+"words": 3519
+},
+{
+"idx": 18,
+"cid": "chapitre-18",
+"label": "Chapitre 18",
+"title": "Confiance, contrôle, responsabilité",
+"kind": "chapter",
+"part": "",
+"words": 3546
+},
+{
+"idx": 19,
+"cid": "chapitre-19",
+"label": "Chapitre 19",
+"title": "Les voix qui disent « pas maintenant »",
+"kind": "chapter",
+"part": "Troisième partie : L'Afrique devant la machine",
+"words": 3660
+},
+{
+"idx": 20,
+"cid": "chapitre-20",
+"label": "Chapitre 20",
+"title": "Ce que coûte l’aveuglement : leçons de l’histoire",
+"kind": "chapter",
+"part": "",
+"words": 3506
+},
+{
+"idx": 21,
+"cid": "chapitre-21",
+"label": "Chapitre 21",
+"title": "La nouvelle dépendance",
+"kind": "chapter",
+"part": "",
+"words": 3460
+},
+{
+"idx": 22,
+"cid": "chapitre-22",
+"label": "Chapitre 22",
+"title": "Les langues : se faire comprendre ou disparaître",
+"kind": "chapter",
+"part": "",
+"words": 3416
+},
+{
+"idx": 23,
+"cid": "chapitre-23",
+"label": "Chapitre 23",
+"title": "Le dividende démographique ou la bombe à retardement",
+"kind": "chapter",
+"part": "",
+"words": 3634
+},
+{
+"idx": 24,
+"cid": "chapitre-24",
+"label": "Chapitre 24",
+"title": "Ce que les autres ont fait",
+"kind": "chapter",
+"part": "",
+"words": 3530
+},
+{
+"idx": 25,
+"cid": "chapitre-25",
+"label": "Chapitre 25",
+"title": "Que faire : un programme pour ne plus être aveugle",
+"kind": "chapter",
+"part": "",
+"words": 3465
+},
+{
+"idx": 26,
+"cid": "chapitre-26",
+"label": "Chapitre 26",
+"title": "Commencer demain : guide pratique pour qui ne code pas",
+"kind": "chapter",
+"part": "",
+"words": 3499
+},
+{
+"idx": 27,
+"cid": "conclusion",
+"label": "Conclusion",
+"title": "Les yeux ouverts",
+"kind": "back",
+"part": "",
+"words": 1967
+},
+{
+"idx": 28,
+"cid": "annexes",
+"label": "Annexes",
+"title": "Annexes",
+"kind": "back",
+"part": "",
+"words": 2935
+}
+]
+}

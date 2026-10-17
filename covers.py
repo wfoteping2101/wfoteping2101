@@ -238,7 +238,82 @@ def monnaie():
     o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
     return "".join(o)
 
-COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie}
+# ---------------------------------------------------------------------------
+# Les Yeux ouverts: an open eye at dawn; the iris is a neural network, and under it
+# five greetings are split into tokens the way a language model splits them.
+def yeux():
+    import math
+    u = _uid()
+    CX, CY, EW, EH = 300, 395, 230, 118
+    GOLD, GOLD2, CREAM, MIST = "#F2C66D", "#C8902E", "#F7F1E3", "#C9CFEA"
+    rnd = random.Random(7)
+    o = []
+    lid = f"M{CX-EW},{CY} Q{CX},{CY-2*EH} {CX+EW},{CY} Q{CX},{CY+2*EH} {CX-EW},{CY} Z"
+    o.append(f'<defs>{_grain("g" + u, ".06")}'
+             f'<linearGradient id="b{u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#151A47"/><stop offset=".55" stop-color="#0C1033"/><stop offset="1" stop-color="#070920"/></linearGradient>'
+             f'<linearGradient id="au{u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{GOLD}"/><stop offset="1" stop-color="{GOLD2}"/></linearGradient>'
+             f'<radialGradient id="d{u}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="{GOLD}" stop-opacity=".30"/><stop offset=".6" stop-color="{GOLD}" stop-opacity=".06"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient>'
+             f'<radialGradient id="i{u}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A2F6B"/><stop offset="1" stop-color="#11143A"/></radialGradient>'
+             f'<clipPath id="e{u}"><path d="{lid}"/></clipPath><clipPath id="f{u}"><rect x="25" y="25" width="550" height="850"/></clipPath></defs>')
+    o.append(f'<rect width="600" height="900" fill="url(#b{u})"/>')
+    for row in range(5):
+        for col in range(16):
+            x = 22 + col * 37 + (18 if row % 2 else 0)
+            y = 742 + row * 26
+            if x > 580: continue
+            o.append(f'<path d="M{x},{y-6} L{x+7},{y} L{x},{y+6} L{x-7},{y} Z" fill="none" stroke="{MIST}" stroke-opacity=".07" stroke-width="1"/>')
+    o.append(f'<circle cx="{CX}" cy="{CY}" r="300" fill="url(#d{u})"/><g clip-path="url(#f{u})">')
+    for i in range(48):
+        a = math.pi * i / 47
+        r1, r2 = 228, 228 + (26 if i % 2 else 48)
+        o.append(f'<line x1="{CX + r1*math.cos(a):.1f}" y1="{CY - r1*math.sin(a):.1f}" x2="{CX + r2*math.cos(a):.1f}" y2="{CY - r2*math.sin(a):.1f}" stroke="{GOLD}" stroke-opacity=".22" stroke-width="1"/>')
+    o.append('</g>')
+    o.append(f'<path d="{lid}" fill="#E9E4F2" fill-opacity=".06"/><g clip-path="url(#e{u})">')
+    R = 102
+    o.append(f'<circle cx="{CX}" cy="{CY}" r="{R}" fill="url(#i{u})"/>')
+    nodes = []
+    for rad, n in ((34, 8), (58, 14), (82, 20)):
+        off = rnd.random() * math.pi
+        nodes.append([(CX + rad * math.cos(off + 2*math.pi*k/n), CY + rad * math.sin(off + 2*math.pi*k/n)) for k in range(n)])
+    for r in range(2):
+        for (x1, y1) in nodes[r]:
+            for (x2, y2) in sorted(nodes[r + 1], key=lambda p: (p[0]-x1)**2 + (p[1]-y1)**2)[:3]:
+                o.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{GOLD}" stroke-opacity=".55" stroke-width=".9"/>')
+    for (x, y) in nodes[2]:
+        o.append(f'<line x1="{x:.1f}" y1="{y:.1f}" x2="{CX + R*(x-CX)/82:.1f}" y2="{CY + R*(y-CY)/82:.1f}" stroke="{GOLD}" stroke-opacity=".35" stroke-width=".8"/>')
+    for ri, ring in enumerate(nodes):
+        for (x, y) in ring:
+            o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{2.6 + ri*0.4:.1f}" fill="{GOLD}"/>')
+    o.append(f'<circle cx="{CX}" cy="{CY}" r="{R}" fill="none" stroke="url(#au{u})" stroke-width="3"/>'
+             f'<circle cx="{CX}" cy="{CY}" r="21" fill="#05061A"/><circle cx="{CX-7}" cy="{CY-8}" r="5.5" fill="{CREAM}" fill-opacity=".9"/></g>')
+    o.append(f'<path d="{lid}" fill="none" stroke="url(#au{u})" stroke-width="4.5" stroke-linejoin="round"/>'
+             f'<path d="M{CX-EW-14},{CY} Q{CX},{CY-2*EH-34} {CX+EW+14},{CY}" fill="none" stroke="{GOLD}" stroke-opacity=".45" stroke-width="1.6"/>')
+    chips = (("Mbo", "te"), ("Jë", "rë", "jëf"), ("Bon", "jour"), ("I", "ni", "ce"), ("A", "kwa", "ba"))
+    labels = ("lingala", "wolof", "français", "bambara", "baoulé")
+    widths = [sum(12 + 8.2 * len(p) for p in ch) + 3 * (len(ch) - 1) for ch in chips]
+    x, y0 = CX - (sum(widths) + 14 * 4) / 2, CY + 148
+    for ch, w, lab in zip(chips, widths, labels):
+        xx = x
+        for p in ch:
+            pw = 12 + 8.2 * len(p)
+            o.append(f'<rect x="{xx:.1f}" y="{y0-13}" width="{pw:.1f}" height="22" rx="5" fill="{GOLD}" fill-opacity=".10" stroke="{GOLD}" stroke-opacity=".7" stroke-width="1"/>'
+                     f'<text x="{xx+pw/2:.1f}" y="{y0+3}" text-anchor="middle" font-family="{SANS}" font-size="12.5" font-weight="500" fill="{CREAM}">{p}</text>')
+            xx += pw + 3
+        o.append(f'<text x="{x+w/2:.1f}" y="{y0+25}" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="9.5" fill="{MIST}" fill-opacity=".8">{lab}</text>')
+        x += w + 14
+    o.append(f'<rect x="24" y="24" width="552" height="852" fill="none" stroke="{GOLD}" stroke-opacity=".32" stroke-width="1.1"/>')
+    o.append(f'<text x="300" y="80" text-anchor="middle" font-family="{SANS}" font-size="9.6" font-weight="500" letter-spacing="3.4" fill="{MIST}">L’INTELLIGENCE ARTIFICIELLE EXPLIQUÉE</text>'
+             f'<text x="300" y="97" text-anchor="middle" font-family="{SANS}" font-size="9.6" font-weight="500" letter-spacing="3.4" fill="{MIST}">À CEUX QUI NE CODENT PAS</text>')
+    o.append(f'<text x="300" y="648" text-anchor="middle" font-family="{SANS}" font-size="64" font-weight="800" letter-spacing="-1.5" fill="{CREAM}">Les Yeux</text>'
+             f'<text x="300" y="712" text-anchor="middle" font-family="{SANS}" font-size="64" font-weight="800" letter-spacing="-1.5" fill="url(#au{u})">ouverts</text>'
+             f'<rect x="245" y="732" width="110" height="2.5" fill="url(#au{u})"/>')
+    o.append(f'<text x="300" y="762" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="16.5" fill="#E9DDB8">Pourquoi l’Afrique ne peut plus</text>'
+             f'<text x="300" y="783" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="16.5" fill="#E9DDB8">détourner le regard</text>')
+    o.append(f'<text x="300" y="842" text-anchor="middle" font-family="{SANS}" font-size="8.4" font-weight="500" letter-spacing="2.2" fill="{MIST}">OUVRIR LA MACHINE  ·  LES MACHINES QUI AGISSENT  ·  L’AFRIQUE DEVANT LA MACHINE</text>')
+    o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
+    return "".join(o)
+
+COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux}
 
 def cover_svg(seed):
     fn = COVERS.get(seed)
