@@ -1,0 +1,56 @@
+/* Python cells, the workshop and the floating flag. Colours of Cameroon: green, red, yellow. */
+:root{--cm-vert:#007A5E;--cm-rouge:#CE1126;--cm-jaune:#FCD116;--code-bg:#0F1A17;--code-ink:#E9F2EE}
+.pycell{margin:22px 0;border:1px solid var(--ligne);border-radius:14px;overflow:hidden;background:var(--blanc);box-shadow:0 1px 0 rgba(0,0,0,.03)}
+.pyc-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 14px;border-bottom:1px solid var(--ligne);background:linear-gradient(90deg,rgba(0,122,94,.10),rgba(206,17,38,.06) 55%,rgba(252,209,22,.10))}
+.pyc-tag{font:600 12px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--cm-vert)}
+.pyc-tag::before{content:"";display:inline-block;width:18px;height:10px;margin-right:8px;vertical-align:-1px;border-radius:2px;background:linear-gradient(90deg,var(--cm-vert) 0 33.3%,var(--cm-rouge) 33.3% 66.6%,var(--cm-jaune) 66.6%)}
+.pyc-act{display:flex;flex-wrap:wrap;gap:6px}
+.pycell .btn.small,.atelier .btn.small{padding:7px 12px;font-size:13px}
+.pyc-run,.at-run{background:var(--cm-vert)!important;border-color:var(--cm-vert)!important;color:#fff!important}
+.pyc-run::before,.at-run::before{content:"";display:inline-block;width:0;height:0;margin-right:7px;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;vertical-align:0}
+.pyc-run.busy,.at-run.busy{opacity:.7;cursor:progress}
+.pyed{position:relative;background:var(--code-bg);color:var(--code-ink);font:14.5px/1.6 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;tab-size:4}
+.pyed .hl,.pyed .ta{margin:0;padding:14px 16px;border:0;font:inherit;letter-spacing:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;tab-size:4}
+.pyed .hl{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:var(--code-ink)}
+.pyed .hl code{font:inherit;background:none;padding:0;color:inherit}
+.pyed .ta{position:relative;display:block;width:100%;min-height:44px;resize:none;background:transparent;color:transparent;caret-color:#FCD116;outline:none;overflow:hidden}
+.pyed .ta::selection{background:rgba(252,209,22,.28);color:transparent}
+.pyed .ta:focus-visible{box-shadow:inset 0 0 0 2px rgba(252,209,22,.55)}
+.pyed i{font-style:normal}
+.pyed .k{color:#FF8FA0;font-weight:600}.pyed .b{color:#7FE0C3}.pyed .s{color:#FCE08A}.pyed .c{color:#8FA39C;font-style:italic}.pyed .n{color:#F7B267}.pyed .f{color:#9EC9FF}
+.pyed.big{height:100%;min-height:280px;overflow:auto}
+.pyed.big .ta{min-height:100%;overflow:auto;height:100%}
+.pyout{border-top:1px solid var(--ligne);padding:10px 14px 12px}
+.pyout-label{display:block;font:600 11px/1 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-bottom:6px}
+.pyout-text{margin:0;font:13.5px/1.55 "JetBrains Mono",ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--encre);max-height:420px;overflow:auto;background:none;padding:0}
+.pyout-text .err{color:var(--cm-rouge)}.pyout-text .muted{color:var(--gris);font-style:italic}
+.pyout-plots img{display:block;max-width:100%;height:auto;margin:10px 0 0;border-radius:10px;background:#fff}
+.pyout-hint{margin:10px 0 0;padding:10px 12px;border-left:3px solid var(--cm-jaune);background:rgba(252,209,22,.12);border-radius:6px;font-size:14.5px;line-height:1.5}
+.salon .text pre.text{font:13.5px/1.55 "JetBrains Mono",ui-monospace,Menlo,monospace;white-space:pre-wrap;padding:12px 14px;border-radius:10px;border:1px dashed var(--ligne);background:transparent;color:var(--encre)}
+.salon .text pre.text.expected{border-color:rgba(0,122,94,.45);background:rgba(0,122,94,.05)}
+.salon .text figure.schema{margin:26px 0;padding:16px 14px 10px;border:1px solid var(--ligne);border-radius:14px;background:var(--blanc);color:var(--fusain)}
+.salon .text figure.schema svg{display:block;width:100%;height:auto;max-height:520px}
+.salon .text figure.schema figcaption{margin-top:8px;font-size:14px;color:var(--gris);text-align:center;font-style:italic}
+/* the floating flag */
+.flag3d{display:block;width:min(300px,70vw);height:190px;margin:0 0 6px -12px}
+.flag-strip{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--cm-vert) 0 33.3%,var(--cm-rouge) 33.3% 66.6%,var(--cm-jaune) 66.6%);max-width:180px;margin:6px 0 16px}
+/* the workshop */
+.atelier{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;background:var(--craie);color:var(--encre)}
+.atelier[hidden]{display:none}
+.atelier.inline{position:relative;inset:auto;z-index:auto;min-height:72vh;border:1px solid var(--ligne);border-radius:16px;overflow:hidden;background:var(--blanc)}
+.at-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--ligne);background:linear-gradient(90deg,rgba(0,122,94,.12),rgba(206,17,38,.07) 55%,rgba(252,209,22,.14))}
+.at-title{display:flex;flex-direction:column;gap:2px}.at-title b{font-size:17px;color:var(--fusain)}.at-title .muted{font-size:13px;color:var(--gris)}
+.at-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.at-ex{padding:7px 10px;border-radius:999px;border:1px solid var(--ligne);background:var(--blanc);color:var(--encre);font:inherit;font-size:13px}
+.at-x{width:36px;height:36px;border-radius:50%;border:1px solid var(--ligne);background:var(--blanc);color:var(--fusain);font-size:20px;line-height:1;cursor:pointer}
+.at-body{flex:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);min-height:0}
+.at-body .pyed{border-right:1px solid var(--ligne)}
+.at-body .pyout{border-top:0;overflow:auto;background:var(--blanc)}
+.at-body .pyout-text{max-height:none}
+@media (max-width:820px){.at-body{grid-template-columns:1fr;grid-template-rows:minmax(260px,55vh) auto}.at-body .pyed{border-right:0;border-bottom:1px solid var(--ligne)}}
+html.atelier-open{overflow:hidden}
+.atelier-fab{position:fixed;right:18px;bottom:18px;z-index:60;padding:12px 16px 12px 44px;border-radius:999px;border:0;cursor:pointer;font:600 14px/1 Inter,system-ui,sans-serif;color:#fff;background:var(--cm-vert);box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.atelier-fab::before{content:"";position:absolute;left:14px;top:50%;width:20px;height:12px;margin-top:-6px;border-radius:2px;background:linear-gradient(90deg,#007A5E 0 33.3%,#CE1126 33.3% 66.6%,#FCD116 66.6%);box-shadow:0 0 0 1.5px rgba(255,255,255,.8)}
+html.atelier-open .atelier-fab{display:none}
+@media print{.pycell .pyc-bar,.atelier,.atelier-fab{display:none}}
+.btn.cm-green{background:var(--cm-vert);border-color:var(--cm-vert);color:#fff}.btn.cm-green:hover{filter:brightness(1.08)}

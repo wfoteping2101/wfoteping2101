@@ -171,16 +171,24 @@ def page(b, t, head, header, footer, cover_art):
             f'<p>{t("Free reading of this book is closed for now. The first sections stay open; the full book is available where it is sold.", "La lecture libre de ce livre est fermée pour le moment. Les premières sections restent ouvertes ; le livre complet est disponible là où il est vendu.")}</p>'
             f'<p class="cta-row">{buy}{coffee_button(t, "btn small coffee")}</p></div>')
     music_svg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>'
-    body = f"""<div class="salon guarded" data-book="{E(b['slug'])}" data-music="{E(b['music'])}" data-sb="{SUPABASE}" data-pk="{PUBLISHABLE}" style="--bk:{b['color']};--bk-ink:{b['ink']}">
+    ide = bool(b.get("ide"))
+    ide_attr = ' data-ide' if ide else ''
+    ide_head = ('<link rel="stylesheet" href="/assets/pyide.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>'
+                '<script src="/assets/flag.js" defer></script><script src="/assets/pyide.js" defer></script>') if ide else ''
+    ide_flag = '<canvas class="flag3d rv" role="img" aria-label="Drapeau du Cameroun qui flotte au vent"></canvas>' if ide else ''
+    ide_row = (f'<p class="cta-row rv"><button class="btn cm-green" type="button" data-atelier>{t("Open the Python workshop", "Ouvrir l’atelier Python")}</button>'
+               f'<a class="btn ghost" href="/atelier-python">{t("Workshop on a full page", "L’atelier en pleine page")} &rarr;</a></p>'
+               f'<p class="rv muted" style="font-size:14px;max-width:58ch">{t("Every Python example in this book runs in your browser: press Run, change the code, run it again. Nothing to install.", "Chaque exemple Python de ce livre s’exécute dans votre navigateur : appuyez sur Exécuter, modifiez le code, relancez. Rien à installer.")}</p>') if ide else ''
+    body = f"""<div class="salon guarded" data-book="{E(b['slug'])}"{ide_attr} data-music="{E(b['music'])}" data-sb="{SUPABASE}" data-pk="{PUBLISHABLE}" style="--bk:{b['color']};--bk-ink:{b['ink']}">
 <div class="coffee-bar"><div class="wrap cb"><span class="cb-text">{t('This book is free to read. If it helps you, you can buy me a coffee.', 'Ce livre se lit gratuitement. S’il vous est utile, vous pouvez m’offrir un café.')}</span>{coffee_button(t, "btn small cobalt coffee")}</div></div>
 <section class="opening wrap"><div class="opening-grid">
 <div class="cover art big rv" style="--bk:{b['color']};--bk-ink:{b['ink']}">{cover_art(b['seed'], b['color'], b['ink'])}<span class="bn free-flag">{t('FREE TO READ', 'LECTURE LIBRE')}</span><span class="bt">{E(b['title'])}</span><span class="by">{E(b['author'])}</span><span class="bk">{E(b['subtitle'])}</span></div>
-<div class="opening-text"><span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span class="free-state">{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span>
+<div class="opening-text">{ide_flag}<span class="label rv"><b>{t('Reading room', 'Salon de lecture')}</b><span class="free-state">{t('Free, complete, online', 'Gratuit, complet, en ligne')}</span></span>
 <h1 class="rv" style="margin:14px 0 6px;font-size:clamp(40px,6vw,84px)">{E(b['title'])}</h1><p class="rv sub">{E(b['subtitle'])}</p>
 <p class="lede rv">{t(b['desc_en'], b['desc_fr'])}</p>
 <p class="rv mono muted" style="margin:0 0 20px">{E(b['author'])} &middot; {n} {t('sections', 'sections')} &middot; {words:,} {t('words', 'mots')} &middot; {t('about', 'environ')} {mins} {t('minutes', 'minutes')}</p>
 <p class="cta-row rv"><a class="btn" href="#{b['sections'][0]['id']}" data-start>{t('Start reading', 'Commencer la lecture')}</a>{coffee_button(t, "btn cobalt coffee")}<button class="btn ghost music" type="button" aria-pressed="false">{music_svg}<span class="on">{t('Calm music', 'Musique calme')}</span><span class="off" hidden>{t('Stop the music', 'Couper la musique')}</span></button></p>
-{('<p class="cta-row rv buy-row">' + buy + '</p>') if buy else ''}
+{('<p class="cta-row rv buy-row">' + buy + '</p>') if buy else ''}{ide_row}
 {ambience()}
 <p class="rv muted" style="font-size:14px;max-width:56ch;margin-top:14px">{t('Ambient music generated in your browser. Choose a mood; it plays only when you start it.', 'Une musique d’ambiance générée dans votre navigateur. Choisissez une ambiance ; elle ne démarre que si vous la lancez.')}</p>
 {album_panel()}</div></div></section>
@@ -193,4 +201,4 @@ def page(b, t, head, header, footer, cover_art):
 <section class="colophon"><span class="label"><b>{t('The end', 'Fin')}</b></span><h2 style="margin:12px 0 10px">{t('Thank you for reading.', 'Merci de votre lecture.')}</h2><p class="lede">{t('If this book was useful, you can buy me a coffee or share the link.', 'Si ce livre vous a été utile, vous pouvez m’offrir un café ou partager le lien.')}</p><p class="cta-row">{coffee_button(t, "btn cobalt coffee")}</p>{album_panel()}<p class="cta-row"><a class="btn" href="/books">{t('Other books', 'Autres livres')}</a><a class="btn ghost" href="/contact">{t('Write to me', 'Écrire')}</a></p></section></div></div></div>
 {coffee_modal(t)}
 <div class="print-block">{t('This book can be read online only. Printing and copying are disabled.', 'Ce livre se lit en ligne uniquement. L’impression et la copie sont désactivées.')}</div>"""
-    return head(b["title"], b["desc_en"], f"/lire/{b['slug']}", '<link rel="stylesheet" href="/assets/salon.css"><script>document.documentElement.classList.add("js")</script><script src="/assets/salon.js" defer></script>') + header("books") + body + footer()
+    return head(b["title"], b["desc_en"], f"/lire/{b['slug']}", '<link rel="stylesheet" href="/assets/salon.css"><script>document.documentElement.classList.add("js")</script><script src="/assets/salon.js" defer></script>' + ide_head) + header("books") + body + footer()

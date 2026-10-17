@@ -383,7 +383,7 @@ FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect w
 import hashlib
 def asset_version():
     here = os.path.dirname(os.path.abspath(__file__)); h = hashlib.sha1()
-    for n in ("style.css", "app.js", "scenes.js", "salon.css", "salon.js", "guard.js", "track.js", "live.js", "admin.js", "admin.css"):
+    for n in ("style.css", "app.js", "scenes.js", "salon.css", "salon.js", "guard.js", "track.js", "live.js", "admin.js", "admin.css", "pyide.js", "pyide.css", "flag.js"):
         p = os.path.join(here, "assets", n)
         if os.path.exists(p): h.update(open(p, "rb").read())
     return h.hexdigest()[:8]
@@ -393,12 +393,29 @@ def write(path, s, strict=True):
     for bad, name in (("—", "em dash"), ("–", "en dash")):
         assert not strict or bad not in s, f"{name} found in {path}"
     import re as _re
-    s = _re.sub(r'(/assets/(?:style|salon|admin)\.css|/assets/(?:app|scenes|salon|guard|track|live|admin)\.js)(?=["\'])', lambda m: m.group(1) + "?v=" + V, s)
+    s = _re.sub(r'(/assets/(?:style|salon|admin|pyide)\.css|/assets/(?:app|scenes|salon|guard|track|live|admin|pyide|flag)\.js)(?=["\'])', lambda m: m.group(1) + "?v=" + V, s)
     s = _re.sub(r'(/assets/(?:shots|motion)/[\w.-]+\.(?:webp|png|jpg|mp4))(?=["\'&])', lambda m: m.group(1) + "?v=" + V, s)
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
         f.write(s)
+
+def page_atelier():
+    extra = ('<link rel="stylesheet" href="/assets/pyide.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>'
+             '<script src="/assets/flag.js" defer></script><script src="/assets/pyide.js" defer></script>')
+    desc = "A free Python workshop in the browser: write, run and try Python programs with nothing to install. It goes with the book Tout est code."
+    body = f"""<section class="wrap" style="padding-top:clamp(28px,5vw,56px);padding-bottom:24px">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end">
+<div><span class="label"><b>{t('Python workshop', 'Atelier Python')}</b><span>{t('Free, in your browser', 'Gratuit, dans votre navigateur')}</span></span>
+<h1 style="margin:14px 0 8px;font-size:clamp(36px,5.5vw,72px)">{t('Write Python. Run it here.', 'Écrivez du Python. Exécutez-le ici.')}</h1>
+<div class="flag-strip"></div>
+<p class="lede" style="max-width:62ch">{t('Python runs inside this page, on your phone or your computer. Write a program, press Run, change it, run it again. Programs stop by themselves after ten seconds; input() opens a small dialog; charts drawn with matplotlib appear on the right.', 'Python s’exécute dans cette page, sur votre téléphone ou votre ordinateur. Écrivez un programme, appuyez sur Exécuter, modifiez-le, relancez. Un programme s’arrête de lui-même au bout de dix secondes ; input() ouvre une petite fenêtre ; les graphiques matplotlib s’affichent à droite.')}</p>
+<p class="cta-row"><a class="btn" href="/lire/tout-est-code">{t('Read the book Tout est code', 'Lire le livre Tout est code')} &rarr;</a></p></div>
+<canvas class="flag3d" role="img" aria-label="Drapeau du Cameroun qui flotte au vent"></canvas></div>
+</section>
+<section class="wrap" style="padding-bottom:64px"><div data-atelier-inline></div>
+<p class="muted" style="font-size:14px;margin-top:12px">{t('Your code is kept in this browser only. The first run downloads Python (about 10 MB), then it is fast.', 'Votre code reste dans ce navigateur uniquement. La première exécution télécharge Python (environ 10 Mo), ensuite tout va vite.')}</p></section>"""
+    return head("Atelier Python", desc, "/atelier-python", extra) + header("books") + body + footer()
 
 def main():
     if os.path.isdir(OUT): shutil.rmtree(OUT)
@@ -415,6 +432,7 @@ def main():
     for b in SALON.load_books(): write(f"lire/{b['slug']}.html", SALON.page(b, t, head, header, footer, cover_art), strict=False)
     write("gallery.html", page_gallery())
     write("demo/e-xaf.html", open(os.path.join(here, "demo", "e-xaf.html"), encoding="utf-8").read(), strict=False)
+    write("atelier-python.html", page_atelier())
     write("journal/index.html", page_journal())
     m = len(C.JOURNAL)
     for i, p in enumerate(C.JOURNAL): write(f"journal/{p['slug']}.html", page_post(p, C.JOURNAL[i - 1], C.JOURNAL[(i + 1) % m]))
@@ -423,7 +441,7 @@ def main():
     write("thanks.html", page_thanks())
     write("404.html", page_404())
     write("admin.html", page_admin())
-    pages = ["/", "/portfolio"] + [f"/portfolio/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/demo/e-xaf", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
+    pages = ["/", "/portfolio"] + [f"/portfolio/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/demo/e-xaf", "/atelier-python", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
     ai = ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "CCBot", "anthropic-ai", "ClaudeBot", "Claude-Web", "Google-Extended", "PerplexityBot", "Bytespider", "Amazonbot", "Applebot-Extended", "meta-externalagent", "FacebookBot", "Diffbot", "ImagesiftBot", "Omgilibot", "cohere-ai", "YouBot", "Timpibot"]
     write("robots.txt", "".join(f"User-agent: {b}\nDisallow: /\n\n" for b in ai) + f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: {C.SITE['url']}/sitemap.xml\n")
