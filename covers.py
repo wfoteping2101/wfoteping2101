@@ -313,7 +313,57 @@ def yeux():
     o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
     return "".join(o)
 
-COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux}
+# ---------------------------------------------------------------------------
+# Tout est code: a code window on deep green, the flag's three colours, and four verbs printed by Python.
+def code():
+    u = _uid()
+    BG, BG2, G, R, Y, CR, MU = "#0B1A15", "#12291F", "#007A5E", "#CE1126", "#FCD116", "#F4EFE3", "#A9C2B6"
+    o = []
+    o.append(f'<defs>{_grain("g" + u, ".06")}<linearGradient id="b{u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient>'
+             f'<pattern id="d{u}" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="{MU}" fill-opacity=".14"/></pattern></defs>')
+    o.append(f'<rect width="600" height="900" fill="url(#b{u})"/><rect width="600" height="900" fill="url(#d{u})"/>')
+    # the flag as three bands across the top, the star in the middle band
+    o.append(f'<rect x="0" y="0" width="200" height="14" fill="{G}"/><rect x="200" y="0" width="200" height="14" fill="{R}"/><rect x="400" y="0" width="200" height="14" fill="{Y}"/>')
+    o.append(f'<text x="300" y="74" text-anchor="middle" font-family="{SANS}" font-size="10" font-weight="600" letter-spacing="3.6" fill="{MU}">APPRENDRE PYTHON, POUR L’AFRIQUE ET SA DIASPORA</text>')
+    # the code window
+    x0, y0, w, h = 62, 116, 476, 342
+    o.append(f'<rect x="{x0}" y="{y0}" width="{w}" height="{h}" rx="16" fill="#06110D" stroke="{G}" stroke-opacity=".55" stroke-width="1.4"/>')
+    o.append(f'<rect x="{x0}" y="{y0}" width="{w}" height="38" rx="16" fill="#0F2219"/><rect x="{x0}" y="{y0 + 22}" width="{w}" height="16" fill="#0F2219"/>')
+    for i, c in enumerate((G, R, Y)):
+        o.append(f'<circle cx="{x0 + 24 + i * 20}" cy="{y0 + 19}" r="6" fill="{c}"/>')
+    o.append(f'<text x="{x0 + w - 18}" y="{y0 + 24}" text-anchor="end" font-family="{MONO}" font-size="11" fill="{MU}">atelier.py</text>')
+    K, S, B, C, N = "#FF8FA0", "#FCE08A", "#7FE0C3", "#8FA39C", "#E9F2EE"
+    lines = [
+        [(C, "# le code est une langue, elle est à vous")],
+        [(N, "verbes = ["), (S, '"penser"'), (N, ", "), (S, '"rattraper"'), (N, ",")],
+        [(N, "          "), (S, '"critiquer"'), (N, ", "), (S, '"visualiser"'), (N, "]")],
+        [],
+        [(K, "for"), (N, " verbe "), (K, "in"), (N, " verbes:")],
+        [(N, "    "), (B, "print"), (N, "(verbe.upper())")],
+    ]
+    yy = y0 + 72
+    for ln in lines:
+        x = x0 + 22
+        spans = "".join(f'<tspan fill="{c}">{s.replace("&", "&amp;").replace("<", "&lt;")}</tspan>' for c, s in ln)
+        o.append(f'<text x="{x}" y="{yy}" font-family="{MONO}" font-size="15" xml:space="preserve">{spans}</text>')
+        yy += 26
+    o.append(f'<line x1="{x0 + 18}" y1="{yy - 6}" x2="{x0 + w - 18}" y2="{yy - 6}" stroke="{MU}" stroke-opacity=".25" stroke-dasharray="3 5"/>')
+    yy += 18
+    for i, v in enumerate(("PENSER", "RATTRAPER", "CRITIQUER", "VISUALISER")):
+        o.append(f'<text x="{x0 + 22}" y="{yy + i * 24}" font-family="{MONO}" font-size="15" font-weight="600" fill="{("#3CC79A" if i == 0 else "#FF5A6E" if i == 1 else Y if i == 2 else CR)}" fill-opacity="{1 if i else .95}">{v}</text>')
+    o.append(f'<rect x="{x0 + 22 + 10 * 9.2}" y="{yy + 3 * 24 - 13}" width="9" height="16" fill="{Y}"><animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/></rect>')
+    # the title
+    o.append(f'<text x="300" y="604" text-anchor="middle" font-family="{SANS}" font-size="68" font-weight="800" letter-spacing="-2" fill="{CR}">Tout est</text>')
+    o.append(f'<text x="300" y="684" text-anchor="middle" font-family="{MONO}" font-size="74" font-weight="600" letter-spacing="-1" fill="{Y}">code<tspan fill="{G}">()</tspan></text>')
+    o.append(f'<rect x="230" y="708" width="46" height="3" fill="{G}"/><rect x="277" y="708" width="46" height="3" fill="{R}"/><rect x="324" y="708" width="46" height="3" fill="{Y}"/>')
+    o.append(f'<text x="300" y="742" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="16.5" fill="#E7E0C8">Apprendre Python pour penser clair,</text>')
+    o.append(f'<text x="300" y="764" text-anchor="middle" font-family="{SERIF}" font-style="italic" font-size="16.5" fill="#E7E0C8">comprendre son époque et tout visualiser</text>')
+    o.append(f'<text x="300" y="838" text-anchor="middle" font-family="{SANS}" font-size="8.6" font-weight="600" letter-spacing="2.4" fill="{MU}">CHAQUE EXEMPLE S’EXÉCUTE DANS LE NAVIGATEUR</text>')
+    o.append(f'<rect x="24" y="24" width="552" height="852" fill="none" stroke="{Y}" stroke-opacity=".22" stroke-width="1"/>')
+    o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
+    return "".join(o)
+
+COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux, "tout-est-code": code}
 
 def cover_svg(seed):
     fn = COVERS.get(seed)

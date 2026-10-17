@@ -54,3 +54,5 @@ html.atelier-open{overflow:hidden}
 html.atelier-open .atelier-fab{display:none}
 @media print{.pycell .pyc-bar,.atelier,.atelier-fab{display:none}}
 .btn.cm-green{background:var(--cm-vert);border-color:var(--cm-vert);color:#fff}.btn.cm-green:hover{filter:brightness(1.08)}
+/* the reading room blocks text selection; the code editors and their output stay selectable */
+.guarded .pyed .ta,.guarded .pyout-text{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
