@@ -1,6 +1,8 @@
 """The reading room: free books as rich HTML pages with chapter navigation and calm music.
 Sources live in books/*.json. Each book page is written to dist/lire/<slug>.html."""
 import os, re, json, html
+import richesse
+INTROS = {"richesse": richesse.section}
 E = html.escape
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -84,7 +86,7 @@ BOOK_META = {
     "la-richesse-silencieuse": {"title": "La Richesse Silencieuse", "subtitle": "Le guide d'investissement de la diaspora africaine", "year": "2026", "color": "#0C2A20", "ink": "#E6CB8E", "seed": "richesse-silencieuse",
         "desc_en": "An investing guide for salaried members of the African diaspora. It names the pressure to build back home, shows why many of those emotional investments never pay back, and gives a simple method: save, buy index funds, protect the family, and help relatives within a set limit.",
         "desc_fr": "Un guide d'investissement pour les salariés de la diaspora africaine. Il nomme la pression de construire au pays, montre pourquoi tant de ces investissements affectifs ne rapportent jamais, et propose une méthode simple : épargner, acheter des fonds indiciels, protéger la famille, et aider les proches dans une limite fixée.",
-        "music": "clair", "buy": []},
+        "music": "clair", "intro": "richesse", "buy": [("Investment simulator", "Simulateur de placements", "/demo/simulateur-placements")]},
     "le-capital-entrave": {"title": "Le capital entravé", "subtitle": "Institutions, investissement et prospérité au Cameroun", "year": "2026", "color": "#3B2414", "ink": "#EDE3CF", "seed": "capital-entrave",
         "desc_en": "Why Cameroon's economy stalls: work and savings cannot become capital when land titles, rules and institutions fail. A few people title and stockpile land to speculate; most families own something they cannot use as collateral. An essay on what must change, and on what the diaspora can do.",
         "desc_fr": "Pourquoi l'économie camerounaise piétine : le travail et l'épargne ne deviennent pas du capital quand les titres fonciers, les règles et les institutions font défaut. Quelques-uns titrent et accumulent les terrains pour spéculer ; la plupart des familles possèdent un bien qu'elles ne peuvent pas mettre en garantie. Un essai sur ce qui doit changer, et sur ce que la diaspora peut faire.",
@@ -180,6 +182,7 @@ def page(b, t, head, header, footer, cover_art):
     ide_head = ('<link rel="stylesheet" href="/assets/pyide.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>'
                 '<script src="/assets/flag.js" defer></script><script src="/assets/pyide.js" defer></script>') if ide else ''
     ide_flag = '<canvas class="flag3d rv" role="img" aria-label="Drapeau du Cameroun qui flotte au vent"></canvas>' if ide else ''
+    intro = INTROS[b["intro"]](t) if b.get("intro") in INTROS else ''
     ide_row = (f'<p class="cta-row rv"><button class="btn cm-green" type="button" data-atelier>{t("Open the Python workshop", "Ouvrir l’atelier Python")}</button>'
                f'<a class="btn ghost" href="/atelier-python">{t("Workshop on a full page", "L’atelier en pleine page")} &rarr;</a></p>'
                f'<p class="rv muted" style="font-size:14px;max-width:58ch">{t("Every Python example in this book runs in your browser: press Run, change the code, run it again. Nothing to install.", "Chaque exemple Python de ce livre s’exécute dans votre navigateur : appuyez sur Exécuter, modifiez le code, relancez. Rien à installer.")}</p>') if ide else ''
@@ -196,6 +199,7 @@ def page(b, t, head, header, footer, cover_art):
 {ambience()}
 <p class="rv muted" style="font-size:14px;max-width:56ch;margin-top:14px">{t('Ambient music generated in your browser. Choose a mood; it plays only when you start it.', 'Une musique d’ambiance générée dans votre navigateur. Choisissez une ambiance ; elle ne démarre que si vous la lancez.')}</p>
 {album_panel()}</div></div></section>
+{intro}
 
 <div class="reader-bar" role="toolbar" aria-label="Reading tools"><div class="wrap rb"><button class="pill toc-btn" type="button" aria-expanded="false" aria-controls="toc">{t('Contents', 'Sommaire')}</button><span class="now mono"></span><span class="rb-tools">{coffee_button(t, "pill coffee", t('Coffee', 'Café'))}<button class="pill size" data-size="-" type="button" aria-label="Smaller text">A&minus;</button><button class="pill size" data-size="+" type="button" aria-label="Larger text">A+</button><button class="pill paper" type="button" aria-label="Page tone">Paper</button><span class="mwrap"><button class="pill mbtn" type="button" aria-expanded="false" aria-label="Music"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><i class="eq" aria-hidden="true"><b></b><b></b><b></b></i></button>
 <div class="mpanel" hidden><span class="label"><b>{t('Music for reading', 'Musique pour lire')}</b></span><button class="btn small music" type="button" aria-pressed="false"><span class="on">{t('Play', 'Lancer')}</span><span class="off" hidden>{t('Stop', 'Arrêter')}</span></button>{ambience(False)}<label class="vol"><span class="mono">{t('Volume', 'Volume')}</span><input type="range" min="0" max="100" value="70" aria-label="Volume"></label></div></span></span></div><div class="progress"><i></i></div></div>
