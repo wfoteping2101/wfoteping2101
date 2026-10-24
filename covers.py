@@ -363,7 +363,22 @@ def code():
     o.append(f'<rect width="600" height="900" filter="url(#g{u})"/>')
     return "".join(o)
 
-COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux, "tout-est-code": code}
+# ---------------------------------------------------------------------------
+# Inside Your House: the book's own cover (a cutaway of a modern house with every system labeled),
+# kept as the SVG drawn for the book in books/covers/, with its ids made unique on the page.
+def house():
+    import re
+    from pathlib import Path
+    u = _uid()
+    src = (Path(__file__).resolve().parent / "books" / "covers" / "inside-your-house.svg").read_text(encoding="utf-8")
+    src = re.sub(r"<title>.*?</title>", "", src, flags=re.S)
+    vb = re.search(r'viewBox="([^"]+)"', src).group(1)
+    body = re.sub(r"^.*?<svg[^>]*>", "", src, count=1, flags=re.S).rsplit("</svg>", 1)[0]
+    for i in sorted(set(re.findall(r'id="([^"]+)"', body)), key=len, reverse=True):
+        body = body.replace(f'id="{i}"', f'id="{u}{i}"').replace(f"url(#{i})", f"url(#{u}{i})")
+    return f'<svg x="0" y="0" width="600" height="900" viewBox="{vb}" preserveAspectRatio="xMidYMid slice">{body}</svg>'
+
+COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux, "tout-est-code": code, "inside-your-house": house}
 
 def cover_svg(seed):
     fn = COVERS.get(seed)

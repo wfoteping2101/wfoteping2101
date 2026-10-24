@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 864" role="img">
+<title>Inside Your House by William Foteping, cover: a cutaway of a modern house with every system labeled</title>
+<rect width="576" height="864" fill="#1F4D3A"/>
+<g stroke="#F6F2EA" stroke-opacity=".06" stroke-width="1"><path d="M0 0V864" /><path d="M24 0V864" /><path d="M48 0V864" /><path d="M72 0V864" /><path d="M96 0V864" /><path d="M120 0V864" /><path d="M144 0V864" /><path d="M168 0V864" /><path d="M192 0V864" /><path d="M216 0V864" /><path d="M240 0V864" /><path d="M264 0V864" /><path d="M288 0V864" /><path d="M312 0V864" /><path d="M336 0V864" /><path d="M360 0V864" /><path d="M384 0V864" /><path d="M408 0V864" /><path d="M432 0V864" /><path d="M456 0V864" /><path d="M480 0V864" /><path d="M504 0V864" /><path d="M528 0V864" /><path d="M552 0V864" /><path d="M576 0V864" /><path d="M0 0H576" /><path d="M0 24H576" /><path d="M0 48H576" /><path d="M0 72H576" /><path d="M0 96H576" /><path d="M0 120H576" /><path d="M0 144H576" /><path d="M0 168H576" /><path d="M0 192H576" /><path d="M0 216H576" /><path d="M0 240H576" /><path d="M0 264H576" /><path d="M0 288H576" /><path d="M0 312H576" /><path d="M0 336H576" /><path d="M0 360H576" /><path d="M0 384H576" /><path d="M0 408H576" /><path d="M0 432H576" /><path d="M0 456H576" /><path d="M0 480H576" /><path d="M0 504H576" /><path d="M0 528H576" /><path d="M0 552H576" /><path d="M0 576H576" /><path d="M0 600H576" /><path d="M0 624H576" /><path d="M0 648H576" /><path d="M0 672H576" /><path d="M0 696H576" /><path d="M0 720H576" /><path d="M0 744H576" /><path d="M0 768H576" /><path d="M0 792H576" /><path d="M0 816H576" /><path d="M0 840H576" /><path d="M0 864H576" /></g>
+<text x="40" y="58" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="3.2" fill="#DDA36B">A KEYSTONE BOOK</text>
+<text x="536" y="58" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="2" fill="#F6F2EA" fill-opacity=".7">ILLUSTRATED GUIDE</text>
+<text x="38" y="140" font-family="Fraunces, Georgia, serif" font-size="74" font-weight="600" letter-spacing="-1.4" fill="#F6F2EA">Inside</text>
+<text x="38" y="208" font-family="Fraunces, Georgia, serif" font-size="74" font-weight="600" letter-spacing="-1.4" fill="#F6F2EA">Your House</text>
+<text x="40" y="247" font-family="Fraunces, Georgia, serif" font-size="19" font-style="italic" fill="#E8F0EB">How every system works, and how to keep it running</text>
+<rect x="0" y="276" width="576" height="422" fill="#F6F2EA"/>
+<text x="18" y="296" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.6" fill="#A86020">WHAT THIS BOOK COVERS</text>
+<text x="558" y="296" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="0.4" fill="#6B645A">Every system in a modern house</text>
+<svg x="8" y="302" width="560" height="390" viewBox="-384 -119 1700 1184">
+  
+  <defs><marker id="ch-ar-shell" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#A86020"/></marker><marker id="ch-ar-water" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2F6F96"/></marker><marker id="ch-ar-power" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#B07D0C"/></marker><marker id="ch-ar-air" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#56707F"/></marker><marker id="ch-ar-appl" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2F6B52"/></marker><marker id="ch-ar-safe" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#C7502D"/></marker></defs>
+
+  
+  <defs>
+    <pattern id="ch-soil" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#B89C74"/><circle cx="4" cy="5" r="1.6" fill="#A3865E"/><circle cx="13" cy="12" r="1.3" fill="#A3865E"/><circle cx="9" cy="2" r="0.9" fill="#C9AE86"/></pattern>
+    <pattern id="ch-block" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="24" height="12" fill="#D9D2C5"/><path d="M0 12H24M12 0V12" stroke="#BDB4A5" stroke-width="1.2"/></pattern>
+    <pattern id="ch-shingle" width="16" height="10" patternUnits="userSpaceOnUse"><rect width="16" height="10" fill="#4E4943"/><path d="M0 10H16M8 0V10" stroke="#3E3A35" stroke-width="1.2"/></pattern>
+    <pattern id="ch-insul" width="18" height="12" patternUnits="userSpaceOnUse"><rect width="18" height="12" fill="#EFC6C0"/><path d="M0 11C5 2 9 2 14 11" fill="none" stroke="#DDA49C" stroke-width="1.4"/></pattern>
+    <pattern id="ch-siding" width="10" height="14" patternUnits="userSpaceOnUse"><rect width="10" height="14" fill="#F1E6D2"/><path d="M0 13.5H10" stroke="#DCCDB3" stroke-width="1.4"/></pattern>
+    <pattern id="ch-solar" width="22" height="16" patternUnits="userSpaceOnUse"><rect width="22" height="16" fill="#25415C"/><path d="M0 0H22M0 0V16" stroke="#6F8DAA" stroke-width="1.2"/></pattern>
+    <linearGradient id="ch-wall" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FBF6EC"/><stop offset="1" stop-color="#F3EADA"/></linearGradient>
+    <linearGradient id="ch-base" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ECE5D8"/><stop offset="1" stop-color="#E2D9C8"/></linearGradient>
+  </defs>
+
+  <!-- ground and soil -->
+  <rect x="0" y="560" width="1000" height="220" fill="url(#ch-soil)"/>
+  <path d="M0 560H1000" stroke="#1E1B16" stroke-width="3"/>
+  <path d="M0 556C60 552 110 552 160 556M840 556C900 551 950 551 1000 555" fill="none" stroke="#5E8C5A" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- street utilities -->
+  <path d="M0 700H96" stroke="#3A7CA5" stroke-width="10" stroke-linecap="round"/>
+  <path d="M0 672H140" stroke="#D9A21E" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 8"/>
+  <path d="M1000 720H770" stroke="#8A6E52" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- footings and basement walls -->
+  <rect x="168" y="728" width="66" height="22" fill="#C8BFB0" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="726" y="728" width="66" height="22" fill="#C8BFB0" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="186" y="560" width="22" height="168" fill="url(#ch-block)" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="752" y="560" width="22" height="168" fill="url(#ch-block)" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="208" y="552" width="544" height="164" fill="url(#ch-base)"/>
+  <rect x="208" y="714" width="544" height="14" fill="#D2CABC" stroke="#1E1B16" stroke-width="2"/>
+
+  <!-- floor decks -->
+  <rect x="186" y="540" width="588" height="14" fill="#C9A877" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="186" y="392" width="588" height="14" fill="#C9A877" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="186" y="246" width="588" height="14" fill="#C9A877" stroke="#1E1B16" stroke-width="2"/>
+
+  <!-- walls with siding -->
+  <rect x="174" y="246" width="12" height="308" fill="url(#ch-siding)" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="774" y="246" width="12" height="308" fill="url(#ch-siding)" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="186" y="260" width="10" height="280" fill="#E6CFA4"/>
+  <rect x="764" y="260" width="10" height="280" fill="#E6CFA4"/>
+  <rect x="196" y="260" width="568" height="132" fill="url(#ch-wall)"/>
+  <rect x="196" y="406" width="568" height="134" fill="url(#ch-wall)"/>
+  <!-- interior partitions -->
+  <path d="M480 260V392" stroke="#D8C29C" stroke-width="8"/>
+  <path d="M560 406V540" stroke="#D8C29C" stroke-width="8"/>
+
+  <!-- windows (sections) -->
+  <g fill="#D6E8EF" stroke="#1E1B16" stroke-width="2.5">
+    <rect x="168" y="286" width="24" height="70"/><rect x="168" y="434" width="24" height="70"/>
+    <rect x="768" y="286" width="24" height="70"/><rect x="768" y="434" width="24" height="70"/>
+  </g>
+
+  <!-- attic -->
+  <rect x="196" y="222" width="568" height="24" fill="url(#ch-insul)" stroke="#1E1B16" stroke-width="1.5"/>
+  <path d="M138 252 480 82 822 252" fill="none" stroke="#C9A877" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M132 244 480 72 828 244 828 260 480 88 132 260Z" fill="url(#ch-shingle)" stroke="#1E1B16" stroke-width="3" stroke-linejoin="round"/>
+  <!-- solar panels on right slope -->
+  <path d="M560 128 700 197 688 212 548 143Z" fill="url(#ch-solar)" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M548 143 688 212" stroke="#A9B1B7" stroke-width="2"/>
+  <!-- ridge vent -->
+  <rect x="456" y="62" width="48" height="12" rx="3" fill="#A9B1B7" stroke="#1E1B16" stroke-width="2"/>
+  <!-- attic airflow -->
+  <path d="M150 268C210 240 270 220 340 194" fill="none" stroke="#7FB4D6" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+  <path d="M380 150C420 120 450 100 472 86" fill="none" stroke="#E07A5A" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+
+  <!-- chimney (left) and flue -->
+  <rect x="196" y="120" width="40" height="96" fill="url(#ch-block)" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="190" y="112" width="52" height="10" fill="#BDB4A5" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M216 216V246" stroke="#A9B1B7" stroke-width="9"/>
+
+  <!-- gutters and downspout -->
+  <rect x="118" y="248" width="20" height="14" rx="2" fill="#A9B1B7" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="822" y="248" width="20" height="14" rx="2" fill="#A9B1B7" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M834 262V548H866" fill="none" stroke="#A9B1B7" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- second floor: bedroom (left) -->
+  <rect x="240" y="352" width="150" height="26" rx="6" fill="#DDA36B" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="240" y="336" width="34" height="20" rx="5" fill="#FBF8F2" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="236" y="374" width="10" height="18" fill="#A86020"/><rect x="384" y="374" width="10" height="18" fill="#A86020"/>
+  <circle cx="420" cy="300" r="12" fill="#F6E3A6" stroke="#1E1B16" stroke-width="2"/><path d="M420 260V288" stroke="#1E1B16" stroke-width="2"/>
+  <!-- smoke alarm -->
+  <rect x="330" y="262" width="30" height="8" rx="4" fill="#FBF8F2" stroke="#1E1B16" stroke-width="1.8"/>
+  <!-- second floor: bathroom (right) -->
+  <path d="M520 360h140a10 10 0 0 1 10 10v10a12 12 0 0 1-12 12H532a12 12 0 0 1-12-12z" fill="#FBF8F2" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="694" y="344" width="28" height="36" rx="4" fill="#FBF8F2" stroke="#1E1B16" stroke-width="2.2"/>
+  <path d="M690 380h40v6a8 8 0 0 1-8 8h-24a8 8 0 0 1-8-8z" fill="#FBF8F2" stroke="#1E1B16" stroke-width="2.2"/>
+  <path d="M600 300v52" stroke="#1E1B16" stroke-width="2.5"/><path d="M588 304h26" stroke="#1E1B16" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- bath fan -->
+  <rect x="640" y="260" width="36" height="10" fill="#A9B1B7" stroke="#1E1B16" stroke-width="1.8"/>
+
+  <!-- first floor: living (left) -->
+  <path d="M232 520v-26a10 10 0 0 1 10-10h108a10 10 0 0 1 10 10v26" fill="#7FA791" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="226" y="510" width="140" height="22" rx="6" fill="#2F6B52" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="400" y="450" width="70" height="44" rx="4" fill="#22262A" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M435 494v14M418 508h34" stroke="#1E1B16" stroke-width="2.5"/>
+  <!-- thermostat -->
+  <circle cx="500" cy="462" r="9" fill="#FBF8F2" stroke="#1E1B16" stroke-width="2"/>
+  <!-- stairs -->
+  <path d="M470 540l14-12h14l14-12h14l14-12h14l14-12h14l14-12" fill="none" stroke="#A9926A" stroke-width="5" stroke-linejoin="round"/>
+  <!-- kitchen (right) -->
+  <rect x="580" y="490" width="120" height="50" fill="#E6CFA4" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="576" y="482" width="128" height="10" fill="#C9A877" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="604" y="500" width="40" height="32" rx="3" fill="#FBF8F2" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M612 488h8M628 488h8" stroke="#C7502D" stroke-width="3" stroke-linecap="round"/>
+  <path d="M600 420h52l-8 20h-36z" fill="#A9B1B7" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M626 406v14" stroke="#A9B1B7" stroke-width="8"/>
+  <rect x="712" y="430" width="44" height="110" rx="5" fill="#E9ECEE" stroke="#1E1B16" stroke-width="2.5"/>
+  <path d="M712 468h44M748 440v18M748 480v24" stroke="#1E1B16" stroke-width="2"/>
+
+  <!-- ducts from furnace -->
+  <path d="M330 600V570H560V548" fill="none" stroke="#B4BCC2" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M440 570V548" stroke="#B4BCC2" stroke-width="12"/>
+  <path d="M560 548v-8M440 548v-8" stroke="#B4BCC2" stroke-width="10"/>
+  <path d="M520 406V570" stroke="#B4BCC2" stroke-width="10" opacity=".75"/>
+  <path d="M510 392h20" stroke="#B4BCC2" stroke-width="8"/>
+
+  <!-- plumbing: cold, hot, drain -->
+  <path d="M96 700H230V600" fill="none" stroke="#3A7CA5" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="230" cy="660" r="9" fill="#C5762F" stroke="#1E1B16" stroke-width="2"/>
+  <path d="M230 600V560H540V320H600" fill="none" stroke="#3A7CA5" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M540 470H620" stroke="#3A7CA5" stroke-width="4"/>
+  <path d="M278 610V584H530V330H594" fill="none" stroke="#C7502D" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M530 474H634" stroke="#C7502D" stroke-width="4"/>
+  <path d="M708 392V720H770" fill="none" stroke="#8A6E52" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M708 392V172" stroke="#8A6E52" stroke-width="7"/><rect x="700" y="164" width="16" height="8" rx="2" fill="#8A6E52"/>
+  <path d="M640 540V600H708" fill="none" stroke="#8A6E52" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- water heater -->
+  <rect x="258" y="610" width="44" height="100" rx="12" fill="#ECE7DD" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="266" y="690" width="28" height="10" rx="2" fill="#F2C9B8"/>
+  <!-- furnace -->
+  <rect x="312" y="600" width="68" height="112" rx="4" fill="#DDD7CC" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="322" y="616" width="48" height="26" rx="2" fill="#F2C9B8" stroke="#6B645A" stroke-width="1.5"/>
+  <path d="M326 664h40M326 676h40M326 688h40" stroke="#6B645A" stroke-width="2"/>
+  <path d="M370 600V590H216V246" fill="none" stroke="#A9B1B7" stroke-width="7" stroke-linejoin="round"/>
+  <!-- gas line -->
+  <path d="M140 672H160V630H340V642" fill="none" stroke="#D9A21E" stroke-width="5" stroke-linejoin="round"/>
+  <rect x="128" y="616" width="34" height="30" rx="5" fill="#E9E3D8" stroke="#1E1B16" stroke-width="2.5" transform="translate(0 -40)"/>
+  <path d="M145 606V630" stroke="#D9A21E" stroke-width="5"/>
+  <!-- washer and dryer -->
+  <rect x="420" y="640" width="58" height="72" rx="6" fill="#F4F4F2" stroke="#1E1B16" stroke-width="2.5"/>
+  <circle cx="449" cy="680" r="18" fill="#D6E8EF" stroke="#1E1B16" stroke-width="2.5"/>
+  <rect x="486" y="640" width="58" height="72" rx="6" fill="#F4F4F2" stroke="#1E1B16" stroke-width="2.5"/>
+  <circle cx="515" cy="680" r="18" fill="#EDE6D9" stroke="#1E1B16" stroke-width="2.5"/>
+  <!-- electrical panel -->
+  <rect x="716" y="596" width="30" height="50" rx="3" fill="#E9E3D8" stroke="#1E1B16" stroke-width="2.5"/>
+  <path d="M722 608h18M722 616h18M722 624h18M722 632h18" stroke="#6B645A" stroke-width="2"/>
+  <!-- sump pit -->
+  <rect x="640" y="714" width="40" height="30" fill="#E8E2D6" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="650" y="722" width="20" height="18" rx="3" fill="#3A7CA5"/>
+  <path d="M660 722V650H600" fill="none" stroke="#6B645A" stroke-width="4" stroke-linejoin="round" opacity=".9"/>
+
+  <!-- electric: meter, service drop, wiring -->
+  <rect x="790" y="470" width="26" height="36" rx="4" fill="#E9E3D8" stroke="#1E1B16" stroke-width="2.5"/>
+  <circle cx="803" cy="484" r="7" fill="#FBF8F2" stroke="#1E1B16" stroke-width="1.6"/>
+  <path d="M803 470V330" stroke="#1E1B16" stroke-width="3"/>
+  <path d="M803 330C850 324 910 306 990 276" fill="none" stroke="#1E1B16" stroke-width="2.6"/>
+  <path d="M803 506V620H746" fill="none" stroke="#1E1B16" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M746 606H700V300H420V270" fill="none" stroke="#D99A1E" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M700 460H520" stroke="#D99A1E" stroke-width="3"/>
+  <!-- solar conduit -->
+  <path d="M690 210V240" stroke="#D99A1E" stroke-width="3"/>
+
+  <!-- outdoor AC / heat pump -->
+  <rect x="842" y="552" width="98" height="10" fill="#D3CCBF" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="850" y="490" width="82" height="62" rx="6" fill="#DDD7CC" stroke="#1E1B16" stroke-width="2.5"/>
+  <circle cx="891" cy="521" r="21" fill="#FBF8F2" stroke="#6B645A" stroke-width="2"/>
+  <path d="M879 521h24M891 509v24" stroke="#6B645A" stroke-width="2"/>
+  <path d="M850 536H820V580H760V570" fill="none" stroke="#3A7CA5" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Wi-Fi router on a shelf in the living room -->
+  <rect x="262" y="446" width="76" height="6" rx="2" fill="#C9A877" stroke="#1E1B16" stroke-width="1.6"/>
+  <rect x="280" y="430" width="40" height="16" rx="4" fill="#22262A" stroke="#1E1B16" stroke-width="1.8"/>
+  <path d="M286 430l-6-16M314 430l6-16" stroke="#1E1B16" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="292" cy="438" r="2" fill="#7FD1A0"/><circle cx="300" cy="438" r="2" fill="#7FD1A0"/>
+  <path d="M286 410a20 20 0 0 1 28 0M280 402a30 30 0 0 1 40 0" fill="none" stroke="#3A7CA5" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- standby generator on its pad -->
+  <rect x="948" y="552" width="70" height="10" fill="#D3CCBF" stroke="#1E1B16" stroke-width="2"/>
+  <rect x="954" y="500" width="58" height="52" rx="6" fill="#E9E3D8" stroke="#1E1B16" stroke-width="2.5"/>
+  <path d="M962 512h42M962 520h42M962 528h42" stroke="#6B645A" stroke-width="2"/>
+  <rect x="966" y="536" width="16" height="9" rx="2" fill="#D9A21E" stroke="#1E1B16" stroke-width="1.4"/>
+  <path d="M954 540H940V600H786" fill="none" stroke="#1E1B16" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <!-- lawn on the right -->
+  <path d="M948 556C975 552 995 552 1020 555" fill="none" stroke="#5E8C5A" stroke-width="8" stroke-linecap="round"/>
+
+  <g><text x="-30.0" y="53.6" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Chimney and flue</text><circle cx="-12.0" cy="43.1" r="6.5" fill="#A86020"/><path d="M-12.0 43.1 L104.0 43.1 L214.0 146.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="-30.0" y="110.2" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Attic insulation</text><circle cx="-12.0" cy="99.7" r="6.5" fill="#56707F"/><path d="M-12.0 99.7 L104.0 99.7 L300.0 234.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="-30.0" y="166.8" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Smoke and</text><text x="-30.0" y="205.8" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">CO alarms</text><circle cx="-12.0" cy="175.8" r="6.5" fill="#C7502D"/><path d="M-12.0 175.8 L104.0 175.8 L345.0 266.0" fill="none" stroke="#C7502D" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-safe)"/><text x="-30.0" y="262.4" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Gutters</text><circle cx="-12.0" cy="251.9" r="6.5" fill="#A86020"/><path d="M-12.0 251.9 L88.0 251.9 L124.0 256.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="-30.0" y="319.0" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Windows and doors</text><circle cx="-12.0" cy="308.5" r="6.5" fill="#A86020"/><path d="M-12.0 308.5 L104.0 308.5 L180.0 322.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="-30.0" y="375.6" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Walls and siding</text><circle cx="-12.0" cy="365.1" r="6.5" fill="#A86020"/><path d="M-12.0 365.1 L104.0 365.1 L180.0 378.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="-30.0" y="432.2" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Wi-Fi and</text><text x="-30.0" y="471.2" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">smart home</text><circle cx="-12.0" cy="441.2" r="6.5" fill="#C7502D"/><path d="M-12.0 441.2 L104.0 441.2 L296.0 432.0" fill="none" stroke="#C7502D" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-safe)"/><text x="-30.0" y="527.8" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Floors and framing</text><circle cx="-12.0" cy="517.3" r="6.5" fill="#A86020"/><path d="M-12.0 517.3 L104.0 517.3 L240.0 547.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="-30.0" y="584.8" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Yard and grading</text><circle cx="-12.0" cy="574.3" r="6.5" fill="#A86020"/><path d="M-12.0 574.3 L64.0 574.3 L100.0 558.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="-30.0" y="641.5" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Gas service</text><circle cx="-12.0" cy="631.0" r="6.5" fill="#56707F"/><path d="M-12.0 631.0 L104.0 631.0 L145.0 592.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="-30.0" y="698.1" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Water heater</text><circle cx="-12.0" cy="687.6" r="6.5" fill="#2F6F96"/><path d="M-12.0 687.6 L104.0 687.6 L280.0 640.0" fill="none" stroke="#2F6F96" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-water)"/><text x="-30.0" y="754.6" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Water main</text><text x="-30.0" y="793.6" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">and shutoff</text><circle cx="-12.0" cy="763.6" r="6.5" fill="#2F6F96"/><path d="M-12.0 763.6 L104.0 763.6 L226.0 664.0" fill="none" stroke="#2F6F96" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-water)"/><text x="-30.0" y="850.2" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Furnace</text><circle cx="-12.0" cy="839.7" r="6.5" fill="#56707F"/><path d="M-12.0 839.7 L104.0 839.7 L346.0 664.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="1052.0" y="125.9" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Bath fan</text><circle cx="1034.0" cy="115.4" r="6.5" fill="#56707F"/><path d="M1034.0 115.4 L1000.0 115.4 L664.0 265.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="1052.0" y="182.5" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Bathroom</text><text x="1052.0" y="221.5" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">fixtures</text><circle cx="1034.0" cy="191.5" r="6.5" fill="#2F6F96"/><path d="M1034.0 191.5 L1000.0 191.5 L610.0 374.0" fill="none" stroke="#2F6F96" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-water)"/><text x="1052.0" y="278.1" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Wiring and</text><text x="1052.0" y="317.1" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">outlets</text><circle cx="1034.0" cy="287.1" r="6.5" fill="#B07D0C"/><path d="M1034.0 287.1 L1000.0 287.1 L640.0 460.0" fill="none" stroke="#B07D0C" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-power)"/><text x="1052.0" y="373.6" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Downspouts</text><circle cx="1034.0" cy="363.1" r="6.5" fill="#A86020"/><path d="M1034.0 363.1 L1000.0 363.1 L834.0 400.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="1052.0" y="430.2" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Kitchen</text><text x="1052.0" y="469.2" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">appliances</text><circle cx="1034.0" cy="439.2" r="6.5" fill="#2F6B52"/><path d="M1034.0 439.2 L1000.0 439.2 L744.0 480.0" fill="none" stroke="#2F6B52" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-appl)"/><text x="1052.0" y="525.8" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Electric meter</text><circle cx="1034.0" cy="515.3" r="6.5" fill="#B07D0C"/><path d="M1034.0 515.3 L1000.0 515.3 L803.0 486.0" fill="none" stroke="#B07D0C" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-power)"/><text x="1052.0" y="582.4" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Heat pump</text><circle cx="1034.0" cy="571.9" r="6.5" fill="#56707F"/><path d="M1034.0 571.9 L1000.0 571.9 L891.0 512.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="1052.0" y="638.9" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Standby</text><text x="1052.0" y="677.9" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">generator</text><circle cx="1034.0" cy="647.9" r="6.5" fill="#B07D0C"/><path d="M1034.0 647.9 L1010.0 647.9 L983.0 520.0" fill="none" stroke="#B07D0C" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-power)"/><text x="1052.0" y="734.5" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Ductwork</text><circle cx="1034.0" cy="724.0" r="6.5" fill="#56707F"/><path d="M1034.0 724.0 L1000.0 724.0 L556.0 572.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="1052.0" y="791.0" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Main panel</text><circle cx="1034.0" cy="780.5" r="6.5" fill="#B07D0C"/><path d="M1034.0 780.5 L1000.0 780.5 L731.0 621.0" fill="none" stroke="#B07D0C" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-power)"/><text x="270.0" y="-79.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Roof and</text><text x="270.0" y="-40.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">shingles</text><circle cx="270.0" cy="-22.0" r="6.5" fill="#A86020"/><path d="M270.0 -22.0 L330.0 152.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="520.0" y="-40.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Ridge vent</text><circle cx="520.0" cy="-22.0" r="6.5" fill="#56707F"/><path d="M520.0 -22.0 L486.0 60.0" fill="none" stroke="#56707F" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-air)"/><text x="760.0" y="-40.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Solar panels</text><circle cx="760.0" cy="-22.0" r="6.5" fill="#B07D0C"/><path d="M760.0 -22.0 L636.0 176.0" fill="none" stroke="#B07D0C" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-power)"/><text x="990.0" y="-79.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Plumbing</text><text x="990.0" y="-40.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">vent</text><circle cx="990.0" cy="-22.0" r="6.5" fill="#2F6F96"/><path d="M990.0 -22.0 L708.0 164.0" fill="none" stroke="#2F6F96" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-water)"/><text x="250.0" y="868.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Foundation</text><text x="250.0" y="907.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">and footings</text><circle cx="250.0" cy="832.0" r="6.5" fill="#A86020"/><path d="M250.0 832.0 L214.0 752.0" fill="none" stroke="#A86020" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-shell)"/><text x="500.0" y="868.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Laundry</text><circle cx="500.0" cy="832.0" r="6.5" fill="#2F6B52"/><path d="M500.0 832.0 L515.0 708.0" fill="none" stroke="#2F6B52" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-appl)"/><text x="724.0" y="868.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Sump pump</text><circle cx="724.0" cy="832.0" r="6.5" fill="#2F6F96"/><path d="M724.0 832.0 L660.0 746.0" fill="none" stroke="#2F6F96" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-water)"/><text x="960.0" y="868.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">Drains and</text><text x="960.0" y="907.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#1E1B16">sewer</text><circle cx="960.0" cy="832.0" r="6.5" fill="#2F6F96"/><path d="M960.0 832.0 L900.0 727.0" fill="none" stroke="#2F6F96" stroke-width="3" stroke-linejoin="round" marker-end="url(#ch-ar-water)"/><circle cx="-170" cy="985" r="10" fill="#A86020"/><text x="-148" y="995" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="500" fill="#3A352D">Structure and shell</text><circle cx="330" cy="985" r="10" fill="#2F6F96"/><text x="352" y="995" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="500" fill="#3A352D">Water and drains</text><circle cx="830" cy="985" r="10" fill="#B07D0C"/><text x="852" y="995" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="500" fill="#3A352D">Power</text><circle cx="-170" cy="1031" r="10" fill="#56707F"/><text x="-148" y="1041" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="500" fill="#3A352D">Heating, cooling and air</text><circle cx="330" cy="1031" r="10" fill="#2F6B52"/><text x="352" y="1041" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="500" fill="#3A352D">Appliances</text><circle cx="830" cy="1031" r="10" fill="#C7502D"/><text x="852" y="1041" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="500" fill="#3A352D">Safety and smart home</text><path d="M-340 943H1272" stroke="#D9CFBE" stroke-width="2"/></g>
+</svg>
+<text x="40" y="768" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="1.6" fill="#F6F2EA" fill-opacity=".7">FROM THE FOOTINGS</text>
+<text x="40" y="786" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="1.6" fill="#F6F2EA" fill-opacity=".7">TO THE WI-FI</text>
+<text x="40" y="812" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="3.4" fill="#F6F2EA">WILLIAM FOTEPING</text>
+<rect x="274" y="718" width="262" height="98" rx="16" fill="#F6F2EA"/>
+<svg x="284" y="728" width="78" height="78" viewBox="0 0 37 37"><rect width="37" height="37" fill="#FFFFFF"/><path d="M2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM15 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM31 2h1v1h-1zM32 2h1v1h-1zM33 2h1v1h-1zM34 2h1v1h-1zM2 3h1v1h-1zM8 3h1v1h-1zM12 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM19 3h1v1h-1zM22 3h1v1h-1zM23 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM28 3h1v1h-1zM34 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM34 4h1v1h-1zM2 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM14 5h1v1h-1zM15 5h1v1h-1zM19 5h1v1h-1zM21 5h1v1h-1zM25 5h1v1h-1zM26 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM31 5h1v1h-1zM32 5h1v1h-1zM34 5h1v1h-1zM2 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM12 6h1v1h-1zM15 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM21 6h1v1h-1zM23 6h1v1h-1zM25 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM17 7h1v1h-1zM18 7h1v1h-1zM20 7h1v1h-1zM22 7h1v1h-1zM24 7h1v1h-1zM28 7h1v1h-1zM34 7h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM31 8h1v1h-1zM32 8h1v1h-1zM33 8h1v1h-1zM34 8h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM13 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM3 10h1v1h-1zM5 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM17 10h1v1h-1zM21 10h1v1h-1zM23 10h1v1h-1zM25 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM3 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM22 11h1v1h-1zM26 11h1v1h-1zM27 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM33 11h1v1h-1zM34 11h1v1h-1zM2 12h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM14 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM21 12h1v1h-1zM23 12h1v1h-1zM24 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM32 12h1v1h-1zM34 12h1v1h-1zM4 13h1v1h-1zM10 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM21 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM33 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM12 14h1v1h-1zM15 14h1v1h-1zM21 14h1v1h-1zM23 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM31 14h1v1h-1zM33 14h1v1h-1zM34 14h1v1h-1zM2 15h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM28 15h1v1h-1zM30 15h1v1h-1zM33 15h1v1h-1zM34 15h1v1h-1zM3 16h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM13 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM32 16h1v1h-1zM33 16h1v1h-1zM2 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM13 17h1v1h-1zM15 17h1v1h-1zM16 17h1v1h-1zM19 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM28 17h1v1h-1zM29 17h1v1h-1zM31 17h1v1h-1zM33 17h1v1h-1zM4 18h1v1h-1zM7 18h1v1h-1zM8 18h1v1h-1zM11 18h1v1h-1zM13 18h1v1h-1zM14 18h1v1h-1zM17 18h1v1h-1zM21 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM33 18h1v1h-1zM5 19h1v1h-1zM10 19h1v1h-1zM12 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM19 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM29 19h1v1h-1zM31 19h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM23 20h1v1h-1zM27 20h1v1h-1zM28 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM34 20h1v1h-1zM5 21h1v1h-1zM12 21h1v1h-1zM14 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM21 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM29 21h1v1h-1zM33 21h1v1h-1zM2 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM18 22h1v1h-1zM21 22h1v1h-1zM23 22h1v1h-1zM26 22h1v1h-1zM27 22h1v1h-1zM29 22h1v1h-1zM34 22h1v1h-1zM4 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM15 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM32 23h1v1h-1zM33 23h1v1h-1zM34 23h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM29 24h1v1h-1zM34 24h1v1h-1zM3 25h1v1h-1zM11 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM18 25h1v1h-1zM20 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM31 25h1v1h-1zM34 25h1v1h-1zM2 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM27 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM31 26h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM34 27h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM15 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM31 28h1v1h-1zM32 28h1v1h-1zM33 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM10 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM13 29h1v1h-1zM15 29h1v1h-1zM21 29h1v1h-1zM23 29h1v1h-1zM24 29h1v1h-1zM26 29h1v1h-1zM30 29h1v1h-1zM33 29h1v1h-1zM34 29h1v1h-1zM2 30h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM12 30h1v1h-1zM14 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM18 30h1v1h-1zM22 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM34 30h1v1h-1zM2 31h1v1h-1zM4 31h1v1h-1zM5 31h1v1h-1zM6 31h1v1h-1zM8 31h1v1h-1zM10 31h1v1h-1zM11 31h1v1h-1zM14 31h1v1h-1zM15 31h1v1h-1zM16 31h1v1h-1zM19 31h1v1h-1zM21 31h1v1h-1zM22 31h1v1h-1zM24 31h1v1h-1zM25 31h1v1h-1zM28 31h1v1h-1zM30 31h1v1h-1zM31 31h1v1h-1zM33 31h1v1h-1zM2 32h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM8 32h1v1h-1zM11 32h1v1h-1zM12 32h1v1h-1zM14 32h1v1h-1zM15 32h1v1h-1zM19 32h1v1h-1zM22 32h1v1h-1zM25 32h1v1h-1zM26 32h1v1h-1zM30 32h1v1h-1zM34 32h1v1h-1zM2 33h1v1h-1zM8 33h1v1h-1zM10 33h1v1h-1zM11 33h1v1h-1zM17 33h1v1h-1zM20 33h1v1h-1zM22 33h1v1h-1zM23 33h1v1h-1zM25 33h1v1h-1zM26 33h1v1h-1zM27 33h1v1h-1zM28 33h1v1h-1zM2 34h1v1h-1zM3 34h1v1h-1zM4 34h1v1h-1zM5 34h1v1h-1zM6 34h1v1h-1zM7 34h1v1h-1zM8 34h1v1h-1zM11 34h1v1h-1zM12 34h1v1h-1zM13 34h1v1h-1zM14 34h1v1h-1zM15 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM20 34h1v1h-1zM23 34h1v1h-1zM25 34h1v1h-1zM26 34h1v1h-1zM30 34h1v1h-1zM31 34h1v1h-1zM33 34h1v1h-1z" fill="#1E1B16"/></svg>
+<text x="374" y="752" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#A86020">INCLUDES THE APP</text>
+<text x="374" y="773" font-family="Fraunces, Georgia, serif" font-size="17" font-weight="600" fill="#1E1B16">Keystone Home</text>
+<text x="374" y="792" font-family="Inter, Arial, sans-serif" font-size="11" fill="#3A352D">The all-in-one app to monitor</text>
+<text x="374" y="807" font-family="Inter, Arial, sans-serif" font-size="11" fill="#3A352D">your house. Scan to set it up.</text>
+</svg>

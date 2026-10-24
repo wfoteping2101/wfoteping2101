@@ -18,7 +18,7 @@ SITE = {
 
 CDN = "https://d2ol7oe51mr4n9.cloudfront.net/user_38X5q6AW6UAWxSufMc8KKw4LN7Q/"
 
-from platforms import PROJECTS  # the 13 platforms, written in platforms.py
+from platforms import PROJECTS  # the 14 platforms, written in platforms.py
 
 ALBUM = {"slug": "wfoss", "title": "Chant et poésie de La'a", "artist": "Wfoss", "kind": "Album", "year": "2026", "color": "#0E1B4D", "ink": "#F2E6C9",
     "line": "Synth album composed for film and video, released under the name Wfoss.",
@@ -37,6 +37,10 @@ BOOKS = [
      "color": "#EDE3CF", "ink": "#A8432A", "free": "le-capital-entrave",
      "line": "Why Cameroon's economy stalls: work and savings cannot become capital when land titles, rules and institutions fail. A few people title and stockpile land to speculate; most families own something they cannot use as collateral.",
      "where": [("Read online, free", "/lire/le-capital-entrave")]},
+    {"slug": "inside-your-house", "title": "Inside Your House", "lang": "English", "kind": "Home systems, illustrated guide", "year": "2026", "pages": "Preface, 24 chapters in 7 parts, conclusion, 5 appendices, 63 drawings",
+     "color": "#1F4D3A", "ink": "#F6F2EA",
+     "line": "How every system in a house works and how to keep it running: foundation, frame, roof, water, drains, power, heating and cooling, air, appliances, safety and the home network, with a drawing for each system, a checklist at the end of every chapter and planning costs. Sold online for 25 dollars, with a free sample, and comes with Keystone Home, the app that keeps the house's records, plan and maintenance.",
+     "where": [("Buy the book, $25", "https://keystone-home-five.vercel.app/book/#buy"), ("Read a free chapter", "https://keystone-home-five.vercel.app/book/")]},
     {"slug": "monnaie-terre-merite", "title": "La Monnaie, la Terre et le Mérite", "lang": "Français", "kind": "Essay, public policy", "year": "2026", "pages": "Introduction, 42 chapters in 3 books, letter to decision makers, 5 appendices",
      "color": "#06241A", "ink": "#F1CF7A", "free": "la-monnaie-la-terre-et-le-merite",
      "line": "Three hard reforms for Cameroon, written for the people who decide: move the franc CFA from cash to digital without changing the currency; rebuild land, industry and finance the way East Asia did; and treat the economy as exchange between free individuals, not a rent shared between clans. Comes with the e-XAF interactive demonstrator.",
