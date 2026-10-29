@@ -18,7 +18,7 @@ SITE = {
 
 CDN = "https://d2ol7oe51mr4n9.cloudfront.net/user_38X5q6AW6UAWxSufMc8KKw4LN7Q/"
 
-from platforms import PROJECTS  # the 14 platforms, written in platforms.py
+from platforms import PROJECTS  # the 15 platforms, written in platforms.py
 
 ALBUM = {"slug": "wfoss", "title": "Chant et poésie de La'a", "artist": "Wfoss", "kind": "Album", "year": "2026", "color": "#0E1B4D", "ink": "#F2E6C9",
     "line": "Synth album composed for film and video, released under the name Wfoss.",
