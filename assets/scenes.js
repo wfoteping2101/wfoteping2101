@@ -1,3 +1,24 @@
+/* Hero fallback: if WebGL is not available (or three.js did not load), the drawn symbol still moves with the pointer. */
+(function () {
+  const wrap = document.querySelector('.glass'); if (!wrap) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let tx = 0, ty = 0, px = 0, py = 0, t0 = performance.now();
+  addEventListener('pointermove', e => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; }, { passive: true });
+  wrap.addEventListener('pointerdown', e => { const r = wrap.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - 0.5; ty = (e.clientY - r.top) / r.height - 0.5; }, { passive: true });
+  function tick(now) {
+    const canvas = document.getElementById('hero-canvas'), svg = wrap.querySelector('.glass-fallback');
+    if (svg && (!canvas || canvas.hidden)) {
+      px += (tx - px) * 0.06; py += (ty - py) * 0.06; const t = (now - t0) / 1000;
+      svg.style.transform = 'perspective(900px) rotateY(' + (px * 22).toFixed(2) + 'deg) rotateX(' + (-py * 16).toFixed(2) + 'deg)';
+      const g = svg.querySelectorAll('g'); if (g[1] && !reduce) g[1].setAttribute('transform', 'rotate(' + (t * 8 % 360).toFixed(2) + ' 200 150)');
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  // three.js never arrived: show the moving drawing instead of an empty box
+  addEventListener('load', () => { const c = document.getElementById('hero-canvas'); if (c && !window.THREE) c.hidden = true; });
+})();
+
 /* Three.js pieces for the portfolio: the hero symbol and one scene per journal article.
    Also a small procedural nature sound engine (no audio files). Requires three r128 (global THREE). */
 (function () {
@@ -21,16 +42,16 @@
     const tex = pmrem.fromScene(scene, 0.04).texture; pmrem.dispose(); return tex;
   }
 
-  function makeRenderer(canvas) {
-    const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  function makeRenderer(canvas, gentle) {
+    const r = new THREE.WebGLRenderer({ canvas, antialias: !gentle, alpha: true, powerPreference: gentle ? 'default' : 'high-performance', failIfMajorPerformanceCaveat: false });
     r.setPixelRatio(Math.min(2, devicePixelRatio || 1)); r.outputEncoding = THREE.sRGBEncoding; r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.05;
     return r;
   }
   function fit(r, cam, el) { const w = el.clientWidth, h = el.clientHeight; if (!w || !h) return; r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
 
   /* ---------- the symbol: a rose window of cobalt glass, a gold ring, a chalk heart ---------- */
-  function hero(canvas) {
-    const r = makeRenderer(canvas), scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  function hero(canvas, gentle) {
+    const r = makeRenderer(canvas, gentle), scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
     cam.position.set(0, 0.4, 7.2); scene.environment = envMap(r);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x8899cc, 0.55));
     const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4, 6, 5); scene.add(key);
@@ -65,7 +86,10 @@
     let px = 0, py = 0, tx = 0, ty = 0;
     addEventListener('pointermove', e => { tx = (e.clientX / innerWidth - 0.5); ty = (e.clientY / innerHeight - 0.5); }, { passive: true });
     const clock = new THREE.Clock();
+    let alive = true;
+    canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); alive = false; canvas.hidden = true; restartHero(1); }, { once: true });
     function frame() {
+      if (!alive) return;
       const t = clock.getElapsedTime();
       px += (tx - px) * 0.04; py += (ty - py) * 0.04;
       group.rotation.z = reduce ? 0 : t * 0.06; group.rotation.y = px * 0.6; group.rotation.x = py * 0.4 - 0.05;
@@ -353,7 +377,17 @@
   })();
 
   /* ---------- wire up ---------- */
-  const h = document.getElementById('hero-canvas'); if (h) try { hero(h); } catch (e) { h.hidden = true; }
+  /* start the hero; if the browser refuses a WebGL context, try again on a fresh canvas before keeping the drawn fallback */
+  function restartHero(attempt) {
+    const old = document.getElementById('hero-canvas'); if (!old) return;
+    if (attempt > 4) { old.hidden = true; return; }
+    setTimeout(() => {
+      const c = old.cloneNode(false); c.hidden = false; old.replaceWith(c);
+      try { hero(c, attempt > 1); } catch (e) { c.hidden = true; restartHero(attempt + 1); }
+    }, attempt ? 700 * attempt : 0);
+  }
+  window.restartHero = restartHero;
+  const h = document.getElementById('hero-canvas'); if (h) try { hero(h); } catch (e) { h.hidden = true; restartHero(1); }
   document.querySelectorAll('canvas[data-scene]').forEach(c => { try { journalScene(c, c.dataset.scene); } catch (e) { c.hidden = true; } });
   document.querySelectorAll('[data-sound]').forEach(b => b.addEventListener('click', () => { const on = Sound.toggle(b.dataset.sound); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.querySelector('span').textContent = on ? b.dataset.off : b.dataset.on; }));
 })();
