@@ -78,7 +78,7 @@ hr.rule{border:0;border-top:1px solid var(--ligne);margin:0}
  radial-gradient(50% 60% at 75% 70%,color-mix(in srgb,var(--or) 45%,transparent),transparent 70%),
  linear-gradient(160deg,var(--pierre),var(--craie-2))}
 .glass canvas,.glass svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.glass canvas:not([hidden]) + svg{display:none}
+.glass canvas:not([hidden]) + .glass-fallback{display:none}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px;border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);padding:22px 0}

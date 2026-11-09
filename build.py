@@ -30,7 +30,7 @@ def tf(en, d, key, i=None, j=None):
     except (IndexError, KeyError, TypeError): v = None
     return t(en, v) if v else E(en)
 
-THREE = '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script><script src="/assets/scenes.js" defer></script>'
+THREE = '<script src="/assets/three.min.js" defer></script><script src="/assets/scenes.js" defer></script>'
 
 def cover_art(seed, color, ink):
     """An original generative motif per cover: concentric arcs, a rose of lines, or a field of dots, seeded by the slug."""
@@ -92,10 +92,7 @@ def platform_card(p):
     return f"""<article class="card pcard rv"><a class="pc-shot" href="/portfolio/{s}" tabindex="-1" aria-hidden="true"><figure class="shot" style="margin:0"><img src="/assets/shots/{p['shot']}.webp" alt="" loading="lazy"></figure></a>{plabel(p)}<h3><a href="/portfolio/{s}">{E(p['title'])}</a></h3><p style="margin:0;color:var(--encre)">{tf(p['line'], f, 'line')}</p><p class="mono muted" style="margin:0;font-size:12px">{tf(p['status'], f, 'status')}</p><p class="pc-links"><a href="/portfolio/{s}">{t('Details', 'Détails')} &rarr;</a><a href="/guides/{s}">{t('How to use', 'Mode d’emploi')} &rarr;</a>{visit_link(p)}</p></article>"""
 
 def hero_art():
-    return """<div class="glass rv" aria-hidden="true"><canvas id="hero-canvas"></canvas><svg class="glass-fallback" viewBox="0 0 400 300" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#1C3FBF">
-<g opacity=".55"><path d="M40 260 L200 40 L360 260 Z"/><path d="M200 40 V260"/><path d="M120 150 H280"/><path d="M80 205 H320"/></g>
-<g opacity=".8" stroke="#B8933F"><circle cx="200" cy="150" r="70"/><circle cx="200" cy="150" r="46"/><path d="M130 150 H270 M200 80 V220"/></g>
-<g opacity=".5"><path d="M20 290 H380" /><path d="M60 120 Q200 -20 340 120" /></g></svg></div>"""
+    return """<div class="glass rv" aria-hidden="true"><canvas id="hero-canvas"></canvas><canvas class="glass-fallback" id="hero-2d"></canvas></div>"""
 
 # ---------------------------------------------------------------------------
 def page_home():

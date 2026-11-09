@@ -1,22 +1,64 @@
-/* Hero fallback: if WebGL is not available (or three.js did not load), the drawn symbol still moves with the pointer. */
+/* Hero fallback: the same rose window drawn in 2D, used when WebGL is refused or three.js does not load.
+   Cobalt glass petals, two gold rings, a chalk heart with a gold point, gold dust; it turns and follows the pointer. */
 (function () {
-  const wrap = document.querySelector('.glass'); if (!wrap) return;
+  const wrap = document.querySelector('.glass'), cv = document.getElementById('hero-2d'); if (!wrap || !cv) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let tx = 0, ty = 0, px = 0, py = 0, t0 = performance.now();
+  const dark = () => document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+  let tx = 0, ty = 0, px = 0, py = 0; const t0 = performance.now();
   addEventListener('pointermove', e => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; }, { passive: true });
-  wrap.addEventListener('pointerdown', e => { const r = wrap.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - 0.5; ty = (e.clientY - r.top) / r.height - 0.5; }, { passive: true });
-  function tick(now) {
-    const canvas = document.getElementById('hero-canvas'), svg = wrap.querySelector('.glass-fallback');
-    if (svg && (!canvas || canvas.hidden)) {
-      px += (tx - px) * 0.06; py += (ty - py) * 0.06; const t = (now - t0) / 1000;
-      svg.style.transform = 'perspective(900px) rotateY(' + (px * 22).toFixed(2) + 'deg) rotateX(' + (-py * 16).toFixed(2) + 'deg)';
-      const g = svg.querySelectorAll('g'); if (g[1] && !reduce) g[1].setAttribute('transform', 'rotate(' + (t * 8 % 360).toFixed(2) + ' 200 150)');
-    }
-    requestAnimationFrame(tick);
+  const dust = []; let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 180; i++) { const a = rnd() * Math.PI * 2, r = 3.3 + rnd() * 1.6; dust.push([Math.cos(a) * r, Math.sin(a) * r * 0.9, 0.5 + rnd() * 0.8]); }
+  function petal(c, len) {
+    c.beginPath(); c.moveTo(0, 0);
+    c.bezierCurveTo(0.42 * len, -0.5 * len, 0.42 * len, -1.5 * len, 0, -2.3 * len);
+    c.bezierCurveTo(-0.42 * len, -1.5 * len, -0.42 * len, -0.5 * len, 0, 0); c.closePath();
   }
-  requestAnimationFrame(tick);
-  // three.js never arrived: show the moving drawing instead of an empty box
-  addEventListener('load', () => { const c = document.getElementById('hero-canvas'); if (c && !window.THREE) c.hidden = true; });
+  function draw(now) {
+    const canvas3d = document.getElementById('hero-canvas');
+    if (canvas3d && !canvas3d.hidden) return requestAnimationFrame(draw);
+    const t = (now - t0) / 1000, w = wrap.clientWidth, h = wrap.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+    const c = cv.getContext('2d'); c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height);
+    px += (tx - px) * 0.05; py += (ty - py) * 0.05;
+    const u = (h * dpr) / 4.13, D = dark();
+    c.translate(cv.width / 2, cv.height / 2 + 0.25 * u); c.scale(u, u);
+    // gentle tilt from the pointer: squash along the tilt axes, like the 3D symbol
+    const ry = px * 0.6, rx = py * 0.4 - 0.05; c.transform(Math.cos(ry), 0, 0, Math.cos(rx), 0, 0);
+    const rot = reduce ? 0 : t * 0.06;
+    // dust
+    c.save(); c.rotate(-t * 0.02); c.fillStyle = D ? 'rgba(232,201,130,.8)' : 'rgba(184,147,63,.75)';
+    dust.forEach(d => { c.globalAlpha = 0.45 + 0.35 * d[2]; c.beginPath(); c.arc(d[0], d[1], 0.022, 0, 7); c.fill(); }); c.restore(); c.globalAlpha = 1;
+    c.save(); c.rotate(rot);
+    // petals: outer ring (16), then inner ring (12)
+    [[16, 1.55, 0.78, Math.PI / 16, D ? [150, 175, 255] : [59, 95, 224]], [12, 0.55, 1, 0, D ? [130, 155, 250] : [28, 63, 191]]].forEach(([n, rad, len, off, col]) => {
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + off;
+        c.save(); c.rotate(a + Math.PI / 2); c.translate(0, -rad); petal(c, len);
+        const g = c.createLinearGradient(0, 0, 0, -2.3 * len);
+        g.addColorStop(0, 'rgba(' + col + ',' + (D ? .30 : .28) + ')'); g.addColorStop(.55, 'rgba(' + col + ',' + (D ? .16 : .12) + ')'); g.addColorStop(1, 'rgba(' + col + ',' + (D ? .26 : .22) + ')');
+        c.fillStyle = g; c.fill();
+        c.lineWidth = 0.018; c.strokeStyle = D ? 'rgba(255,255,255,.55)' : 'rgba(255,255,255,.75)'; c.stroke();
+        // a light streak on each petal, brighter towards the upper left
+        const lit = 0.5 + 0.5 * Math.cos(a + rot - 2.3);
+        c.beginPath(); c.moveTo(0.05 * len, -0.45 * len); c.quadraticCurveTo(0.2 * len, -1.15 * len, 0.06 * len, -1.85 * len);
+        c.lineWidth = 0.035; c.strokeStyle = 'rgba(255,255,255,' + (0.15 + 0.55 * lit).toFixed(3) + ')'; c.stroke();
+        c.restore();
+      }
+    });
+    // gold rings
+    const gold = (r0, lw) => { const g = c.createLinearGradient(-r0, -r0, r0, r0); g.addColorStop(0, '#E9D08C'); g.addColorStop(.5, '#B8933F'); g.addColorStop(1, '#F3E2AE'); c.beginPath(); c.arc(0, 0, r0, 0, 7); c.lineWidth = lw; c.strokeStyle = g; c.stroke(); };
+    gold(2.95, 0.09); gold(1.52, 0.04);
+    c.restore();
+    // chalk heart with a gold point
+    const hg = c.createRadialGradient(-0.1, -0.12, 0.02, 0, 0, 0.36); hg.addColorStop(0, '#FFFFFF'); hg.addColorStop(1, '#E6DFD2');
+    c.beginPath(); c.arc(0, 0, 0.34, 0, 7); c.fillStyle = hg; c.fill();
+    const dg = c.createRadialGradient(-0.03, -0.03, 0.01, 0, 0, 0.1); dg.addColorStop(0, '#F3E2AE'); dg.addColorStop(1, '#9C7A2E');
+    c.beginPath(); c.arc(0, 0, 0.1, 0, 7); c.fillStyle = dg; c.fill();
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+  // three.js never arrived: show the 2D symbol instead of an empty box
+  addEventListener('load', () => { const c3 = document.getElementById('hero-canvas'); if (c3 && !window.THREE) c3.hidden = true; });
 })();
 
 /* Three.js pieces for the portfolio: the hero symbol and one scene per journal article.
