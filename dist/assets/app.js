@@ -5,6 +5,18 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
 
+  /* ---------- African Playhouse collection ---------- */
+  const portfolioPath = location.pathname.replace(/\/$/, '');
+  if (portfolioPath === '/portfolio') {
+    const card = $('.pcard h3 a[href="/portfolio/african-playhouse"]')?.closest('article');
+    const links = card?.querySelector('.pc-links');
+    if (links && !links.querySelector('a[href="https://africanplayhouse.vercel.app/"]')) {
+      links.insertAdjacentHTML('beforeend', "<a class=\"pc-visit\" href=\"https://africanplayhouse.vercel.app/\" target=\"_blank\" rel=\"noopener\"><span data-fr=\"Jouer à la collection\">Play the collection</span> &#8599;</a>");
+    }
+  } else if (portfolioPath === '/portfolio/african-playhouse' && !$('#featured-collection')) {
+    $('main .open figure.shot')?.insertAdjacentHTML('beforebegin', "<section class=\"card rv\" aria-labelledby=\"featured-collection\" style=\"margin-bottom:24px\">\n<h2 id=\"featured-collection\" style=\"font-size:clamp(22px,3vw,30px);margin:0\"><span data-fr=\"Créations originales d’African Playhouse\">African Playhouse Originals</span></h2>\n<p style=\"margin:0\"><span data-fr=\"Trois jeux de navigateur inspirés du Cameroun.\">Three browser games inspired by Cameroon.</span></p>\n<div class=\"cta-row\"><a class=\"btn cobalt\" href=\"https://africanplayhouse.vercel.app/\" target=\"_blank\" rel=\"noopener\"><span data-fr=\"Jouer à la collection\">Play the collection</span> &#8599;</a></div>\n<ul style=\"display:grid;gap:8px;margin:0;padding-left:1.25em\"><li><a href=\"https://africanplayhouse.vercel.app/games/recolte-mboa/\" target=\"_blank\" rel=\"noopener\">Récolte Mboa</a><p style=\"margin:0\"><span data-fr=\"Ramassez des plantains dans une course de 45 secondes.\">Collect plantains in a 45-second run.</span></p></li><li><a href=\"https://africanplayhouse.vercel.app/games/les-gardiens-du-royaume/\" target=\"_blank\" rel=\"noopener\">Les Gardiens du Royaume</a><p style=\"margin:0\"><span data-fr=\"Placez des postes de garde pour défendre la cour pendant trois vagues.\">Place watchposts to defend a courtyard through three waves.</span></p></li><li><a href=\"https://africanplayhouse.vercel.app/games/mboa-foot/\" target=\"_blank\" rel=\"noopener\">Mboa Foot</a><p style=\"margin:0\"><span data-fr=\"Passez et tirez dans des matchs de football de quartier de 60 secondes.\">Pass and shoot in 60-second neighbourhood football matches.</span></p></li></ul></section>");
+  }
+
   /* ---------- language (EN / FR) ---------- */
   const LANG_KEY = 'wf-lang';
   function applyLang(l) {
