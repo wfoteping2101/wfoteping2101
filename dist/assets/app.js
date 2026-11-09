@@ -5,15 +5,58 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
 
-  /* ---------- African Playhouse collection ---------- */
+  /* ---------- Portfolio project numbering ---------- */
   const portfolioPath = location.pathname.replace(/\/$/, '');
+  const playableProjectId = 'african-playhouse-playable-2';
+  const playableProjectNumber = 14;
+  const playableGallery = 'https://africanplayhouse.vercel.app/';
+
+  function moveLaterProjectNumbers(labels) {
+    labels.forEach(label => {
+      const number = Number(label.textContent.match(/^N° (\d+)$/)?.[1]);
+      if (number >= playableProjectNumber) label.textContent = 'N° ' + (number + 1);
+    });
+  }
+
   if (portfolioPath === '/portfolio') {
-    const card = $('.pcard h3 a[href="/portfolio/african-playhouse"]')?.closest('article');
-    const links = card?.querySelector('.pc-links');
-    if (links && !links.querySelector('a[href="https://africanplayhouse.vercel.app/"]')) {
-      links.insertAdjacentHTML('beforeend', "<a class=\"pc-visit\" href=\"https://africanplayhouse.vercel.app/\" target=\"_blank\" rel=\"noopener\"><span data-fr=\"Jouer à la collection\">Play the collection</span> &#8599;</a>");
+    const labels = $$('#main .pcard .label > b');
+    const nextCard = labels.find(label => label.textContent === 'N° ' + playableProjectNumber)?.closest('.pcard');
+    if (nextCard && !document.getElementById(playableProjectId)) {
+      nextCard.insertAdjacentHTML('beforebegin', `
+        <article id="${playableProjectId}" class="card pcard rv" style="scroll-margin-top:100px">
+          <a class="pc-shot" href="${playableGallery}" tabindex="-1" aria-hidden="true"><figure class="shot" style="margin:0"><img src="${playableGallery}art/highland-road.jpg" alt="" loading="lazy" width="1536" height="1024"></figure></a>
+          <span class="label"><b>N° ${playableProjectNumber}</b><span><span data-fr="Collection de jeux de navigateur">Browser game collection</span></span><span>2026</span></span>
+          <h3><a href="${playableGallery}">African Playhouse Playable 2</a></h3>
+          <p style="margin:0;color:var(--encre)"><span data-fr="Trois jeux inspirés du Cameroun à jouer dans le navigateur : Récolte Mboa, Les Gardiens du Royaume et Mboa Foot.">Three Cameroon-inspired games you can play in your browser: Récolte Mboa, Les Gardiens du Royaume and Mboa Foot.</span></p>
+          <p class="mono muted" style="margin:0;font-size:12px"><span data-fr="En ligne · 3 jeux jouables">Live · 3 playable games</span></p>
+          <p class="pc-links"><a class="pc-visit" href="${playableGallery}"><span data-fr="Jouer à la collection">Play the collection</span> &#8599;</a></p>
+        </article>`);
+      moveLaterProjectNumbers(labels);
+
+      const total = $('#main .label [data-fr$=" plateformes"]');
+      const live = nextCard.closest('section')?.querySelector('.sec-head .label > span');
+      if (total) {
+        const count = labels.length + 1;
+        total.textContent = count + ' platforms';
+        total.dataset.fr = count + ' plateformes';
+      }
+      if (live) live.textContent = String(Number(live.textContent) + 1);
     }
-  } else if (portfolioPath === '/portfolio/african-playhouse' && !$('#featured-collection')) {
+  } else if (/^\/(?:portfolio|guides)\//.test(portfolioPath)) {
+    moveLaterProjectNumbers($$('#main .label > b'));
+  } else if (portfolioPath === '') {
+    const allProjects = $('a[href="/portfolio"] [data-fr^="Les "][data-fr$=" plateformes"]');
+    if (allProjects) {
+      const count = Number(allProjects.textContent.match(/^All (\d+) platforms$/)?.[1]);
+      if (count) {
+        allProjects.textContent = 'All ' + (count + 1) + ' platforms';
+        allProjects.dataset.fr = 'Les ' + (count + 1) + ' plateformes';
+      }
+    }
+  }
+
+  /* ---------- African Playhouse collection ---------- */
+  if (portfolioPath === '/portfolio/african-playhouse' && !$('#featured-collection')) {
     $('main .open figure.shot')?.insertAdjacentHTML('beforebegin', "<section class=\"card rv\" aria-labelledby=\"featured-collection\" style=\"margin-bottom:24px\">\n<h2 id=\"featured-collection\" style=\"font-size:clamp(22px,3vw,30px);margin:0\"><span data-fr=\"Créations originales d’African Playhouse\">African Playhouse Originals</span></h2>\n<p style=\"margin:0\"><span data-fr=\"Trois jeux de navigateur inspirés du Cameroun.\">Three browser games inspired by Cameroon.</span></p>\n<div class=\"cta-row\"><a class=\"btn cobalt\" href=\"https://africanplayhouse.vercel.app/\" target=\"_blank\" rel=\"noopener\"><span data-fr=\"Jouer à la collection\">Play the collection</span> &#8599;</a></div>\n<ul style=\"display:grid;gap:8px;margin:0;padding-left:1.25em\"><li><a href=\"https://africanplayhouse.vercel.app/games/recolte-mboa/\" target=\"_blank\" rel=\"noopener\">Récolte Mboa</a><p style=\"margin:0\"><span data-fr=\"Ramassez des plantains dans une course de 45 secondes.\">Collect plantains in a 45-second run.</span></p></li><li><a href=\"https://africanplayhouse.vercel.app/games/les-gardiens-du-royaume/\" target=\"_blank\" rel=\"noopener\">Les Gardiens du Royaume</a><p style=\"margin:0\"><span data-fr=\"Placez des postes de garde pour défendre la cour pendant trois vagues.\">Place watchposts to defend a courtyard through three waves.</span></p></li><li><a href=\"https://africanplayhouse.vercel.app/games/mboa-foot/\" target=\"_blank\" rel=\"noopener\">Mboa Foot</a><p style=\"margin:0\"><span data-fr=\"Passez et tirez dans des matchs de football de quartier de 60 secondes.\">Pass and shoot in 60-second neighbourhood football matches.</span></p></li></ul></section>");
   }
 
