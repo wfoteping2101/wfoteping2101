@@ -4,6 +4,9 @@
 from platforms import PROJECTS_FR as PROJECTS, GUIDES_FR as GUIDES
 
 BOOKS = {
+"la-route-de-la-lumiere": {"pages": "Introduction, 26 chapitres en 6 parties, conclusion, 4 annexes ; 343 pages, 50 schémas", "kind": "Réseaux télécoms et droit, illustré",
+    "line": "Comment Internet arrive au Cameroun, du câble sous-marin jusqu’à chez vous : la physique de la fibre et de la radio, les stations d’atterrissement, la dorsale nationale, les boucles des villes, les sites radio, la fibre à domicile, les liaisons d’entreprise et les villages ; les réseaux de CAMTEL, d’Orange et de MTN couche par couche ; la façon dont ils s’interconnectent ; et les lois qui encadrent chaque étape. Chaque fait sur le Cameroun est sourcé en note. Le compagnon de la plateforme Lemon Connect Cameroon.",
+    "where": [("Lire en ligne, gratuitement",), ("Télécharger le PDF",), ("Plateforme interactive",)]},
 "camera-au-poing": {"pages": "Préface, introduction, 23 chapitres, 4 annexes", "kind": "Vlog, cinéma, montage",
     "line": "Vloguer et filmer avec un téléphone : trouver sa voix, raconter une journée, la lumière, le son, la scène, le documentaire, le sketch et le clip, puis monter avec Bobine et apprendre de chaque publication.",
     "where": [("Lire en ligne, gratuitement",), ("Sur Bobine",)]},

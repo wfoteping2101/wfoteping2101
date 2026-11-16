@@ -25,6 +25,10 @@ ALBUM = {"slug": "wfoss", "title": "Chant et poésie de La'a", "artist": "Wfoss"
     "where": [("Listen on Spotify", "https://open.spotify.com/search/Wfoss%20Chant%20et%20po%C3%A9sie%20de%20La%27a")]}
 
 BOOKS = [
+    {"slug": "la-route-de-la-lumiere", "title": "La Route de la lumière", "lang": "Français", "kind": "Telecom networks and law, illustrated", "year": "2026", "pages": "Introduction, 26 chapters in 6 parts, conclusion, 4 appendices; 343 pages, 50 diagrams",
+     "color": "#0A1824", "ink": "#F4EBD9",
+     "line": "How the Internet reaches Cameroon, from the submarine cable to your home: the physics of fibre and radio, landing stations, the national backbone, metro rings, radio sites, fibre to the home, business links and villages; the networks of CAMTEL, Orange and MTN layer by layer; how they interconnect; and the laws that govern every step. Every fact about Cameroon is sourced in the notes. The companion of the Lemon Connect Cameroon platform.",
+     "where": [("Read online, free", "https://lemon-connect-cameroon.vercel.app/#livre"), ("Download the PDF", "https://lemon-connect-cameroon.vercel.app/livre/la-route-de-la-lumiere.pdf"), ("Interactive platform", "https://lemon-connect-cameroon.vercel.app/#construction")]},
     {"slug": "camera-au-poing", "title": "Caméra au poing", "lang": "Français", "kind": "Vlog, film, editing", "year": "2026", "pages": "Preface, introduction, 23 chapters, 4 appendices",
      "color": "#0B0B0D", "ink": "#D4AD6A", "free": "camera-au-poing",
      "line": "Vlogging and filmmaking with a phone: finding a voice, telling a day, light, sound, scenes, documentary, sketch and music video, then editing with Bobine and learning from every post.",

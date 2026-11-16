@@ -378,7 +378,20 @@ def house():
         body = body.replace(f'id="{i}"', f'id="{u}{i}"').replace(f"url(#{i})", f"url(#{u}{i})")
     return f'<svg x="0" y="0" width="600" height="900" viewBox="{vb}" preserveAspectRatio="xMidYMid slice">{body}</svg>'
 
-COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux, "tout-est-code": code, "inside-your-house": house}
+# ---------------------------------------------------------------------------
+# La Route de la lumière: the real outline of Cameroon stippled with lights, the five submarine
+# cables landing at Limbé, Douala and Kribi. Drawn in code (book/cover.py), kept in books/covers/.
+def route():
+    import re
+    from pathlib import Path
+    u = _uid()
+    src = (Path(__file__).resolve().parent / "books" / "covers" / "la-route-de-la-lumiere.svg").read_text(encoding="utf-8")
+    body = re.sub(r"^.*?<svg[^>]*>", "", src, count=1, flags=re.S).rsplit("</svg>", 1)[0]
+    for i in sorted(set(re.findall(r'id="([^"]+)"', body)), key=len, reverse=True):
+        body = body.replace(f'id="{i}"', f'id="{u}{i}"').replace(f"url(#{i})", f"url(#{u}{i})").replace(f'href="#{i}"', f'href="#{u}{i}"')
+    return body
+
+COVERS = {"richesse-silencieuse": richesse, "la-richesse-silencieuse": richesse, "capital-entrave": capital, "le-capital-entrave": capital, "camera-au-poing": camera, "monnaie-terre-merite": monnaie, "la-monnaie-la-terre-et-le-merite": monnaie, "yeux-ouverts": yeux, "les-yeux-ouverts": yeux, "tout-est-code": code, "inside-your-house": house, "la-route-de-la-lumiere": route}
 
 def cover_svg(seed):
     fn = COVERS.get(seed)
