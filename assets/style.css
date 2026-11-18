@@ -354,3 +354,20 @@ input,textarea,select,[contenteditable],.selectable,.selectable *{-webkit-user-s
 /* covers in grids sit in the flow: no sticky offset */
 .tome .cover.art,.salon-card .cover.art,.cover.mini{top:auto}
 .tome{align-content:start}
+
+/* Seal and background artwork (art.py): engraved astrolabe and orbital diagram behind the content */
+.brand .seal{width:34px;height:34px;border-radius:50%;flex:none;box-shadow:0 1px 3px color-mix(in srgb,#000 22%,transparent)}
+footer .seal-lg{display:block;width:72px;height:72px;border-radius:50%;margin:0 0 14px}
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.sky i{position:absolute;display:block;aspect-ratio:1;background-repeat:no-repeat;background-size:contain;background-position:center}
+.sky-a{--s:min(118vh,1240px);width:var(--s);right:calc(var(--s) * -.36);top:calc(var(--s) * -.17);background-image:url(/assets/art/astrolabe-ink.svg);opacity:.13}
+.sky-b{--s:min(70vh,700px);width:var(--s);left:calc(var(--s) * -.30);bottom:calc(var(--s) * -.26);background-image:url(/assets/art/orbits-ink.svg);opacity:.12}
+:root[data-theme="dark"] .sky-a{background-image:url(/assets/art/astrolabe-paper.svg);opacity:.10}
+:root[data-theme="dark"] .sky-b{background-image:url(/assets/art/orbits-paper.svg);opacity:.10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sky-a{background-image:url(/assets/art/astrolabe-paper.svg);opacity:.10}:root:not([data-theme="light"]) .sky-b{background-image:url(/assets/art/orbits-paper.svg);opacity:.10}}
+@media (prefers-reduced-motion:no-preference){.sky-a{animation:sky-turn 480s linear infinite}}
+@keyframes sky-turn{to{transform:rotate(360deg)}}
+@media (max-width:720px){.sky-a{--s:150vw;right:-62vw;top:-8vh;opacity:.10}.sky-b{--s:115vw;left:-52vw;bottom:-16vh;opacity:.09}.brand .seal{width:30px;height:30px}}
+@media print{.sky{display:none}}
+@media (max-width:440px){.top .brand{font-size:17px;gap:8px}.brand .seal{width:26px;height:26px}.top .pill{padding:6px 8px}.top .tools{gap:4px}.top .burger{width:36px;height:36px}}
+@media (max-width:350px){.top .brand .bname{display:none}}

@@ -1407,6 +1407,10 @@ PLATFORMS = [
 ]
 
 # ---------------------------------------------------------------------------
+# Academic records (academic.py) replace kind, line, facts and sections before the views are derived.
+from academic import apply_platforms
+apply_platforms(PLATFORMS)
+
 # Derived views for build.py: English dicts, and French overlays keyed by slug.
 def _en(pair): return pair[0]
 def _fr(pair): return pair[1]

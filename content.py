@@ -167,3 +167,7 @@ STEPS = [
     ("Meet", "We review the brief. You receive the scope, price and timeline in writing."),
     ("Deposit, build, deliver", "The deposit starts the work. You review at each milestone. Delivery includes two rounds of revisions and documentation."),
 ]
+
+# Academic catalogue records for the books (academic.py).
+from academic import apply_books_en
+apply_books_en(BOOKS)

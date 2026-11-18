@@ -99,3 +99,7 @@ STEPS = [
 ]
 
 JOURNAL = {}  # the journal is written in French (journal.py)
+
+# Academic catalogue records for the books, French side (academic.py).
+from academic import apply_books_fr
+apply_books_fr(BOOKS)

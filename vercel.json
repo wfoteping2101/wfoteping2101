@@ -87,6 +87,11 @@
   ],
   "redirects": [
     {
+      "source": "/studio",
+      "destination": "https://claude.ai/artifact/13VsrjKSLhC1rrVeGyic27",
+      "permanent": false
+    },
+    {
       "source": "/work",
       "destination": "/portfolio",
       "permanent": true
