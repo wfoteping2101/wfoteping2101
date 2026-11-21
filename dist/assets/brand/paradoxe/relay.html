@@ -1,0 +1,13 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="robots" content="noindex"><title>Paradoxe · kit</title>
+<body style="background:#0d111c;color:#efe4cf;font:16px system-ui;display:grid;place-items:center;height:100vh;margin:0">
+<p id="s">Paradoxe · envoi du kit…</p>
+<script>
+(async () => {
+  const names = ['avatar', 'x-header', 'youtube-banner', 'logo-lockup'];
+  const kit = {};
+  for (const n of names) { const r = await fetch(n + '.png', {cache: 'no-store'}); kit[n] = await r.blob(); }
+  const targets = ['https://x.com', 'https://www.youtube.com', 'https://studio.youtube.com', 'https://www.tiktok.com'];
+  if (window.opener) { for (const t of targets) window.opener.postMessage({paradoxeKit: kit}, t); document.getElementById('s').textContent = 'Kit envoyé. Cette fenêtre va se fermer.'; setTimeout(() => window.close(), 1500); }
+  else document.getElementById('s').textContent = 'Ouvrez cette page depuis l’onglet qui doit recevoir le kit.';
+})();
+</script></body></html>
