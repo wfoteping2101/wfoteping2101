@@ -1,8 +1,8 @@
-# Academic records for platforms 13-20. Each value is (English, French).
+# Academic records for platforms 14-21. Each value is (English, French).
 from acad_a import PS, CO, AR, ME, VL
 
 C = {
-# ---------------------------------------------------------------- 13
+# ---------------------------------------------------------------- 14
 "express-union-next": {
  "kind": ("Product concept for a money-transfer and microfinance network", "Concept produit pour un réseau de transfert d’argent et de microfinance"),
  "line": ("A product concept prepared for the founder of Express Union, the Cameroonian money-transfer and microfinance network: one account reachable through an application, messaging channels, agencies and an API, backed by a double-entry ledger and PIN-gated authorisation.",
@@ -24,7 +24,7 @@ C = {
   (VL, ("The MTN, Orange, WhatsApp, Telegram and SMS integrations are simulated, and the ledger is a client-side demonstration, not a production core-banking system. The guide and the book were written from the code and from public sources.",
         "Les intégrations MTN, Orange, WhatsApp, Telegram et SMS sont simulées, et le grand livre est une démonstration côté client, non un système bancaire de production. Le guide et le livre ont été rédigés à partir du code et de sources publiques.")),
  ]},
-# ---------------------------------------------------------------- 14
+# ---------------------------------------------------------------- 15
 "terraguard-cm": {
  "kind": ("Land-evidence registry with spatial conflict detection and on-chain integrity anchoring", "Registre de preuves foncières avec détection spatiale des conflits et ancrage d’intégrité sur blockchain"),
  "line": ("An independent land-evidence platform for Cameroon in which a parcel can be recorded by walking its boundary with a phone, every declaration and document receives a dated, salted fingerprint anchored on a public test blockchain, overlaps between declarations are detected in PostGIS before and after registration, and a prospective buyer obtains a rule-based, traffic-light assessment of what the platform knows before payment.",
@@ -46,7 +46,7 @@ C = {
   (VL, ("Verification comprised 43 API integration tests against PostgreSQL/PostGIS and a local chain, 12 contract tests, and 9 browser tests, among them the four simple flows and the 18-step tour on a 390-pixel screen with basemap tiles delayed by 25 seconds to emulate a rural connection; on the hosted demo, the ten scenarios succeeded and their Base Sepolia receipts were checked. The limits are structural. The platform sees only what is declared on it and cannot block a sale concluded elsewhere; a green verdict is the absence of known problems, not proof of ownership. Phone positions carry errors of several metres, and satellite imagery requires a licensed tile provider. No MINDCAF, cadastre or court system is connected, so the status reserved for official confirmation cannot be assigned. E-mail and SMS delivery are not configured, and the demonstration runs on a test network without monetary value.",
         "La vérification a compris 43 tests d’intégration de l’API sur PostgreSQL/PostGIS et une chaîne locale, 12 tests de contrats et 9 tests navigateur, dont les quatre parcours simples et la visite de 18 étapes sur un écran de 390 pixels, avec un fond de carte retardé de 25 secondes pour simuler une connexion rurale ; sur la démonstration en ligne, les dix scénarios ont réussi et leurs reçus Base Sepolia ont été contrôlés. Les limites sont structurelles. La plateforme ne voit que ce qui y est déclaré et ne peut pas bloquer une vente conclue ailleurs ; un verdict vert signifie l’absence de problème connu, non la preuve de la propriété. Les positions de téléphone comportent des erreurs de plusieurs mètres, et l’imagerie satellite exige un fournisseur de tuiles sous licence. Aucun système du MINDCAF, du cadastre ou des tribunaux n’est connecté, de sorte que le statut réservé à la confirmation officielle ne peut être attribué. L’envoi de courriels et de SMS n’est pas configuré, et la démonstration fonctionne sur un réseau de test sans valeur monétaire.")),
  ]},
-# ---------------------------------------------------------------- 15
+# ---------------------------------------------------------------- 16
 "sebene": {
  "kind": ("Automated DJ system for best-part playback over streaming players", "Système de DJ automatisé pour la lecture des meilleurs moments sur lecteurs de streaming"),
  "line": ("A party DJ application that locates the best part of each song in a 214-song Thanksgiving playlist from the timing of its synced lyrics, sequences the cuts along a five-part evening arc, and plays them through two alternating Spotify players with a handover designed so that no silence is heard between songs, while the host keeps live control.",
@@ -70,7 +70,7 @@ C = {
   (VL, ("A stand-in for the Spotify player reproduced the delays that cause gaps: a load time, commands ignored during a load, buffering before sound, one stream per account, songs that keep reporting buffering while they play, and update streams that fall silent. Driven in headless Chrome and sampled every 50 ms, the unbridged silence was 0 ms in every condition, and drag to Next and the reordering of picks behaved as specified. On the production site with real Spotify players, consecutive songs overlapped for about 2.5 s with no gap; that test revealed songs that report buffering while playing, which had set off the drum bridge over the music, and the fault was corrected. Limitations: the embedded players expose no volume control, so a blend is an overlap rather than a fade; full songs require the browser to be signed in to Spotify, otherwise 30-second previews play; 135 cuts are estimates intended for Soundcheck; corrections are stored in one browser and moved with Copy my fixes; automatic sync requires a Spotify developer application, which Spotify reserves for Premium accounts. Only line timings are used, and no lyric text is stored or displayed.",
         "Un substitut du lecteur Spotify a reproduit les délais à l’origine des trous : un temps de chargement, des commandes ignorées pendant un chargement, une mise en mémoire tampon avant le son, un seul flux par compte, des chansons qui continuent de signaler un chargement pendant leur lecture, et des flux de mises à jour qui se taisent. Piloté dans Chrome sans interface et échantillonné toutes les 50 ms, le silence non couvert a été de 0 ms dans chaque condition, et le glissement vers Next comme le réordonnancement des choix se sont comportés comme prévu. Sur le site de production, avec de vrais lecteurs Spotify, les chansons consécutives se sont superposées pendant environ 2,5 s, sans trou ; ce test a révélé des chansons qui signalent un chargement pendant leur lecture, ce qui déclenchait le pont de percussions par-dessus la musique, et le défaut a été corrigé. Limites : les lecteurs intégrés n’offrent aucun réglage de volume, si bien qu’un fondu est une superposition et non une baisse progressive ; les chansons complètes demandent un navigateur connecté à Spotify, faute de quoi des extraits de 30 secondes sont joués ; 135 découpes sont des estimations destinées au Soundcheck ; les corrections sont conservées dans un seul navigateur et se transfèrent avec Copy my fixes ; la synchronisation automatique demande une application développeur Spotify, que Spotify réserve aux comptes Premium. Seul le minutage des lignes est utilisé, et aucun texte de paroles n’est conservé ni affiché.")),
  ]},
-# ---------------------------------------------------------------- 16
+# ---------------------------------------------------------------- 17
 "lemon-connect-cameroon": {
  "kind": ("Interactive laboratory on Cameroon’s Internet infrastructure", "Laboratoire interactif sur l’infrastructure Internet du Cameroun"),
  "line": ("An interactive laboratory on why Internet access in Cameroon is slow and costly. It models the path of a packet from a handset in Douala to a server, from radio access and power supply to the backbone, international transit and market structure, and every figure on screen is dated and sourced.",
@@ -93,7 +93,7 @@ C = {
   (VL, ("52 unit tests verify the engine and 54 browser tests traverse the site on a desktop and an Android phone. Simulations are labelled as teaching models: they illustrate mechanisms and are not measurements of the operators’ networks.",
         "52 tests unitaires vérifient le moteur et 54 tests navigateur parcourent le site sur ordinateur et sur téléphone Android. Les simulations sont signalées comme modèles pédagogiques : elles illustrent des mécanismes et ne sont pas des mesures des réseaux des opérateurs.")),
  ]},
-# ---------------------------------------------------------------- 17
+# ---------------------------------------------------------------- 18
 "cameroun-terre-republique": {
  "kind": ("Civic-education and deliberation platform on land and citizenship", "Plateforme d’éducation civique et de délibération sur la terre et la citoyenneté"),
  "line": ("A civic-education platform that separates four questions confused in Cameroonian political debate (a people’s history, the development of land, the legal status of a plot and citizenship) and examines each against the Constitution, the land texts of 1974 and 1976 and dated scholarship.",
@@ -115,7 +115,7 @@ C = {
   (VL, ("The site states plainly what it could not verify, and its simulations are labelled as fictional. It is an independent citizen initiative with no party or community affiliation; its thesis is argued openly, and the opposing case is given at full strength.",
         "Le site indique clairement ce qu’il n’a pas pu vérifier, et ses simulations sont signalées comme fictives. Il s’agit d’une initiative citoyenne indépendante, sans affiliation partisane ni communautaire ; sa thèse est défendue ouvertement et la thèse adverse est présentée dans toute sa force.")),
  ]},
-# ---------------------------------------------------------------- 18
+# ---------------------------------------------------------------- 19
 "lemon": {
  "kind": ("Network design practice: configurator and design deliverable", "Bureau d’études réseau : configurateur et livrable de conception"),
  "line": ("The site of a network-integration practice in which a sizing configurator, a 508-product catalogue and a ten-page project book share one set of design rules, so that the online estimate and the signed design describe the same installation.",
@@ -133,7 +133,7 @@ C = {
   (AR, ("Next.js, with large content sets retrieved from a CDN at build time. The configurator and the project book apply the same sizing rules, so the estimate and the final quotation agree. Coverage and cabling drawings are made on the client’s own floor plans and exported to PDF.",
         "Next.js, avec des contenus volumineux récupérés depuis un CDN à la compilation. Le configurateur et le dossier de projet appliquent les mêmes règles de dimensionnement, si bien que l’estimation et le devis final concordent. Les plans de couverture et de câblage sont tracés sur les plans du client et exportés en PDF.")),
  ]},
-# ---------------------------------------------------------------- 19
+# ---------------------------------------------------------------- 20
 "pocketwell": {
  "kind": ("Household grocery-budget and price-monitoring application", "Application de budget alimentaire et de suivi des prix"),
  "line": ("A household application that brings coupons, a priced shopping list and the grocery budget together so that the planned total equals the amount paid, and that tracks ten staple prices from official statistics to support letters to elected representatives.",
@@ -155,7 +155,7 @@ C = {
   (VL, ("233 unit tests and 14 browser tests run on phone and desktop profiles. The name is provisional. Stores and prices are real, while demonstration coupons are labelled as examples, and live shelf prices cover one Kroger-family store.",
         "233 tests unitaires et 14 tests navigateur s’exécutent en profils téléphone et ordinateur. Le nom est provisoire. Magasins et prix sont réels, les coupons de démonstration sont signalés comme exemples, et les prix en rayon en direct couvrent un magasin de l’enseigne Kroger.")),
  ]},
-# ---------------------------------------------------------------- 20
+# ---------------------------------------------------------------- 21
 "racines-reseaux": {
  "kind": ("Educational simulation game: agriculture, trade and network engineering", "Jeu de simulation éducatif : agriculture, commerce et ingénierie réseau"),
  "line": ("A pixel-art simulation game set in Cameroon that combines farming, regional trade and the social life of the Bandjoun Kingdom with network-troubleshooting laboratories in which the player restores connectivity to schools and cooperatives.",
