@@ -8,6 +8,7 @@ import salon as SALON
 
 READING = SALON.available()  # books whose table of contents is present; their text lives in the protected backend
 from covers import cover_svg
+from eng import ENG, LAYERS, COLS, NOTE
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 E = html.escape
@@ -89,7 +90,7 @@ def visit_link(p, cls="pc-visit"):
 
 def platform_card(p):
     f = frp(p["slug"]); s = p["slug"]
-    return f"""<article class="card pcard rv"><a class="pc-shot" href="/portfolio/{s}" tabindex="-1" aria-hidden="true"><figure class="shot" style="margin:0"><img src="/assets/shots/{p['shot']}.webp" alt="" loading="lazy"></figure></a>{plabel(p)}<h3><a href="/portfolio/{s}">{E(p['title'])}</a></h3><p style="margin:0;color:var(--encre)">{tf(p['line'], f, 'line')}</p><p class="mono muted" style="margin:0;font-size:12px">{tf(p['status'], f, 'status')}</p><p class="pc-links"><a href="/portfolio/{s}">{t('Details', 'Détails')} &rarr;</a><a href="/guides/{s}">{t('How to use', 'Mode d’emploi')} &rarr;</a>{visit_link(p)}</p></article>"""
+    return f"""<article class="card pcard rv"><a class="pc-shot" href="/portfolio/{s}" tabindex="-1" aria-hidden="true"><figure class="shot" style="margin:0"><img src="/assets/shots/{p['shot']}.webp" alt="" loading="lazy"></figure></a>{plabel(p)}<h3><a href="/portfolio/{s}">{E(p['title'])}</a></h3><p style="margin:0;color:var(--encre)">{tf(p['line'], f, 'line')}</p>{eng_chips(s)}<p class="mono muted" style="margin:0;font-size:12px">{tf(p['status'], f, 'status')}</p><p class="pc-links"><a href="/portfolio/{s}">{t('Details', 'Détails')} &rarr;</a><a href="/guides/{s}">{t('How to use', 'Mode d’emploi')} &rarr;</a>{visit_link(p)}</p></article>"""
 
 def hero_art():
     return """<div class="glass rv" aria-hidden="true"><canvas id="hero-canvas"></canvas><canvas class="glass-fallback" id="hero-2d"></canvas></div>"""
@@ -182,10 +183,49 @@ def prose(blocks):
 def page_portfolio():
     live = [p for p in C.PROJECTS if p["url"]]; private = [p for p in C.PROJECTS if not p["url"]]
     n = len(C.PROJECTS)
-    body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>Portfolio</b><span>{t(f'{n} platforms', f'{n} plateformes')}</span></span><h1 class="rv" style="margin:16px 0 14px">Portfolio.</h1><p class="lede rv">{t('Software systems designed and built across technical education, civic information, financial services, media, games and network engineering. Each record follows the same structure: problem statement, contribution, architecture, method and data, verification and limitations, followed by a guided tour of the actual screens.', 'Systèmes logiciels conçus et réalisés dans les domaines de la formation technique, de l’information civique, des services financiers, des médias, du jeu et de l’ingénierie réseau. Chaque fiche suit la même structure : problématique, contribution, architecture, méthode et données, vérification et limites, suivie d’une visite guidée des écrans réels.')}</p></section>
+    body = f"""<section class="block wrap" style="padding-bottom:20px"><span class="label rv"><b>Portfolio</b><span>{t(f'{n} platforms', f'{n} plateformes')}</span></span><h1 class="rv" style="margin:16px 0 14px">Portfolio.</h1><p class="lede rv">{t('Software systems designed and built across technical education, civic information, financial services, media, games and network engineering. Each record opens with an engineering summary: my role, size of the codebase, a system architecture diagram, the stack by layer and the key design decisions with their trade-offs. It continues with the problem statement, contribution, architecture, method and data, verification and limitations, followed by a guided tour of the actual screens.', 'Systèmes logiciels conçus et réalisés dans les domaines de la formation technique, de l’information civique, des services financiers, des médias, du jeu et de l’ingénierie réseau. Chaque fiche suit la même structure : problématique, contribution, architecture, méthode et données, vérification et limites, suivie d’une visite guidée des écrans réels.')}</p></section>
 <section class="block wrap" style="padding-top:10px"><div class="sec-head"><span class="label rv"><b>{t('Live', 'En ligne')}</b><span>{len(live)}</span></span></div><div class="grid g3">{"".join(platform_card(p) for p in live)}</div></section>
 <section class="block wrap" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>{t('Private', 'Privé')}</b><span>{len(private)}</span></span><p class="muted rv" style="margin:0">{t('Not public. Walkthrough on request.', 'Non publiques. Démonstration sur demande.')}</p></div><div class="grid g3">{"".join(platform_card(p) for p in private)}</div></section>"""
     return head("Portfolio", "Software platforms designed and built by William Foteping.", "/portfolio") + header("portfolio") + body + footer()
+
+def eng_chips(slug, cls="chips"):
+    e = ENG.get(slug)
+    if not e: return ""
+    return f'<p class="{cls}">' + "".join(f"<span>{E(c)}</span>" for c in e["chips"]) + "</p>"
+
+def eng_block(p):
+    e = ENG.get(p["slug"])
+    if not e: return ""
+    col = p["color"]
+    metrics = "".join(f'<div class="em"><b class="ev">{t(v[0], v[1])}</b><span class="el">{t(k[0], k[1])}</span></div>' for k, v in e["metrics"])
+    cols = []
+    for i, (key, items) in enumerate(e["arch"]):
+        lab = COLS[key]
+        boxes = "".join(f'<li>{E(x) if isinstance(x, str) else t(x[0], x[1])}</li>' for x in items)
+        cols.append(f'<div class="acol"><span class="ak">{t(lab[0], lab[1])}</span><ul>{boxes}</ul></div>')
+        if i < len(e["arch"]) - 1:
+            lk = e.get("links", [])
+            lt = lk[i] if i < len(lk) else ""
+            src = e.get("from", {}).get(i + 1)
+            via = f' · {t("from: " + COLS[src][0].lower(), "depuis\u00a0: " + COLS[src][1].lower())}' if src else ""
+            cols.append(f'<div class="aarrow{" side" if src else ""}" aria-hidden="true"><span class="at">{E(lt)}{via}</span></div>')
+    layers = "".join(f'<div><span>{t(LAYERS[k][0], LAYERS[k][1])}</span><span>{E(v)}</span></div>' for k, v in e["layers"])
+    notes = "".join(f'<div><span>{t(NOTE[k][0], NOTE[k][1])}</span><span>{t(x[0], x[1])}</span></div>' for k, x in e.get("notes", []))
+    notes_html = f'<h3 class="eng-h">{t("Notes for reviewers", "Notes pour les relecteurs")}</h3><div class="facts layers notes">{notes}</div>' if notes else ""
+    decs = "".join(f'<article class="dec"><span class="dn">{str(i + 1).zfill(2)}</span><h4>{t(h[0], h[1])}</h4><p>{t(x[0], x[1])}</p></article>' for i, (h, x) in enumerate(e["decisions"]))
+    return f"""<section class="eng rv" id="engineering" style="--pc:{col}">
+<div class="eng-head"><span class="label"><b>{t('Engineering record', 'Dossier d’ingénierie')}</b><span>{t('For technical reviewers', 'Pour les relecteurs techniques')}</span></span>
+<p class="eng-role">{t(e['role'][0], e['role'][1])}</p></div>
+<div class="emetrics">{metrics}</div>
+<h3 class="eng-h">{t('System architecture', 'Architecture du système')}</h3>
+<div class="arch" role="figure" aria-label="{E(p['title'], quote=True)} architecture diagram">{"".join(cols)}</div>
+<p class="arch-cap">{t(e['flow'][0], e['flow'][1])}</p>
+<h3 class="eng-h">{t('Stack by layer', 'Technologies par couche')}</h3>
+<div class="facts layers">{layers}</div>
+<h3 class="eng-h">{t('Key engineering decisions', 'Décisions d’ingénierie clés')}</h3>
+<div class="decs">{decs}</div>
+{notes_html}
+</section>"""
 
 def page_project(p, prev, nxt):
     f = frp(p["slug"])
@@ -195,8 +235,9 @@ def page_project(p, prev, nxt):
     m = len(p["sections"]) + 1
     body = f"""<section class="block wrap"><div class="open">
 <aside><span class="label" style="margin-bottom:10px"><b>{t('Technical record', 'Fiche technique')}</b></span><div class="facts" style="border-top:6px solid {p['color']};padding-top:6px;margin-top:0">{facts}<div><span>{t('Technology', 'Technologies')}</span><span>{E(p['stack'])}</span></div><div><span>{t('Status', 'Statut')}</span><span>{tf(p['status'], f, 'status')}</span></div>{f'<div><span>{t("Link", "Lien")}</span><span><a href="{E(p["url"])}" target="_blank" rel="noopener">{tf(p["link_label"], f, "link_label")}</a></span></div>' if p["url"] else ''}</div></aside>
-<div>{plabel(p)}<h1 class="rv" style="margin:14px 0 12px;font-size:clamp(36px,5.5vw,72px)">{E(p['title'])}</h1><p class="lede rv">{tf(p['line'], f, 'line')}</p><p class="cta-row rv" style="margin:18px 0 34px">{visit}<a class="btn cobalt" href="/guides/{p['slug']}">{t('How to use', 'Mode d’emploi')}</a><a class="btn ghost" href="#motion">{t('In motion', 'En mouvement')}</a></p>
+<div>{plabel(p)}<h1 class="rv" style="margin:14px 0 12px;font-size:clamp(36px,5.5vw,72px)">{E(p['title'])}</h1><p class="lede rv">{tf(p['line'], f, 'line')}</p><p class="cta-row rv" style="margin:18px 0 34px">{visit}<a class="btn cobalt" href="/guides/{p['slug']}">{t('How to use', 'Mode d’emploi')}</a><a class="btn ghost" href="#engineering">{t('Engineering record', 'Dossier d’ingénierie')}</a></p>
 <figure class="shot rv"><img src="/assets/shots/{p['shot']}.webp" alt="{E(p['title'], quote=True)}, screenshot"><figcaption>{E(p['title'])}, {t('screenshot', 'capture d’écran')}</figcaption></figure>
+{eng_block(p)}
 <div class="chapters" style="margin-top:40px">{secs}
 <div class="chapter rv" id="motion"><span class="ch">{str(m).zfill(2)}</span><div><h3>{t('In motion', 'En mouvement')}</h3><p style="margin-bottom:14px">{t('Four frames that summarize the platform. Click to advance.', 'Quatre plans qui résument la plateforme. Cliquez pour avancer.')}</p>{stage(p)}</div></div></div>
 <nav class="cta-row" style="margin-top:48px;justify-content:space-between" aria-label="Platforms"><a class="btn ghost small" href="/portfolio/{prev['slug']}">&larr; {E(prev['title'])}</a><a class="btn ghost small" href="/portfolio/{nxt['slug']}">{E(nxt['title'])} &rarr;</a></nav></div></div></section>"""

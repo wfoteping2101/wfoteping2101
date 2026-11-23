@@ -578,8 +578,8 @@ PLATFORMS = [
                "Les créateurs qui publient chaque jour passent leurs soirées à monter sur téléphone. Les applications simples donnent un résultat amateur, les logiciels professionnels demandent des mois d'apprentissage, et les monteurs en ligne exigent d'envoyer des gigaoctets en données mobiles.")),
     (DOES, ("You choose a format (vlog, product launch, UGC, podcast clip and 11 others), add footage and music, and an agent plans the cut, edits, reviews and fixes it. Captions, titles, color and music levels are set automatically; you request changes in plain words. Export in 9:16 and 16:9. Cinéma generates AI scenes with a chosen camera, movement and light.",
             "Vous choisissez un format (vlog, lancement produit, UGC, extrait de podcast et 11 autres), vous ajoutez images et musique, et un agent planifie la coupe, monte, se relit et se corrige. Sous-titres, titres, couleur et niveau de la musique sont réglés automatiquement ; vous demandez les changements avec vos mots. Export en 9:16 et en 16:9. Cinéma génère des scènes IA avec la caméra, le mouvement et la lumière choisis.")),
-    (BUILT, ("Rendering runs in the browser with WebCodecs; only short text descriptions are sent to the AI. Cuts follow the beats of the music. Credits are reserved before each AI call and refunded if the call fails. The 13 demo edits in the gallery were made from licensed stock footage.",
-             "Le rendu tourne dans le navigateur avec WebCodecs ; seules de courtes descriptions textuelles partent vers l'IA. Les coupes suivent le rythme de la musique. Les crédits sont réservés avant chaque appel à l'IA et remboursés en cas d'échec. Les 13 montages de démonstration de la galerie viennent d'images sous licence.")),
+    (BUILT, ("Rendering runs in the browser with WebCodecs; only small keyframes and audio chunks are sent to the AI. Cuts follow the beats of the music. Credits are reserved before each AI call and refunded if the call fails. The 13 demo edits in the gallery were made from licensed stock footage.",
+             "Le rendu tourne dans le navigateur avec WebCodecs ; seules de petites images clés et des extraits audio partent vers l'IA. Les coupes suivent le rythme de la musique. Les crédits sont réservés avant chaque appel à l'IA et remboursés en cas d'échec. Les 13 montages de démonstration de la galerie viennent d'images sous licence.")),
  ],
  "beats": [("15 formats, one agent each", "15 formats, un agent chacun", "stack"),
            ("Editing on the device, nothing uploaded", "Montage sur l'appareil, rien n'est envoyé", "ring"),
@@ -613,7 +613,7 @@ PLATFORMS = [
     "tips": [("Film a wide shot, a detail and a face for each scene; the edit needs all three.", "Filmez un plan large, un détail et un visage pour chaque scène ; le montage a besoin des trois."),
              ("Add your music: cuts follow its beats.", "Ajoutez votre musique : les coupes suivent son rythme."),
              ("Export both ratios every time.", "Exportez les deux formats à chaque fois.")],
-    "faq": [(("Is my footage uploaded?", "Mes images sont-elles envoyées ?"), ("No. Editing and export run in your browser. Only short text descriptions go to the AI.", "Non. Le montage et l'export se font dans votre navigateur. Seules de courtes descriptions textuelles partent vers l'IA.")),
+    "faq": [(("Is my footage uploaded?", "Mes images sont-elles envoyées ?"), ("No. Your files stay on your device and editing and export run in your browser. The AI only receives small keyframes (512 px at most) and short audio chunks for transcription.", "Non. Vos fichiers restent sur votre appareil, le montage et l'export se font dans votre navigateur. L'IA ne reçoit que de petites images clés (512 px au plus) et de courts extraits audio pour la transcription.")),
             (("How much does a cut cost?", "Combien coûte une coupe ?"), ("20 credits for a first cut. One credit is about one US cent.", "20 crédits pour une première coupe. Un crédit vaut environ un centime de dollar.")),
             (("Can I pay in cash?", "Puis-je payer en espèces ?"), ("Yes. Pay through the contact page and you receive a code.", "Oui. Payez via la page contact et vous recevez un code.")),
             (("Which languages?", "Quelles langues ?"), ("French and English.", "Français et anglais."))],
@@ -1687,6 +1687,18 @@ PLATFORMS = [
                (("Start", "Commencer"), ("Play now", "Jouer"), ("Free in the browser.", "Gratuit dans le navigateur."), "racines-reseaux", [20, 0, 46, 40])],
  }},
 ]
+
+# ---------------------------------------------------------------------------
+# Order of the portfolio: Thalès first, then SiteProof, GRAAL, CYVAREN and Keystone; the rest follow.
+from plat_thales import THALES
+PLATFORMS.insert(0, THALES)
+ORDER = ["thales", "siteproof", "graal", "cyvaren", "keystone", "uplink", "ocd-live", "saga-1884", "cameroun-citoyen",
+         "bobine", "rushes", "mosaic", "african-playhouse", "ndamba", "express-union-next", "terraguard-cm", "sebene",
+         "lemon-connect-cameroon", "cameroun-terre-republique", "lemon", "pocketwell", "racines-reseaux"]
+_by = {p["slug"]: p for p in PLATFORMS}
+PLATFORMS[:] = [_by[s] for s in ORDER] + [p for p in PLATFORMS if p["slug"] not in ORDER]
+for _i, _p in enumerate(PLATFORMS, 1):
+    _p["n"] = str(_i).zfill(2)
 
 # ---------------------------------------------------------------------------
 # Academic records (academic.py) replace kind, line, facts and sections before the views are derived.
