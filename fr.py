@@ -4,6 +4,12 @@
 from platforms import PROJECTS_FR as PROJECTS, GUIDES_FR as GUIDES
 
 BOOKS = {
+"entreprendre-en-afrique": {"pages": "23 chapitres en 4 parties, un épilogue et une annexe ; 313 pages, 24 photographies", "kind": "Entrepreneuriat, essai pratique",
+    "line": "Un livre franc et pratique pour celles et ceux qui veulent vivre de leur savoir-faire en Afrique : le terrain tel qu’il est, l’argent du départ, le poids des attentes familiales, trouver des clients avant de dépenser, fixer ses prix, acheter, vendre, tenir l’argent, les papiers, la confiance et les arnaques, le téléphone et l’IA, grandir, les femmes, les jeunes, la diaspora, l’échec, la santé, construire avec les autres et un plan de 90 jours. Le compagnon de la plateforme Etali.",
+    "where": [("Lire en ligne, gratuitement",), ("Télécharger le PDF",), ("La plateforme Etali",)]},
+"etali-en-action": {"pages": "22 chapitres en 6 parties ; 185 pages, 42 photographies, 40 planches d’écrans réels", "kind": "Cas d’usage, illustré",
+    "line": "Vingt métiers, vingt histoires : une couturière, une coiffeuse, une savonnière, un bronzier, une pâtissière, un maquis, une traiteuse, un agriculteur, un éleveur, une fumeuse de poisson, un réparateur de téléphones, un menuisier, un mécanicien, un maçon, une électricienne solaire, un livreur, un cybercafé, une boutique de quartier, un photographe et une professeure, chacun suivi écran par écran dans Etali avec de vraies photographies et de vrais écrans, puis une méthode pour tous les autres métiers et un premier mois.",
+    "where": [("Lire en ligne, gratuitement",), ("Télécharger le PDF",), ("Démos guidées",)]},
 "la-route-de-la-lumiere": {"pages": "Introduction, 26 chapitres en 6 parties, conclusion, 4 annexes ; 343 pages, 50 schémas", "kind": "Réseaux télécoms et droit, illustré",
     "line": "Comment Internet arrive au Cameroun, du câble sous-marin jusqu’à chez vous : la physique de la fibre et de la radio, les stations d’atterrissement, la dorsale nationale, les boucles des villes, les sites radio, la fibre à domicile, les liaisons d’entreprise et les villages ; les réseaux de CAMTEL, d’Orange et de MTN couche par couche ; la façon dont ils s’interconnectent ; et les lois qui encadrent chaque étape. Chaque fait sur le Cameroun est sourcé en note. Le compagnon de la plateforme Lemon Connect Cameroon.",
     "where": [("Lire en ligne, gratuitement",), ("Télécharger le PDF",), ("Plateforme interactive",)]},

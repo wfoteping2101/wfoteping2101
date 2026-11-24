@@ -25,6 +25,14 @@ ALBUM = {"slug": "wfoss", "title": "Chant et poésie de La'a", "artist": "Wfoss"
     "where": [("Listen on Spotify", "https://open.spotify.com/search/Wfoss%20Chant%20et%20po%C3%A9sie%20de%20La%27a")]}
 
 BOOKS = [
+    {"slug": "entreprendre-en-afrique", "title": "Entreprendre en Afrique, pour de vrai", "lang": "Français", "kind": "Entrepreneurship, practical essay", "year": "2026", "pages": "23 chapters in 4 parts, an epilogue and an appendix; 313 pages, 24 photographs",
+     "color": "#2C3A8C", "ink": "#F5EEDF",
+     "line": "An honest, practical book for people who want to live from their skills in Africa: the ground as it is, the money to start, family expectations, finding customers before spending, pricing, buying, selling, keeping the money, paperwork, trust and scams, the phone and AI, growing, women, young people, the diaspora, failure, health, working together and a 90-day plan. The companion of the Etali platform.",
+     "where": [("Read online, free", "https://etali.vercel.app/fr/livres/entreprendre"), ("Download the PDF", "https://etali.vercel.app/books/entreprendre-fr.pdf"), ("The Etali platform", "https://etali.vercel.app")]},
+    {"slug": "etali-en-action", "title": "Etali en action", "lang": "Français", "kind": "Use cases, illustrated", "year": "2026", "pages": "22 chapters in 6 parts; 185 pages, 42 photographs, 40 plates of real screens",
+     "color": "#2D7A52", "ink": "#F5EEDF",
+     "line": "Twenty trades, twenty stories: a tailor, a hairdresser, a soap maker, a bronze caster, a pastry cook, a restaurant, a caterer, a farmer, a poultry farmer, a fish smoker, a phone repairer, a carpenter, a mechanic, a mason, a solar electrician, a delivery rider, a cybercafé, a corner shop, a photographer and a tutor, each followed screen by screen in Etali with real photographs and real screens, then a method for every other trade and a first month.",
+     "where": [("Read online, free", "https://etali.vercel.app/fr/livres/etali-en-action"), ("Download the PDF", "https://etali.vercel.app/books/etali-en-action-fr.pdf"), ("Guided demos", "https://etali.vercel.app/fr/demos")]},
     {"slug": "la-route-de-la-lumiere", "title": "La Route de la lumière", "lang": "Français", "kind": "Telecom networks and law, illustrated", "year": "2026", "pages": "Introduction, 26 chapters in 6 parts, conclusion, 4 appendices; 343 pages, 50 diagrams",
      "color": "#0A1824", "ink": "#F4EBD9",
      "line": "How the Internet reaches Cameroon, from the submarine cable to your home: the physics of fibre and radio, landing stations, the national backbone, metro rings, radio sites, fibre to the home, business links and villages; the networks of CAMTEL, Orange and MTN layer by layer; how they interconnect; and the laws that govern every step. Every fact about Cameroon is sourced in the notes. The companion of the Lemon Connect Cameroon platform.",

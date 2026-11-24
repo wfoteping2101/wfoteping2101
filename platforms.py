@@ -1689,10 +1689,12 @@ PLATFORMS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Order of the portfolio: Thalès first, then SiteProof, GRAAL, CYVAREN and Keystone; the rest follow.
+# Order of the portfolio: Thalès first, then SiteProof, GRAAL, CYVAREN and Keystone; Uplink 06, Etali 07; the rest follow.
 from plat_thales import THALES
+from plat_etali import ETALI
 PLATFORMS.insert(0, THALES)
-ORDER = ["thales", "siteproof", "graal", "cyvaren", "keystone", "uplink", "ocd-live", "saga-1884", "cameroun-citoyen",
+PLATFORMS.append(ETALI)
+ORDER = ["thales", "siteproof", "graal", "cyvaren", "keystone", "uplink", "etali", "ocd-live", "saga-1884", "cameroun-citoyen",
          "bobine", "rushes", "mosaic", "african-playhouse", "ndamba", "express-union-next", "terraguard-cm", "sebene",
          "lemon-connect-cameroon", "cameroun-terre-republique", "lemon", "pocketwell", "racines-reseaux"]
 _by = {p["slug"]: p for p in PLATFORMS}
