@@ -46,6 +46,7 @@ from eng_a import EA
 from eng_b import EB
 from eng_c import EC
 from eng_etali import EE
+from eng_paradoxe import EP
 
 
 def _fr(x):
@@ -59,7 +60,7 @@ def _fr(x):
     return x
 
 
-ENG = {k: _fr(v) for k, v in {**EA, **EB, **EC, **EE}.items()}
+ENG = {k: _fr(v) for k, v in {**EA, **EB, **EC, **EE, **EP}.items()}
 
 # Sanity checks run at build time.
 for _s, _e in ENG.items():

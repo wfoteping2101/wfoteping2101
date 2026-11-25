@@ -11,9 +11,10 @@ from acad_b import B
 from acad_c import C
 from acad_thales import T
 from acad_etali import E as ETALI_RECORD
+from acad_paradoxe import E as PARADOXE_RECORD
 from acad_books import BOOKS as BOOK_RECORDS
 
-PLATFORM_RECORDS = {**T, **A, **B, **C, **ETALI_RECORD}
+PLATFORM_RECORDS = {**T, **A, **B, **C, **ETALI_RECORD, **PARADOXE_RECORD}
 
 NNBSP, NBSP = " ", " "
 

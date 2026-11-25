@@ -51,7 +51,7 @@ def cover_art(seed, color, ink):
 
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">'
 
-NAV = [("/", "Home", "Accueil", "home"), ("/portfolio", "Portfolio", "Portfolio", "portfolio"), ("/books", "Books", "Livres", "books"), ("/gallery", "Gallery", "Galerie", "gallery"), ("/journal", "Journal", "Journal", "journal"), ("/services", "Services", "Services", "services"), ("/contact", "Contact", "Contact", "contact")]
+NAV = [("/", "Home", "Accueil", "home"), ("/portfolio", "Portfolio", "Portfolio", "portfolio"), ("/books", "Books", "Livres", "books"), ("/tiktok", "TikTok", "TikTok", "tiktok"), ("/services", "Services", "Services", "services"), ("/contact", "Contact", "Contact", "contact")]
 
 def head(title, desc, path, extra=""):
     full = f"{title} | {C.SITE['name']}" if title else C.SITE["name"]
@@ -74,7 +74,7 @@ def footer():
     work = "".join(f'<a href="/portfolio/{p["slug"]}">{E(p["title"])}</a>' for p in C.PROJECTS[:6]) + f'<a href="/portfolio">{t("All platforms", "Toutes les plateformes")}</a>'
     return f"""</main><footer><div class="wrap"><div><img class="seal-lg" src="/assets/brand/medal-192.png" alt="" width="72" height="72" loading="lazy"><div class="tag">{E(C.SITE['name'])}</div><p>{t('Network engineering, software platforms, books and video.', 'Réseaux, plateformes logicielles, livres et vidéo.')}</p><p>{t('Maryland, United States. French and English.', 'Maryland, États-Unis. Français et anglais.')}</p><p><a href="mailto:{E(C.SITE['email'])}">{E(C.SITE['email'])}</a></p></div>
 <div><h4>Portfolio</h4>{work}</div>
-<div><h4>{t('Site', 'Site')}</h4><a href="/books">{t('Books', 'Livres')}</a><a href="/gallery">{t('Gallery', 'Galerie')}</a><a href="/journal">Journal</a><a href="/services">Services</a><a href="/contact">Contact</a><p style="margin-top:14px">&copy; {y} {E(C.SITE['name'])}</p><p class="privacy-note">{t('Anonymous visit statistics. No cookies, no ads.', 'Statistiques de visite anonymes. Pas de cookies, pas de publicité.')}</p></div></div></footer>
+<div><h4>{t('Site', 'Site')}</h4><a href="/books">{t('Books', 'Livres')}</a><a href="/tiktok">TikTok</a><a href="/services">Services</a><a href="/contact">Contact</a><p style="margin-top:14px">&copy; {y} {E(C.SITE['name'])}</p><p class="privacy-note">{t('Anonymous visit statistics. No cookies, no ads.', 'Statistiques de visite anonymes. Pas de cookies, pas de publicité.')}</p></div></div></footer>
 <script src="/assets/app.js" defer></script></body></html>"""
 
 def plabel(p):
@@ -99,7 +99,7 @@ def hero_art():
 def page_home():
     posts = C.JOURNAL[:3]
     n = len(C.PROJECTS)
-    stats = [(str(n), "Platforms", "Plateformes"), (str(len(C.BOOKS)), "Books", "Livres"), (str(len(C.MOTION) + len(C.EDITS)), "Videos", "Vidéos"), (str(len(READING)), "Free to read", "À lire gratuitement")]
+    stats = [(str(n), "Platforms", "Plateformes"), (str(len(C.BOOKS)), "Books", "Livres"), (str(len(READING)), "Free to read", "À lire gratuitement")]
     body = f"""<section class="hero wrap"><div class="hero-grid"><div>
 <span class="label rv"><b>Portfolio</b><span>{t(C.SITE['location'], 'Maryland, États-Unis')}</span></span>
 <h1 class="name rv" style="margin:18px 0 20px">William<br><em>Foteping</em></h1>
@@ -113,13 +113,7 @@ def page_home():
 <section class="block wrap"><div class="sec-head"><span class="label rv"><b>02</b><span>{t('Books', 'Livres')}</span></span><div class="row rv"><h2>{t('Essays, a novel and technical books.', 'Essais, roman et livres techniques.')}</h2><a class="btn ghost small" href="/books">{t('All books', 'Tous les livres')} &rarr;</a></div></div>
 <div class="bookcase rv">{"".join(tome(b) for b in C.BOOKS[:3])}</div></section>
 
-<section class="block wrap"><div class="sec-head"><span class="label rv"><b>03</b><span>{t('Gallery', 'Galerie')}</span></span><div class="row rv"><h2>{t('Motion design and video edits.', 'Motion design et montages vidéo.')}</h2><a class="btn ghost small" href="/gallery">{t('Open the gallery', 'Ouvrir la galerie')} &rarr;</a></div></div>
-<div class="grid g3 rv">{vcard(C.MOTION[0])}{vcard(C.MOTION[1])}{vcard(C.EDITS[12])}</div></section>
-
-<section class="block wrap"><div class="sec-head"><span class="label rv"><b>04</b><span>Journal</span></span><div class="row rv"><h2>{t('Practical advice drawn from the books.', 'Des conseils pratiques, tirés des livres.')}</h2><a class="btn ghost small" href="/journal">{t('All posts', 'Tous les articles')} &rarr;</a></div></div>
-<div class="posts rv">{"".join(post_row(p) for p in posts)}</div></section>
-
-<section class="block wrap"><div class="card rv" style="padding:clamp(24px,4vw,44px);gap:16px"><span class="label"><b>05</b><span>Services</span></span><h2>{t('Work with me.', 'Travailler avec moi.')}</h2><p class="lede">{t('Platforms, networks, books, video and content systems, in French and English. Prices are published; every project starts with a brief and a written quote.', 'Plateformes, réseaux, livres, vidéo et systèmes de contenu, en français et en anglais. Les prix sont affichés ; chaque projet commence par un brief et un devis écrit.')}</p><p class="cta-row"><a class="btn cobalt" href="/services">{t('Services and prices', 'Services et tarifs')}</a><a class="btn ghost" href="/services#brief">{t('Send a brief', 'Envoyer un brief')}</a></p></div></section>"""
+<section class="block wrap"><div class="card rv" style="padding:clamp(24px,4vw,44px);gap:16px"><span class="label"><b>03</b><span>Services</span></span><h2>{t('Work with me.', 'Travailler avec moi.')}</h2><p class="lede">{t('Platforms, networks, books, video and content systems, in French and English. Prices are published; every project starts with a brief and a written quote.', 'Plateformes, réseaux, livres, vidéo et systèmes de contenu, en français et en anglais. Les prix sont affichés ; chaque projet commence par un brief et un devis écrit.')}</p><p class="cta-row"><a class="btn cobalt" href="/services">{t('Services and prices', 'Services et tarifs')}</a><a class="btn ghost" href="/services#brief">{t('Send a brief', 'Envoyer un brief')}</a></p></div></section>"""
     return head("", C.SITE["description"], "/", THREE) + header("home") + body + footer()
 
 def tome(b, is_album=False):
@@ -357,6 +351,21 @@ def page_guide(p):
 <section class="block wrap" id="contact" style="padding-top:0"><div class="sec-head"><span class="label rv"><b>05</b></span><h2 class="rv">Contact</h2></div><div class="grid g3 rv">{contact}<a class="card" href="/services#brief"><span class="label"><b>{t('Project', 'Projet')}</b></span><h3 style="font-size:20px">{t('Need a similar platform?', 'Besoin d’une plateforme similaire ?')}</h3><span class="mono muted">{t('Send a brief', 'Envoyer un brief')} &rarr;</span></a></div></section>"""
     return head("How to use " + p["title"], f"How to use {p['title']}: guided tour, first steps, features, tips, FAQ and contact.", f"/guides/{p['slug']}") + header("portfolio") + body + footer()
 
+def page_tiktok():
+    h = C.TIKTOK["handle"]; vids = C.TIKTOK.get("videos") or []
+    prof = f"https://www.tiktok.com/@{h}"
+    feed = ""
+    if vids:
+        feed = f"""<div class="sec-head" style="margin-top:8px"><span class="label rv"><b>{t('Latest', 'Récentes')}</b><span>{t('Scroll to the next video', 'Faites défiler vers la vidéo suivante')}</span></span></div>
+<div class="tt-feed rv" tabindex="0" aria-label="{t('TikTok videos', 'Vidéos TikTok')}">""" + "".join(f'<div class="tt-item"><iframe src="https://www.tiktok.com/player/v1/{E(v)}?description=1&music_info=1" title="TikTok video {i + 1}" loading="lazy" allow="encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>' for i, v in enumerate(vids)) + "</div>"
+    body = f"""<section class="block wrap"><span class="label rv"><b>TikTok</b><span>@{E(h)}</span></span><h1 class="rv" style="margin:16px 0 14px">{t('Paradoxe on TikTok.', 'Paradoxe sur TikTok.')}</h1><p class="lede rv">{t('Short videos from my show Paradoxe: monologues, fact-checks and vlogs on society, technology, politics and Africa. Scroll and play them here, without leaving the site.', 'Les vidéos courtes de mon émission Paradoxe : monologues, vérifications des faits et vlogs sur la société, la technologie, la politique et l’Afrique. Faites-les défiler et regardez-les ici, sans quitter le site.')}</p>
+{feed}
+<div class="tt-grid" style="margin-top:28px"><div class="tt-frame rv"><iframe src="https://www.tiktok.com/embed/@{E(h)}" title="{t('Paradoxe TikTok profile', 'Profil TikTok de Paradoxe')}" loading="lazy" allow="encrypted-media; fullscreen; picture-in-picture; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<aside class="card tt-side rv"><span class="label"><b>{t('The show', 'L’émission')}</b><span>Paradoxe</span></span><h3>{t('No one thinks for you here.', 'Ici, personne ne pense à votre place.')}</h3><p style="margin:0;color:var(--encre)">{t('Each video takes one question people argue about, checks the claims, and gives the reasoning behind the answer. New videos appear on this page as soon as they are posted.', 'Chaque vidéo part d’une question qui fait débat, vérifie les affirmations et donne le raisonnement derrière la réponse. Les nouvelles vidéos apparaissent sur cette page dès leur publication.')}</p>
+<ul class="tt-list"><li>{t('Monologues', 'Monologues')}</li><li>{t('Fact-checks', 'Vérifications des faits')}</li><li>{t('Vlogs from my projects', 'Vlogs de mes projets')}</li></ul>
+<p class="cta-row" style="margin:6px 0 0"><a class="btn" href="{prof}" target="_blank" rel="noopener">{t('Follow on TikTok', 'Suivre sur TikTok')} &rarr;</a></p></aside></div></section>"""
+    return head("TikTok", "Paradoxe, William Foteping's show, on TikTok: monologues, fact-checks and vlogs to watch on this page.", "/tiktok") + header("tiktok") + body + footer()
+
 def page_contact():
     body = f"""<section class="block wrap"><span class="label rv"><b>Contact</b><span>{t(C.SITE['location'], 'Maryland, États-Unis')}</span></span><h1 class="rv" style="margin:16px 0 14px">Contact.</h1><p class="lede rv">{t('For a project, start with the brief on the services page. For anything else, email me. I reply within one business day, in French or English.', 'Pour un projet, commencez par le brief de la page services. Pour le reste, écrivez-moi. Je réponds sous un jour ouvré, en français ou en anglais.')}</p>
 <div class="grid g2 rv" style="margin-top:28px"><div class="card"><span class="label"><b>Email</b></span><h3><a href="mailto:{E(C.SITE['email'])}">{E(C.SITE['email'])}</a></h3><p style="margin:0;color:var(--encre)">{t('Projects, books, speaking, questions.', 'Projets, livres, interventions, questions.')}</p></div><div class="card"><span class="label"><b>{t('Meetings', 'Rendez-vous')}</b></span><h3>Zoom, Microsoft Teams, Google Meet</h3><p style="margin:0;color:var(--encre)">{t('Booked through the brief and confirmed by email.', 'Réservés via le brief et confirmés par courriel.')}</p><p class="cta-row" style="margin-top:10px"><a class="btn small" href="/services#brief">{t('Open the brief', 'Ouvrir le brief')}</a></p></div></div>
@@ -468,19 +477,16 @@ def main():
     for p in C.PROJECTS: write(f"guides/{p['slug']}.html", page_guide(p))
     write("books.html", page_books())
     for b in SALON.load_books(): write(f"lire/{b['slug']}.html", SALON.page(b, t, head, header, footer, cover_art), strict=False)
-    write("gallery.html", page_gallery())
+    write("tiktok.html", page_tiktok())
     write("demo/e-xaf.html", open(os.path.join(here, "demo", "e-xaf.html"), encoding="utf-8").read(), strict=False)
     write("demo/simulateur-placements.html", open(os.path.join(here, "demo", "simulateur-placements.html"), encoding="utf-8").read())
     write("atelier-python.html", page_atelier())
-    write("journal/index.html", page_journal())
-    m = len(C.JOURNAL)
-    for i, p in enumerate(C.JOURNAL): write(f"journal/{p['slug']}.html", page_post(p, C.JOURNAL[i - 1], C.JOURNAL[(i + 1) % m]))
     write("services.html", page_services())
     write("contact.html", page_contact())
     write("thanks.html", page_thanks())
     write("404.html", page_404())
     write("admin.html", page_admin())
-    pages = ["/", "/portfolio"] + [f"/portfolio/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/gallery", "/demo/e-xaf", "/demo/simulateur-placements", "/atelier-python", "/journal"] + [f"/journal/{p['slug']}" for p in C.JOURNAL] + ["/services", "/contact"]
+    pages = ["/", "/portfolio"] + [f"/portfolio/{p['slug']}" for p in C.PROJECTS] + [f"/guides/{p['slug']}" for p in C.PROJECTS] + ["/books"] + [f"/lire/{b['slug']}" for b in SALON.load_books()] + ["/tiktok", "/demo/e-xaf", "/demo/simulateur-placements", "/atelier-python"] + ["/services", "/contact"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{C.SITE['url']}{u}</loc></url>" for u in pages) + "</urlset>")
     ai = ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "CCBot", "anthropic-ai", "ClaudeBot", "Claude-Web", "Google-Extended", "PerplexityBot", "Bytespider", "Amazonbot", "Applebot-Extended", "meta-externalagent", "FacebookBot", "Diffbot", "ImagesiftBot", "Omgilibot", "cohere-ai", "YouBot", "Timpibot"]
     write("robots.txt", "".join(f"User-agent: {b}\nDisallow: /\n\n" for b in ai) + f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: {C.SITE['url']}/sitemap.xml\n")

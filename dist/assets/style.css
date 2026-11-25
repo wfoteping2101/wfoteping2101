@@ -407,3 +407,15 @@ footer .seal-lg{display:block;width:72px;height:72px;border-radius:50%;margin:0 
 .aarrow .at{left:38px}
  .facts.layers div{grid-template-columns:1fr}
 }
+
+/* TikTok page */
+.tt-grid{display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:28px;align-items:start}
+.tt-frame{border:1px solid var(--ligne);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 18px 50px -30px rgba(0,0,0,.45)}
+.tt-frame iframe{display:block;width:100%;height:min(860px,84vh);border:0}
+.tt-side{gap:12px;position:sticky;top:96px}
+.tt-list{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.tt-list li{border:1px solid var(--ligne);border-radius:999px;padding:5px 12px;font:600 12px var(--mono);letter-spacing:.04em;color:var(--encre)}
+.tt-feed{max-width:460px;height:min(820px,86vh);overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;border-radius:20px;border:1px solid var(--ligne);background:#000}
+.tt-item{height:100%;scroll-snap-align:start;scroll-snap-stop:always}
+.tt-item iframe{display:block;width:100%;height:100%;border:0}
+@media (max-width:860px){.tt-grid{grid-template-columns:1fr}.tt-side{position:static}.tt-frame iframe{height:80vh}.tt-feed{max-width:none;height:82vh}}

@@ -179,3 +179,9 @@ STEPS = [
 # Academic catalogue records for the books (academic.py).
 from academic import apply_books_en
 apply_books_en(BOOKS)
+
+
+# TikTok page (/tiktok). The profile embed always shows the latest videos.
+# To pin videos in the vertical feed at the top of the page, add their ids
+# (the number at the end of a TikTok video link), newest first.
+TIKTOK = {"handle": "paradoxeshow", "videos": []}
